@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
 } from 'react-native-gesture-handler';
 
-
 import Animated, {
     runOnJS,
     useAnimatedStyle,
@@ -207,13 +206,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },Slider: {
-      height: slider_hight,
-      borderBottomRightRadius: 75
+        height: slider_hight,
+        borderBottomRightRadius: 75
     },
     footer: {
-      flex: .65,
-      width:SCREEN_WIDTH,
-      height:100
+        flex: .65,
+        width:SCREEN_WIDTH,
+        height:100
 
     },
     OnBoardingContainer: {

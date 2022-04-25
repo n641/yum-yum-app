@@ -1,7 +1,10 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, Keyboard, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
+import { register } from '../../db/Auth/auth';
+import { auth, db, app } from '../../db/config';
+import { addUser } from '../../db/Auth/usersData/users';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -15,7 +18,36 @@ const SignUp = ({ navigation }) => {
     const [add, setadd] = useState("");
     const [flag, setflag] = useState(true);
     const [flag2, setflag2] = useState(true);
+    const [error, setError] = useState("");
 
+    const AlertError = (err) =>{
+
+    }
+
+    const handleSignUp = () => {
+        if(pass === cpass){
+            console.log(userName, email, pass, add);
+            register(email, pass).then(() =>{
+                addUser({
+                    userName: userName, 
+                    email: email, 
+                    password: pass,
+                    address: add,
+                    rule: "user"
+                });
+            }).catch((error)=>{
+                console.log(error)
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+        }
+        else{
+
+            const errorMessage = "your confirm password not equal you password";
+            alert(errorMessage);
+        }
+    }
 
 
     return (
@@ -121,7 +153,8 @@ const SignUp = ({ navigation }) => {
 
                         {pass && email && userName && cpass ?
                             <Button title='sign Up' onPress={() => {
-                                navigation.navigate('Login')
+                                // navigation.navigate('Login')
+                                handleSignUp();
                              }} color={"red"}
                                 style={styles.btn} />
                             : <Button title='sign Up' onPress={() => { 
@@ -137,15 +170,8 @@ const SignUp = ({ navigation }) => {
                                 <Text style={{ color: 'yellow', fontSize: 16 }}>have already account?</Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
-
-                  
-
-
-
                 </View>
-
             </View>
         </View>
     )
