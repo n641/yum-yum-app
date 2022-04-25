@@ -1,6 +1,10 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, SliderComponent } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
+import { getUsers } from '../../db/Auth/usersData/users';
+import { logout } from '../../db/Auth/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../db/config';
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
 
 import { login } from '../../db/Auth/auth';
@@ -10,11 +14,21 @@ const height = Dimensions.get("window").height;
 
 const Login = ({ navigation }) => {
 
+    useEffect(()=>{
+        const unsub = onAuthStateChanged(auth, (user) => setUser(user));
+        return () => {
+            unsub();
+        };
+    },[]);
+    
     const [email, setemail] = useState("");
     const [pass, setpass] = useState("");
     const [flag, setflag] = useState(true);
+    const [user, setUser] = useState(undefined);
 
-    const handleLogin = () =>{
+    
+
+    const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
 
@@ -23,6 +37,9 @@ const Login = ({ navigation }) => {
             const errorMessage = err;
             alert(errorMessage);
         });
+        if(user){
+            navigation.navigate('AdminStartScreen');
+        }
     }
 
     return (
@@ -86,14 +103,14 @@ const Login = ({ navigation }) => {
 
                         {pass && email ?
                             <Button title='log in' onPress={() => {
-                                navigation.navigate('SignUp')
+                                handleLogin();
                             }} color={"red"}
                                 style={styles.btn} />
 
                             : <Button title='log in' onPress={() => {
                                 // navigation.navigate('SignUp')
                                 handleLogin();
-                                lo
+                                
                             }} color={"red"}
                                 disabled style={styles.btn} />
 

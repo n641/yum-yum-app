@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, Keyboard, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons"; 
+import {register} from '../../db/Auth/auth'; 
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
-import { register } from '../../db/Auth/auth';
 import { auth, db, app } from '../../db/config';
 import { addUser } from '../../db/Auth/usersData/users';
 
@@ -20,10 +20,6 @@ const SignUp = ({ navigation }) => {
     const [flag2, setflag2] = useState(true);
     const [error, setError] = useState("");
 
-    const AlertError = (err) =>{
-
-    }
-
     const handleSignUp = () => {
         if(pass === cpass){
             console.log(userName, email, pass, add);
@@ -33,7 +29,10 @@ const SignUp = ({ navigation }) => {
                     email: email, 
                     password: pass,
                     address: add,
-                    rule: "user"
+                    rule: "user",
+                    cart: [],
+                    favourite: [],
+                    oldOrders: []
                 });
             }).catch((error)=>{
                 console.log(error)

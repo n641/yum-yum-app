@@ -10,10 +10,12 @@ import {
     where,
     onSnapshot,
 } from "firebase/firestore";
+
 // Get a list of cities from your database
 async function getUsers() {
     const citiesCol = collection(db, "users");
-    const citySnapshot = await getDocs(citiesCol);
+
+    const citySnapshot = await (await getDocs(citiesCol));
     const cityList = citySnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
