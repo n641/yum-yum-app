@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
 
+import { login } from '../../db/Auth/auth';
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -11,6 +13,17 @@ const Login = ({ navigation }) => {
     const [email, setemail] = useState("");
     const [pass, setpass] = useState("");
     const [flag, setflag] = useState(true);
+
+    const handleLogin = () =>{
+        console.log(email, pass);
+        login(email, pass).then(()=>{
+
+        }).catch((err)=>{
+            console.log(err)
+            const errorMessage = err;
+            alert(errorMessage);
+        });
+    }
 
     return (
         <View style={{
@@ -74,12 +87,14 @@ const Login = ({ navigation }) => {
                         {pass && email ?
                             <Button title='log in' onPress={() => {
                                 navigation.navigate('SignUp')
-                             }} color={"red"}
+                            }} color={"red"}
                                 style={styles.btn} />
 
                             : <Button title='log in' onPress={() => {
-                                navigation.navigate('SignUp')
-                             }} color={"red"}
+                                // navigation.navigate('SignUp')
+                                handleLogin();
+                                lo
+                            }} color={"red"}
                                 disabled style={styles.btn} />
 
                         }
@@ -87,7 +102,7 @@ const Login = ({ navigation }) => {
                         <View style={{ margin: 10, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
                             <TouchableOpacity onPress={() => {
                                 
-                             }}>
+                            }}>
                                 <Text style={{ color: 'yellow', fontSize: 18 }}>forget password?</Text>
                             </TouchableOpacity>
                         </View>

@@ -207,7 +207,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },Slider: {
-    //   height: slider_hight,
       borderBottomRightRadius: 75
     },
     footer: {
