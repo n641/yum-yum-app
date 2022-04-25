@@ -9,7 +9,6 @@ import {
 
 
 import Animated, {
-    runOnJS,
     useAnimatedStyle,
     useSharedValue,
     withSpring,
@@ -73,9 +72,9 @@ const OnBoarding = ({ navigation }) => {
                                 flexDirection: 'column',
                             },
                         ]}>
-                          <View style={[styles.Slider , {backgroundColor:"red"}]}>
+                          <View style={[styles.Slider , {backgroundColor:"white" }]}>
                         
-                              <Slider label='Testy' />
+                              <Slider img={require('../../assets/burger.png')} />
                           </View>
                       </View>  
                       {/* /////////////////////// footer */}
@@ -93,7 +92,7 @@ const OnBoarding = ({ navigation }) => {
                 <Text style={{fontSize:19 , fontWeight:'400'}}>literature from</Text>
 
 
-                <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"red" , borderRadius:20} }>
+                <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"red" ,padding:5, borderRadius:20} }>
                     <TouchableOpacity onPress={()=>{
                         navigation.navigate('Login')
                     }}>
@@ -118,27 +117,28 @@ const OnBoarding = ({ navigation }) => {
                                 // backgroundColor: 'red',
                             },
                         ]}>
-                          <View style={[styles.Slider , {backgroundColor:"#ff4d00"}]}>
+                            {/* #ff4d00 */}
+                          <View style={[styles.Slider , {backgroundColor:"white" }]}>
                         
-                              <Slider label='Fast Food' />
+                              <Slider img={require('../../assets/chef.png')} />
                           </View>
                       </View>  
                       {/* ////////////////////////////////////////////////////////////// */}
                       <View style={styles.footer}>
-              <View style={{ ...StyleSheet.absoluteFill, backgroundColor: "#ff4d00" }}>
+              <View style={{ ...StyleSheet.absoluteFill, backgroundColor: "black" }}>
                  <View style={{ flex: 1, backgroundColor: 'white', borderTopLeftRadius: 75 }}>
 
                 <View style={{flex:1 , justifyContent:'center' , alignItems:'center'}}>
 
-                <Text style={{fontSize:70 , fontWeight:'400' , marginTop:20 }}>Yummies</Text>
+                <Text style={{fontSize:70 , fontWeight:'400' , marginTop:20 , color:"black"}}>Yummies</Text>
                 <Text style={{fontSize:20 , fontWeight:'400'}}>Tasty meals delivered to </Text>
                 <Text style={{fontSize:20 , fontWeight:'400'}}>your doorstep</Text>
 
-                <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"#ff4d00" , borderRadius:20} }>
+                <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"black" ,padding:5, borderRadius:20} }>
                     <TouchableOpacity onPress={()=>{
                         navigation.navigate('Login')
                     }}>
-                    <Text style={{fontSize:20 , fontWeight:'400'}}>{'Skip'}</Text>
+                    <Text style={{fontSize:20 , fontWeight:'400' , color:'white'}}>{'Skip'}</Text>
                     </TouchableOpacity>
                     </View>
 
@@ -159,9 +159,9 @@ const OnBoarding = ({ navigation }) => {
                                 flexDirection: 'column',
                             },
                         ]}>
-                          <View style={[styles.Slider , {backgroundColor:"yellow"}]}>
+                          <View style={[styles.Slider , {backgroundColor:"white" }]}>
                         
-                              <Slider label='Delivery' />
+                              <Slider img={require('../../assets/delivery.png')} />
                           </View>
                       </View>  
                       {/* /////////////////////// ///////////////////////////////////////*/}
@@ -177,7 +177,7 @@ const OnBoarding = ({ navigation }) => {
                         <Text style={{fontSize:19 , fontWeight:'400'}}>sadipscing eliter, sed diam nonumy</Text>
 
 
-                        <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"yellow" , borderRadius:20} }>
+                        <View style={{alignItems:'center', height:"15%" ,justifyContent:'center' , width:'30%' , marginTop:70 , backgroundColor:"yellow",padding:5, borderRadius:20} }>
  
                         <TouchableOpacity onPress={()=>{
                         navigation.navigate('Login')
@@ -207,11 +207,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },Slider: {
-      height: slider_hight,
+    //   height: slider_hight,
       borderBottomRightRadius: 75
     },
     footer: {
-      flex: .65,
+      flex: .90,
       width:SCREEN_WIDTH,
       height:100
 

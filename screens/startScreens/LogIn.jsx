@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
 
                     <View style={styles.input}>
 
-                        <Ionicons name="person-circle" size={25} color={'white'} />
+                        <Ionicons name="mail" size={25} color={'white'} />
                         <TextInput
                             placeholder='enter your email'
                             style={{ color: 'white', fontSize: 18, paddingLeft: 10 }}

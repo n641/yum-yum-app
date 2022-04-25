@@ -61,7 +61,7 @@ const SignUp = ({ navigation }) => {
                         />
                     </View>
                     <View style={styles.input}>
-                        <Ionicons name="person-circle" size={25} color={'white'} />
+                        <Ionicons name="mail" size={25} color={'white'} />
                         <TextInput
                             placeholder='enter your email'
                             style={{ color: 'white', paddingLeft: 10, fontSize: 18 }}
@@ -107,7 +107,7 @@ const SignUp = ({ navigation }) => {
                     </View>
 
                     <View style={styles.input}>
-                        <Ionicons name="car-sport" size={25} color={'white'} />
+                        <Ionicons name="location" size={25} color={'white'} />
                         <TextInput
                             placeholder='enter your address'
                             style={{ color: 'white', paddingLeft: 10, fontSize: 18 }}
