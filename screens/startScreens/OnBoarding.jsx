@@ -117,7 +117,6 @@ const OnBoarding = ({ navigation }) => {
                                 // backgroundColor: 'red',
                             },
                         ]}>
-                            {/* #ff4d00 */}
                           <View style={[styles.Slider , {backgroundColor:"white" }]}>
                         
                               <Slider img={require('../../assets/chef.png')} />

@@ -27,16 +27,18 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={{
-            flex: 1,
             backgroundColor: 'black'
         }}>
-            <View>
+            <View style={{flex:1}}>
                 <Image
                     style={{
                         width: width,
                         height: height,
                         position: 'relative',
-                        opacity: 0.6
+                        opacity: 0.6,
+                        resizeMode: 'cover',
+                        flexDirection:'row'
+
                     }}
                     source={require('../../assets/1.jpg')}
                 />
@@ -59,6 +61,7 @@ const Login = ({ navigation }) => {
                             placeholder='enter your email'
                             style={{ color: 'white', fontSize: 18, paddingLeft: 10 }}
                             placeholderTextColor="white"
+                            autoComplete="off"
                             onChangeText={setemail}
                             value={email}
 
@@ -78,6 +81,7 @@ const Login = ({ navigation }) => {
                             placeholderTextColor="white"
                             onChangeText={setpass}
                             value={pass}
+                            autoComplete="off"
                             secureTextEntry={flag}
                         />
                     </View>
@@ -93,7 +97,7 @@ const Login = ({ navigation }) => {
                             : <Button title='log in' onPress={() => {
                                 // navigation.navigate('SignUp')
                                 handleLogin();
-                                lo
+                                
                             }} color={"red"}
                                 disabled style={styles.btn} />
 

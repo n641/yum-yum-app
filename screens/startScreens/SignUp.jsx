@@ -90,6 +90,8 @@ const SignUp = ({ navigation }) => {
                             onChangeText={setuserName}
                             value={userName}
                             autoFocus={true}
+                                                        autoComplete="off"
+
                         />
                     </View>
                     <View style={styles.input}>
@@ -101,6 +103,8 @@ const SignUp = ({ navigation }) => {
                             onChangeText={setemail}
                             value={email}
                             keyboardType='email-address'
+                                                        autoComplete="off"
+
                         />
                     </View>
 
@@ -118,6 +122,8 @@ const SignUp = ({ navigation }) => {
                             value={pass}
                             keyboardType='number-pad'
                             secureTextEntry={flag}
+                                                        autoComplete="off"
+
                         />
                     </View>
 
@@ -135,6 +141,8 @@ const SignUp = ({ navigation }) => {
                             value={cpass}
                             keyboardType='number-pad'
                             secureTextEntry={flag2}
+                                                        autoComplete="off"
+
                         />
                     </View>
 
@@ -146,6 +154,8 @@ const SignUp = ({ navigation }) => {
                             placeholderTextColor="white"
                             onChangeText={setadd}
                             value={add}
+                                                        autoComplete="off"
+
                         />
                     </View>
 
