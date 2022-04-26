@@ -22,15 +22,14 @@ const Card = ({ name, price, url, discound, offer }) => {
           style={{
             width: width / 2 - 28,
             height: 150,
-            // resizeMode: "resize",
             borderRadius: 30,
           }}
           source={{
             uri: `${url}`,
           }}
         />
-        <View style={{ justifyContent: "space-around", flexDirection: "row" }}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+        <View style={{ justifyContent: "space-between",alignItems:"center", flexDirection: "row" }}>
+          <Text style={{ fontSize: 18, fontWeight: 700 ,   }}>{name}</Text>
           {offer ? (
             <View style={{ flexDirection: "row" }}>
               <Text

@@ -41,7 +41,6 @@ const Offers = () => {
             style={{
               width: width-20,
               height: 300,
-              resizeMode: "resize",
               borderRadius: 30,
               borderWidth: 4,
               marginHorizontal:10

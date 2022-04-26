@@ -14,6 +14,7 @@ const Header = ({pagename,icon}) => {
           flexDirection: "row",
           alignItems: "center",
           alignItems: "center",
+          top:20,
           marginHorizontal: 15,
         }}
       >
