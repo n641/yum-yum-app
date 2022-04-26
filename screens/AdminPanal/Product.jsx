@@ -5,9 +5,11 @@ import {
 
 
 const Product = ({ navigation }) => {
-    <View>
-        
-    </View>
+    return(
+        <View>
+            
+        </View>
+    )
 }
 
 export default Product;

@@ -4,7 +4,7 @@ import {
 } from "react-native";
 
 
-const staff = ({ navigation }) => {
+const Offers = ({ navigation }) => {
     return(
         <View>
             
@@ -12,4 +12,4 @@ const staff = ({ navigation }) => {
     )
 }
 
-export default staff;
+export default Offers;

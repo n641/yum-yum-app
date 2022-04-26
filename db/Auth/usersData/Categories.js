@@ -12,14 +12,14 @@ import {
 } from "firebase/firestore";
 
 // Get a list of cities from your database
-async function getUsers() {
-    const usersCol = collection(db, "users");
+async function getCategories() {
+    const categoriesCol = collection(db, "Categories");
 
-    const userSnapshot = await (await getDocs(usersCol));
-    const userList = userSnapshot.docs.map((doc) => {
+    const CategorySnapshot = await (await getDocs(categoriesCol));
+    const CategoryList = CategorySnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
-    return userList;
+    return CategoryList;
 }
 
 // async function editCity(city) {
@@ -36,9 +36,9 @@ async function getUsers() {
 //     }
 // }
 
-async function addUser(user) {
+async function addCategory(category) {
     try {
-        const docRef = await addDoc(collection(db, "users"), user);
+        const docRef = await addDoc(collection(db, "Categories"), category);
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -47,7 +47,7 @@ async function addUser(user) {
 
 function subscribe(callback) {
     const unsubscribe = onSnapshot(
-    query(collection(db, "users")),
+    query(collection(db, "Categories")),
         (snapshot) => {
             const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
             snapshot.docChanges().forEach((change) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, subscribe };
+export { getCategories, addCategory, subscribe };

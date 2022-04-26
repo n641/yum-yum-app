@@ -5,9 +5,9 @@ import Category from "./Category";
 import ChatToSupport from "./ChatToSupport";
 import GetOrders from "./GetOrders";
 import GetUsers from "./GetUsers";
-import offers from "./offers";
+import Offers from "./Offers";
 import Product from "./Product";
-import staff from "./staff";
+import Staff from "./Staff";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,9 +18,9 @@ const AdminStartScreen = ({ navigation }) => {
                 <Drawer.Screen name="ChatToSupport" component={ChatToSupport} />
                 <Drawer.Screen name="GetOrders" component={GetOrders} />
                 <Drawer.Screen name="GetUsers" component={GetUsers} />
-                <Drawer.Screen name="offers" component={offers} />
+                <Drawer.Screen name="Offers" component={Offers} />
                 <Drawer.Screen name="Product" component={Product} />
-                <Drawer.Screen name="staff" component={staff} />
+                <Drawer.Screen name="Staff" component={Staff} />
             </Drawer.Navigator>
         
     )
