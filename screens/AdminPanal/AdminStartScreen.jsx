@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 
 const AdminStartScreen = ({ navigation }) => {
     return(
-            <Drawer.Navigator initialRouteName="Category">
+            <Drawer.Navigator initialRouteName="Product">
                 <Drawer.Screen name="Category" component={Category} />
                 <Drawer.Screen name="ChatToSupport" component={ChatToSupport} />
                 <Drawer.Screen name="GetOrders" component={GetOrders} />

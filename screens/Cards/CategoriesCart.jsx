@@ -10,8 +10,8 @@ import {
 
 import { deleteCategory, editCategory, getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 
-    const width = Dimensions.get("window").width;
-    const height = Dimensions.get("window").height;
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 const CategoriesCart = props => {
 

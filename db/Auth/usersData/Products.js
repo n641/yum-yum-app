@@ -12,33 +12,33 @@ import {
 } from "firebase/firestore";
 
 // Get a list of cities from your database
-async function getProduct(category) {
-    const productCol = collection(db, category);
+async function getProducts() {
+    const productsCol = collection(db, "Products");
 
-    const productSnapshot = await (await getDocs(productCol));
-    const productList = productSnapshot.docs.map((doc) => {
+    const ProductSnapshot = await (await getDocs(productsCol));
+    const ProductList = ProductSnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
-    return productList;
+    return ProductList;
 }
 
-// async function editCity(city) {
-//     console.log("at editCity", city);
-//     await setDoc(doc(db, "cities", city.id), city);
-// }
+async function editProduct(product) {
+    console.log("at editProduct", product);
+    await setDoc(doc(db, "Products", category.id), product);
+}
 
-// async function deleteCity(id) {
-//     try {
-//         await deleteDoc(doc(db, "cities", id));
-//         console.log("Document deleted with ID: ", id);
-//     } catch (error) {
-//         console.error("Error deleting document: ", error);
-//     }
-// }
-
-async function addProduct(product, category) {
+async function deleteProduct(id) {
     try {
-        const docRef = await addDoc(collection(db, category), product);
+        await deleteDoc(doc(db, "Products", id));
+        console.log("Document deleted with ID: ", id);
+    } catch (error) {
+        console.error("Error deleting document: ", error);
+    }
+}
+
+async function addProduct(product) {
+    try {
+        const docRef = await addDoc(collection(db, "Products"), product);
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -47,7 +47,7 @@ async function addProduct(product, category) {
 
 function subscribe(callback) {
     const unsubscribe = onSnapshot(
-    query(collection(db, "Categories")),
+    query(collection(db, "Products")),
         (snapshot) => {
             const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
             snapshot.docChanges().forEach((change) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getProduct, addProduct, subscribe };
+export { getProducts, addProduct, editProduct, deleteProduct, subscribe };
