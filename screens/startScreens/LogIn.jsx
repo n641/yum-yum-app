@@ -31,12 +31,12 @@ const Login = ({ navigation }) => {
     const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
-
+                 navigation.navigate("Home")
         }).catch((err)=>{
             console.log(err)
             const errorMessage = err;
             alert(errorMessage);
-        });
+        }) ;
         if(user){
             navigation.navigate('AdminStartScreen');
         }
@@ -104,11 +104,11 @@ const Login = ({ navigation }) => {
                         {pass && email ?
                             <Button title='log in' onPress={() => {
                                 handleLogin();
+
                             }} color={"red"}
                                 style={styles.btn} />
 
                             : <Button title='log in' onPress={() => {
-                                // navigation.navigate('SignUp')
                                 handleLogin();
                                 
                             }} color={"red"}

@@ -5,7 +5,7 @@ import {register} from '../../db/Auth/auth';
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
 import { auth, db, app } from '../../db/config';
 import { addUser } from '../../db/Auth/usersData/users';
-
+import {updateProfile} from "firebase/auth"
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -33,14 +33,22 @@ const SignUp = ({ navigation }) => {
                     cart: [],
                     favourite: [],
                     oldOrders: []
-                });
-            }).catch((error)=>{
+                }).then((userCredential) => {
+          // Registered
+          const user = userCredential.user;
+          updateProfile(user, {
+              displayName: userName
+            });
+            navigation.navigate('Login');
+        })
+            .catch((error)=>{
                 console.log(error)
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 alert(errorMessage);
             });
-        }
+        })   
+    }
         else{
 
             const errorMessage = "your confirm password not equal you password";
@@ -152,7 +160,6 @@ const SignUp = ({ navigation }) => {
 
                         {pass && email && userName && cpass ?
                             <Button title='sign Up' onPress={() => {
-                                // navigation.navigate('Login')
                                 handleSignUp();
                              }} color={"red"}
                                 style={styles.btn} />
