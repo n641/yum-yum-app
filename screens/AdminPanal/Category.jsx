@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { 
     View ,
     TextInput,
@@ -7,8 +7,7 @@ import {
     FlatList,
     Dimensions
 } from "react-native";
-import { Ionicons } from "react-native-vector-icons";
-import { addCategory, getCategories } from "../../db/Auth/usersData/Categories";
+import { addCategory, getCategories, subscribe } from "../../db/Auth/usersData/Categories";
 import CategoriesCard from '../Cards/CategoriesCart';
 
     const width = Dimensions.get("window").width;
@@ -36,6 +35,28 @@ const Category = ({ navigation }) => {
         setArrCategory(arr)
         console.log(arrCategory);
     }
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getCategories();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getCategories();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getCategories();
+            }
+          // }
+        });
+    
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     return (
         <View style={styles.bigContainer}>

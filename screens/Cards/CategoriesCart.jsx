@@ -1,4 +1,4 @@
-import react from 'react';
+import react, {useEffect} from 'react';
 import { 
     View,
     Text,
@@ -8,7 +8,7 @@ import {
     Button
 } from 'react-native';
 
-import { deleteCategory, editCategory } from '../../db/Auth/usersData/Categories';
+import { deleteCategory, editCategory, getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 
     const width = Dimensions.get("window").width;
     const height = Dimensions.get("window").height;
@@ -19,6 +19,28 @@ const CategoriesCart = props => {
         console.log("We delete category with id: ", id);
         deleteCategory(id);
     }
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getCategories();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getCategories();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getCategories();
+            }
+          // }
+        });
+    
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     return(
         <View style={styles.listItem}>
