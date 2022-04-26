@@ -77,10 +77,14 @@ const Category = ({ navigation }) => {
                     numColumns={2}
                     // style={{paddingVertical: 30}}
                     renderItem={itemData => <CategoriesCard 
-                        category={itemData.item.category} 
-                        link={itemData.item.link}
-                        description={itemData.item.description}
-                    />}
+                            category={itemData.item.category} 
+                            link={itemData.item.link}
+                            description={itemData.item.description}
+                            id={itemData.item.id}
+                            newCategory={category}
+                            newLink={imageLink}
+                            newDescription={description}
+                        />}
                 />
             </View>
         </View>

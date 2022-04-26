@@ -12,33 +12,33 @@ import {
 } from "firebase/firestore";
 
 // Get a list of cities from your database
-async function getCategories() {
-    const categoriesCol = collection(db, "Categories");
+async function getProduct(category) {
+    const productCol = collection(db, category);
 
-    const CategorySnapshot = await (await getDocs(categoriesCol));
-    const CategoryList = CategorySnapshot.docs.map((doc) => {
+    const productSnapshot = await (await getDocs(productCol));
+    const productList = productSnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
-    return CategoryList;
+    return productList;
 }
 
-async function editCategory(category) {
-    console.log("at editCategory", category);
-    await setDoc(doc(db, "Categories", category.id), category);
-}
+// async function editCity(city) {
+//     console.log("at editCity", city);
+//     await setDoc(doc(db, "cities", city.id), city);
+// }
 
-async function deleteCategory(id) {
+// async function deleteCity(id) {
+//     try {
+//         await deleteDoc(doc(db, "cities", id));
+//         console.log("Document deleted with ID: ", id);
+//     } catch (error) {
+//         console.error("Error deleting document: ", error);
+//     }
+// }
+
+async function addProduct(product, category) {
     try {
-        await deleteDoc(doc(db, "Categories", id));
-        console.log("Document deleted with ID: ", id);
-    } catch (error) {
-        console.error("Error deleting document: ", error);
-    }
-}
-
-async function addCategory(category) {
-    try {
-        const docRef = await addDoc(collection(db, "Categories"), category);
+        const docRef = await addDoc(collection(db, category), product);
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getCategories, addCategory, editCategory, deleteCategory, subscribe };
+export { getProduct, addProduct, subscribe };
