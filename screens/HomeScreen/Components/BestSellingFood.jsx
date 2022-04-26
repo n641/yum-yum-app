@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, ScrollView, Dimensions,FlatList } from "react-n
 import React , {useState}from 'react'
 import Card from './Card';
 
+
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -56,6 +58,7 @@ const BestSellingFood = () => {
       <FlatList
         data={pro}
         numColumns={2}
+        keyExtractor={item => item.name}
         //style={{marginHorizontal: 30}}
         renderItem={(itemData) => (
             itemData.item.count>5?(

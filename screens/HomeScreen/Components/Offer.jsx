@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
+
+import OfferCard from "./OfferCard";
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -36,21 +39,13 @@ const Offers = () => {
         bounces={false}
       >
         {imgs.map((e, id) => (
-          <Image
-            key={id}
-            style={{
-              width: width-20,
-              height: 300,
-              borderRadius: 30,
-              borderWidth: 4,
-              marginHorizontal:10
-            }}
-            source={{
-              uri: `${e}`,
-            }}
-          />
+          <OfferCard url={e} key={id}/>
         ))}
+
       </Animated.ScrollView>
+
+     
+
     </View>
   );
 };

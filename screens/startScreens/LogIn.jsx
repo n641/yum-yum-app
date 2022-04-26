@@ -31,7 +31,7 @@ const Login = ({ navigation }) => {
     const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
-                 navigation.navigate("Home")
+                 navigation.navigate("HomeStart")
         }).catch((err)=>{
             console.log(err)
             const errorMessage = err;

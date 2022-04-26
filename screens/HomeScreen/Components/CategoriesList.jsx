@@ -7,7 +7,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
-const CategoriesList = () => {
+import colors from "../../../Constants/colors";
+
+const CategoriesList = ({ navigation }) => {
   const [categoryName, setcategoryName] = useState([
     "pizzaaaaaa",
     "meat",
@@ -30,39 +32,45 @@ const CategoriesList = () => {
           horizontal
           // snapToInterval={100}
           decelerationRate="fast"
-          showsHorizontalScrollIndicator={true}
+          showsHorizontalScrollIndicator={false}
           bounces={false}
         >
+          
           {categoryName.map((e, index) =>
+
             index < 4 ? (
               <TouchableOpacity
                 key={index}
-                onPress={() => alert(e)}
-                style={{ backgroundColor: "red", borderRadius: 20, margin: 10 }}
+                onPress={() => {
+                  // navigation.navigate('Login');
+                  alert(e)
+                }}
+                style={{  borderRadius: 20, margin: 10 , borderColor:colors.fourth , borderWidth:3 }}
               >
                 <Text
                   style={{
-                    color: "black",
-                    fontSize: 22,
+                    color: colors.primary,
+                    fontSize: 20,
                     minHeight: 40,
                     textAlign: "center",
                     borderRadius: 20,
-                    padding: 8,
+                    padding: 10,
                     minWidth: 90,
-                    fontWeight: 600,
+                    fontWeight: "600",
                   }}
                 >
                   {e}
                 </Text>
               </TouchableOpacity>
             ) : index == 4 ? (
-              <TouchableOpacity key={index} style={{ margin: 10 }}>
-                <Text style={{ color: "red", fontSize: 22, fontWeight: 700 }}>
-                  ...see more
+              <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }}>
+                <Text style={{ color: colors.primary, fontSize: 19, fontWeight: "700", paddingTop:8 }}>
+                  {'more \>\>'}
                 </Text>
               </TouchableOpacity>
             ) : null
           )}
+
         </Animated.ScrollView>
       </View>
     </View>
