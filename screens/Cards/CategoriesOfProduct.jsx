@@ -8,13 +8,42 @@ import {
     Dimensions
 } from "react-native";
 
+import { deleteProduct, editProduct } from "../../db/Auth/usersData/Products";
+
 const width = Dimensions.get("window").width;
 
 const CategoriesOfProduct = (props, { navigation }) =>{
 
     return(
         <View style={styles.listItem}>
-            
+            <Image 
+                source={{uri: props.link}}
+                style={{height: 100}}
+            />
+            <Text style={styles.textHeader}>{props.title}</Text>
+            <Text style={styles.textDescription}>{props.description}</Text>
+            <Text>EGP {props.price}</Text>
+            {/* <Text>{props.rate}</Text> */}
+            <Button 
+                title="Delete"
+                color={"red"}
+                onPress={() => deleteProduct(props.id)}
+            />
+            <Button 
+                title="Edit"
+                onPress={() => editProduct({
+                    id: props.id, 
+                    category: props.newCategory,
+                    comments: props.comments,
+                    count: props.count,
+                    description: props.newDescription,
+                    discount: props.newDiscount,
+                    offer: props.newOffer,
+                    productName: props.newProductName,
+                    rate: props.rate,
+                    url: props.newUrl
+                })}
+            />
         </View>
     )
 }
@@ -39,7 +68,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     textDescription: {
-        width: width / 4.3
+        fontSize: 12,
     }
 })
 

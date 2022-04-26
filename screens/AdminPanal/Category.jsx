@@ -61,20 +61,22 @@ const Category = ({ navigation }) => {
     return (
         <View style={styles.bigContainer}>
             <View style={styles.Container}>
-                <TextInput
-                    onChangeText={setCategory}
-                    placeholder="Enter category name"
-                    style={styles.textInput}
-                />
+                <View style={{flexDirection: "row"}}>
+                    <TextInput
+                        onChangeText={setCategory}
+                        placeholder="Enter category name"
+                        style={styles.textInput}
+                    />
+                    <TextInput 
+                        onChangeText={setImageLink}
+                        placeholder="Enter image link"
+                        style={styles.textInput}
+                    />
+                </View>
                 <TextInput 
                     onChangeText={setDescription}
                     placeholder="Enter description"
                     style={styles.textInputDescription}
-                />
-                <TextInput 
-                    onChangeText={setImageLink}
-                    placeholder="Enter image link"
-                    style={styles.textInput}
                 />
                 {/* <Ionicons 
                     name="send"
@@ -116,7 +118,6 @@ const styles = StyleSheet.create({
     bigContainer: {
         flex: 1,
         // justifyContent: "center",
-        alignItems: "center",
         width: width
     },
     Container: {
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     textInputDescription: {
         borderWidth: 1,
         width: "100%",
-        paddingVertical: 25,
+        paddingVertical: 5,
         marginVertical: 5,
         justifyContent: "center",
         alignContent: "center",

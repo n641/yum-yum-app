@@ -22,10 +22,9 @@ const Product = ({ navigation }) => {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]); 
-    
 
     const getItems = async() => {
-        const arr = await getCategories();
+        const arr = await getProducts();
         setCategories(arr);
         console.log(arr)
     }
@@ -100,7 +99,23 @@ const Product = ({ navigation }) => {
                 />
                 <FlatList 
                     data={categories}
-                    
+                    numColumns={2}
+                    renderItem={itemData => <CategoriesOfProduct 
+                        title={itemData.item.productName}
+                        link={itemData.item.url}
+                        description={itemData.item.description}
+                        price={itemData.item.price}
+                        id={itemData.item.id}
+                        count ={itemData.item.count}
+                        rate={itemData.item.rate}
+                        comments={itemData.item.comments}
+                        newCategory={category}
+                        newDescription={description}
+                        newDiscount={discount}
+                        newOffer={offer}
+                        newProductName={productName}
+                        newUrl={url}
+                    />}
                 />
             </View>
         </View>

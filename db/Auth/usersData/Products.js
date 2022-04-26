@@ -24,7 +24,7 @@ async function getProducts() {
 
 async function editProduct(product) {
     console.log("at editProduct", product);
-    await setDoc(doc(db, "Products", category.id), product);
+    await setDoc(doc(db, "Products", product.id), product);
 }
 
 async function deleteProduct(id) {
