@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import {auth} from "../../../db/config"
 const Header = () => {
-    console.log(auth.currentUser);
+    console.log(auth.currentUser.displayName);
   return (
       
     <View>
