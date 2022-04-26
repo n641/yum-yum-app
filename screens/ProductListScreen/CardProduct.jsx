@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, Dimensions, Image, Button } from "react-native";
 import React from "react";
+
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -86,7 +88,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                         style={{
                             borderRadius: 10,
                             backgroundColor: colors.primary,
-                            width: 80,
+                            width: width/4-20,
                             height: 40,
                             justifyContent: "center",
                             margin: 5
@@ -106,7 +108,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                         style={{
                             borderRadius: 10,
                             backgroundColor: colors.secondry,
-                            width: 80,
+                            width: width/4-20,
                             height: 40,
                             justifyContent: "center",
                         }}

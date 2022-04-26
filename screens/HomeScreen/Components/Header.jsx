@@ -3,7 +3,7 @@ import React from "react";
 import { auth } from "../../../db/config";
 import { Ionicons } from "@expo/vector-icons";
 
-import colors from '../../../Constants/colors'
+import colors from "../../../Constants/colors"
 
 
 const Header = ({ pagename, icon, navigation }) => {

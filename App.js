@@ -12,7 +12,7 @@ import HomeStart from "./screens/HomeScreen/HomeStart";
 import Cart from "./screens/CartScreen/Cart";
 import Home from "./screens/HomeScreen/Components/Home";
 import Category from "./screens/CategoriesScreen/Category";
-import productList from "./screens/ProductListScreen/ProductList";
+import ProductList from "./screens/ProductListScreen/ProductList";
 
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +25,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="productList"
+        initialRouteName="HomeStart"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -33,7 +33,7 @@ export default function App() {
         <Stack.Screen name="HomeStart" component={HomeStart} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="productList" component={productList} />
+        <Stack.Screen name="productList" component={ProductList} />
 
 
 

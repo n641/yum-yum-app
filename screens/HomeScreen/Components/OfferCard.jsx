@@ -24,7 +24,7 @@ const OfferCard = ({ url}) => {
             <View style={{ position: "absolute", left: 10 }}>
                 <Text style={{
                     transform: [
-                        { translateY: 50, translateX: 0 },
+                        { translateY: 50 },
                         { rotate: "320deg" }],
                     fontWeight: "bold", fontSize: 20,
                     backgroundColor: colors.primary , width: 140, textAlign: "center", color: colors.third

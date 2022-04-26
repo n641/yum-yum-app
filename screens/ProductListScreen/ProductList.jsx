@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList } from "react-native";
 import React, { useState } from 'react'
 
+import Header from "../HomeScreen/Components/Header";
+
 import CardProduct from "./CardProduct";
 
 
@@ -9,7 +11,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const productList = () => {
+const ProductList = () => {
     const [pro, setpro] = useState([        //must order product by count!!!!
         {
             name: "sawarma",
@@ -63,6 +65,7 @@ const productList = () => {
     ]);
     return (
         <View>
+            <Header icon={"cart"}/>
             <Text style={{ fontSize: 25, color: "red", fontWeight: "bold", textAlign: "center", marginVertical: 10 }}>product</Text>
 
             <FlatList
@@ -88,6 +91,6 @@ const productList = () => {
     );
 }
 
-export default productList
+export default ProductList
 
 const styles = StyleSheet.create({})
