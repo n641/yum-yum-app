@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image, Dimensions ,ScrollView} from "react-native";
 import React, { useState } from "react";
-import Header from "./Components/Header";
-import Offers from "./Components/Offer";
-import CategoriesList from "./Components/CategoriesList";
-import BestSellingFood from "./Components/BestSellingFood";
+import Header from "./Header";
+import Offers from "./Offer";
+import CategoriesList from "./CategoriesList";
+import BestSellingFood from "./BestSellingFood";
+
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -11,8 +12,10 @@ const height = Dimensions.get("window").height;
 const Home = ({ navigation }) => {
   const [Homes, setHomes] = useState([]);
 
+ 
+
   return (
-    <View
+   <View
       style={{
         flex: 1,
         justifyContent: "space-around",
@@ -21,11 +24,11 @@ const Home = ({ navigation }) => {
     >
       <Header pagename={"Home"} icon={"cart"} />
       <CategoriesList />
-
       <ScrollView>
         <Offers />
         <BestSellingFood />
       </ScrollView>
+     
     </View>
   );
 };
@@ -33,3 +36,4 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({});
+
