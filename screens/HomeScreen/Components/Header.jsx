@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Header = ({pagename,icon}) => {
     console.log(auth.currentUser);
+
   return (
     <View
       style={{
