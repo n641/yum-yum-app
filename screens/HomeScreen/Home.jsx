@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import React, { useState } from "react";
 import Header from "./Components/Header";
+import Offers from "./Components/Offer";
 import CategoriesList from "./Components/CategoriesList";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -12,6 +13,7 @@ const Home = ({ navigation }) => {
     <View style={{flex:1 ,justifyContent: 'space-around',flexDirection: 'column'}}>
       <Header pagename={"Home"} icon ={"cart"}/>
       <CategoriesList/>
+      <Offers/>
     </View>
   );
 };

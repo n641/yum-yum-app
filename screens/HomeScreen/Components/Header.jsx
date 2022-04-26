@@ -9,21 +9,27 @@ const Header = ({pagename,icon}) => {
   return (
     <View
       style={{
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         flexDirection: "row",
-        top: 30,
+        top: 5,
         alignItems: "center",
+        alignItems: "center",
+        marginHorizontal:15
       }}
     >
-      <View>
+      <View style={{flexDirection: "row" ,alignItems: 'center'}}>
+        <Ionicons name="person-circle" size={30} color={"black"} />
+
         <Text
           style={{
             color: "red",
             fontSize: 18,
             fontWeight: "bold",
             textTransform: "capitalize",
+            paddingLeft:10
           }}
         >
+          {/* {auth.currentUser.displayName} */}
           raneen
         </Text>
       </View>
