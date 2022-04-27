@@ -22,19 +22,19 @@ async function getUsers() {
     return userList;
 }
 
-// async function editCity(city) {
-//     console.log("at editCity", city);
-//     await setDoc(doc(db, "cities", city.id), city);
-// }
+async function editUser(user) {
+    console.log("at editUsers", user);
+    await setDoc(doc(db, "users", user.id), user);
+}
 
-// async function deleteCity(id) {
-//     try {
-//         await deleteDoc(doc(db, "cities", id));
-//         console.log("Document deleted with ID: ", id);
-//     } catch (error) {
-//         console.error("Error deleting document: ", error);
-//     }
-// }
+async function deleteUserDB(id) {
+    try {
+        await deleteDoc(doc(db, "users", id));
+        console.log("Document deleted with ID: ", id);
+    } catch (error) {
+        console.error("Error deleting document: ", error);
+    }
+}
 
 async function addUser(user) {
     try {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, subscribe };
+export { getUsers, addUser, editUser, deleteUserDB, subscribe };
