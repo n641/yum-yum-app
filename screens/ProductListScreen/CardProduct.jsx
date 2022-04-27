@@ -15,7 +15,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                 style={{
                     borderRadius: 30,
                     height: height / 2 - 30,
-                    borderWidth: 4,
+                    borderWidth: 1,
                     flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
@@ -71,7 +71,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                 </View>
 
                 <View>
-                    <Text style={{ color: colors.fourth, fontSize: 18  }}>{desc.substring(0,25)}....</Text>
+                    <Text style={{ color: colors.fourth, fontSize: 18 , marginLeft:10  }}>{desc.substring(0,25)}....</Text>
                 </View>
 
 

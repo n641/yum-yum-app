@@ -13,7 +13,7 @@ const OfferCard = ({ url}) => {
                     width: width - 20,
                     height: 250,
                     borderRadius: 30,
-                    borderWidth: 4,
+                    borderWidth: 1,
                     marginHorizontal: 10
                 }}
                 source={{

@@ -18,7 +18,7 @@ const CardCategory = ({ url , name }) => {
                     width: width / 2 - 10,
                     height:  height / 2 - 100,
                     borderRadius: 30,
-                    borderWidth: 4,
+                    borderWidth: 1,
                     marginHorizontal: 5,
                     marginVertical: 5
 
@@ -28,7 +28,7 @@ const CardCategory = ({ url , name }) => {
                 }}
             />
 
-            <View style={{ position: "absolute", left: 50 ,top:width / 2 - 80 , bottom:0 , right:0 }}>
+            <View style={{ position: "absolute", left: '15%' ,top:width / 2 - 90 , bottom:0 , right:0 }}>
                 <Text style={{
                     fontWeight: "bold", fontSize: 30,
                      width: 140, textAlign: "center", color: colors.third , fontWeight:'bold'

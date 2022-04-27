@@ -12,8 +12,8 @@ const Card = ({ name, price, url, discound, offer }) => {
       <View
         style={{
           borderRadius: 30,
-          height: height / 2 - 30,
-          borderWidth: 4,
+          height: height / 2 - 70,
+          borderWidth: 1,
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",

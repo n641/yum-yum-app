@@ -13,6 +13,7 @@ import Cart from "./screens/CartScreen/Cart";
 import Home from "./screens/HomeScreen/Components/Home";
 import Category from "./screens/CategoriesScreen/Category";
 import ProductList from "./screens/ProductListScreen/ProductList";
+import UseerProScreen from "./screens/UserProfile/UseerProScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +26,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="HomeStart"
+        initialRouteName="UseerProScreen"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -34,6 +35,8 @@ export default function App() {
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="productList" component={ProductList} />
+        <Stack.Screen name="UseerProScreen" component={UseerProScreen} />
+
 
 
 

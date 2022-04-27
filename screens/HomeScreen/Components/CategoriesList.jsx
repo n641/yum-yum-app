@@ -45,7 +45,7 @@ const CategoriesList = ({ navigation }) => {
                   // navigation.navigate('Login');
                   alert(e)
                 }}
-                style={{  borderRadius: 20, margin: 10 , borderColor:colors.fourth , borderWidth:3 }}
+                style={{  borderRadius: 20, margin: 10 , borderColor:colors.fourth , borderWidth:1 }}
               >
                 <Text
                   style={{
