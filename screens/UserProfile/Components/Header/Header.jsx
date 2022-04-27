@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
 import React from 'react'
 
-import colors from '../../../../Constants/colors';
+import style from '../../../../Constants/style';
 import { Ionicons } from "@expo/vector-icons";
 
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Header = () => {
+const Headerinf = () => {
     return (
         <View>
             <Image
@@ -24,10 +24,10 @@ const Header = () => {
             <View style={{ flexDirection: 'row', position: 'absolute' }}>
 
                 <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', top: 120 }}>
-                    <Text style={{ color: colors.fourth, fontSize: 20, fontWeight: 'bold' }}> noha mohammed</Text>
+                    <Text style={{ color: style.fourth, fontSize: 20, fontWeight: 'bold' }}> noha mohammed</Text>
                     <View style={{ flexDirection: 'row' , alignItems:'center' ,justifyContent:'center' }}>
-                        <Ionicons name="mail" size={15} color={colors.fourth} />
-                        <Text style={{ color: colors.secondry, fontSize: 16, fontWeight: 'bold' }}> noha64@gamil.com</Text>
+                        <Ionicons name="mail" size={15} color={style.fourth} />
+                        <Text style={{ color: style.secondry, fontSize: 16, fontWeight: 'bold' }}> noha64@gamil.com</Text>
                     </View>
 
                 </View>
@@ -44,7 +44,7 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Headerinf
 
 const styles = StyleSheet.create({
 

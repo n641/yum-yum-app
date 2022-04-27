@@ -30,7 +30,7 @@ const [Carts, setCarts] = useState([]);
                     }}
                     source={require('../../assets/emptyCart.png')}
                 />
-                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 50 , alignItems: 'center', justifyContent:'flex-end'}}>
+                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: height/20 , alignItems: 'center', justifyContent:'flex-end'}}>
                 <Text style={{color:'red' , fontSize:30, fontWeight:'500'}}>Empty Card</Text>
                 </View>
                

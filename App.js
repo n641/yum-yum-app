@@ -26,7 +26,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="UseerProScreen"
+        initialRouteName="HomeStart"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -34,16 +34,11 @@ export default function App() {
         <Stack.Screen name="HomeStart" component={HomeStart} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="productList" component={ProductList} />
+        <Stack.Screen name="ProductList" component={ProductList} />
         <Stack.Screen name="UseerProScreen" component={UseerProScreen} />
-
-
-
 
         <Stack.Screen name="OnBoarding" component={OnBoarding} />
         {/* <Stack.Screen name="AdminStartScreen" component={AdminStartScreen} /> */}
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
-import colors from "../../../Constants/colors";
+import style from "../../../Constants/style";
 
 const CategoriesList = ({ navigation }) => {
   const [categoryName, setcategoryName] = useState([
@@ -30,7 +30,6 @@ const CategoriesList = ({ navigation }) => {
       >
         <Animated.ScrollView
           horizontal
-          // snapToInterval={100}
           decelerationRate="fast"
           showsHorizontalScrollIndicator={false}
           bounces={false}
@@ -45,15 +44,15 @@ const CategoriesList = ({ navigation }) => {
                   // navigation.navigate('Login');
                   alert(e)
                 }}
-                style={{  borderRadius: 20, margin: 10 , borderColor:colors.fourth , borderWidth:1 }}
+                style={{  borderRadius: style.border, margin: 10 , borderColor:style.fourth , borderWidth:1 }}
               >
                 <Text
                   style={{
-                    color: colors.primary,
+                    color: style.primary,
                     fontSize: 20,
                     minHeight: 40,
                     textAlign: "center",
-                    borderRadius: 20,
+                    borderRadius: style.border,
                     padding: 10,
                     minWidth: 90,
                     fontWeight: "600",
@@ -64,7 +63,7 @@ const CategoriesList = ({ navigation }) => {
               </TouchableOpacity>
             ) : index == 4 ? (
               <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }}>
-                <Text style={{ color: colors.primary, fontSize: 19, fontWeight: "700", paddingTop:8 }}>
+                <Text style={{ color: style.primary, fontSize: 19, fontWeight: "700", paddingTop:8 }}>
                   {'more \>\>'}
                 </Text>
               </TouchableOpacity>

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Dimensions , TouchableOpacity } from 'react-native'
 import React from 'react'
-import colors from '../../../Constants/colors'
+import style from '../../../Constants/style'
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -16,11 +16,10 @@ const CardCategory = ({ url , name }) => {
             <Image
                 style={{
                     width: width / 2 - 10,
-                    height:  height / 2 - 100,
-                    borderRadius: 30,
+                    height:  height / 4,
+                    borderRadius: style.border,
                     borderWidth: 1,
-                    marginHorizontal: 5,
-                    marginVertical: 5
+                    margin: 5
 
                 }}
                 source={{
@@ -28,10 +27,10 @@ const CardCategory = ({ url , name }) => {
                 }}
             />
 
-            <View style={{ position: "absolute", left: '15%' ,top:width / 2 - 90 , bottom:0 , right:0 }}>
+            <View style={{ position: "absolute", left: "15%" ,top:width / 7 , bottom:0 , right:0 }}>
                 <Text style={{
-                    fontWeight: "bold", fontSize: 30,
-                     width: 140, textAlign: "center", color: colors.third , fontWeight:'bold'
+                    fontWeight: "bold", fontSize: width/14,
+                     width: width/3, textAlign: "center", color: style.third , fontWeight:'bold'
                 }}>{name}</Text>
             </View>
             </TouchableOpacity>

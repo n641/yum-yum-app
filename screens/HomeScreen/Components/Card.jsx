@@ -4,47 +4,59 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-import colors from "../../../Constants/colors";
+import style from "../../../Constants/style";
 
 const Card = ({ name, price, url, discound, offer }) => {
   return (
-    <View style={{ marginHorizontal: 8, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ margin: 8, alignItems: "center", justifyContent: "center" }}>
       <View
         style={{
-          borderRadius: 30,
-          height: height / 2 - 70,
+          borderRadius: style.border,
+          height: height / 2-60,
           borderWidth: 1,
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
-          width: width / 2 - 20,
-          marginVertical: 10,
+          width: width / 2 - 16,
         }}
       >
         <Image
           style={{
-            width: width / 2 - 28,
-            height: 150,
-            borderRadius: 30,
+            width: width / 2 - 18,
+            height: height / 5,
+            borderRadius: style.border,
           }}
           source={{
             uri: `${url}`,
           }}
         />
-        <View style={{ justifyContent: "space-around", alignItems: "center", flexDirection: "row" , width:width / 2 - 30, }}>
+        <View
+          style={{
+            justifyContent: "space-around",
+            alignItems: "center",
+            flexDirection: "row",
+            width: width / 2,
+          }}
+        >
           <View>
-            <Text style={{ fontSize: 18, fontWeight: "700", }}>{name}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
           </View>
           <View>
             {offer ? (
-              <View style={{ flexDirection: "row" , justifyContent: "space-between" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <View>
                   <Text
                     style={{
-                      color: colors.primary,
+                      color: "#838787",
                       fontSize: 18,
                       fontWeight: "bold",
                       textDecorationLine: "line-through",
+                      marginRight: 5,
                     }}
                   >
                     {price + "$"}
@@ -52,7 +64,11 @@ const Card = ({ name, price, url, discound, offer }) => {
                 </View>
                 <View>
                   <Text
-                    style={{ color: "green", fontSize: 18, fontWeight: "bold" }}
+                    style={{
+                      color: "red",
+                      fontSize: 18,
+                      fontWeight: "bold",
+                    }}
                   >
                     {price - discound + "$"}
                   </Text>
@@ -60,14 +76,19 @@ const Card = ({ name, price, url, discound, offer }) => {
               </View>
             ) : (
               <View>
-                <Text style={{ color: colors.primary, fontSize: 18, fontWeight: "bold" }}>
+                <Text
+                  style={{
+                    color: "red",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                >
                   {price + "$"}
                 </Text>
               </View>
             )}
           </View>
         </View>
-
 
         <View
           style={{
@@ -80,17 +101,17 @@ const Card = ({ name, price, url, discound, offer }) => {
         >
           <View
             style={{
-              borderRadius: 10,
-              backgroundColor: colors.primary,
-              width: width/4-20,
-              height: 40,
+              borderRadius: style.border,
+              backgroundColor: style.primary,
+              width: width / 4 - 15,
+              height: height / 14,
               justifyContent: "center",
-              margin: 5
+              margin: 5,
             }}
           >
             <Text
               style={{
-                color: colors.third,
+                color: style.third,
                 textAlign: "center",
                 fontWeight: "bold",
               }}
@@ -100,16 +121,17 @@ const Card = ({ name, price, url, discound, offer }) => {
           </View>
           <View
             style={{
-              borderRadius: 10,
-              backgroundColor: colors.secondry,
-              width: width/4-20,
-              height: 40,
+              borderRadius: style.border,
+              backgroundColor: "black",
+              width: width / 4 - 15,
+              height: height / 14,
               justifyContent: "center",
+              margin: 5,
             }}
           >
             <Text
               style={{
-                color: colors.third,
+                color: style.third,
                 textAlign: "center",
                 fontWeight: "bold",
               }}

@@ -3,7 +3,7 @@ import React from "react";
 import { auth } from "../../../db/config";
 import { Ionicons } from "@expo/vector-icons";
 
-import colors from "../../../Constants/colors"
+import style from "../../../Constants/style"
 
 
 const Header = ({ pagename, icon, navigation }) => {
@@ -28,11 +28,11 @@ const Header = ({ pagename, icon, navigation }) => {
             //navigete to users info
           }}>
 
-            <Ionicons name="person-circle" size={30} color={colors.fourth} />
+            <Ionicons name="person-circle" size={30} color={style.fourth} />
             </TouchableOpacity>
             <Text
               style={{
-                color: colors.primary,
+                color: style.primary,
                 fontSize: 18,
                 fontWeight: "bold",
                 textTransform: "capitalize",
@@ -54,14 +54,14 @@ const Header = ({ pagename, icon, navigation }) => {
             <TouchableOpacity onPress={() => {
               navigation.navigator('Cart');
             }}>
-              <Ionicons name={icon} size={35} color={colors.primary} />
+              <Ionicons name={icon} size={35} color={style.primary} />
             </TouchableOpacity>
 
           )
           } */}
 
           <TouchableOpacity onPress={()=>{}}>
-          <Ionicons name={icon} size={35} color={colors.primary} />
+          <Ionicons name={icon} size={35} color={style.primary} />
           </TouchableOpacity>
 
 

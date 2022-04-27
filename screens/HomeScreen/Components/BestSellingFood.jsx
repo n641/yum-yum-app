@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions,FlatList } from "react-native";
 import React , {useState}from 'react'
 import Card from './Card';
-
+import style from "../../../Constants/style";
 
 
 const width = Dimensions.get("window").width;
@@ -11,7 +11,7 @@ const height = Dimensions.get("window").height;
 const BestSellingFood = () => {
     const [pro, setpro] = useState([        //must order product by count!!!!
       {
-        name: "sawarma",
+        name: "sawarmaa",
         url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
         price: 20,
         count: 19,
@@ -53,7 +53,7 @@ const BestSellingFood = () => {
     ]);
   return (
     <View>
-      <Text style={{fontSize:25,color:"red",fontWeight:"bold" ,textAlign:"center",marginVertical:10}}>BestSellingFood</Text>
+      <Text style={{fontSize:25,color:style.primary,fontWeight:"bold" ,textAlign:"center",marginVertical:10}}>BestSellingFood</Text>
     
       <FlatList
         data={pro}

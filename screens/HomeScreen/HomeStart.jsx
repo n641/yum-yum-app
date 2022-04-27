@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 import Home from "./Components/Home";
 
-import colors from '../../Constants/colors'
+import style from '../../Constants/style'
 
 
 const HomeStart = ({ navigation }) => {
@@ -38,8 +38,8 @@ const HomeStart = ({ navigation }) => {
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.fourth,
+        tabBarActiveTintColor: style.primary,
+        tabBarInactiveTintColor: style.fourth,
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />

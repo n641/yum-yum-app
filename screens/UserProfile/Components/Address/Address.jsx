@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Dimensions , ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import colors from '../../../../Constants/colors';
+import style from '../../../../Constants/style';
 import { Ionicons } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
@@ -12,9 +12,9 @@ const Address = () => {
 
     return (
         <View style={{flexDirection:'row'}}>
-            <View style={{ width: width /2-20, height: height / 5 , backgroundColor: colors.third,
+            <View style={{ width: width /2-20, height: height / 5 , backgroundColor: style.third,
              borderRadius: 20, borderWidth: 1, margin: 10, justifyContent:'space-around' , }}>
-                 <Text style={{ fontWeight:'bold' , fontSize:20 , color:colors.primary , textAlign:'center'}}>Address</Text>
+                 <Text style={{ fontWeight:'bold' , fontSize:20 , color:style.primary , textAlign:'center'}}>Address</Text>
                 <ScrollView>
                 {address.map((e, i)=>(
                     e?(
@@ -27,13 +27,13 @@ const Address = () => {
                 </ScrollView>
             </View>
 
-            <View style={{ width: width /2-20, height: height / 5 , backgroundColor: colors.third,
+            <View style={{ width: width /2-20, height: height / 5 , backgroundColor: style.third,
              borderRadius: 20, borderWidth: 1, margin: 10, justifyContent:'space-around' , }}>
-                 <Text style={{ fontWeight:'bold' , fontSize:25 , color:colors.primary , textAlign:'center'}}>points</Text>
+                 <Text style={{ fontWeight:'bold' , fontSize:25 , color:style.primary , textAlign:'center'}}>points</Text>
 
                  <View style={{flexDirection:'row' , alignItems:'center' , justifyContent:'center'}}>
                  <Text style={{fontWeight:'bold' , fontSize:50 , textAlign:'center'}}>1</Text>
-                 <Ionicons name="trophy" size={40} color={colors.secondry} />
+                 <Ionicons name="trophy" size={40} color={style.secondry} />
                  </View>
                
             </View>

@@ -39,7 +39,7 @@ const Category = () => {
     return (
         <View>
             <Header icon={'cart'} />
-            <Text style={{textAlign:'center', fontSize:20 , fontWeight:'bold', margin:20 }}>select from the categories below </Text>
+            <Text style={{textAlign:'center', fontSize:20 , margin:20 }}>select from the categories below </Text>
             <FlatList
                 data={category}
                 numColumns={2}
