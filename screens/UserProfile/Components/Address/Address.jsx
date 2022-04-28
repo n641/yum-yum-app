@@ -11,7 +11,7 @@ const Address = () => {
     const [address, setaddress] = useState([ "17 mhi el deen el bahry street / basaten el3momy /  ",  "7 doctoe city / bawaba 4 / doctor buliding ", "" ]);
 
     return (
-        <View style={{flexDirection:'row'}}>
+        <View style={{flexDirection:'row' , marginTop:20}}>
             <View style={{ width: width /2-20, height: height / 5 , backgroundColor: style.third,
              borderRadius: 20, borderWidth: 1, margin: 10, justifyContent:'space-around' , }}>
                  <Text style={{ fontWeight:'bold' , fontSize:20 , color:style.primary , textAlign:'center'}}>Address</Text>

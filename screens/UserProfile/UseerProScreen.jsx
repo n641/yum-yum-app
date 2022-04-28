@@ -7,12 +7,18 @@ const height = Dimensions.get("window").height;
 
 import Headerinf from "./Components/Header/Header";
 import Address from './Components/Address/Address';
+import Favourite from './Components/Favourite/favourite';
+import LastOrder from './Components/LastOrders/LastOrder';
+import Footer from './Components/Footer/Footer';
 
 const UseerProScreen = () => {
   return (
-    <View style={{ width: width, height: height, backgroundColor: "#232424" }}>
+    <View style={{ width: width, height: height+400, backgroundColor: "#232424" }}>
       <Headerinf />
       <Address />
+      <LastOrder/>
+      <Favourite/> 
+      <Footer/>   
     </View>
   );
 }
