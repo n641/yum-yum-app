@@ -13,18 +13,20 @@ import Footer from './Components/Footer/Footer';
 
 const UseerProScreen = () => {
   return (
-    <View>
-        <ScrollView>
-      <View style={{ backgroundColor: "#232424" }}>
+  
+      // <View style={{ backgroundColor: "#232424" }}>
 
-          <Headerinf />
+        <ScrollView style={{backgroundColor: "#232424"}}>
+
+          <Headerinf /> 
           <Address />
           <LastOrder />
           <Favourite />
           <Footer />
-      </View>
         </ScrollView>
-    </View>
+      // </View>
+
+  
   );
 }
 

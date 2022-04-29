@@ -69,7 +69,7 @@ const Favourite = () => {
 
   return Favourite.length!=0?  (
     <View>
-    <Text style={{fontSize:25,color:style.primary,fontWeight:"bold" ,textAlign:"center",marginVertical:10}}>BestSellingFood</Text>
+    <Text style={{fontSize:25,color:style.primary,fontWeight:"bold" ,textAlign:"center",marginVertical:10}}>favourite meals</Text>
   
     <FlatList
       data={Favourite}

@@ -45,7 +45,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
             }}
           >
             <View>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" ,color:style.third }}>{name}</Text>
             </View>
             <View>
               {offer ? (
@@ -98,7 +98,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
           </View>
 
           <View>
-            <Text style={{ color: style.fourth, fontSize: 18, marginLeft: 10 }}>
+            <Text style={{ color: style.third, fontSize: 18, marginLeft: 10 }}>
               {desc.substring(0, 25)}....
             </Text>
           </View>
