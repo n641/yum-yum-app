@@ -8,7 +8,7 @@ import style from '../../../../Constants/style';
 
 import LastOrderCard from './LastOrderCard';
 
-const LastOrder = () => {
+const LastOrder = ({ navigation}) => {
     const [pro, setpro] = useState([        //must order product by count!!!!
         {
             name: "sawarma",
@@ -90,7 +90,7 @@ const LastOrder = () => {
 
                         {pro.map((e, id) => (
 
-                            <LastOrderCard url={e.url} name={e.name} price={e.price} desc={e.desc} offer={e.offer} discound={e.discound} key={id} />
+                            <LastOrderCard url={e.url} name={e.name} price={e.price} desc={e.desc} fav={e.fav} offer={e.offer} discound={e.discound} navigation={navigation} key={id} />
 
                         ))}
 

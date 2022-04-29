@@ -11,8 +11,8 @@ import style from "../../../Constants/style";
 
 const CategoriesList = ({ navigation }) => {
   const [categoryName, setcategoryName] = useState([
-    "pizzaaaaaa",
-    "meat",
+    "pasta",
+    "milk",
     "fish",
     "pizza",
     "meat",
@@ -41,8 +41,7 @@ const CategoriesList = ({ navigation }) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  // navigation.navigate('Login');
-                  alert(e)
+                  navigation.navigate("ProductList" ,{name:e});
                 }}
                 style={{  borderRadius: style.border, margin: 10 , borderColor:style.fourth , borderWidth:1 }}
               >
@@ -62,7 +61,8 @@ const CategoriesList = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             ) : index == 4 ? (
-              <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }}>
+              <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }} onPress={() =>{
+                navigation.navigate("Category");}}>
                 <Text style={{ color: style.primary, fontSize: 19, fontWeight: "700", paddingTop:8 }}>
                   {'more \>\>'}
                 </Text>

@@ -7,35 +7,56 @@ const height = Dimensions.get("window").height;
 
 
 
-const CardCategory = ({ url , name }) => {
-    return (
-        <View >
-            <TouchableOpacity onPress={()=>{
-                //NAVIGATE TO PRODUCT SCREEN  WITH PARAM NAME OF CATEGORY TO LIST ALL PRODUCT OF THIS CATEGORY 
-            }}>
-            <Image
-                style={{
-                    width: width / 2 - 10,
-                    height:  height / 4,
-                    borderRadius: style.border,
-                    borderWidth: 1,
-                    margin: 5
-                }}
-                source={{
-                    uri: `${url}`,
-                }}
-            />
 
-            <View style={{ position: "absolute", left: "15%" ,top:width / 7 , bottom:0 , right:0 }}>
-                <Text style={{
-                    fontWeight: "bold", fontSize: width/14,
-                     width: width/3, textAlign: "center", color: style.third , fontWeight:'bold'
-                }}>{name}</Text>
-            </View>
-            </TouchableOpacity>
+const CardCategory = ({ url, namepro, navigation }) => {
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("ProductList", { name: namepro });
+          //NAVIGATE TO PRODUCT SCREEN  WITH PARAM NAME OF CATEGORY TO LIST ALL PRODUCT OF THIS CATEGORY
+        }}
+      >
+        <Image
+          style={{
+            width: width / 2 - 10,
+            height: height / 4,
+            borderRadius: style.border,
+            borderWidth: 1,
+            margin: 5,
+          }}
+          source={{
+            uri: `${url}`,
+          }}
+        />
+
+        <View
+          style={{
+            position: "absolute",
+            left: "15%",
+            top: width / 7,
+            bottom: 0,
+            right: 0,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: width / 14,
+              width: width / 3,
+              textAlign: "center",
+              color: style.third,
+              fontWeight: "bold",
+            }}
+          >
+            {namepro}
+          </Text>
         </View>
-    )
-}
+      </TouchableOpacity>
+     
+    </View>
+  );
+};
 
 export default CardCategory
 

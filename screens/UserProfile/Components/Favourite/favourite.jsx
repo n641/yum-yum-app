@@ -7,7 +7,7 @@ const height = Dimensions.get("window").height;
 import FavCard from './FavCard';
 import style from '../../../../Constants/style';
 
-const Favourite = () => {
+const Favourite = ({ navigation}) => {
     const [Favourite, setFavourite] = useState([        //must order Favouriteduct by count!!!!
     {
         name: "sawarma",
@@ -88,7 +88,7 @@ const Favourite = () => {
       >
         {Favourite.map((e, id) => (
             e.fav?(
-          <FavCard url={e.url} name={e.name} price={e.price}  desc={e.desc} offer={e.offer} discound={e.discound} key={id}/>
+          <FavCard url={e.url} name={e.name} fav={e.fav} price={e.price}  desc={e.desc} offer={e.offer} discound={e.discound} navigation={navigation}key={id}/>
             ):null
         ))}
 

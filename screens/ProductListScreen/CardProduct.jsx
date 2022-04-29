@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Dimensions, Image, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import React from "react";
 
 
@@ -8,7 +16,7 @@ const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
 
-const CardProduct = ({ name, price, url, discound, offer, desc }) => {
+const CardProduct = ({ name,fav, price, url, discound, offer, desc ,navigation}) => {
     return (
       <View
         style={{ margin: 8, alignItems: "center", justifyContent: "center" }}
@@ -60,7 +68,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                         fontSize: 18,
                         fontWeight: "bold",
                         textDecorationLine: "line-through",
-                        marginRight:10
+                        marginRight: 10,
                       }}
                     >
                       {price + "$"}
@@ -72,7 +80,7 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                         color: "red",
                         fontSize: 18,
                         fontWeight: "bold",
-                        marginRight:5
+                        marginRight: 5,
                       }}
                     >
                       {price - discound + "$"}
@@ -139,15 +147,29 @@ const CardProduct = ({ name, price, url, discound, offer, desc }) => {
                 justifyContent: "center",
               }}
             >
-              <Text
-                style={{
-                  color: style.third,
-                  textAlign: "center",
-                  fontWeight: "bold",
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("DetailsScreen", {
+                    name: name,
+                    price: price,
+                    fav: fav,
+                    url: url,
+                    discound: discound,
+                    desc: desc,
+                    offer: offer,
+                  });
                 }}
               >
-                See More
-              </Text>
+                <Text
+                  style={{
+                    color: style.third,
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  See More
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

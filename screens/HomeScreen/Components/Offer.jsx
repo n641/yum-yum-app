@@ -15,13 +15,39 @@ import OfferCard from "./OfferCard";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Offers = () => {
-  const [imgs, setImgs] = useState([
-    "https://assets.nn.ps/CACHE/images/uploads/weblog/2018/10/10/ssssss/0151185bbcf1d4898e90fd619857e7df.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs49hF7oKeLHVYCegN3PBQRpuU6mgTnZEfig&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxI0wksTqMLew7TB2HOpT0aZFd-dWCR07_fQ&usqp=CAU",
-    "https://img-global.cpcdn.com/recipes/127150/680x482cq70/%D8%A7%D9%84%D8%B5%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9-%D9%84%D9%88%D8%B5%D9%81%D8%A9%D8%B7%D8%B1%D9%8A%D9%82%D8%A9-%D8%B9%D9%85%D9%84-%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A9-%D8%A7%D9%84%D9%84%D8%AD%D9%85%D8%A9.jpg",
-  ]);
+const Offers = ({ navigation}) => {
+ const [pro, setpro] = useState([
+      //must order product by count!!!!
+      {
+        name: "sawarmaa",
+        url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
+        price: 20,
+        count: 19,
+        offer: true,
+        discound: 20,
+        fav: true,
+        desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      },
+      {
+        name: "pizza",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn_hPABuSXp3vmpfoOhZASRFB3O1qfF8c_Ew&usqp=CAU",
+        price: 70,
+        count: 8,
+        offer: true,
+        discound: 10,
+        fav: true,
+        desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      },
+      {
+        name: "burger",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_w3pS-DmxibqgtTz2H2FLuCIs5dmUl9YB5g&usqp=CAU",
+        price: 100,
+        count: 7,
+        offer: false,
+        discound: 10,
+        fav: false,
+        desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      },])
 
   return (
     <View
@@ -38,14 +64,20 @@ const Offers = () => {
         showsHorizontalScrollIndicator={false}
         bounces={false}
       >
-        {imgs.map((e, id) => (
-          <OfferCard url={e} key={id}/>
+        {pro.map((e, id) => (
+          <OfferCard
+            url={e.url}
+            desc={e.desc}
+            fav={e.fav}
+            discound={e.discound}
+            offer={e.offer}
+            price={e.price}
+            key={id}
+            name={e.name}
+            navigation={navigation}
+          />
         ))}
-
       </Animated.ScrollView>
-
-     
-
     </View>
   );
 };

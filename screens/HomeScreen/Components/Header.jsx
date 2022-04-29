@@ -25,7 +25,7 @@ const Header = ({ pagename, icon, navigation }) => {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
 
           <TouchableOpacity onPress={() => {
-            //navigete to users info
+            navigation.navigate("UseerProScreen");
           }}>
 
             <Ionicons name="person-circle" size={30} color={style.fourth} />

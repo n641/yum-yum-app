@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View , FlatList} from 'react-native'
+import { StyleSheet, Text, View , FlatList,Dimensions ,TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
 
 import CardCategory from './Component/CardCaregory';
+import { Ionicons } from "@expo/vector-icons";
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+import style from "../../Constants/style";
+
+
+
+
 import Header from '../HomeScreen/Components/Header';
 
-const Category = () => {
+const Category = ({navigation}) => {
     const [category, setcategory] = useState([
         {
             name: "sawarma",
@@ -37,19 +45,45 @@ const Category = () => {
 
     ]);
     return (
-        <View>
-            <Header icon={'cart'} />
-            <Text style={{textAlign:'center', fontSize:20 , margin:20 }}>select from the categories below </Text>
-            <FlatList
-                data={category}
-                numColumns={2}
-                keyExtractor={item => item.name}
-                renderItem={(itemData) => (
-                    <CardCategory url={`${itemData.item.url}`} name={itemData.item.name} />
-                )}
+      <View>
+        <Header icon={"cart"} navigation={navigation} />
+        <Text style={{ textAlign: "center", fontSize: 20, margin: 20 }}>
+          select from the categories below{" "}
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{
+            fontSize: 18,
+            position: "absolute",
+            top: 55,
+            left: 20,
+            marginHorizontal: 15,
+            alignItems: "center",
+            justifyContent: "center",
+            width: width / 14,
+            height: width / 14,
+            backgroundColor: style.third,
+            borderRadius: width / 2,
+          }}
+        >
+          <Ionicons name="chevron-back" size={30} color={"black"} style={{}} />
+        </TouchableOpacity>
+        <FlatList
+          data={category}
+          numColumns={2}
+          keyExtractor={(item) => item.name}
+          renderItem={(itemData) => (
+            <CardCategory
+              url={`${itemData.item.url}`}
+              namepro={itemData.item.name}
+              navigation={navigation}
             />
-        </View>
-    )
+          )}
+        />
+      </View>
+    );
 }
 
 export default Category

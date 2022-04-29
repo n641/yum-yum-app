@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Dimensions, Image, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import React from "react";
 
 
@@ -8,7 +16,7 @@ const height = Dimensions.get("window").height;
 
 import style from "../../../../Constants/style";
 
-const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
+const LastOrderCard = ({ name, price, url, discound,fav, offer,navigation, desc}) => {
     return (
       <View
         style={{ margin: 8, alignItems: "center", justifyContent: "center" }}
@@ -24,7 +32,6 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
             width: width / 2 - 16,
           }}
         >
-
           <Image
             style={{
               width: width / 2 - 18,
@@ -45,7 +52,15 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
             }}
           >
             <View>
-              <Text style={{ fontSize: 18, fontWeight: "bold" ,color:style.third }}>{name}</Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: style.fourth,
+                }}
+              >
+                {name}
+              </Text>
             </View>
             <View>
               {offer ? (
@@ -62,7 +77,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
                         fontSize: 18,
                         fontWeight: "bold",
                         textDecorationLine: "line-through",
-                        marginRight:10
+                        marginRight: 10,
                       }}
                     >
                       {price + "$"}
@@ -74,7 +89,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
                         color: "red",
                         fontSize: 18,
                         fontWeight: "bold",
-                        marginRight:5
+                        marginRight: 5,
                       }}
                     >
                       {price - discound + "$"}
@@ -98,7 +113,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
           </View>
 
           <View>
-            <Text style={{ color: style.third, fontSize: 18, marginLeft: 10 }}>
+            <Text style={{ color: style.fourth, fontSize: 18, marginLeft: 10 }}>
               {desc.substring(0, 25)}....
             </Text>
           </View>
@@ -141,6 +156,8 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
                 justifyContent: "center",
               }}
             >
+              <TouchableOpacity onPress={() => {              
+                navigation.navigate("DetailsScreen",{name:name,price:price,fav:fav,url:url,discound:discound,desc:desc,offer:offer});}}>
               <Text
                 style={{
                   color: style.third,
@@ -150,6 +167,7 @@ const LastOrderCard = ({ name, price, url, discound, offer, desc}) => {
               >
                 See More
               </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

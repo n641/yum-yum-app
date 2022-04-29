@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, Image, Button } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity,Button } from "react-native";
 import React from "react";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -6,7 +6,7 @@ const height = Dimensions.get("window").height;
 
 import style from "../../../Constants/style";
 
-const Card = ({ name, price, url, discound, offer }) => {
+const Card = ({ name, price, desc,url, discound, offer,fav ,navigation}) => {
   return (
     <View style={{ margin: 8, alignItems: "center", justifyContent: "center" }}>
       <View
@@ -129,15 +129,19 @@ const Card = ({ name, price, url, discound, offer }) => {
               margin: 5,
             }}
           >
+            <TouchableOpacity onPress={() => {
+              navigation.navigate("DetailsScreen",{name:name,price:price,fav:fav,url:url,discound:discound,desc:desc,offer:offer});
+              }}>
             <Text
-              style={{
-                color: style.third,
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
+            style={{
+              color: style.third,
+              textAlign: "center",
+              fontWeight: "bold",
+            }}
             >
               See More
             </Text>
+              </TouchableOpacity>
           </View>
         </View>
       </View>

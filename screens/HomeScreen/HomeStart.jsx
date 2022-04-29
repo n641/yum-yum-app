@@ -15,7 +15,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Home from "./../HomeScreen/Components/HomeScreen/Home";
-import Cart from "../CartScreen/Cart";
 import Favourite from "../favouriteScreen/favourite";
 import UseerProScreen from "../UserProfile/UseerProScreen";
 
@@ -36,9 +35,8 @@ const HomeStart = ({ navigation }) => {
             iconName = focused
               ? "home"
               : "home";
-          } else if (route.name === "Cart") {
-            iconName = focused ? "cart" : "cart";
-          } else if (route.name === "Favourite") {
+          }
+           else if (route.name === "Favourite") {
             iconName = focused ? "heart" : "heart";
           }else if (route.name === "UseerProfile") {
             iconName = focused ? "person" : "person";
@@ -52,7 +50,6 @@ const HomeStart = ({ navigation }) => {
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="Cart" component={Cart} options={{ headerShown: false }} />
       <Tab.Screen name="Favourite" component={Favourite} options={{ headerShown: false }} />
       <Tab.Screen name="UseerProfile" component={UseerProScreen} options={{ headerShown: false }} />
 

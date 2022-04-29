@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image,Dimensions } from 'react-native'
 import React ,{useState} from 'react';
+import HomeStart from '../HomeScreen/HomeStart';
 
 
 const width = Dimensions.get("window").width;
@@ -33,6 +34,7 @@ const [Carts, setCarts] = useState([]);
                 <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: height/20 , alignItems: 'center', justifyContent:'flex-end'}}>
                 <Text style={{color:'red' , fontSize:30, fontWeight:'500'}}>Empty Card</Text>
                 </View>
+                <HomeStart/>
                
       </View>
   )

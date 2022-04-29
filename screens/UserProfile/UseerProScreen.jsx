@@ -11,20 +11,18 @@ import Favourite from './Components/Favourite/favourite';
 import LastOrder from './Components/LastOrders/LastOrder';
 import Footer from './Components/Footer/Footer';
 
-const UseerProScreen = () => {
+const UseerProScreen = ({ navigation}) => {
   return (
   
-      // <View style={{ backgroundColor: "#232424" }}>
 
-        <ScrollView style={{backgroundColor: "#232424"}}>
+        <ScrollView style={{backgroundColor: "white"}}>
 
-          <Headerinf /> 
-          <Address />
-          <LastOrder />
-          <Favourite />
-          <Footer />
+          <Headerinf  navigation={navigation}/> 
+          <Address navigation={navigation} />
+          <LastOrder navigation={navigation} />
+          <Favourite navigation={navigation} />
+          <Footer navigation={navigation}/>
         </ScrollView>
-      // </View>
 
   
   );
