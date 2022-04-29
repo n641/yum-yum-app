@@ -23,7 +23,7 @@ const Headerinf = () => {
 
             <View style={{ flexDirection: 'row', position: 'absolute' }}>
 
-                <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', top: 120 }}>
+                <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', top: height/5+10 }}>
                     <Text style={{ color: style.fourth, fontSize: 20, fontWeight: 'bold' }}> noha mohammed</Text>
                     <View style={{ flexDirection: 'row' , alignItems:'center' ,justifyContent:'center' }}>
                         <Ionicons name="mail" size={15} color={style.fourth} />

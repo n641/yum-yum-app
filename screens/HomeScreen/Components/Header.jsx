@@ -60,7 +60,9 @@ const Header = ({ pagename, icon, navigation }) => {
           )
           } */}
 
-          <TouchableOpacity onPress={()=>{}}>
+          <TouchableOpacity onPress={()=>{
+            navigation.navigate('Cart');
+          }}>
           <Ionicons name={icon} size={35} color={style.primary} />
           </TouchableOpacity>
 

@@ -20,7 +20,6 @@ const CardCategory = ({ url , name }) => {
                     borderRadius: style.border,
                     borderWidth: 1,
                     margin: 5
-
                 }}
                 source={{
                     uri: `${url}`,

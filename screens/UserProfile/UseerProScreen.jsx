@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native'
 import React from 'react'
 
 
@@ -7,13 +7,26 @@ const height = Dimensions.get("window").height;
 
 import Headerinf from "./Components/Headerinf/Headerinf";
 import Address from './Components/Address/Address';
+import Favourite from './Components/Favourite/favourite';
+import LastOrder from './Components/LastOrders/LastOrder';
+import Footer from './Components/Footer/Footer';
 
 const UseerProScreen = () => {
   return (
-    <View style={{ width: width, height: height, backgroundColor: "#232424" }}>
-      <Headerinf />
-      <Address />
-    </View>
+  
+      // <View style={{ backgroundColor: "#232424" }}>
+
+        <ScrollView style={{backgroundColor: "#232424"}}>
+
+          <Headerinf /> 
+          <Address />
+          <LastOrder />
+          <Favourite />
+          <Footer />
+        </ScrollView>
+      // </View>
+
+  
   );
 }
 
