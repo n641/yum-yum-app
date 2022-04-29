@@ -5,7 +5,7 @@ import React from 'react'
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-import Headerinf from "./Components/Header/Header";
+import Headerinf from "./Components/Headerinf/Headerinf";
 import Address from './Components/Address/Address';
 
 const UseerProScreen = () => {
