@@ -11,12 +11,12 @@ import style from "../../../Constants/style";
 
 const CategoriesList = ({ navigation }) => {
   const [categoryName, setcategoryName] = useState([
+    "salads",
     "pasta",
-    "milk",
-    "fish",
     "pizza",
-    "meat",
-    "fish",
+    "sandwiches",
+    "pastries",
+    "d",
   ]);
 
   return (

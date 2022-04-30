@@ -38,7 +38,7 @@ const HomeStart = ({ navigation }) => {
           }
            else if (route.name === "Favourite") {
             iconName = focused ? "heart" : "heart";
-          }else if (route.name === "UseerProfile") {
+          }else if (route.name === "Profile") {
             iconName = focused ? "person" : "person";
           }
 
@@ -51,7 +51,7 @@ const HomeStart = ({ navigation }) => {
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="Favourite" component={Favourite} options={{ headerShown: false }} />
-      <Tab.Screen name="UseerProfile" component={UseerProScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Profile" component={UseerProScreen} options={{ headerShown: false }} />
 
     </Tab.Navigator>
   );

@@ -51,7 +51,11 @@ export default function App() {
           component={Category}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="ProductList" component={ProductList} />
+        <Stack.Screen
+          name="ProductList"
+          component={ProductList}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="UseerProScreen"
           component={UseerProScreen}

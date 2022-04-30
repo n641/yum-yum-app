@@ -20,7 +20,7 @@ import style from "../../Constants/style";
 const DetailsScreen = ({ route,navigation}) => {
     const{name,price,desc,url,fav,discound,offer}=route.params;
     const [counter,setcounter] = useState(0);
-   
+    const[favo,setfavo]= useState(fav);
     console.log(name)
   return (
     <View
@@ -83,10 +83,19 @@ const DetailsScreen = ({ route,navigation}) => {
           </Text>
         </View>
         <View style={{}}>
-          {fav ? (
-            <Ionicons name="heart" size={40} color={"red"} style={{}} />
+          {favo ? (
+            <TouchableOpacity onPress={()=>setfavo(!favo)}>
+              <Ionicons name="heart" size={40} color={"red"} style={{}} />
+            </TouchableOpacity>
           ) : (
-            <Ionicons name="heart-outline" size={40} color={"red"} style={{}} />
+            <TouchableOpacity onPress={()=>setfavo(!favo)}>
+              <Ionicons
+                name="heart-outline"
+                size={40}
+                color={"red"}
+                style={{}}
+              />
+            </TouchableOpacity>
           )}
         </View>
       </View>

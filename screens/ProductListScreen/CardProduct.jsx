@@ -51,7 +51,12 @@ const CardProduct = ({ name,fav, price, url, discound, offer, desc ,navigation})
             }}
           >
             <View>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+              {
+              name.length>20?(
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name.substring(0, 20)}...
+              </Text>):
+              (<Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>)
+}
             </View>
             <View>
               {offer ? (

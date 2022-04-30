@@ -30,8 +30,7 @@ const Headerinf = ({ navigation}) => {
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack("HomeStart");
-            console.log("hi");
+            navigation.goBack();
           }}
           style={{
             fontSize: 18,
@@ -47,16 +46,15 @@ const Headerinf = ({ navigation}) => {
             borderRadius: width / 2,
           }}
         >
-          <Ionicons name="chevron-back" size={40} color={"black"} />
+          <Ionicons name="chevron-back" size={40} color={"black"} style={{}} />
         </TouchableOpacity>
 
-        <View style={{ flexDirection: "row", position: "absolute" }}>
           <View
             style={{
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "flex-start",
-              top: height / 5 + 10,
+              justifyContent: "center",
+              
             }}
           >
             <Text
@@ -79,12 +77,10 @@ const Headerinf = ({ navigation}) => {
                   fontWeight: "bold",
                 }}
               >
-                {" "}
-                noha64@gamil.com
+                                noha64@gamil.com
               </Text>
             </View>
           </View>
-        </View>
 
         <View style={styles.footer}>
           <View style={{ ...StyleSheet.absoluteFill }}>
