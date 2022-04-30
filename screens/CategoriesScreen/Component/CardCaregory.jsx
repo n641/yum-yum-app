@@ -42,11 +42,12 @@ const CardCategory = ({ url, namepro, navigation }) => {
           <Text
             style={{
               fontWeight: "bold",
-              fontSize: width / 14,
+              fontSize: namepro.length< 7 ? width / 14:width / 16,
               width: width / 3,
               textAlign: "center",
               color: style.third,
-              fontWeight: "bold",
+              shadowColor:"black",
+              shadowRadius:20,
             }}
           >
             {namepro}
