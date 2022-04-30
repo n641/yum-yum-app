@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View , ScrollView} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -22,13 +22,13 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-  
+
   return (
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="HomeStart"
-        // screenOptions={{ headerShown: false }}
+        initialRouteName="OnBoarding"
+      // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
           name="Login"
@@ -40,6 +40,17 @@ export default function App() {
           component={SignUp}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name="OnBoarding"
+          component={OnBoarding}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="AdminStartScreen"
+          component={AdminStartScreen} />
+
         <Stack.Screen
           name="HomeStart"
           component={HomeStart}
@@ -68,16 +79,12 @@ export default function App() {
         />
         {/* <Stack.Screen name="NavHome" component={NavHome} /> */}
 
-        <Stack.Screen
-          name="OnBoarding"
-          component={OnBoarding}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="AdminStartScreen" component={AdminStartScreen} />
+
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 
- 
