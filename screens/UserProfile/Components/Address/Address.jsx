@@ -1,14 +1,58 @@
 import { StyleSheet, Text, View, Dimensions , ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import style from '../../../../Constants/style';
 import { Ionicons } from "@expo/vector-icons";
+
+import { getUsers, subscribe } from "../../../../db/Auth/usersData/users";
+import {auth} from "../../../../db/config";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
 const Address = () => {
-    const [address, setaddress] = useState([ "17 mhi el deen el bahry street / basaten el3momy /  ",  "7 doctoe city / bawaba 4 / doctor buliding ", "" ]);
+    const [user, setUsers] = useState([]);
+
+
+
+
+    const getUserss = async () => {
+      const arr = await getUsers();
+      setUsers(arr);
+      console.log(arr);
+    };
+
+
+     useEffect(() => {
+       getUserss();
+     }, []);
+
+     useEffect(() => {
+       const unsubscribe = subscribe(({ change, snapshot }) => {
+         //   console.log("changes", change, snapshot, change.type);
+         // if (snapshot.metadata.hasPendingWrites) {
+         if (change.type === "added") {
+           console.log("New message: ", change.doc.data());
+           getUserss();
+         }
+         if (change.type === "modified") {
+           console.log("Modified city: ", change.doc.data());
+           getUserss();
+         }
+         if (change.type === "removed") {
+           console.log("Removed message: ", change.doc.data());
+           getUserss();
+         }
+         // }
+       });
+
+       return () => {
+         unsubscribe();
+       };
+     }, []);
+
+
+    
 
     return (
         <View style={{flexDirection:'row' , marginTop:20}}>
@@ -16,10 +60,10 @@ const Address = () => {
              borderRadius: 20, borderWidth: 1, margin: 10, justifyContent:'space-around' , }}>
                  <Text style={{ fontWeight:'bold' , fontSize:20 , color:style.primary , textAlign:'center'}}>Address</Text>
                 <ScrollView>
-                {address.map((e, i)=>(
-                    e?(
+                {user.map((e, i)=>(
+                    e.email==auth.currentUser.email?(
                         <View key={i} style={{padding:10}}>
-                    <Text style={{fontWeight:'500' , fontSize:16 }} > {e} </Text>
+                    <Text style={{fontWeight:'500' , fontSize:16 }} > {e.address} </Text>
                     <Text> ----------------------------</Text>
                     </View>
                     ):null
