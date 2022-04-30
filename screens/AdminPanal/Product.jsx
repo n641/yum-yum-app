@@ -23,6 +23,7 @@ const Product = ({ navigation }) => {
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]); 
 
+    ///getitems = getproduct
     const getItems = async() => {
         const arr = await getProducts();
         setCategories(arr);

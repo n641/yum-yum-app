@@ -21,16 +21,13 @@ import DetailsScreen from "./screens/Details/DetailsScreen"
 
 const Stack = createNativeStackNavigator();
 
-
-
 export default function App() {
 
   return (
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="OnBoarding"
-
+        initialRouteName="HomeStart"
       // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen

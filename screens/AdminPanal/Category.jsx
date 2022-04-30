@@ -40,17 +40,16 @@ const Category = ({ navigation }) => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
                 console.log("New mesg: ", change.doc.data());
-                getCategories();
+                getGategoriesHandler();
             }
             if (change.type === "modified") {
                 console.log("Modified mesg: ", change.doc.data());
-                getCategories();
+                getGategoriesHandler();
             }
             if (change.type === "removed") {
                 console.log("Removed mesg: ", change.doc.data());
-                getCategories();
+                getGategoriesHandler();
             }
-          // }
         });
     
         return () => {
