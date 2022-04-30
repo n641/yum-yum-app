@@ -12,33 +12,33 @@ import {
 } from "firebase/firestore";
 
 // Get a list of cities from your database
-async function getUsers() {
-    const usersCol = collection(db, "users");
+async function getProducts() {
+    const productsCol = collection(db, "Products");
 
-    const userSnapshot = await (await getDocs(usersCol));
-    const userList = userSnapshot.docs.map((doc) => {
+    const ProductSnapshot = await (await getDocs(productsCol));
+    const ProductList = ProductSnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
-    return userList;
+    return ProductList;
 }
 
-async function editUser(user) {
-    console.log("at editUsers", user);
-    await setDoc(doc(db, "users", user.id), user);
+async function editProduct(product) {
+    console.log("at editProduct", product);
+    await setDoc(doc(db, "Products", product.id), product);
 }
 
-async function deleteUserDB(id) {
+async function deleteProduct(id) {
     try {
-        await deleteDoc(doc(db, "users", id));
+        await deleteDoc(doc(db, "Products", id));
         console.log("Document deleted with ID: ", id);
     } catch (error) {
         console.error("Error deleting document: ", error);
     }
 }
 
-async function addUser(user) {
+async function addProduct(product) {
     try {
-        const docRef = await addDoc(collection(db, "users"), user);
+        const docRef = await addDoc(collection(db, "Products"), product);
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -47,7 +47,7 @@ async function addUser(user) {
 
 function subscribe(callback) {
     const unsubscribe = onSnapshot(
-    query(collection(db, "users")),
+    query(collection(db, "Products")),
         (snapshot) => {
             const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
             snapshot.docChanges().forEach((change) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUserDB, subscribe };
+export { getProducts, addProduct, editProduct, deleteProduct, subscribe };

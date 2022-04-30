@@ -12,33 +12,33 @@ import {
 } from "firebase/firestore";
 
 // Get a list of cities from your database
-async function getUsers() {
-    const usersCol = collection(db, "users");
+async function getCategories() {
+    const categoriesCol = collection(db, "Categories");
 
-    const userSnapshot = await (await getDocs(usersCol));
-    const userList = userSnapshot.docs.map((doc) => {
+    const CategorySnapshot = await (await getDocs(categoriesCol));
+    const CategoryList = CategorySnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });
-    return userList;
+    return CategoryList;
 }
 
-async function editUser(user) {
-    console.log("at editUsers", user);
-    await setDoc(doc(db, "users", user.id), user);
+async function editCategory(category) {
+    console.log("at editCategory", category);
+    await setDoc(doc(db, "Categories", category.id), category);
 }
 
-async function deleteUserDB(id) {
+async function deleteCategory(id) {
     try {
-        await deleteDoc(doc(db, "users", id));
+        await deleteDoc(doc(db, "Categories", id));
         console.log("Document deleted with ID: ", id);
     } catch (error) {
         console.error("Error deleting document: ", error);
     }
 }
 
-async function addUser(user) {
+async function addCategory(category) {
     try {
-        const docRef = await addDoc(collection(db, "users"), user);
+        const docRef = await addDoc(collection(db, "Categories"), category);
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -47,7 +47,7 @@ async function addUser(user) {
 
 function subscribe(callback) {
     const unsubscribe = onSnapshot(
-    query(collection(db, "users")),
+    query(collection(db, "Categories")),
         (snapshot) => {
             const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
             snapshot.docChanges().forEach((change) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUserDB, subscribe };
+export { getCategories, addCategory, editCategory, deleteCategory, subscribe };
