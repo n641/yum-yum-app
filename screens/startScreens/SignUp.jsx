@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, Keyboard, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { Ionicons } from "@expo/vector-icons"; 
-import {register} from '../../db/Auth/auth'; 
+import { Ionicons } from "@expo/vector-icons";
+import { register } from '../../db/Auth/auth';
 {/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
 import { auth, db, app } from '../../db/config';
 import { addUser } from '../../db/Auth/usersData/users';
-
+import { updateProfile } from "firebase/auth"
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -21,27 +21,30 @@ const SignUp = ({ navigation }) => {
     const [error, setError] = useState("");
 
     const handleSignUp = () => {
-        if(pass === cpass){
+        if (pass === cpass) {
             console.log(userName, email, pass, add);
-            register(email, pass).then(() =>{
+            register(email, pass, userName).then(() => {
                 addUser({
-                    userName: userName, 
-                    email: email, 
+                    userName: userName,
+                    email: email,
                     password: pass,
                     address: add,
                     rule: "user",
                     cart: [],
                     favourite: [],
                     oldOrders: []
+                })
+                auth.currentUser.displayName=userName;
+
+            })
+                .catch((error) => {
+                    console.log(error)
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
                 });
-            }).catch((error)=>{
-                console.log(error)
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
         }
-        else{
+        else {
 
             const errorMessage = "your confirm password not equal you password";
             alert(errorMessage);
@@ -152,11 +155,10 @@ const SignUp = ({ navigation }) => {
 
                         {pass && email && userName && cpass ?
                             <Button title='sign Up' onPress={() => {
-                                // navigation.navigate('Login')
                                 handleSignUp();
-                             }} color={"red"}
+                            }} color={"red"}
                                 style={styles.btn} />
-                            : <Button title='sign Up' onPress={() => { 
+                            : <Button title='sign Up' onPress={() => {
                                 navigation.navigate('Login')
                             }} color={"red"}
                                 disabled style={styles.btn} />

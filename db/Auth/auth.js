@@ -8,6 +8,7 @@ import {
     signInWithCredential,
     signOut,
     FacebookAuthProvider,
+    updateProfile,
 } from "firebase/auth";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
@@ -19,8 +20,19 @@ onAuthStateChanged(auth, (user) => {
   // Do other things
 });
 
-async function register(email, password) {
-    await createUserWithEmailAndPassword(auth, email, password);
+async function register(email, password , name) {
+    await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      const user = userCredential.user;
+      updateProfile(user, {
+          displayName: name,  
+      })
+      .then(() => {
+          alert('Registered, please login.');
+      })
+      .catch((error) => {
+          alert(error.message);
+      })
+  });
 }
 
 async function login(email, password) {

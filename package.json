@@ -10,8 +10,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@freakycoder/react-native-single-select": "^0.4.0",
-    "@react-native-picker/picker": "^2.4.1",
+
+    "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",

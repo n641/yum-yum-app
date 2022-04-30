@@ -16,6 +16,7 @@ const Login = ({ navigation }) => {
 
     useEffect(()=>{
         const unsub = onAuthStateChanged(auth, (user) => setUser(user));
+
         return () => {
             unsub();
         };
@@ -31,15 +32,18 @@ const Login = ({ navigation }) => {
     const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
-
+            if (user) {
+              navigation.navigate("AdminStartScreen");
+            }
+         navigation.navigate("HomeStart")
         }).catch((err)=>{
             console.log(err)
             const errorMessage = err;
             alert(errorMessage);
-        });
-        if(user){
-            navigation.navigate('AdminStartScreen');
-        }
+        }) ;
+            console.log(user);
+
+        
     }
 
     return (
@@ -104,11 +108,11 @@ const Login = ({ navigation }) => {
                         {pass && email ?
                             <Button title='log in' onPress={() => {
                                 handleLogin();
+
                             }} color={"red"}
                                 style={styles.btn} />
 
                             : <Button title='log in' onPress={() => {
-                                // navigation.navigate('SignUp')
                                 handleLogin();
                                 
                             }} color={"red"}
