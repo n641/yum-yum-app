@@ -45,7 +45,7 @@ async function addUser(user) {
     }
 }
 
-function subscribe(callback) {
+function subscribeUser(callback) {
     const unsubscribe = onSnapshot(
     query(collection(db, "users")),
         (snapshot) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUserDB, subscribe };
+export { getUsers, addUser, editUser, deleteUserDB, subscribeUser };

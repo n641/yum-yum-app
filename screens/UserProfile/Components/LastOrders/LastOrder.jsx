@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View  , Animated , Dimensions} from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Animated, Dimensions } from 'react-native'
+import React, { useState, useEffect } from 'react'
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -8,64 +8,97 @@ import style from '../../../../Constants/style';
 
 import LastOrderCard from './LastOrderCard';
 
-const LastOrder = ({ navigation}) => {
-    const [pro, setpro] = useState([        //must order product by count!!!!
-        {
-            name: "sawarma",
-            url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
-            price: 20,
-            count: 19,
-            offer: true,
-            discound: 20,
-            desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa l",
-            fav: false
+import { getUsers, subscribeUser } from '../../../../db/Auth/usersData/users';
+import { getProducts, subscribe } from '../../../../db/Auth/usersData/Products';
+import { auth } from '../../../../db/config';
 
-        },
-        {
-            name: "pizza",
-            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn_hPABuSXp3vmpfoOhZASRFB3O1qfF8c_Ew&usqp=CAU",
-            price: 70,
-            count: 8,
-            offer: true,
-            discound: 10
-            , desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa l"
-            , fav: true
+const LastOrder = ({ navigation }) => {
+    const [Users, setUsers] = useState([]);
+    const [product, setproduct] = useState([]);
 
-        },
-        {
-            name: "burger",
-            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_w3pS-DmxibqgtTz2H2FLuCIs5dmUl9YB5g&usqp=CAU",
-            price: 100,
-            count: 7,
-            offer: false,
-            discound: 10
-            , desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa l"
-            , fav: true
 
-        },
-        {
-            name: "rice",
-            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0JjLQlJMNvD_Iex8Zp36zNWM-fGlkoBGfnw&usqp=CAU",
-            price: 150,
-            count: 6,
-            offer: true,
-            discound: 20
-            , desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa l"
-            , fav: true
+    const getUserss = async () => {
+        const arr = await getUsers();
+        setUsers(arr);
+        // console.log(arr);
+    };
 
-        },
-        {
-            name: "pasta",
-            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMk9SLkWzA6RHgAfZKAdNfk_UQ2IsdHDRz2A&usqp=CAU",
-            price: 200,
-            count: 1,
-            offer: true,
-            discound: 40
-            , desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa l"
-            , fav: true
+    const getProduct = async () => {
+        const arr = await getProducts();
+        setproduct(arr);
+        console.log(arr)
+    }
 
-        },
-    ]);
+
+    useEffect(() => {
+        getUserss();
+        getProduct();
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = subscribeUser(({ change, snapshot }) => {
+            //   console.log("changes", change, snapshot, change.type);
+            // if (snapshot.metadata.hasPendingWrites) {
+            if (change.type === "added") {
+                console.log("New message: ", change.doc.data());
+                getUserss();
+            }
+            if (change.type === "modified") {
+                console.log("Modified city: ", change.doc.data());
+                getUserss();
+            }
+            if (change.type === "removed") {
+                console.log("Removed message: ", change.doc.data());
+                getUserss();
+            }
+            // }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            //   console.log("changes", change, snapshot, change.type);
+            // if (snapshot.metadata.hasPendingWrites) {
+            if (change.type === "added") {
+                console.log("New message: ", change.doc.data());
+                getProduct();
+            }
+            if (change.type === "modified") {
+                console.log("Modified city: ", change.doc.data());
+                getProduct();
+            }
+            if (change.type === "removed") {
+                console.log("Removed message: ", change.doc.data());
+                getProduct();
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+
+    // Users.map((e) => (
+    //     e.email == auth.currentUser.email ? (
+    //         e.oldOrders.map((op) => (
+    //             product.map((p) => (
+    //                 op == p.productName ? (
+    //                     console.log(p.productName)
+    //                 ) : null
+    //             ))
+    //         )
+    //         )
+    //     ) : null
+
+    //     // <LastOrderCard url={e.url} name={e.name} price={e.price} desc={e.desc} fav={e.fav} offer={e.offer} discound={e.discound} navigation={navigation} key={id} />
+
+    // ))
+
     return (
         <View>
             <View>
@@ -88,9 +121,19 @@ const LastOrder = ({ navigation}) => {
                         bounces={false}
                     >
 
-                        {pro.map((e, id) => (
+                        {Users.map((e) => (
+                            e.email == auth.currentUser.email ? (
+                                e.oldOrders.map((op) => (
+                                    product.map((p, id) => (
+                                        op == p.productName ? (
+                                            <LastOrderCard url={p.url} name={p.productName} price={p.price} desc={p.description} offer={e.offer} discound={e.discount} navigation={navigation} key={id} />
+                                        ) : null
+                                    ))
+                                )
+                                )
+                            ) : null
 
-                            <LastOrderCard url={e.url} name={e.name} price={e.price} desc={e.desc} fav={e.fav} offer={e.offer} discound={e.discound} navigation={navigation} key={id} />
+                            // <LastOrderCard url={e.url} name={e.name} price={e.price} desc={e.desc} fav={e.fav} offer={e.offer} discound={e.discound} navigation={navigation} key={id} />
 
                         ))}
 
