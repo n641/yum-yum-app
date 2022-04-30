@@ -9,13 +9,16 @@ import {
     query,
     where,
     onSnapshot,
+    orderBy
 } from "firebase/firestore";
 
 // Get a list of cities from your database
 async function getProducts() {
     const productsCol = collection(db, "Products");
+    const q = query(productsCol, orderBy('count'));
 
-    const ProductSnapshot = await (await getDocs(productsCol));
+
+    const ProductSnapshot = await (await getDocs(q));
     const ProductList = ProductSnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
     });

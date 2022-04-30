@@ -18,6 +18,7 @@ import Header from '../HomeScreen/Components/Header';
 const Category = ({navigation}) => {
 
     const [category, setcategory] = useState([]);
+    
     const getGategoriesHandler = async () => {
       const arr = await getCategories();
       setcategory(arr)

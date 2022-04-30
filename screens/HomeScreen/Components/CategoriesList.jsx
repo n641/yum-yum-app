@@ -5,19 +5,47 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 
 import style from "../../../Constants/style";
 
+import { getCategories , subscribe } from "../../../db/Auth/usersData/Categories";
+
 const CategoriesList = ({ navigation }) => {
-  const [categoryName, setcategoryName] = useState([
-    "salads",
-    "pasta",
-    "pizza",
-    "sandwiches",
-    "pastries",
-    "d",
-  ]);
+  const [categoryName, setcategoryName] = useState([]);
+  const getGategoriesHandler = async () => {
+    const arr = await getCategories();
+    setcategoryName(arr)
+    console.log(categoryName);
+}
+
+useEffect(()=>{
+  getGategoriesHandler();
+},[]);
+
+useEffect(() => {
+  const unsubscribe = subscribe(({ change, snapshot }) => {
+    //   console.log("changes", change, snapshot, change.type);
+    // if (snapshot.metadata.hasPendingWrites) {
+    if (change.type === "added") {
+      console.log("New message: ", change.doc.data());
+      getGategoriesHandler();
+    }
+    if (change.type === "modified") {
+      console.log("Modified city: ", change.doc.data());
+      getGategoriesHandler();
+    }
+    if (change.type === "removed") {
+      console.log("Removed message: ", change.doc.data());
+      getGategoriesHandler();
+    }
+    // }
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, []);
 
   return (
     <View style={{ margin: 20 }}>
@@ -41,7 +69,7 @@ const CategoriesList = ({ navigation }) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  navigation.navigate("ProductList" ,{name:e});
+                  navigation.navigate("ProductList" ,{name:e.category});
                 }}
                 style={{  borderRadius: style.border, margin: 10 , borderColor:style.fourth , borderWidth:1 }}
               >
@@ -57,7 +85,7 @@ const CategoriesList = ({ navigation }) => {
                     fontWeight: "600",
                   }}
                 >
-                  {e}
+                  {e.category}
                 </Text>
               </TouchableOpacity>
             ) : index == 4 ? (
