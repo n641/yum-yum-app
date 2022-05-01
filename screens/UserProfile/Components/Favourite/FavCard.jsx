@@ -96,11 +96,11 @@ const FavCard = ({ name, price, url, discound, offer, desc,navigation}) => {
             </View>
           </View>
 
-          <View>
+          {/* <View>
             <Text style={{ color: style.fourth, fontSize: 18, marginLeft: 10 }}>
               {desc.substring(0, 25)}....
             </Text>
-          </View>
+          </View> */}
 
           <View
             style={{

@@ -13,7 +13,7 @@ import style from '../../Constants/style';
 
 const Favourite = ({ navigation }) => {
 
-  const [Favourite, setFavourite] = useState([]);
+  var Favourite =[{}];
   const [product, setproduct] = useState([]);
 
 
@@ -85,15 +85,19 @@ const Favourite = ({ navigation }) => {
 
 
 
+  
   useEffect(() => {
     Users.map((e) =>
       e.email == auth.currentUser.email
-        ? e.favourite.map((op) => (
-          setFavourite([...Favourite, op])
-        )
-        ) : null
-    )
-  })
+        ? e.favourite.map((op) =>
+            product.map((p) => (p.productName == op ? Favourite.push(p) : null))
+          )
+        : null
+    );
+  },[Users]);
+  const a =[1,2,3];
+  a.push(4)
+  console.log(Favourite);
 
   return Favourite.length != 0 ? (
     <ScrollView>
@@ -112,22 +116,17 @@ const Favourite = ({ navigation }) => {
       <FlatList
         data={Favourite}
         numColumns={2}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item.productName}
         renderItem={(itemData) => (
-
-
           <FavCard
-            name={itemData.item.name}
+            name={itemData.item.productName}
             url={itemData.item.url}
             price={itemData.item.price}
             offer={itemData.item.offer}
-            discound={itemData.item.discound}
-            fav={itemData.item.fav}
-            desc={itemData.item.desc}
+            discound={itemData.item.discount}
+            desc={itemData.item.description}
             navigation={navigation}
           />
-
-
         )}
       />
     </ScrollView>
