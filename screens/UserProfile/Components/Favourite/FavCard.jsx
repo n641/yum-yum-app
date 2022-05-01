@@ -8,7 +8,7 @@ const height = Dimensions.get("window").height;
 
 import style from "../../../../Constants/style";
 
-const FavCard = ({ name, price, url, discound,fav, offer, desc,navigation}) => {
+const FavCard = ({ name, price, url, discound, offer, desc,navigation}) => {
     return (
       <View
         style={{ margin: 8, alignItems: "center", justifyContent: "center" }}
@@ -145,7 +145,6 @@ const FavCard = ({ name, price, url, discound,fav, offer, desc,navigation}) => {
                   navigation.navigate("DetailsScreen", {
                     name: name,
                     price: price,
-                    fav: fav,
                     url: url,
                     discound: discound,
                     desc: desc,

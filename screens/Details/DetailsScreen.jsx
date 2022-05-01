@@ -7,21 +7,68 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React ,{useState} from 'react'
+import React ,{useState ,useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
+
+import {auth} from '../../db/config'
 
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
+import { editUser ,getUsers,subscribeUser} from "../../db/Auth/usersData/users";
+import { cos } from "react-native-reanimated";
 
 
 const DetailsScreen = ({ route,navigation}) => {
-    const{name,price,desc,url,fav,discound,offer}=route.params;
+    const{name,price,desc,url,discound,offer}=route.params;
+      const [user, setUsers] = useState([]);
+
     const [counter,setcounter] = useState(0);
-    const[favo,setfavo]= useState(fav);
+    const[favo,setfavo]= useState(false);
+
+    const getUserss = async () => {
+    const arr = await getUsers();
+    setUsers(arr);
+    // console.log(arr);
+  };
+
+     useEffect(() => {
+    getUserss();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeUser(({ change, snapshot }) => {
+      //   console.log("changes", change, snapshot, change.type);
+      // if (snapshot.metadata.hasPendingWrites) {
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getUserss();
+      }
+      // }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
     console.log(name)
+useEffect(() => {  user.map((u) =>
+  auth.currentUser.email == u.email
+    ? u.favourite.map((fav) => (name == fav ? setfavo(true) : null))
+    : null
+);})
+  
   return (
     <View
       style={{
@@ -83,20 +130,36 @@ const DetailsScreen = ({ route,navigation}) => {
           </Text>
         </View>
         <View style={{}}>
-          {favo ? (
-            <TouchableOpacity onPress={()=>setfavo(!favo)}>
-              <Ionicons name="heart" size={40} color={"red"} style={{}} />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={()=>setfavo(!favo)}>
-              <Ionicons
-                name="heart-outline"
-                size={40}
-                color={"red"}
-                style={{}}
-              />
-            </TouchableOpacity>
-          )}
+          
+         
+          
+
+          <TouchableOpacity
+            onPress={() => {
+               user.map((u, id) =>
+                 u.email == auth.currentUser.email
+                   ? favo
+                     ? editUser({
+                         ...u,
+                         favourite: u.favourite.filter(
+                           (n) => n !== name
+                         ),
+                       }).then(() => setfavo(false))
+                     : editUser({
+                         ...u,
+                         favourite: [...u.favourite, name],
+                       }).then(() => setfavo(true))
+                   : null
+               );
+            }}
+          >
+            <Ionicons
+              name={favo ? "heart" : "heart-outline"}
+              size={40}
+              color={"red"}
+              style={{}}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View
@@ -232,3 +295,14 @@ const DetailsScreen = ({ route,navigation}) => {
 export default DetailsScreen
 
 const styles = StyleSheet.create({})
+
+
+
+//  onPress={() => {
+//             editMessage({ ...messageToEdit, name: messageToEditName })
+//               .then((d) => {
+//                 onSave();
+//                 console.log(messageToEditName);
+//               })
+//               .catch((e) => console.log(e));
+//           }}
