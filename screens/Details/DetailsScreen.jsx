@@ -11,6 +11,7 @@ import React ,{useState ,useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 import {auth} from '../../db/config'
+import { getData , removeItemValue , storeData } from "../../db/AsyncStorage/AsyncStore";
 
 
 const width = Dimensions.get("window").width;

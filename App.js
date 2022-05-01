@@ -28,8 +28,8 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="Cart"
-        // screenOptions={{ headerShown: false }}
+        initialRouteName="HomeStart"
+      // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
           name="Login"
@@ -93,7 +93,7 @@ export default function App() {
         <Stack.Screen
           name="CheckOut"
           component={CheckOut}
-          options={{ headerShown: false }}
+
         />
         {/* <Stack.Screen name="NavHome" component={NavHome} /> */}
       </Stack.Navigator>

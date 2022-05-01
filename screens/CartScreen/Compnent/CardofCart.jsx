@@ -6,6 +6,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../../Constants/style";
+import { storeData,  removeItemValue, getData } from "../../../db/AsyncStorage/AsyncStore";
 
 export default function CardofCart({
   name,
@@ -14,10 +15,16 @@ export default function CardofCart({
   desc,
   offer,
   discound,
+  numOfOreders
 }) {
 
-      const [counter, setcounter] = useState(1);
+      const [counter, setcounter] = useState(numOfOreders);
       const Total = offer ? counter * (price - discound) : counter * price;
+
+      console.log(numOfOreders)
+
+
+
       
   return (
     <View>
@@ -135,7 +142,8 @@ export default function CardofCart({
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  counter <= 0 ? setcounter(0) : setcounter(counter - 1);
+                  counter <= 1 ? setcounter(1) : setcounter(counter - 1);
+                  storeData(name, counter);
                 }}
               >
                 <Ionicons name="remove" size={20} color={"red"} style={{}} />

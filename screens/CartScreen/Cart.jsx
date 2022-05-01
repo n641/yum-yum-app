@@ -11,22 +11,27 @@ import React, { useState } from "react";
 import HomeStart from "../HomeScreen/HomeStart";
 import CardofCart from "./Compnent/CardofCart";
 
+import { getData } from "../../db/AsyncStorage/AsyncStore";
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
+import { useEffect } from "react/cjs/react.production.min";
 
 const Cart = ({ navigation}) => {
   const [Carts, setCarts] = useState([
     //must order product by count!!!!
+    
     {
       name: "sawarmaa",
       url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
       price: 20,
       count: 19,
       offer: true,
-      discound: 20,
+      discound: 10,
       desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      
     },
     {
       name: "sawarmaa",
@@ -34,26 +39,9 @@ const Cart = ({ navigation}) => {
       price: 20,
       count: 19,
       offer: true,
-      discound: 20,
+      discound: 5,
       desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
-    },
-    {
-      name: "sawarmaa",
-      url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
-      price: 20,
-      count: 19,
-      offer: true,
-      discound: 20,
-      desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
-    },
-    {
-      name: "sawarmaa",
-      url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
-      price: 20,
-      count: 19,
-      offer: true,
-      discound: 20,
-      desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      
     },
     {
       name: "pizza",
@@ -63,8 +51,11 @@ const Cart = ({ navigation}) => {
       offer: true,
       discound: 10,
       desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
+      
     },
   ]);
+
+  
 
   return Carts.length != 0 ? (
     <View
@@ -90,6 +81,7 @@ const Cart = ({ navigation}) => {
 
         <ScrollView>
           {Carts.map((p, id) => (
+
             <CardofCart
               key={id}
               url={p.url}
@@ -100,6 +92,7 @@ const Cart = ({ navigation}) => {
               discound={p.discound}
             />
           ))}
+
         </ScrollView>
       </View>
       <TouchableOpacity
@@ -113,7 +106,7 @@ const Cart = ({ navigation}) => {
           height: height / 10,
         }}
         onPress={() => {
-           navigation.navigate("CheckOut");
+           navigation.navigate("CheckOut" , {});    
         }}
       >
         <Text
@@ -159,7 +152,6 @@ const Cart = ({ navigation}) => {
           Empty Card
         </Text>
       </View>
-      <HomeStart />
     </View>
   );
 };
