@@ -15,6 +15,7 @@ import Category from "./screens/CategoriesScreen/Category";
 import ProductList from "./screens/ProductListScreen/ProductList";
 import UseerProScreen from "./screens/UserProfile/UseerProScreen";
 import DetailsScreen from "./screens/Details/DetailsScreen"
+import CheckOut from "./screens/Checkout/CheckOut"
 // import NavHome from "./screens/HomeScreen/Components/HomeScreen/NavHome";
 
 
@@ -27,7 +28,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Cart"
         // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
@@ -54,7 +55,21 @@ export default function App() {
           component={HomeStart}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            title: "Your Cart",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
         <Stack.Screen
           name="Category"
           component={Category}
@@ -73,6 +88,11 @@ export default function App() {
         <Stack.Screen
           name="DetailsScreen"
           component={DetailsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CheckOut"
+          component={CheckOut}
           options={{ headerShown: false }}
         />
         {/* <Stack.Screen name="NavHome" component={NavHome} /> */}

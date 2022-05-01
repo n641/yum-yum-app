@@ -170,6 +170,9 @@ useEffect(() => {  user.map((u) =>
           flexDirection: "row",
         }}
       >
+
+
+        
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity
             onPress={() => {
