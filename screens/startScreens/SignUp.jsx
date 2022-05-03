@@ -23,7 +23,7 @@ const SignUp = ({ navigation }) => {
     const handleSignUp = () => {
         if (pass === cpass) {
             console.log(userName, email, pass, add);
-            register(email, pass, userName).then(() => {
+            register(email, pass).then(() => {
                 addUser({
                     userName: userName,
                     email: email,
@@ -34,8 +34,8 @@ const SignUp = ({ navigation }) => {
                     favourite: [],
                     oldOrders: []
                 })
-                auth.currentUser.displayName=userName;
-
+                alert("Sign up done")
+                navigation.navigate("Login")
             })
                 .catch((error) => {
                     console.log(error)

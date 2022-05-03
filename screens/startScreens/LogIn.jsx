@@ -27,15 +27,21 @@ const Login = ({ navigation }) => {
     const [flag, setflag] = useState(true);
     const [user, setUser] = useState(undefined);
 
-    
+    const getUserss = async() =>{
+        const arr = await getUsers();
+        console.log(arr);
+        let obj = arr.find(o => o.email === email);
+        if(obj.rule === "user")
+            navigation.navigate("HomeStart")
+        else if(obj.rule === "admin")
+            navigation.navigate("AdminStartScreen")
+    }
 
     const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
-            if (user) {
-              navigation.navigate("AdminStartScreen");
-            }
-         navigation.navigate("HomeStart")
+            getUserss();
+            
         }).catch((err)=>{
             console.log(err)
             const errorMessage = err;
