@@ -22,17 +22,6 @@ import { useEffect } from "react/cjs/react.production.min";
 const Cart = ({ navigation}) => {
   const [Carts, setCarts] = useState([
     //must order product by count!!!!
-    
-    {
-      name: "sawarmaa",
-      url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
-      price: 20,
-      count: 19,
-      offer: true,
-      discound: 10,
-      desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
-      
-    },
     {
       name: "sawarmaa",
       url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
@@ -53,25 +42,29 @@ const Cart = ({ navigation}) => {
     },
   ]);
   
-  const [to,setto]= useState([{}]);
+  const [to,setto] = useState(
+
+    [   { name: "pizza", total: 60 },
+    { name: "sawarmaa", total: 15 },
+  ]);
 
 
-  
+
   const handale =({name,total})=>{
-     to.map((e)=>{
-      e.name==name?(
+      to.map((e)=>{
+      if(e.name==name){
         
+        setto([ ...to,e.total= total]);
+      }
+      else{
+        setto([...to, { name: name, total: total }]);
 
-        setto([...to,{name:name,total:total}])
-      ):(
-        setto([...to,{name:name,total:total}])
 
-
-      )
+      }
 
     })
   }
-  console.log(to)
+  console.log(to);
 
   return Carts.length != 0 ? (
     <View

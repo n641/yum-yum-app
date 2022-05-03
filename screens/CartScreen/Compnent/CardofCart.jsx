@@ -23,7 +23,7 @@ export default function CardofCart({
 
 
 
-//useEffect(() => {handale({name:name,total:offer?(counter * (price - discound)):(counter* price)});},[counter,name])
+  useEffect(() => {handale({name:name,total:offer?(counter * (price - discound)):(counter* price)});},[counter,name])
 const add =({})=>{
 
 }
