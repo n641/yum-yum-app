@@ -15,16 +15,18 @@ export default function CardofCart({
   desc,
   offer,
   discound,
-  numOfOreders
+  handale
+  
 }) {
 
-      const [counter, setcounter] = useState(numOfOreders);
-      const Total = offer ? counter * (price - discound) : counter * price;
-
-      console.log(numOfOreders)
+      const [counter, setcounter] = useState(1);
 
 
 
+//useEffect(() => {handale({name:name,total:offer?(counter * (price - discound)):(counter* price)});},[counter,name])
+const add =({})=>{
+
+}
       
   return (
     <View>
@@ -142,8 +144,9 @@ export default function CardofCart({
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  counter <= 1 ? setcounter(1) : setcounter(counter - 1);
-                  storeData(name, counter);
+                  counter <= 1
+                    ? setcounter(1)
+                    : setcounter(counter - 1)
                 }}
               >
                 <Ionicons name="remove" size={20} color={"red"} style={{}} />
@@ -190,12 +193,13 @@ export default function CardofCart({
           >
             <Text style={{ fontSize: width / 24 }}>Total</Text>
             <Text style={{ fontWeight: "bold", marginTop: height / 18 }}>
-              {Total}$
+              {    offer ? (counter * (price - discound))
+               : (counter * price)
+              }$
             </Text>
           </View>
         </View>
       </View>
-     
     </View>
   );
 }

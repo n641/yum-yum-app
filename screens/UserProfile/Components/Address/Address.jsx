@@ -54,13 +54,12 @@ const Address = () => {
 
 
   
-    user.map((e, i) => (
+    user.map((e, i) => {
       e.email == auth.currentUser.email ? (
         e.address.map((l)=>{
           console.log(l);
         })
-      ) : null
-    ))
+      ) : null })
   
   return (
     <View style={{ flexDirection: 'row', marginTop: 20 }}>
