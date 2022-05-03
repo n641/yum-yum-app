@@ -37,7 +37,6 @@ const Cart = ({ navigation}) => {
       name: "sawarmaa",
       url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
       price: 20,
-      count: 19,
       offer: true,
       discound: 5,
       desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
@@ -47,15 +46,32 @@ const Cart = ({ navigation}) => {
       name: "pizza",
       url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn_hPABuSXp3vmpfoOhZASRFB3O1qfF8c_Ew&usqp=CAU",
       price: 70,
-      count: 8,
       offer: true,
       discound: 10,
       desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
       
     },
   ]);
+  
+  const [to,setto]= useState([{}]);
+
 
   
+  const handale =({name,total})=>{
+     to.map((e)=>{
+      e.name==name?(
+        
+
+        setto([...to,{name:name,total:total}])
+      ):(
+        setto([...to,{name:name,total:total}])
+
+
+      )
+
+    })
+  }
+  console.log(to)
 
   return Carts.length != 0 ? (
     <View
@@ -81,7 +97,6 @@ const Cart = ({ navigation}) => {
 
         <ScrollView>
           {Carts.map((p, id) => (
-
             <CardofCart
               key={id}
               url={p.url}
@@ -90,9 +105,9 @@ const Cart = ({ navigation}) => {
               price={p.price}
               offer={p.offer}
               discound={p.discound}
+              handale={handale}
             />
           ))}
-
         </ScrollView>
       </View>
       <TouchableOpacity
@@ -106,7 +121,7 @@ const Cart = ({ navigation}) => {
           height: height / 10,
         }}
         onPress={() => {
-           navigation.navigate("CheckOut" , {});    
+          navigation.navigate("CheckOut", {});
         }}
       >
         <Text
