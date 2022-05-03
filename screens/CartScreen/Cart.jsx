@@ -62,9 +62,9 @@ const Cart = ({ navigation}) => {
       e.name==name?(
         
 
-        setto([...to,{name:name,total:total}])
+        setto({...e, total:total})
       ):(
-        setto([...to,{name:name,total:total}])
+        setto({...e, name:name, total: total})
 
 
       )
