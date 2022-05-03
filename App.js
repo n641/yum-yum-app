@@ -28,7 +28,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="HomeStart"
+        initialRouteName="AdminStartScreen"
       // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
@@ -48,7 +48,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-        <Stack.Screen name="AdminStartScreen" component={AdminStartScreen} />
+        <Stack.Screen name="AdminStartScreen" component={AdminStartScreen}  options={{ headerShown: false }}/>
 
         <Stack.Screen
           name="HomeStart"

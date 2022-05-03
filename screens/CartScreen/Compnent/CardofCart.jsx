@@ -15,16 +15,12 @@ export default function CardofCart({
   desc,
   offer,
   discound,
-  numOfOreders
-}) {
+  
+})
+ {
 
-      const [counter, setcounter] = useState(numOfOreders);
+      const [counter, setcounter] = useState(1);
       const Total = offer ? counter * (price - discound) : counter * price;
-
-      console.log(numOfOreders)
-
-
-
       
   return (
     <View>
