@@ -30,6 +30,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Cart"
         // screenOptions={{ headerShown: false }}
+
       >
         <Stack.Screen
           name="Login"
@@ -48,7 +49,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-        <Stack.Screen name="AdminStartScreen" component={AdminStartScreen} />
+        <Stack.Screen name="AdminStartScreen" component={AdminStartScreen}  options={{ headerShown: false }}/>
 
         <Stack.Screen
           name="HomeStart"

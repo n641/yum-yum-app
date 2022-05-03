@@ -27,7 +27,7 @@ export default function CardofCart({
 const add =({})=>{
 
 }
-      
+
   return (
     <View>
       <View
