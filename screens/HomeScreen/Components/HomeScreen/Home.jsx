@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Dimensions ,ScrollView} from "react-native";
 import React, { useState } from "react";
 
-
+import Search from "../Search";
 import Header from "../Header";
 import Offers from "../Offer";
 import CategoriesList from "../CategoriesList";
@@ -26,8 +26,9 @@ const Home = ({ navigation }) => {
       }}
     >
       <Header pagename={"Home"} icon={"cart"} navigation={navigation} />
-      <CategoriesList navigation={navigation} />
       <ScrollView>
+      <Search/>
+      <CategoriesList navigation={navigation} />
         <Offers navigation={navigation} />
         <BestSellingFood navigation={navigation} />
       </ScrollView>

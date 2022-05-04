@@ -10,7 +10,7 @@ const Header = ({ pagename, icon, navigation }) => {
   console.log(auth.currentUser);
 
   return (
-    <View>
+    <View >
       <View
         style={{
           justifyContent: "space-between",
