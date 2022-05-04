@@ -14,6 +14,7 @@ import Cart from "./screens/CartScreen/Cart";
 import Category from "./screens/CategoriesScreen/Category";
 import ProductList from "./screens/ProductListScreen/ProductList";
 import UseerProScreen from "./screens/UserProfile/UseerProScreen";
+import EditProfile from "./screens/UserProfile/Components/Footer/EditProfile";
 import DetailsScreen from "./screens/Details/DetailsScreen"
 import CheckOut from "./screens/Checkout/CheckOut"
 // import NavHome from "./screens/HomeScreen/Components/HomeScreen/NavHome";
@@ -28,7 +29,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="HomeStart"
+        initialRouteName="OnBoarding"
         // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
@@ -88,6 +89,21 @@ export default function App() {
           name="UseerProScreen"
           component={UseerProScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            title: "Edit profile",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
         />
         <Stack.Screen
           name="DetailsScreen"

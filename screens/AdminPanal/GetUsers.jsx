@@ -28,7 +28,7 @@ const GetUsers = ({ navigation }) => {
                 password: password,
                 email: email,
                 rule: rule,
-                address: address,
+                address: [address],
                 credit: credit,
                 cart: [],
                 favourite: [],

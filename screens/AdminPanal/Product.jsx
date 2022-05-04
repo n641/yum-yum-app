@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { 
-    View ,
+import {
+    View,
     StyleSheet,
     Text,
     TextInput,
@@ -21,16 +21,16 @@ const Product = ({ navigation }) => {
     const [discount, setDiscount] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [categories, setCategories] = useState([]); 
+    const [categories, setCategories] = useState([]);
 
     ///getitems = getproduct
-    const getItems = async() => {
+    const getItems = async () => {
         const arr = await getProducts();
         setCategories(arr);
         console.log(arr)
     }
 
-    const addProducts = () =>{
+    const addProducts = () => {
         console.log(productName, url, price, offer);
         addProduct({
             productName: productName,
@@ -46,45 +46,46 @@ const Product = ({ navigation }) => {
         });
     }
 
-    return(
+    return (
         <View>
             <View style={styles.RowContainer}>
-                <TextInput 
+                <TextInput
                     placeholder="Enter Product name"
                     onChangeText={setProductName}
                     style={styles.textInput}
                 />
-                <TextInput 
+                <TextInput
                     placeholder="Enter url image"
                     onChangeText={setUrl}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.RowContainer}>
-                <TextInput 
+                <TextInput
                     placeholder="Enter Product price"
                     onChangeText={setPrice}
                     style={styles.textInput}
                 />
-                <TextInput 
+                <TextInput
                     placeholder="in offer or not ?"
                     onChangeText={setOffer}
                     style={styles.textInput}
                 />
             </View>
+            
             <View style={styles.RowContainer}>
-                <TextInput 
+                <TextInput
                     placeholder="Enter discount"
                     onChangeText={setDiscount}
                     style={styles.textInput}
                 />
-                <TextInput 
+                <TextInput
                     placeholder="Enter Category"
                     onChangeText={setCategory}
                     style={styles.textInput}
                 />
             </View>
-            <TextInput 
+            <TextInput
                 placeholder="Enter description"
                 onChangeText={setDescription}
                 style={styles.textInput}
@@ -94,20 +95,20 @@ const Product = ({ navigation }) => {
                 onPress={() => addProducts()}
             />
             <View style={styles.secondContainer}>
-                <Button 
+                <Button
                     title="Get Product"
                     onPress={() => getItems()}
                 />
-                <FlatList 
+                <FlatList
                     data={categories}
                     numColumns={2}
-                    renderItem={itemData => <CategoriesOfProduct 
+                    renderItem={itemData => <CategoriesOfProduct
                         title={itemData.item.productName}
                         link={itemData.item.url}
                         description={itemData.item.description}
                         price={itemData.item.price}
                         id={itemData.item.id}
-                        count ={itemData.item.count}
+                        count={itemData.item.count}
                         rate={itemData.item.rate}
                         comments={itemData.item.comments}
                         newCategory={category}
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     },
     RowContainer: {
         flexDirection: "row",
-        paddingVertical : 2,
+        paddingVertical: 2,
         paddingHorizontal: 3,
         marginHorizontal: 2
     },
