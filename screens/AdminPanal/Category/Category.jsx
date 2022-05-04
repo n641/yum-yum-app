@@ -87,7 +87,7 @@ const Category = ({ navigation }) => {
                     />}
             />
             <View>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("editCaregory")}}>
+                <TouchableOpacity onPress={()=>{ navigation.navigate("addCategory")}}>
                 <Ionicons name="add-circle" size={70} color={'red'} />
                 </TouchableOpacity>
             </View>

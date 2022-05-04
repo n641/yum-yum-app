@@ -28,7 +28,7 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="AdminStartScreen"
         // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen

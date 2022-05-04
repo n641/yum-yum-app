@@ -115,7 +115,7 @@ const CategoriesCart = ({navigation , link , category , description , id }) => {
 
                     <View style={{ flexDirection: 'column' }}>
                         <TouchableOpacity onPress={()=>{
-                            navigation.navigate("editCaregory" , {name :category , desc:description , url : link })
+                            navigation.navigate("editCaregory" , {name :category , desc:description , url : link , ids :id })
                         }}>
                             <Ionicons name="create" size={30} color={'red'} />
                         </TouchableOpacity>
