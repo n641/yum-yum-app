@@ -19,20 +19,8 @@ const height = Dimensions.get("window").height;
 
 const Category = ({ navigation }) => {
 
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [imageLink, setImageLink] = useState("");
+    
     const [arrCategory, setArrCategory] = useState([]);
-
-    const addCategoryHandler = () => {
-        console.log(category);
-        addCategory({
-            category: category,
-            description: description,
-            link: imageLink,
-            products: [],
-        })
-    }
 
 
 

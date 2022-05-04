@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Category from './Category';
 import editCaregory from './editCaregory';
 import AddCategory from './addCategory';
+import ProductOfCategory from './ProductOfCategory';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,11 @@ const categoryStart = () => {
              <Stack.Screen
                 name="addCategory"
                 component={AddCategory}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="ProductOfCategory"
+                component={ProductOfCategory}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>
