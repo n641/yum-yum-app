@@ -42,7 +42,17 @@ export default function App() {
          <Stack.Screen
           name="TestSearch"
           component={TestSearch}
-          options={{ headerShown: false }}
+          options={{
+            title: "results of search",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
         />
         <Stack.Screen
           name="SignUp"
