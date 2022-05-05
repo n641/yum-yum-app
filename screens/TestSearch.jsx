@@ -52,69 +52,65 @@ const TestSearch = ({ navigation, route }) => {
         };
     }, []);
 
-      useEffect(() => {
+    useEffect(() => {
         searchfilter(resulte);
     });
 
     const searchfilter = (text) => {
         if (text) {
-
             products.map((p) => {
-                if(p.productName == text ){
+                if (p.productName.toUpperCase() == text.toUpperCase()) {
                     setFilterProducts(p)
                     setflag(true);
-                }else{
+                    console.log("find");
+                } else {
                     console.log("not find");
+                    // setflag(false);
                 }
 
             })
-
             // })
-
-        } else {
-            //  setsearch(text);
-            setFilterProducts(products)
-        }
+        } 
     }
 
 
 
 
     return (
-        <View style={{top:2, alignItems: 'center' }}>
-            <View style={{ borderRadius: 20, borderColor: "black", borderWidth: 1, width: width - 50, height: height / 17, backgroundColor: "gray", alignItems: 'center', justifyContent: 'space-between', padding: 10, flexDirection: 'row' }}>
+        <View style={{ top: 2, alignItems: 'center' }}>
+            <View style={{ borderRadius: 20, borderColor: "black", borderWidth: 1, width: width - 100, height: height / 17, backgroundColor: "gray", alignItems: 'center', justifyContent: 'center', padding: 10, flexDirection: 'row', margin:10 }}>
                 <TextInput
                     placeholder='Search here...'
                     onChangeText={setsearch}
                     value={search}
                 />
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={() => searchfilter(search)}
                 >
                     <Ionicons name="search" size={20} color={'black'} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
 
             <View>
-               {
-                   flag?(
-                    <Card
-                    name={FilterProducts.productName}
-                    url={FilterProducts.url}
-                    price={FilterProducts.price}
-                    offer={FilterProducts.offer}
-                    discound={FilterProducts.discount}
-                    desc={FilterProducts.description}
-                    navigation={navigation}
-                />
-                   ):(
-                    <View>
-                        <NotFound/>
-                    </View>
-                   )
-               }
-                
+                {
+                    flag ? (
+                        <Card
+                            name={FilterProducts.productName}
+                            url={FilterProducts.url}
+                            price={FilterProducts.price}
+                            offer={FilterProducts.offer}
+                            discound={FilterProducts.discount}
+                            desc={FilterProducts.description}
+                            navigation={navigation}
+                        />
+                    ) : (
+                        <View>
+                            <NotFound />
+                        </View>
+                    )
+                }
+
 
 
             </View>
