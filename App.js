@@ -19,6 +19,8 @@ import DetailsScreen from "./screens/Details/DetailsScreen"
 import CheckOut from "./screens/Checkout/CheckOut"
 // import NavHome from "./screens/HomeScreen/Components/HomeScreen/NavHome";
 
+import TestSearch from "./screens/TestSearch";
+
 
 
 const Stack = createNativeStackNavigator();
@@ -29,12 +31,17 @@ export default function App() {
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator
-        initialRouteName="OnBoarding"
+        initialRouteName="HomeStart"
         // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="TestSearch"
+          component={TestSearch}
           options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Search = () => {
+const Search = ({navigation}) => {
 
     const [search, setsearch] = useState("")
 
@@ -19,7 +19,11 @@ const Search = () => {
                     onChangeText={setsearch}
                     value={search}
                 />
+                <TouchableOpacity onPress={()=>{
+                    navigation.navigate("TestSearch" , {resulte:search})
+                }}>
                 <Ionicons name="search" size={20} color={'black'} />
+                </TouchableOpacity>
 
             </View>
             <View style={{ justifyContent: 'space-around', backgroundColor: "black", width: width - 30, height: height / 5 + 20, borderRadius: 30, marginTop: 20, elevation: 100 }}>

@@ -26,8 +26,8 @@ const Home = ({ navigation }) => {
       }}
     >
       <Header pagename={"Home"} icon={"cart"} navigation={navigation} />
+      <Search navigation={navigation}/>
       <ScrollView>
-      <Search/>
       <CategoriesList navigation={navigation} />
         <Offers navigation={navigation} />
         <BestSellingFood navigation={navigation} />
