@@ -22,7 +22,6 @@ const Favourite = ({ navigation }) => {
   const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
-    // console.log(arr);
   };
 
   const getProduct = async () => {
@@ -38,8 +37,7 @@ const Favourite = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
+      
       if (change.type === "added") {
         console.log("New message: ", change.doc.data());
         getUserss();
@@ -52,7 +50,6 @@ const Favourite = ({ navigation }) => {
         console.log("Removed message: ", change.doc.data());
         getUserss();
       }
-      // }
     });
 
     return () => {
@@ -62,8 +59,6 @@ const Favourite = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
         console.log("New message: ", change.doc.data());
         getProduct();
@@ -99,7 +94,7 @@ const Favourite = ({ navigation }) => {
   a.push(4)
   console.log(Favourite);
 
-  return Favourite.length != 0 ? (
+  return product.length !=0? (
     <ScrollView>
       <Text
         style={{

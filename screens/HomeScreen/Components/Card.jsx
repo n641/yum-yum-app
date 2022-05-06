@@ -1,18 +1,22 @@
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity,Button } from "react-native";
-import React from "react";
+import React , {useState,useEffect} from "react";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
+
 import style from "../../../Constants/style";
 
-const Card = ({ name, price, desc,url, discound, offer,fav ,navigation}) => {
+const Card = ({ name, price, desc,url, fav,discound, offer ,navigation}) => {
+
+ 
+  
   return (
     <View style={{ margin: 8, alignItems: "center", justifyContent: "center" }}>
       <View
         style={{
           borderRadius: style.border,
-          height: height / 2-60,
+          height: height / 2 - 60,
           borderWidth: 1,
           flexDirection: "column",
           justifyContent: "space-between",
@@ -39,7 +43,9 @@ const Card = ({ name, price, desc,url, discound, offer,fav ,navigation}) => {
           }}
         >
           <View>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              {name.length < 15 ? name : name.substring(0, 10) + "..."}
+            </Text>
           </View>
           <View>
             {offer ? (
@@ -99,14 +105,15 @@ const Card = ({ name, price, desc,url, discound, offer,fav ,navigation}) => {
             bottom: 5,
           }}
         >
-          <View
+          {/* <TouchableOpacity onPress={() => handleAddList()}
             style={{
               borderRadius: style.border,
               backgroundColor: style.primary,
-              width: width / 4 - 15,
+              width: width / 4 - 25,
               height: height / 14,
               justifyContent: "center",
               margin: 5,
+              marginLeft: 5,
             }}
           >
             <Text
@@ -118,30 +125,41 @@ const Card = ({ name, price, desc,url, discound, offer,fav ,navigation}) => {
             >
               Order Now
             </Text>
-          </View>
+          </TouchableOpacity> */}
           <View
             style={{
               borderRadius: style.border,
               backgroundColor: "black",
-              width: width / 4 - 15,
+              width: width / 4 - 25,
               height: height / 14,
               justifyContent: "center",
               margin: 5,
+              marginRight: 5,
             }}
           >
-            <TouchableOpacity onPress={() => {
-              navigation.navigate("DetailsScreen",{name:name,price:price,fav:fav,url:url,discound:discound,desc:desc,offer:offer});
-              }}>
-            <Text
-            style={{
-              color: style.third,
-              textAlign: "center",
-              fontWeight: "bold",
-            }}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("DetailsScreen", {
+                  name: name,
+                  price: price,
+                  fav: fav,
+                  url: url,
+                  discound: discound,
+                  desc: desc,
+                  offer: offer,
+                });
+              }}
             >
-              See More
-            </Text>
-              </TouchableOpacity>
+              <Text
+                style={{
+                  color: style.third,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                Order
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

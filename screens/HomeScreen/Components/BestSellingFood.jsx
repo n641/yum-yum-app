@@ -68,7 +68,7 @@ const BestSellingFood = ({ navigation }) => {
         keyExtractor={(item) => item.productName}
 
         renderItem={(itemData) =>
-          itemData.item.count > 5 ? (
+          itemData.item.count > 2 ? (
             <Card
               name={itemData.item.productName}
               url={itemData.item.url}

@@ -10,6 +10,9 @@ import {
 import React ,{useState ,useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 import {auth} from '../../db/config'
 import { getData , removeItemValue , storeData } from "../../db/AsyncStorage/AsyncStore";
 
@@ -26,7 +29,7 @@ const DetailsScreen = ({ route,navigation}) => {
     const{name,price,desc,url,discound,offer}=route.params;
       const [user, setUsers] = useState([]);
 
-    const [counter,setcounter] = useState(0);
+    const [counter,setcounter] = useState(1);
     const[favo,setfavo]= useState(false);
 
     const getUserss = async () => {
@@ -34,6 +37,78 @@ const DetailsScreen = ({ route,navigation}) => {
     setUsers(arr);
     // console.log(arr);
   };
+
+    const [listItems, setListItems] = useState([]);
+  
+
+    
+
+    const StoreData = (productlist) => {
+      try {
+        AsyncStorage.setItem("ListOfData", JSON.stringify(productlist));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+     
+
+    const deleteItem = (idx) => {
+     
+            const data = listItems.filter((item, index) => index !== idx);
+            console.log(data);
+            console.log(idx);
+            setListItems(data);
+            StoreData(data);
+          
+        
+      
+    };
+   
+
+    const addlist = async () => {
+     
+
+
+
+      AsyncStorage.getItem("ListOfData").then((productlist) => {
+        if (productlist) {
+            // if (listItems.length == 0) {
+            //   listItems.map((item, id) => {
+            //     if (name == item.name) {
+            //       console.log("yes");
+            //     } else {
+            //       console.log("no");
+            //     }
+            //   });
+            // } else console.log("ddd");
+          setListItems(JSON.parse(productlist))
+         
+         
+            StoreData([
+              ...JSON.parse(productlist),
+
+              {
+                name: name,
+                desc: desc,
+                price: price,
+                offer: offer,
+                discound: discound,
+                count: counter,
+                url: url,
+              },
+            ]);
+            
+            console.log(listItems);
+          
+          }
+        
+        else {
+          AsyncStorage.setItem("ListOfData", JSON.stringify([]));
+        }
+      });
+    };
+
 
      useEffect(() => {
     getUserss();
@@ -278,7 +353,9 @@ useEffect(() => {  user.map((u) =>
           height: height / 10,
         }}
         onPress={() => {
-          navigation.navigate("");
+          addlist().then(() =>{
+                        navigation.goBack();
+          })
         }}
       >
         <Text

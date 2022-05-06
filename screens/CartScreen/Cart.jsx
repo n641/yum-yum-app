@@ -7,66 +7,42 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import HomeStart from "../HomeScreen/HomeStart";
 import CardofCart from "./Compnent/CardofCart";
 
-import { getData } from "../../db/AsyncStorage/AsyncStore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
-import { useEffect } from "react/cjs/react.production.min";
 
 const Cart = ({ navigation}) => {
-  const [Carts, setCarts] = useState([
     //must order product by count!!!!
-    {
-      name: "sawarmaa",
-      url: "https://pbs.twimg.com/media/EoyE2lvWEAAo-pk?format=jpg&name=4096x4096",
-      price: 20,
-      offer: true,
-      discound: 5,
-      desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
-      
-    },
-    {
-      name: "pizza",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn_hPABuSXp3vmpfoOhZASRFB3O1qfF8c_Ew&usqp=CAU",
-      price: 70,
-      offer: true,
-      discound: 10,
-      desc: "pla plap pla pla pla pla pla pla pla pla pl apl apl apl pal pal pal pal pa lwerrrrrrrrrrrrrrrrrrr",
-      
-    },
-  ]);
+  const [listItems, setListItems] = useState([]);
+
+
+     useEffect(() => {
+       GetData();
+     }, []);
+   const GetData = () => {
+     AsyncStorage.getItem("ListOfData").then((productlist) => {
+       if (productlist) {
+         setListItems(JSON.parse(productlist));
+       } else {
+         AsyncStorage.setItem("ListOfData", JSON.stringify([]));
+       }
+     });
+   };
   
-  const [to,setto] = useState(
-
-    [   { name: "pizza", total: 60 },
-    { name: "sawarmaa", total: 15 },
-  ]);
+ 
 
 
 
-  const handale =({name,total})=>{
-      to.map((e)=>{
-      if(e.name==name){
-        
-        setto([ ...to,e.total= total]);
-      }
-      else{
-        setto([...to, { name: name, total: total }]);
+  
 
-
-      }
-
-    })
-  }
-  console.log(to);
-
-  return Carts.length != 0 ? (
+  return listItems.length != 0 ? (
     <View
       style={{
         justifyContent: "space-between",
@@ -85,11 +61,11 @@ const Cart = ({ navigation}) => {
             marginRight: 20,
           }}
         >
-          {Carts.length} items
+          {listItems.length} items
         </Text>
 
         <ScrollView>
-          {Carts.map((p, id) => (
+          {listItems.map((p, id) => (
             <CardofCart
               key={id}
               url={p.url}
@@ -97,8 +73,8 @@ const Cart = ({ navigation}) => {
               desc={p.desc}
               price={p.price}
               offer={p.offer}
+              count={p.count}
               discound={p.discound}
-              handale={handale}
             />
           ))}
         </ScrollView>

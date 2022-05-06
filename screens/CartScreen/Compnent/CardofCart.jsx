@@ -15,18 +15,14 @@ export default function CardofCart({
   desc,
   offer,
   discound,
-  handale
+  count
   
 }) {
 
-      const [counter, setcounter] = useState(1);
+      const [counter, setcounter] = useState(count);
 
 
 
-  useEffect(() => {handale({name:name,total:offer?(counter * (price - discound)):(counter* price)});},[counter,name])
-const add =({})=>{
-
-}
 
   return (
     <View>
@@ -70,19 +66,23 @@ const add =({})=>{
           >
             <View>
               <View>
-                <Text
-                  style={{
-                    fontSize: width / 20,
-                    fontWeight: "bold",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {name}
-                </Text>
+                {name ? (
+                  <Text
+                    style={{
+                      fontSize: width / 20,
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {name.length < 15 ? name : name.substring(0, 10) + "..."}
+                  </Text>
+                ) : null}
               </View>
-              <Text style={{ fontSize: 16, color: "gray" }}>
-                {desc.substring(0, 15)}...
-              </Text>
+              {desc ? (
+                <Text style={{ fontSize: 16, color: "gray" }}>
+                  {desc.substring(0, 15)}...
+                </Text>
+              ) : null}
             </View>
             <View>
               {offer ? (
@@ -144,9 +144,7 @@ const add =({})=>{
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  counter <= 1
-                    ? setcounter(1)
-                    : setcounter(counter - 1)
+                  counter <= 1 ? setcounter(1) : setcounter(counter - 1);
                 }}
               >
                 <Ionicons name="remove" size={20} color={"red"} style={{}} />
@@ -163,16 +161,20 @@ const add =({})=>{
                   borderRadius: width / 2,
                 }}
               >
-                <Text
+                {counter?(
+                  
+                  <Text
                   style={{
                     fontSize: 18,
                     marginHorizontal: 15,
-                    borderRadius: width / 2,
-                    color: "white",
-                  }}
+                  borderRadius: width / 2,
+                  color: "white",
+                }}
                 >
                   {counter}
                 </Text>
+                  ): null
+                }
               </View>
               <TouchableOpacity
                 onPress={() => {
@@ -193,9 +195,7 @@ const add =({})=>{
           >
             <Text style={{ fontSize: width / 24 }}>Total</Text>
             <Text style={{ fontWeight: "bold", marginTop: height / 18 }}>
-              {    offer ? (counter * (price - discound))
-               : (counter * price)
-              }$
+              {offer ? counter * (price - discound) : counter * price}$
             </Text>
           </View>
         </View>
