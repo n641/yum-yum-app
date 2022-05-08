@@ -29,16 +29,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="OnBoarding" screenOptions={{ headerShown: false }}> */}
+      
       <Stack.Navigator
         initialRouteName="Login"
-        // screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
           name="Login"
           component={Login}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="TestSearch"
           component={TestSearch}
@@ -54,6 +54,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen
           name="SignUp"
           component={SignUp}
@@ -77,6 +78,7 @@ export default function App() {
           component={HomeStart}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="Cart"
           component={Cart}
@@ -92,21 +94,25 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen
           name="Category"
           component={Category}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="ProductList"
           component={ProductList}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="UseerProScreen"
           component={UseerProScreen}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
@@ -122,11 +128,13 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen
           name="DetailsScreen"
           component={DetailsScreen}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen name="CheckOut" component={CheckOut} />
         {/* <Stack.Screen name="NavHome" component={NavHome} /> */}
       </Stack.Navigator>

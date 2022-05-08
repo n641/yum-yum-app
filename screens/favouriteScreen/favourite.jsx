@@ -13,9 +13,9 @@ import style from '../../Constants/style';
 
 const Favourite = ({ navigation }) => {
 
-  var Favourite =[{}];
+  // var Favourite =[{}];
   const [product, setproduct] = useState([]);
-
+  const [Favourite, setfavourite] = useState([]);
 
   const [Users, setUsers] = useState([]);
 
@@ -37,7 +37,7 @@ const Favourite = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      
+
       if (change.type === "added") {
         console.log("New message: ", change.doc.data());
         getUserss();
@@ -79,22 +79,33 @@ const Favourite = ({ navigation }) => {
   }, []);
 
 
+  Users.map((e) =>
+  e.email == auth.currentUser.email
+    ? e.favourite.map((op) =>
+      product.map((p) => {
+        if (p.productName == op) {
+          // setfavourite([p, ...Favourite])
+          console.log(Favourite);
+        }
+      })
+    )
+    : null
+);
 
-  
   useEffect(() => {
     Users.map((e) =>
       e.email == auth.currentUser.email
         ? e.favourite.map((op) =>
-            product.map((p) => (p.productName == op ? Favourite.push(p) : null))
-          )
+          product.map((p) => (p.productName == op ? setfavourite([p, ...Favourite]) : null))
+        )
         : null
     );
-  },[Users]);
-  const a =[1,2,3];
-  a.push(4)
-  console.log(Favourite);
+  }, [product]);
 
-  return product.length !=0? (
+  
+
+
+  return Favourite.length != 0 ? (
     <ScrollView>
       <Text
         style={{
@@ -112,8 +123,9 @@ const Favourite = ({ navigation }) => {
         data={Favourite}
         numColumns={2}
         keyExtractor={(item) => item.productName}
-        renderItem={(itemData) => (
+        renderItem={(itemData, id) => (
           <FavCard
+            key={id}
             name={itemData.item.productName}
             url={itemData.item.url}
             price={itemData.item.price}
@@ -126,6 +138,7 @@ const Favourite = ({ navigation }) => {
       />
     </ScrollView>
   ) : (
+
     <View
       style={{
         flex: 1,
@@ -141,6 +154,7 @@ const Favourite = ({ navigation }) => {
         }}
         source={require("../../assets/fav.png")}
       />
+
       <View
         style={{
           position: "absolute",
@@ -152,6 +166,7 @@ const Favourite = ({ navigation }) => {
           justifyContent: "flex-end",
         }}
       >
+
         <Text style={{ color: "red", fontSize: 30, fontWeight: "500" }}>
           not exist favourit meals
         </Text>

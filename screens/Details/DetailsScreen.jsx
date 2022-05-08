@@ -53,9 +53,9 @@ const DetailsScreen = ({ route,navigation}) => {
 
      
 
-    const deleteItem = (idx) => {
+    const deleteItem = (name) => {
      
-            const data = listItems.filter((item, index) => index !== idx);
+            const data = listItems.filter((item, index) => item.name !== name);
             console.log(data);
             console.log(idx);
             setListItems(data);
@@ -76,6 +76,7 @@ const DetailsScreen = ({ route,navigation}) => {
             // if (listItems.length == 0) {
             //   listItems.map((item, id) => {
             //     if (name == item.name) {
+            //     deleteItem(name)
             //       console.log("yes");
             //     } else {
             //       console.log("no");
@@ -108,6 +109,11 @@ const DetailsScreen = ({ route,navigation}) => {
         }
       });
     };
+
+
+
+
+
 
 
      useEffect(() => {
@@ -354,7 +360,7 @@ useEffect(() => {  user.map((u) =>
         }}
         onPress={() => {
           addlist().then(() =>{
-                        navigation.goBack();
+              navigation.goBack();
           })
         }}
       >

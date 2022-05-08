@@ -23,12 +23,13 @@ const Header = ({ pagename, icon, navigation }) => {
    
 
    useEffect(() => {
-     if (listItems == null) {
+     if (listItems.length == 0) {
        return;
      } else {
        GetData();
      }
    }, [listItems]);
+   
 
   
   
