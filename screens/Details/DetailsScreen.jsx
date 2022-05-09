@@ -38,77 +38,73 @@ const DetailsScreen = ({ route,navigation}) => {
     // console.log(arr);
   };
 
-    const [listItems, setListItems] = useState([]);
-  
-
-    
-
-    const StoreData = (productlist) => {
-      try {
-        AsyncStorage.setItem("ListOfData", JSON.stringify(productlist));
-      } catch (err) {
-        console.error(err);
-      }
-    };
+ 
+    // const StoreData = (productlist) => {
+    //   try {
+    //     AsyncStorage.setItem("ListOfData", JSON.stringify(productlist));
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // };
 
      
 
-    const deleteItem = (name) => {
+    // const deleteItem = (name) => {
      
-            const data = listItems.filter((item, index) => item.name !== name);
-            console.log(data);
-            console.log(idx);
-            setListItems(data);
-            StoreData(data);
+    //         const data = listItems.filter((item, index) => item.name !== name);
+    //         console.log(data);
+    //         console.log(idx);
+    //         setListItems(data);
+    //         StoreData(data);
           
         
       
-    };
+    // };
    
 
-    const addlist = async () => {
+    // const addlist = async () => {
      
 
 
 
-      AsyncStorage.getItem("ListOfData").then((productlist) => {
-        if (productlist) {
-            // if (listItems.length == 0) {
-            //   listItems.map((item, id) => {
-            //     if (name == item.name) {
-            //     deleteItem(name)
-            //       console.log("yes");
-            //     } else {
-            //       console.log("no");
-            //     }
-            //   });
-            // } else console.log("ddd");
-          setListItems(JSON.parse(productlist))
+    //   AsyncStorage.getItem("ListOfData").then((productlist) => {
+    //     if (productlist) {
+    //         // if (listItems.length == 0) {
+    //         //   listItems.map((item, id) => {
+    //         //     if (name == item.name) {
+    //         //     deleteItem(name)
+    //         //       console.log("yes");
+    //         //     } else {
+    //         //       console.log("no");
+    //         //     }
+    //         //   });
+    //         // } else console.log("ddd");
+    //       setListItems(JSON.parse(productlist))
          
          
-            StoreData([
-              ...JSON.parse(productlist),
+    //         StoreData([
+    //           ...JSON.parse(productlist),
 
-              {
-                name: name,
-                desc: desc,
-                price: price,
-                offer: offer,
-                discound: discound,
-                count: counter,
-                url: url,
-              },
-            ]);
+    //           {
+    //             name: name,
+    //             desc: desc,
+    //             price: price,
+    //             offer: offer,
+    //             discound: discound,
+    //             count: counter,
+    //             url: url,
+    //           },
+    //         ]);
             
-            console.log(listItems);
+    //         console.log(listItems);
           
-          }
+    //       }
         
-        else {
-          AsyncStorage.setItem("ListOfData", JSON.stringify([]));
-        }
-      });
-    };
+    //     else {
+    //       AsyncStorage.setItem("ListOfData", JSON.stringify([]));
+    //     }
+    //   });
+    // };
 
 
 
@@ -144,12 +140,6 @@ const DetailsScreen = ({ route,navigation}) => {
     };
   }, []);
 
-    console.log(name)
-useEffect(() => {  user.map((u) =>
-  auth.currentUser.email == u.email
-    ? u.favourite.map((fav) => (name == fav ? setfavo(true) : null))
-    : null
-);})
   
   return (
     <View
@@ -218,6 +208,7 @@ useEffect(() => {  user.map((u) =>
 
           <TouchableOpacity
             onPress={() => {
+
                user.map((u, id) =>
                  u.email == auth.currentUser.email
                    ? favo
@@ -233,6 +224,7 @@ useEffect(() => {  user.map((u) =>
                        }).then(() => setfavo(true))
                    : null
                );
+
             }}
           >
             <Ionicons
