@@ -23,14 +23,14 @@ async function getCategories() {
 }
 
 async function editCategory(category) {
-    console.log("at editCategory", category);
+    // console.log("at editCategory", category);
     await setDoc(doc(db, "Categories", category.id), category);
 }
 
 async function deleteCategory(id) {
     try {
         await deleteDoc(doc(db, "Categories", id));
-        console.log("Document deleted with ID: ", id);
+        // console.log("Document deleted with ID: ", id);
     } catch (error) {
         console.error("Error deleting document: ", error);
     }
@@ -39,7 +39,7 @@ async function deleteCategory(id) {
 async function addCategory(category) {
     try {
         const docRef = await addDoc(collection(db, "Categories"), category);
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
     }

@@ -105,7 +105,7 @@ const Card = ({ name, price, desc,url, fav,discound, offer ,navigation}) => {
             bottom: 5,
           }}
         >
-          {/* <TouchableOpacity onPress={() => handleAddList()}
+          <TouchableOpacity onPress={() => {}}
             style={{
               borderRadius: style.border,
               backgroundColor: style.primary,
@@ -125,7 +125,7 @@ const Card = ({ name, price, desc,url, fav,discound, offer ,navigation}) => {
             >
               Order Now
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <View
             style={{
               borderRadius: style.border,

@@ -93,14 +93,22 @@ const Favourite = ({ navigation }) => {
 );
 
   useEffect(() => {
-    Users.map((e) =>
-      e.email == auth.currentUser.email
-        ? e.favourite.map((op) =>
-          product.map((p) => (p.productName == op ? setfavourite([p, ...Favourite]) : null))
-        )
-        : null
-    );
-  }, [product]);
+    if(!Users?.length)
+      return;
+    console.log('auth.currentUser.email :>> ', auth.currentUser.email);
+    const user = Users.find(e=>e.email == auth.currentUser.email);
+    console.log('Users :>> ', Users);
+    console.log('User i find :>> ', user);
+    const fav = user.favourite.map(name=>product.find(p=>p.productName===name));
+    setfavourite(fav);
+    // Users.map((e) =>
+    //   e.email == auth.currentUser.email
+    //     ? e.favourite.map((op) =>
+    //       product.map((p) => (p.productName == op ? setfavourite([p, ...Favourite]) : null))
+    //     )
+    //     : null
+    // );
+  }, [product, Users]);
 
   
 

@@ -24,25 +24,26 @@ const TestSearch = ({ navigation, route }) => {
     const getItems = async () => {
         const arr = await getProducts();
         setproducts(arr);
-        console.log(products);
+        // console.log(products);
     };
+
     useEffect(() => {
         getItems();
-        searchfilter(resulte);
+        searchfilteredit(resulte);
     }, []);
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New message: ", change.doc.data());
+                // console.log("New message: ", change.doc.data());
                 getItems();
             }
             if (change.type === "modified") {
-                console.log("Modified city: ", change.doc.data());
+                // console.log("Modified city: ", change.doc.data());
                 getItems();
             }
             if (change.type === "removed") {
-                console.log("Removed message: ", change.doc.data());
+                // console.log("Removed message: ", change.doc.data());
                 getItems();
             }
         });
@@ -53,23 +54,35 @@ const TestSearch = ({ navigation, route }) => {
     }, []);
 
     useEffect(() => {
-        searchfilter(resulte);
+        searchfilteredit(resulte);
     });
 
-    const searchfilter = (text) => {
-        if (text) {
-            products.map((p) => {
-                if (p.productName.toUpperCase() == text.toUpperCase()) {
-                    setFilterProducts(p)
-                    setflag(true);
-                    console.log("find");
-                } else {
-                    console.log("not find");
-                    // setflag(false);
-                }
+    // const searchfilter = (text) => {
+    //     if (text) {
+    //         products.map((p) => {
+    //             if (p.productName.toUpperCase() == text.toUpperCase()) {
+    //                 setFilterProducts(p)
+    //                 setflag(true);
+    //                 console.log("find");
+    //             } else {
+    //                 console.log("not find");
+    //                 // setflag(false);
+    //             }
 
-            })
-            // })
+    //         })
+    //         // })
+    //     } 
+    // }
+
+    const searchfilteredit = (text) => {
+        let sizeWord = text.length;
+        if (text) {
+         const foundproduct=products.find(p=>p.productName.toUpperCase()===text.toUpperCase())
+        if(foundproduct){
+            setFilterProducts(foundproduct);
+            setflag(true);
+        }
+         
         } 
     }
 
