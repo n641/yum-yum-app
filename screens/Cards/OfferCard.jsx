@@ -4,37 +4,38 @@ import {
     Text,
     StyleSheet,
     Dimensions,
+    Image
 } from 'react-native';
 import style from '../../Constants/style'
 import { Ionicons } from "@expo/vector-icons";
 
-import { deleteStuff, getStuff, subscribe } from "../../db/Auth/usersData/Stuff";
+import { deleteOffer, getOffers, subscribe } from "../../db/Auth/usersData/Offers";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
+const OfferCard = ({navigation, offerName, price, desc, url, id}) =>{
 
-    const handleDeleteStaff = (id) => {
-        console.log("We delete Staff with id: ", id);
-        deleteStuff(id);
+    const handleDeleteOffer = (id) => {
+        console.log("We delete Offer with id: ", id);
+        deleteOffer(id);
     }
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
                 console.log("New mesg: ", change.doc.data());
-                getStuff();
+                getOffers();
             }
             if (change.type === "modified") {
                 console.log("Modified mesg: ", change.doc.data());
-                getStuff();
+                getOffers();
             }
             if (change.type === "removed") {
                 console.log("Removed mesg: ", change.doc.data());
-                getStuff();
+                getOffers();
             }
             // }
         });
@@ -49,31 +50,34 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
             <View style={styles.FirstContainer}>
                 <View style={styles.SecondContainer}>
                     <View style={styles.thirdContainer}>
+                        <Image
+                            style={style.imageStyle}
+                            source={{
+                                uri: url,
+                            }}
+                        />
                         <View>
                             <View>
-                                <Text>{name}</Text>
+                                <Text>{offerName}</Text>
                             </View>
                             <View>
-                                <Text>{rule}</Text>
+                                <Text>{price}</Text>
                             </View>
                             <View>
-                                <Text>{salary}</Text>
-                            </View>
-                            <View>
-                                <Text>{rate}</Text>
+                                <Text>{desc}</Text>
                             </View>
                         </View>
                     </View>
 
                     <View style={{ flexDirection: 'column' }}>
                         <TouchableOpacity onPress={()=>{
-                            navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
+                            navigation.navigate("editOffer" , {offerName :offerName , price: price , desc: desc, url: url , id :id })
                         }}>
                             <Ionicons name="create" size={30} color={'red'} />
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={()=>{  //test
-                            handleDeleteStaff(id);
+                            handleDeleteOffer(id);
                         }}>
                             <Ionicons name="trash" size={30} color={'red'} />
                         </TouchableOpacity>
@@ -112,7 +116,12 @@ const styles = StyleSheet.create({
         fontSize: width / 20,
         fontWeight: "bold",
         textTransform: "capitalize",
+    },
+    imageStyle:{
+        width: width / 3 - 18,
+        height: height / 6,
+        borderRadius: style.border,
     }
 })
 
-export default StaffCard;
+export default OfferCard

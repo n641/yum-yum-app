@@ -1,34 +1,32 @@
 import {
     StyleSheet, 
     Text, 
-    View, 
-    Button,
+    View,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Button
 } from 'react-native'
 import react, {useState} from 'react'
+
 import { Ionicons } from "@expo/vector-icons";
 
-import { editStuff } from '../../../db/Auth/usersData/Stuff';
+import { addOffer } from '../../../db/Auth/usersData/Offers';
 
-const editStaff = ({route, navigation}) =>{
+const addOffers = ({navigation}) =>{
 
-    const {name, rule, salary, rate, id} = route.params;
+    const [offerName, setOfferName] = useState('')
+    const [price, setPrice] = useState(0)
+    const [desc, setDesc] = useState('')
+    const [url, setUrl] = useState('')
 
-    const [namee, setName] = useState(name);
-    const [rulee, setRule] = useState(rule);
-    const [salaryy, setSalary] = useState(salary);
-    const [ratee, setRate] = useState(rate);
-
-    const editStaffHandler = () =>{
-        console.log(name, rule, salary, rate)
-        editStuff({
-            name: namee,
-            rule: rulee,
-            salary: salaryy,
-            rate: ratee,
-            id:id
-        }).then(() => navigation.navigate("Staff"));
+    const addOfferHandler = () =>{
+        console.log(offerName, price, desc, url)
+        addOffer({
+            offerName: offerName,
+            price: price,
+            desc: desc,
+            url: url
+        });
     }
 
     return(
@@ -36,55 +34,57 @@ const editStaff = ({route, navigation}) =>{
             <View style={styles.backButtonStyle}>
 
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate("Staff");
+                    navigation.navigate("Offer");
                 }}>
                     <Ionicons name="chevron-back" size={40} color={'red'} />
                 </TouchableOpacity>
 
                 <Text style={styles.fontStyle}>
-                    Edit Staff
+                    Add Offer
                 </Text>
             </View>
 
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter name of Staff'
-                    onChangeText={setName}
-                    value={name}
+                    placeholder='Enter name of Offer'
+                    onChangeText={setOfferName}
+                    value={offerName}
                 />
             </View>
 
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter rule of Staff'
-                    onChangeText={setRule}
-                    value={rule}
+                    placeholder='Enter price of offer'
+                    onChangeText={setPrice}
+                    value={price}
                 />
             </View>
 
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter Salary of Staff'
-                    onChangeText={setSalary}
-                    value={salary}
+                    placeholder='Enter description of Offer'
+                    onChangeText={setDesc}
+                    value={desc}
                 />
             </View>
 
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter ate of Staff'
-                    onChangeText={setRate}
-                    value={rate}
+                    placeholder='Enter image url of Offer'
+                    onChangeText={setUrl}
+                    value={url}
                 />
             </View>
 
             <View style={styles.finishButton}>
-                <Button title='Confirm Edit' color={'red'} onPress={() => {
-                    editStaffHandler();
+                <Button title='Confirm Add' color={'red'} onPress={() => {
+                    addOfferHandler();
+                    navigation.navigate("Offer");
                 }} />
             </View>
         </View>
     );
+
 }
 
 const styles = StyleSheet.create({
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default editStaff
+export default addOffers

@@ -8,39 +8,39 @@ import {
 import react, {useState, useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
-import { getStuff, subscribe } from '../../../db/Auth/usersData/Stuff';
-import StaffCard from '../../Cards/StaffCard';
+import { getOffers, subscribe } from '../../../db/Auth/usersData/Offers';
+import OfferCard from '../../Cards/OfferCard';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Staff = ({navigation}) =>{
+const Offer = ({navigation}) => {
 
-    const [arrStaff, setArrStaff] = useState([]);
+    const [arrOffer, setArrOffer] = useState([]);
 
-    const getStaffHandler = async () => {
-        const arr = await getStuff();
-        setArrStaff(arr)
-        console.log(arrStaff);
+    const getOfferHandler = async () => {
+        const arr = await getOffers();
+        setArrOffer(arr)
+        console.log(arrOffer);
     }
 
     useEffect(() => {
-        getStaffHandler();
+        getOfferHandler();
     }, [])
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
                 console.log("New mesg: ", change.doc.data());
-                getStaffHandler();
+                getOfferHandler();
             }
             if (change.type === "modified") {
                 console.log("Modified mesg: ", change.doc.data());
-                getStaffHandler();
+                getOfferHandler();
             }
             if (change.type === "removed") {
                 console.log("Removed mesg: ", change.doc.data());
-                getStaffHandler();
+                getOfferHandler();
             }
             // }
         });
@@ -50,28 +50,29 @@ const Staff = ({navigation}) =>{
         };
     }, []);
 
-
     return(
         <View style={styles.bigContainer}>
             <FlatList 
-                data={arrStaff}
-                renderItem={itemData => 
-                    <StaffCard 
-                        name={itemData.item.name}
-                        rule={itemData.item.rule}
-                        salary={itemData.item.salary}
-                        rate={itemData.item.rate}
-                        id={itemData.item.id}
+                data={arrOffer}
+                renderItem={itemDate =>
+                    <OfferCard 
+                        offerName={itemDate.item.offerName}
+                        price={itemDate.item.price}
+                        desc={itemDate.item.desc}
+                        url={itemDate.item.url}
+                        id={itemDate.item.id}
                     />
                 }
             />
-            <View>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("addStaff")}}>
+
+        <View>
+                <TouchableOpacity onPress={()=>{ navigation.navigate("addOffer")}}>
                 <Ionicons name="add-circle" size={70} color={'red'} />
                 </TouchableOpacity>
             </View>
         </View>
     );
+
 }
 
 const styles = StyleSheet.create({
@@ -107,4 +108,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Staff
+export default Offer;
