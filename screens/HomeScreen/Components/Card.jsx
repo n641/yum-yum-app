@@ -1,16 +1,53 @@
-import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity,Button } from "react-native";
-import React , {useState,useEffect} from "react";
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Button } from "react-native";
+import React, { useState, useEffect } from "react";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
+import { getUsers, subscribeUser, editUser } from "../../../db/Auth/usersData/users";
+import { auth } from "../../../db/config"; 
 
 import style from "../../../Constants/style";
 
-const Card = ({ name, price, desc,url, fav,discound, offer ,navigation}) => {
+const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
+  const [user, setUsers] = useState([]);
+  const [favo, setfavo] = useState(false);
 
- 
-  
+  const getUserss = async () => {
+    const arr = await getUsers();
+    setUsers(arr);
+    // console.log(arr);
+  };
+
+  useEffect(() => {
+    getUserss();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeUser(({ change, snapshot }) => {
+      //   console.log("changes", change, snapshot, change.type);
+      // if (snapshot.metadata.hasPendingWrites) {
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getUserss();
+      }
+      // }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
   return (
     <View style={{ margin: 8, alignItems: "center", justifyContent: "center" }}>
       <View
@@ -105,7 +142,18 @@ const Card = ({ name, price, desc,url, fav,discound, offer ,navigation}) => {
             bottom: 5,
           }}
         >
-          <TouchableOpacity onPress={() => {}}
+          <TouchableOpacity onPress={() => {
+
+            user.map((u) =>
+              u.email == auth.currentUser.email
+                ? editUser({
+                    ...u,
+                    cart: [...u.cart, name],
+                  })
+                : null
+            );
+
+          }}
             style={{
               borderRadius: style.border,
               backgroundColor: style.primary,

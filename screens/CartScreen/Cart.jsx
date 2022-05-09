@@ -6,8 +6,14 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+import { auth } from "../../db/config";
+import { getUsers, subscribeUser } from "../../db/Auth/usersData/users";
+import { getProducts, subscribe } from "../../db/Auth/usersData/Products";
+
 import HomeStart from "../HomeScreen/HomeStart";
 import CardofCart from "./Compnent/CardofCart";
 
@@ -18,64 +24,88 @@ const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
 
-const Cart = ({ navigation}) => {
-    //must order product by count!!!!
-  // const [listItems, setListItems] = useState([]);
+const Cart = ({ navigation }) => {
 
-  const listItems = [
-    {
-      name: "Sandwich",
-      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
-      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
-      price: 50,
-      offer: "false",
-      discound: 0,
-    },
-    {
-      name: "Sandwich",
-      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
-      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
-      price: 50,
-      offer: "false",
-      discound: 0,
-    },
-    {
-      name: "Sandwich",
-      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
-      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
-      price: 50,
-      offer: "false",
-      discound: 0,
-    },
-    {
-      name: "Sandwich",
-      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
-      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
-      price: 50,
-      offer: "false",
-      discound: 0,
-    }
-  ];
+  const [products, setproducts] = useState([]);
+  const [Users, setUsers] = useState([]);
+  const [listItems, setListItems] = useState([]);
 
+  const getUserss = async () => {
+    const arr = await getUsers();
+    setUsers(arr);
+  };
 
-     useEffect(() => {
-       GetData();
-     }, []);
-   const GetData = () => {
-     AsyncStorage.getItem("ListOfData").then((productlist) => {
-       if (productlist) {
-        //  setListItems(JSON.parse(productlist));
-       } else {
-         AsyncStorage.setItem("ListOfData", JSON.stringify([]));
-       }
-     });
-   };
-  
- 
+  const getProduct = async () => {
+    const arr = await getProducts();
+    setproducts(arr);
+    // console.log(arr);
+  };
+
+  useEffect(() => {
+    getUserss();
+    getProduct();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeUser(({ change, snapshot }) => {
+
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getUserss();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getProduct();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getProduct();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getProduct();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!Users?.length)
+      return;
+    console.log('auth.currentUser.email :>> ', auth.currentUser.email);
+    const user = Users.find(e => e.email == auth.currentUser.email);
+    console.log('Users :>> ', Users);
+    console.log('User i find :>> ', user);
+    const fav = user.cart.map(name => products.find(p => p.productName === name));
+    console.log("we have orders", fav)
+    setListItems(fav);
+
+  }, [products, Users]);
 
 
 
   const [total, setTotal] = useState(0)
+
 
   const totalIncrement = givinTotal => {
     setTotal(total + givinTotal)
@@ -108,21 +138,28 @@ const Cart = ({ navigation}) => {
           {listItems.length} items
         </Text>
 
-        <ScrollView>
-          {listItems.map((p, id) => (
+        <FlatList
+          data={listItems}
+          numColumns={2}
+          keyExtractor={(item) => item.productName}
+          renderItem={(itemData, id) => (
+
             <CardofCart
-              key={id}
-              url={p.url}
-              name={p.name}
-              desc={p.desc}
-              price={p.price}
-              offer={p.offer}
-              discound={p.discound}
+              name={itemData.item.productName}
+              url={itemData.item.url}
+              price={itemData.item.price}
+              offer={itemData.item.offer}
+              discound={itemData.item.discount}
+              desc={itemData.item.description}
+              navigation={navigation}
               onAdd={totalIncrement}
               onRemove={totalDecrement}
             />
-          ))}
-        </ScrollView>
+
+
+          )}
+        />
+
       </View>
       <TouchableOpacity
         style={{
