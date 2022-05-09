@@ -32,7 +32,7 @@ export default function App() {
     <NavigationContainer>
       
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Cart"
       >
 
 

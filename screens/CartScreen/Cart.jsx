@@ -20,7 +20,42 @@ import style from "../../Constants/style";
 
 const Cart = ({ navigation}) => {
     //must order product by count!!!!
-  const [listItems, setListItems] = useState([]);
+  // const [listItems, setListItems] = useState([]);
+
+  const listItems = [
+    {
+      name: "Sandwich",
+      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
+      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
+      price: 50,
+      offer: "false",
+      discound: 0,
+    },
+    {
+      name: "Sandwich",
+      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
+      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
+      price: 50,
+      offer: "false",
+      discound: 0,
+    },
+    {
+      name: "Sandwich",
+      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
+      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
+      price: 50,
+      offer: "false",
+      discound: 0,
+    },
+    {
+      name: "Sandwich",
+      url: "https://assets.bonappetit.com/photos/5a7cc004dbc53a07d3d60b58/1:1/w_960,c_limit/fried-bologna-sandwich.jpg",
+      desc: "الكبده دي صح الصح و صاحبها راجل صح الصح",
+      price: 50,
+      offer: "false",
+      discound: 0,
+    }
+  ];
 
 
      useEffect(() => {
@@ -29,7 +64,7 @@ const Cart = ({ navigation}) => {
    const GetData = () => {
      AsyncStorage.getItem("ListOfData").then((productlist) => {
        if (productlist) {
-         setListItems(JSON.parse(productlist));
+        //  setListItems(JSON.parse(productlist));
        } else {
          AsyncStorage.setItem("ListOfData", JSON.stringify([]));
        }
@@ -40,7 +75,16 @@ const Cart = ({ navigation}) => {
 
 
 
-  
+  const [total, setTotal] = useState(0)
+
+  const totalIncrement = givinTotal => {
+    setTotal(total + givinTotal)
+    console.log(total + givinTotal)
+  }
+  const totalDecrement = givinTotal => {
+    setTotal(total - givinTotal)
+    console.log(total + givinTotal)
+  }
 
   return listItems.length != 0 ? (
     <View
@@ -73,8 +117,9 @@ const Cart = ({ navigation}) => {
               desc={p.desc}
               price={p.price}
               offer={p.offer}
-              count={p.count}
               discound={p.discound}
+              onAdd={totalIncrement}
+              onRemove={totalDecrement}
             />
           ))}
         </ScrollView>
@@ -90,7 +135,9 @@ const Cart = ({ navigation}) => {
           height: height / 10,
         }}
         onPress={() => {
-          navigation.navigate("CheckOut", {});
+          navigation.navigate("CheckOut", {
+            total: total
+          });
         }}
       >
         <Text
