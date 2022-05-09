@@ -8,7 +8,7 @@ import GetOrders from "./GetOrders";
 import GetUsers from "./GetUsers";
 import Offers from "./Offers";
 import Product from "./Product";
-import Staff from "./Staff";
+import StaffStart from "./Staff/StaffStart";
 
 const Drawer = createDrawerNavigator();
 
@@ -90,7 +90,7 @@ const AdminStartScreen = ({ navigation }) => {
                 },
             }} />
 
-            <Drawer.Screen name="Staff" component={Staff} options={{
+            <Drawer.Screen name="StaffStart" component={StaffStart} options={{
                 title: "Staff",
                 headerStyle: {
                     backgroundColor: "red",
