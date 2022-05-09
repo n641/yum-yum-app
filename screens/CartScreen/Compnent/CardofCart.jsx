@@ -15,14 +15,29 @@ export default function CardofCart({
   desc,
   offer,
   discound,
-  count
-  
+  onAdd,
+  onRemove
 }) {
 
-      const [counter, setcounter] = useState(count);
+  const [counter, setcounter] = useState(0);
+  const [total, setTotal] = useState(0);
 
+  const increment = () =>{
+    setcounter(counter + 1)
+    setTotal(price * (counter + 1))
+    onAdd(price)
+  }
 
-
+  const decrement = () =>{
+    if(counter == 0){
+      setTotal(0)
+    }
+    else{
+      setcounter(counter - 1)
+      setTotal(price * (counter - 1))
+      onRemove(price)
+    }
+  }
 
   return (
     <View>
@@ -143,9 +158,7 @@ export default function CardofCart({
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
-                onPress={() => {
-                  counter <= 1 ? setcounter(1) : setcounter(counter - 1);
-                }}
+                onPress={() => decrement()}
               >
                 <Ionicons name="remove" size={20} color={"red"} style={{}} />
               </TouchableOpacity>
@@ -177,9 +190,7 @@ export default function CardofCart({
                 }
               </View>
               <TouchableOpacity
-                onPress={() => {
-                  setcounter(counter + 1);
-                }}
+                onPress={() => increment()}
               >
                 <Ionicons name="add" size={20} color={"red"} style={{}} />
               </TouchableOpacity>
