@@ -10,38 +10,75 @@ import { auth } from "../../../db/config";
 import { Ionicons } from "@expo/vector-icons";
 
 import style from "../../../Constants/style"
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
+
+import {
+  editUser,
+  getProducts,
+  getUsers,
+  subscribeUser,
+} from "../../../db/Auth/usersData/users";
+
 
 
 const Header = ({ pagename, icon, navigation }) => {
   console.log(auth.currentUser);
 
    const [listItems, setListItems] = useState([]);
+
+
+    const [users, setUsers] = useState([]);
+
    
 
-   useEffect(() => {
-     if (listItems.length == 0) {
-       return;
-     } else {
-       GetData();
-     }
-   }, [listItems]);
+    const getUserss = async () => {
+      const arr = await getUsers();
+      setUsers(arr);
+      // console.log(arr);
+    };
+
+    useEffect(() => {
+      getUserss();
+    }, []);
+
+    useEffect(() => {
+      const unsubscribe = subscribeUser(({ change, snapshot }) => {
+        if (change.type === "added") {
+          console.log("New message: ", change.doc.data());
+          getUserss();
+        }
+        if (change.type === "modified") {
+          console.log("Modified city: ", change.doc.data());
+          getUserss();
+        }
+        if (change.type === "removed") {
+          console.log("Removed message: ", change.doc.data());
+          getUserss();
+        }
+        // }
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }, []);
+   
+
+  useEffect(() => {
+    if (!users?.length) return;
+    const user = users.find((e) => e.email == auth.currentUser.email);
+    console.log("User i find :>> ", user);
+
+                   setListItems([...user.cart]) ;
+    
+  }, [users]);
    
 
   
   
-   const GetData = () => {
-     AsyncStorage.getItem("ListOfData").then((productlist) => {
-       if (productlist) {
-         setListItems(JSON.parse(productlist));
-       } else {
-         AsyncStorage.setItem("ListOfData", JSON.stringify([]));
-       }
-     });
-   };
+
 
   return (
     <View
