@@ -3,31 +3,29 @@ import {
   Text,
   View,
   Image,
-  Button,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import React ,{useState ,useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
 import {auth} from '../../db/config'
-import { getData , removeItemValue , storeData } from "../../db/AsyncStorage/AsyncStore";
 
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
-import { editUser ,getUsers,subscribeUser} from "../../db/Auth/usersData/users";
-import { cos } from "react-native-reanimated";
+import { editUser,getProducts ,getUsers,subscribeUser} from "../../db/Auth/usersData/users";
 
 
 const DetailsScreen = ({ route,navigation}) => {
     const{name,price,desc,url,discound,offer}=route.params;
-      const [user, setUsers] = useState([]);
+
+
+      const [users, setUsers] = useState([]);
+      const [product, setproduct] = useState([]);
+
 
     const [counter,setcounter] = useState(1);
     const[favo,setfavo]= useState(false);
@@ -37,79 +35,7 @@ const DetailsScreen = ({ route,navigation}) => {
     setUsers(arr);
     // console.log(arr);
   };
-
- 
-    // const StoreData = (productlist) => {
-    //   try {
-    //     AsyncStorage.setItem("ListOfData", JSON.stringify(productlist));
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
-
-     
-
-    // const deleteItem = (name) => {
-     
-    //         const data = listItems.filter((item, index) => item.name !== name);
-    //         console.log(data);
-    //         console.log(idx);
-    //         setListItems(data);
-    //         StoreData(data);
-          
-        
-      
-    // };
    
-
-    // const addlist = async () => {
-     
-
-
-
-    //   AsyncStorage.getItem("ListOfData").then((productlist) => {
-    //     if (productlist) {
-    //         // if (listItems.length == 0) {
-    //         //   listItems.map((item, id) => {
-    //         //     if (name == item.name) {
-    //         //     deleteItem(name)
-    //         //       console.log("yes");
-    //         //     } else {
-    //         //       console.log("no");
-    //         //     }
-    //         //   });
-    //         // } else console.log("ddd");
-    //       setListItems(JSON.parse(productlist))
-         
-         
-    //         StoreData([
-    //           ...JSON.parse(productlist),
-
-    //           {
-    //             name: name,
-    //             desc: desc,
-    //             price: price,
-    //             offer: offer,
-    //             discound: discound,
-    //             count: counter,
-    //             url: url,
-    //           },
-    //         ]);
-            
-    //         console.log(listItems);
-          
-    //       }
-        
-    //     else {
-    //       AsyncStorage.setItem("ListOfData", JSON.stringify([]));
-    //     }
-    //   });
-    // };
-
-
-
-
-
 
 
      useEffect(() => {
@@ -140,6 +66,16 @@ const DetailsScreen = ({ route,navigation}) => {
     };
   }, []);
 
+  useEffect(() => {
+     if (!users?.length) return;
+    const user = users.find((e) => e.email == auth.currentUser.email);
+        console.log("User i find :>> ", user);
+
+
+    const fav = user.favourite.map((namefav) =>
+      namefav == name ? setfavo(true) : null
+    );
+  }, [users]);
   
   return (
     <View
@@ -208,23 +144,25 @@ const DetailsScreen = ({ route,navigation}) => {
 
           <TouchableOpacity
             onPress={() => {
+                  const user = users.find(
+                    (e) => e.email == auth.currentUser.email
+                  );
 
-               user.map((u, id) =>
-                 u.email == auth.currentUser.email
-                   ? favo
+
+                    favo
                      ? editUser({
-                         ...u,
-                         favourite: u.favourite.filter(
+                         ...user,
+                         favourite: user.favourite.filter(
                            (n) => n !== name
                          ),
                        }).then(() => setfavo(false))
                      : editUser({
-                         ...u,
-                         favourite: [...u.favourite, name],
+                         ...user,
+                         favourite: [...user.favourite, name],
                        }).then(() => setfavo(true))
-                   : null
-               );
 
+
+              
             }}
           >
             <Ionicons

@@ -98,7 +98,7 @@ const Cart = ({ navigation }) => {
     console.log('User i find :>> ', user);
     const fav = user.cart.map(name => products.find(p => p.productName === name));
     console.log("we have orders", fav)
-    setListItems(fav);
+      setListItems(fav);
 
   }, [products, Users]);
 
@@ -137,28 +137,24 @@ const Cart = ({ navigation }) => {
         >
           {listItems.length} items
         </Text>
+        {
+          listItems.map((item,id)=>(
 
-        <FlatList
-          data={listItems}
-          numColumns={2}
-          keyExtractor={(item) => item.productName}
-          renderItem={(itemData, id) => (
-
-            <CardofCart
-              name={itemData.item.productName}
-              url={itemData.item.url}
-              price={itemData.item.price}
-              offer={itemData.item.offer}
-              discound={itemData.item.discount}
-              desc={itemData.item.description}
+             <CardofCart
+              name={item.productName}
+              url={item.url}
+              price={item.price}
+              offer={item.offer}
+              discound={item.discount}
+              desc={item.description}
               navigation={navigation}
               onAdd={totalIncrement}
               onRemove={totalDecrement}
             />
+          ))
+        }
 
-
-          )}
-        />
+       
 
       </View>
       <TouchableOpacity

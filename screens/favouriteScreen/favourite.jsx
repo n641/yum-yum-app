@@ -79,18 +79,7 @@ const Favourite = ({ navigation }) => {
   }, []);
 
 
-  Users.map((e) =>
-  e.email == auth.currentUser.email
-    ? e.favourite.map((op) =>
-      product.map((p) => {
-        if (p.productName == op) {
-          // setfavourite([p, ...Favourite])
-          console.log(Favourite);
-        }
-      })
-    )
-    : null
-);
+  
 
   useEffect(() => {
     if(!Users?.length)
