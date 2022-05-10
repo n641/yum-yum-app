@@ -289,10 +289,36 @@ const DetailsScreen = ({ route,navigation}) => {
           height: height / 10,
         }}
         onPress={() => {
-          addlist().then(() =>{
-              navigation.goBack();
-          })
-        }}
+
+
+           const user = users.find((e) => e.email == auth.currentUser.email);
+     if (user.cart.length == 0) {
+       editUser({
+         ...user,
+         cart: [...user.cart, name],
+       }).then(() => {
+         navigation.navigate("Cart");
+       });
+     } else {
+                const cart = user.cart.find(
+                  (namecart) => namecart == name
+                );
+                cart?alert("you have already added this product to your cart"):(
+                       editUser({
+                              ...user,
+                                cart: [...user.cart, name],
+                           }).then(()=>{
+                             navigation.navigate("Cart",{counter:counter});
+                           })
+
+                )
+
+       
+     }}
+
+             
+          
+        }
       >
         <Text
           style={{
@@ -313,13 +339,3 @@ export default DetailsScreen
 
 const styles = StyleSheet.create({})
 
-
-
-//  onPress={() => {
-//             editMessage({ ...messageToEdit, name: messageToEditName })
-//               .then((d) => {
-//                 onSave();
-//                 console.log(messageToEditName);
-//               })
-//               .catch((e) => console.log(e));
-//           }}

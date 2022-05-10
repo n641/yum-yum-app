@@ -6,7 +6,8 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../../Constants/style";
-import { storeData,  removeItemValue, getData } from "../../../db/AsyncStorage/AsyncStore";
+
+
 
 export default function CardofCart({
   name,
@@ -16,196 +17,191 @@ export default function CardofCart({
   offer,
   discound,
   onAdd,
-  onRemove
+  onRemove,
+  deleteItem,
+  count
+  
 }) {
-
-  const [counter, setcounter] = useState(0);
+  
+  const [counter, setcounter] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const increment = () =>{
-    setcounter(counter + 1)
-    setTotal(price * (counter + 1))
-    onAdd(price)
-  }
+  const increment = () => {
+    setcounter(counter + 1);
+    setTotal(price * (counter + 1));
+    onAdd(price);
+  };
 
-  const decrement = () =>{
-    if(counter == 0){
-      setTotal(0)
+  const decrement = () => {
+    if (counter == 0) {
+      setTotal(0);
+    } else {
+      setcounter(counter - 1);
+      setTotal(price * (counter - 1));
+      onRemove(price);
     }
-    else{
-      setcounter(counter - 1)
-      setTotal(price * (counter - 1))
-      onRemove(price)
-    }
-  }
+  };
 
   return (
-    <View>
+    <View style={{ margin: 10 }}>
       <View
         style={{
-          flexDirection: "row",
+          borderRadius: style.border,
+          height: height / 2 - 60,
+          borderWidth: 1,
+          flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
-          width: width,
-          margin: 10,
+          width: width / 2 - 16,
         }}
       >
+        <Image
+          style={{
+            width: width / 2 - 18,
+            height: height / 5,
+            borderRadius: style.border,
+          }}
+          source={{
+            uri: `${url}`,
+          }}
+        />
+        <TouchableOpacity
+        onPress={() => {deleteItem(name)}}
+          style={{ position: "absolute", left: width / 2 - 45, top: -20 }}
+        >
+          <Ionicons name="close" size={40} color={"red"} />
+        </TouchableOpacity>
+
         <View
           style={{
-            borderRadius: style.border,
-            borderWidth: 1,
-            justifyContent: "space-between",
-            width: width - 20,
+            justifyContent: "space-around",
             alignItems: "center",
             flexDirection: "row",
+            width: width / 2,
           }}
         >
-          <Image
-            style={{
-              width: width / 3 - 18,
-              height: height / 4,
-              borderRadius: style.border,
-              // marginRight: 10,
-            }}
-            source={{
-              uri: `${url}`,
-            }}
-          />
-
-          <View
-            style={{
-              flexDirection: "column",
-              height: height / 4,
-              justifyContent: "center",
-            }}
-          >
+          <View style={{ flexDirection: "column" }}>
             <View>
-              <View>
-                {name ? (
-                  <Text
-                    style={{
-                      fontSize: width / 20,
-                      fontWeight: "bold",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {name.length < 15 ? name : name.substring(0, 10) + "..."}
-                  </Text>
-                ) : null}
-              </View>
-              {desc ? (
-                <Text style={{ fontSize: 16, color: "gray" }}>
-                  {desc.substring(0, 15)}...
-                </Text>
-              ) : null}
+              <Text
+                style={{
+                  fontSize: width / 32,
+                  fontWeight: "bold",
+                  paddingLeft: 5,
+                }}
+              >
+                {name.length < 15 ? name : name.substring(0, 10) + "..."}
+              </Text>
             </View>
-            <View>
-              {offer ? (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <View>
-                    <Text
-                      style={{
-                        color: "#838787",
-                        fontSize: 18,
-                        fontWeight: "bold",
-                        textDecorationLine: "line-through",
-                        marginRight: 5,
-                      }}
-                    >
-                      {price + "$"}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={{
-                        color: "red",
-                        fontSize: 18,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {price - discound + "$"}
-                    </Text>
-                  </View>
-                </View>
-              ) : (
+          </View>
+
+          <View>
+            {offer ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <View>
                   <Text
                     style={{
-                      color: "red",
-                      fontSize: 18,
+                      color: "#838787",
+                      fontSize: width / 30,
                       fontWeight: "bold",
+                      textDecorationLine: "line-through",
+                      marginRight: 5,
                     }}
                   >
                     {price + "$"}
                   </Text>
                 </View>
-              )}
-            </View>
+                <View>
+                  <Text
+                    style={{
+                      color: "red",
+                      fontSize: width / 30,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {price - discound + "$"}
+                  </Text>
+                </View>
+              </View>
+            ) : (
+              <View>
+                <Text
+                  style={{
+                    color: "red",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {price + "$"}
+                </Text>
+              </View>
+            )}
           </View>
+        </View>
 
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <TouchableOpacity onPress={() => decrement()}>
+            <Ionicons name="remove" size={20} color={"red"} style={{}} />
+          </TouchableOpacity>
           <View
             style={{
-              flexDirection: "column",
+              fontSize: 18,
+              marginHorizontal: 15,
               alignItems: "center",
-              height: height / 4,
               justifyContent: "center",
+              width: width / 12,
+              height: width / 12,
+              backgroundColor: "gray",
+              borderRadius: width / 2,
             }}
           >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableOpacity
-                onPress={() => decrement()}
-              >
-                <Ionicons name="remove" size={20} color={"red"} style={{}} />
-              </TouchableOpacity>
-              <View
+            {counter ? (
+              <Text
                 style={{
                   fontSize: 18,
                   marginHorizontal: 15,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: width / 12,
-                  height: width / 12,
-                  backgroundColor: "gray",
-                  borderRadius: width / 2,
-                }}
-              >
-                {counter?(
-                  
-                  <Text
-                  style={{
-                    fontSize: 18,
-                    marginHorizontal: 15,
                   borderRadius: width / 2,
                   color: "white",
                 }}
-                >
-                  {counter}
-                </Text>
-                  ): null
-                }
-              </View>
-              <TouchableOpacity
-                onPress={() => increment()}
               >
-                <Ionicons name="add" size={20} color={"red"} style={{}} />
-              </TouchableOpacity>
-            </View>
+                {counter}
+              </Text>
+            ) : null}
           </View>
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "center",
-              marginRight: 10,
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ fontSize: width / 24 }}>Total</Text>
-            <Text style={{ fontWeight: "bold", marginTop: height / 18 }}>
+          <TouchableOpacity onPress={() => increment()}>
+            <Ionicons name="add" size={20} color={"red"} style={{}} />
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginRight: 10,
+            justifyContent: "center",
+          }}
+        >
+          <View>
+            <Text style={{ fontSize: width / 24 }}>Total:</Text>
+          </View>
+          <View>
+            <Text
+              style={{
+                fontWeight: "bold",
+                marginLeft: 10,
+                fontSize: width / 33,
+              }}
+            >
               {offer ? counter * (price - discound) : counter * price}$
             </Text>
           </View>

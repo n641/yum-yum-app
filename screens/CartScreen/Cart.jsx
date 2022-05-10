@@ -7,11 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  Alert
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import { auth } from "../../db/config";
-import { getUsers, subscribeUser } from "../../db/Auth/usersData/users";
+import { getUsers, editUser,subscribeUser } from "../../db/Auth/usersData/users";
 import { getProducts, subscribe } from "../../db/Auth/usersData/Products";
 
 import HomeStart from "../HomeScreen/HomeStart";
@@ -24,7 +25,10 @@ const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
 
-const Cart = ({ navigation }) => {
+const Cart = ({ navigation,route }) => {
+ // const { counter } = route.params;
+  //console.log("counter",counter)
+
 
   const [products, setproducts] = useState([]);
   const [Users, setUsers] = useState([]);
@@ -96,9 +100,11 @@ const Cart = ({ navigation }) => {
     const user = Users.find(e => e.email == auth.currentUser.email);
     console.log('Users :>> ', Users);
     console.log('User i find :>> ', user);
-    const fav = user.cart.map(name => products.find(p => p.productName === name));
-    console.log("we have orders", fav)
-      setListItems(fav);
+    const cart = user.cart.map(name => products.find(p => p.productName == name));
+    console.log("we have orders", cart)
+      setListItems(cart);
+          console.log("we have product", listItems);
+
 
   }, [products, Users]);
 
@@ -115,6 +121,24 @@ const Cart = ({ navigation }) => {
     setTotal(total - givinTotal)
     console.log(total + givinTotal)
   }
+   const deleteItem = (name) => {
+    //  Alert.alert("Delete Item", `Are you sure you want to delete this ${name}?`, [
+    //    {
+    //      text: "Yes",
+    //      onPress: () => {
+           
+            const user = Users.find((e) => e.email == auth.currentUser.email);
+            console.log("User i find :>> ", user);
+          editUser({
+            ...user,
+            cart: user.cart.filter((n) => n !== name),
+          });
+          
+            
+      //  },
+       //},
+     //]);
+   };
 
   return listItems.length != 0 ? (
     <View
@@ -137,25 +161,28 @@ const Cart = ({ navigation }) => {
         >
           {listItems.length} items
         </Text>
-        {
-          listItems.map((item,id)=>(
 
-             <CardofCart
-              name={item.productName}
-              url={item.url}
-              price={item.price}
-              offer={item.offer}
-              discound={item.discount}
-              desc={item.description}
+        <FlatList
+          data={listItems}
+          numColumns={2}
+          keyExtractor={(item) => item.productName}
+          renderItem={(itemData, id) => (
+            <CardofCart
+              key={id}
+              name={itemData.item.productName}
+              url={itemData.item.url}
+              price={itemData.item.price}
+              offer={itemData.item.offer}
+              discound={itemData.item.discount}
+              desc={itemData.item.description}
               navigation={navigation}
               onAdd={totalIncrement}
               onRemove={totalDecrement}
+              deleteItem={deleteItem}
+             // count={counter ? 2 : 1}
             />
-          ))
-        }
-
-       
-
+          )}
+        />
       </View>
       <TouchableOpacity
         style={{
@@ -169,7 +196,7 @@ const Cart = ({ navigation }) => {
         }}
         onPress={() => {
           navigation.navigate("CheckOut", {
-            total: total
+            total: total,
           });
         }}
       >

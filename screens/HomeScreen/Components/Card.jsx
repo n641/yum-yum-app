@@ -10,7 +10,7 @@ import { auth } from "../../../db/config";
 import style from "../../../Constants/style";
 
 const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
-  const [user, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [favo, setfavo] = useState(false);
 
   const getUserss = async () => {
@@ -144,16 +144,29 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
         >
           <TouchableOpacity onPress={() => {
 
-            user.map((u) =>
-              u.email == auth.currentUser.email
-                ? editUser({
-                    ...u,
-                    cart: [...u.cart, name],
-                  })
-                : null
-            );
+          const user = users.find((e) => e.email == auth.currentUser.email);
+     if (user.cart.length == 0) {
+       editUser({
+         ...user,
+         cart: [...user.cart, name],
+       });
+     } else {
+                const cart = user.cart.find(
+                  (namecart) => namecart == name
+                );
+                cart?alert("you have already added this product to your cart"):(
+                       editUser({
+                              ...user,
+                                cart: [...user.cart, name],
+                           })
 
-          }}
+                )
+
+       
+     }}
+  }
+
+          
             style={{
               borderRadius: style.border,
               backgroundColor: style.primary,
@@ -205,7 +218,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
                   fontWeight: "bold",
                 }}
               >
-                Order
+                See More
               </Text>
             </TouchableOpacity>
           </View>
