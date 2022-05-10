@@ -7,6 +7,7 @@ const Stack = createNativeStackNavigator();
 
 import Offer from './Offer';
 import addOffers from './addOffers';
+import editOfferr from './editOfferr';
 
 const OfferStart = () =>{
     return(
@@ -18,7 +19,7 @@ const OfferStart = () =>{
             />
             <Stack.Screen
                 name="editOffer"
-                component={editOffer}
+                component={editOfferr}
                 options={{ headerShown: false }}
             />
             <Stack.Screen

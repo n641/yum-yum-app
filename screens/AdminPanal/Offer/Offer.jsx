@@ -61,6 +61,7 @@ const Offer = ({navigation}) => {
                         desc={itemDate.item.desc}
                         url={itemDate.item.url}
                         id={itemDate.item.id}
+                        navigation={navigation}
                     />
                 }
             />

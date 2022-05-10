@@ -73,7 +73,7 @@ const editOfferr = ({route, navigation}) =>{
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter image url of Offer'
-                    onChangeText={setUrll}
+                    onChangeText={seturll}
                     value={url}
                 />
             </View>
