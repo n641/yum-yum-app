@@ -10,9 +10,10 @@ import {
   Alert
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import { auth } from "../../db/config";
-import { getUsers, editUser,subscribeUser } from "../../db/Auth/usersData/users";
+import { getUsers, editUser, subscribeUser } from "../../db/Auth/usersData/users";
 import { getProducts, subscribe } from "../../db/Auth/usersData/Products";
 
 import HomeStart from "../HomeScreen/HomeStart";
@@ -25,8 +26,8 @@ const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
 
-const Cart = ({ navigation,route }) => {
- // const { counter } = route.params;
+const Cart = ({ navigation, route }) => {
+  // const { counter } = route.params;
   //console.log("counter",counter)
 
 
@@ -96,14 +97,14 @@ const Cart = ({ navigation,route }) => {
   useEffect(() => {
     if (!Users?.length)
       return;
-    console.log('auth.currentUser.email :>> ', auth.currentUser.email);
+    // console.log('auth.currentUser.email :>> ', auth.currentUser.email);
     const user = Users.find(e => e.email == auth.currentUser.email);
-    console.log('Users :>> ', Users);
-    console.log('User i find :>> ', user);
+    // console.log('Users :>> ', Users);
+    // console.log('User i find :>> ', user);
     const cart = user.cart.map(name => products.find(p => p.productName == name));
-    console.log("we have orders", cart)
-      setListItems(cart);
-          console.log("we have product", listItems);
+    // console.log("we have orders", cart)
+    setListItems(cart);
+    // console.log("we have product", listItems);
 
 
   }, [products, Users]);
@@ -121,24 +122,24 @@ const Cart = ({ navigation,route }) => {
     setTotal(total - givinTotal)
     console.log(total + givinTotal)
   }
-   const deleteItem = (name) => {
+  const deleteItem = (name) => {
     //  Alert.alert("Delete Item", `Are you sure you want to delete this ${name}?`, [
     //    {
     //      text: "Yes",
     //      onPress: () => {
-           
-            const user = Users.find((e) => e.email == auth.currentUser.email);
-            console.log("User i find :>> ", user);
-          editUser({
-            ...user,
-            cart: user.cart.filter((n) => n !== name),
-          });
-          
-            
-      //  },
-       //},
-     //]);
-   };
+
+    const user = Users.find((e) => e.email == auth.currentUser.email);
+    console.log("User i find :>> ", user);
+    editUser({
+      ...user,
+      cart: user.cart.filter((n) => n !== name),
+    });
+
+
+    //  },
+    //},
+    //]);
+  };
 
   return listItems.length != 0 ? (
     <View
@@ -179,23 +180,41 @@ const Cart = ({ navigation,route }) => {
               onAdd={totalIncrement}
               onRemove={totalDecrement}
               deleteItem={deleteItem}
-             // count={counter ? 2 : 1}
+            // count={counter ? 2 : 1}
             />
           )}
         />
       </View>
+
+      <View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+
+          <Text style={{ color: "red", fontWeight: "bold", fontSize: width/30 }}>-----------------------------------------------------------</Text>
+        </View>
+        <View style={{ flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
+          <Text style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
+            Total:
+          </Text>
+          <Text style={{ color: "red", fontWeight: "bold", fontSize: 15 }}>
+            {total}
+          </Text>
+        </View>
+      </View>
+
+
       <TouchableOpacity
         style={{
           width: width - 40,
-          justifyContent: "center",
           marginHorizontal: 20,
           borderRadius: 40,
-          justifyContent: "center",
+          justifyContent: "space-around",
           backgroundColor: style.primary,
           height: height / 10,
+          flexDirection:"row",
+          alignItems:"center"
         }}
         onPress={() => {
-          navigation.navigate("CheckOut", {
+          navigation.navigate("Address", {
             total: total,
           });
         }}
@@ -205,11 +224,14 @@ const Cart = ({ navigation,route }) => {
             color: style.third,
             textAlign: "center",
             fontWeight: "bold",
-            fontSize: 20,
+            fontSize: 24,
           }}
         >
-          Checkout
+          Address
         </Text>
+        <View>
+          <Ionicons name="caret-forward" size={30} color={'white'} />
+        </View>
       </TouchableOpacity>
     </View>
   ) : (
