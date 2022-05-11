@@ -19,6 +19,7 @@ import DetailsScreen from "./screens/Details/DetailsScreen"
 import CheckOut from "./screens/Checkout/CheckOut"
 import About from "./screens/AboutScreen/About"
 import TestSearch from "./screens/TestSearch";
+import EndOfOrder from "./screens/Checkout/EndOfOrder";
 
 
 
@@ -30,6 +31,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Cart">
+
         <Stack.Screen
           name="Login"
           component={Login}
@@ -137,8 +139,67 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-        <Stack.Screen name="CheckOut" component={CheckOut} />
-        {/* <Stack.Screen name="NavHome" component={NavHome} /> */}
+        <Stack.Screen name="CheckOut" component={CheckOut}
+        options={{
+          title: "results of search",
+          headerStyle: {
+            backgroundColor: "red",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 22,
+          },
+        }}
+        />
+        <Stack.Screen name="Address" component={Address}
+        options={{
+          title: "Address",
+          headerStyle: {
+            backgroundColor: "red",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 22,
+          },
+        }} />
+        <Stack.Screen name="editAddress" component={EditAddressCheckout}
+        options={{
+          title: "Address",
+          headerStyle: {
+            backgroundColor: "red",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 22,
+          },
+        }} />
+        <Stack.Screen name="placeOrder" component={placeOrder}
+        options={{
+          title: "Address",
+          headerStyle: {
+            backgroundColor: "red",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 22,
+          },
+        }} />
+         <Stack.Screen name="EndOfOrder" component={EndOfOrder}
+        options={{
+          title: "Address",
+          headerStyle: {
+            backgroundColor: "red",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 22,
+          },
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

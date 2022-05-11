@@ -52,6 +52,7 @@ const TestSearch = ({ navigation, route }) => {
       }
     });
 
+<<<<<<< HEAD
     return () => {
       unsubscribe();
     };
@@ -76,6 +77,19 @@ const TestSearch = ({ navigation, route }) => {
         setFilterProducts(tem);
         setflag(true);
       
+=======
+    
+
+    const searchfilteredit = (text) => {
+        if (text) {
+         const foundproduct=products.find(p=>p.productName.toUpperCase().includes(text.toUpperCase()))
+        if(foundproduct){
+            setFilterProducts(foundproduct);
+            setflag(true);
+        }
+         
+        } 
+>>>>>>> 4f878b20bbe419fe645e8e0d3376a3b7dd307cee
     }
   };
 
