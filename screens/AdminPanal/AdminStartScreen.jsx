@@ -10,12 +10,13 @@ import Offers from "./Offers";
 import Product from "./Product";
 import StaffStart from "./Staff/StaffStart";
 import OfferStart from "./Offer/OfferStart";
+import ProductStart from "./Product/ProductStart";
 
 const Drawer = createDrawerNavigator();
 
 const AdminStartScreen = ({ navigation }) => {
     return (
-        <Drawer.Navigator initialRouteName="Offers">
+        <Drawer.Navigator initialRouteName="Product">
             <Drawer.Screen name="Category" component={categoryStart} options={{
                 title: "categories",
                 headerStyle: {
@@ -28,7 +29,7 @@ const AdminStartScreen = ({ navigation }) => {
                 },
             }} />
 
-            <Drawer.Screen name="Product" component={Product} options={{
+            <Drawer.Screen name="Product" component={ProductStart} options={{
                 title: "Products",
                 headerStyle: {
                     backgroundColor: "red",

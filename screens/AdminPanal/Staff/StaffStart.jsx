@@ -1,6 +1,3 @@
-import {StyleSheet} from 'react-native'
-import react from 'react'
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Staff from './Staff';

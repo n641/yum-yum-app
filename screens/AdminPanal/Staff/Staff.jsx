@@ -5,8 +5,6 @@ import {
     FlatList,
     Dimensions,
     TouchableOpacity,
-    Animated,
-    ScrollView,
 } from 'react-native'
 import react, {useState, useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";

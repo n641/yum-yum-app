@@ -46,30 +46,32 @@ const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
 
     return(
         <View style={styles.FirsrCotainer}>
-            <Image 
-                source={"https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png"}
-                style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 100
-                }}
-            />
-            <View style={styles.Card}>
-                <View style={{flexDirection: "row"}}>
-                    <Text style={styles.fontStyle}>name: </Text>
-                    <Text>{name}</Text>
-                </View>
-                <View style={{flexDirection: "row"}}>
-                    <Text style={styles.fontStyle}>job: </Text>
-                    <Text>{rule}</Text>
-                </View>
-                <View style={{flexDirection: "row"}}>
-                    <Text style={styles.fontStyle}>salary: </Text>
-                    <Text>{salary}</Text>
-                </View>
-                <View style={{flexDirection: "row"}}>
-                    <Text style={styles.fontStyle}>rate: </Text>
-                    <Text>{rate}</Text>
+            <View style={{flexDirection: "row"}}>
+                <Image 
+                    source={"https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png"}
+                    style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 100
+                    }}
+                />
+                <View style={styles.Card}>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={styles.fontStyle}>name: </Text>
+                        <Text>{name}</Text>
+                    </View>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={styles.fontStyle}>job: </Text>
+                        <Text>{rule}</Text>
+                    </View>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={styles.fontStyle}>salary: </Text>
+                        <Text>{salary}</Text>
+                    </View>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={styles.fontStyle}>rate: </Text>
+                        <Text>{rate}</Text>
+                    </View>
                 </View>
             </View>
             <View style={{ flexDirection: 'column'}}>
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     FirsrCotainer: {
         flexDirection: "row",
         alignItems: 'center', 
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
         width: width,
         height: 120,
         borderWidth: 1,
