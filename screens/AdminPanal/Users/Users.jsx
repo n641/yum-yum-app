@@ -46,9 +46,9 @@ const Users = ({navigation}) =>{
         //     // }
         // });
 
-        return () => {
-            unsubscribe();
-        };
+        // return () => {
+        //     unsubscribe();
+        // };
     }, []);
 
     return(

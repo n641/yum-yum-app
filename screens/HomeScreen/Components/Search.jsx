@@ -1,6 +1,10 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
+
+import { auth } from '../../../db/config';
+import { getUsers, subscribeUser } from '../../../db/Auth/usersData/users';
+
 
 
 
@@ -9,7 +13,48 @@ const height = Dimensions.get("window").height;
 
 const Search = ({navigation}) => {
 
-    const [search, setsearch] = useState("")
+    const [Users, setUsers] = useState([]);
+    const [credit, setcredit] = useState('');
+    const [search, setsearch] = useState("");
+
+    const getUserss = async () => {
+        const arr = await getUsers();
+        setUsers(arr);
+      };
+      useEffect(() => {
+        getUserss();
+      }, []);
+
+      useEffect(() => {
+        const unsubscribe = subscribeUser(({ change, snapshot }) => {
+    
+          if (change.type === "added") {
+            console.log("New message: ", change.doc.data());
+            getUserss();
+          }
+          if (change.type === "modified") {
+            console.log("Modified city: ", change.doc.data());
+            getUserss();
+          }
+          if (change.type === "removed") {
+            console.log("Removed message: ", change.doc.data());
+            getUserss();
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
+      }, []);
+
+
+      useEffect(() => {
+        if (!Users?.length)
+          return;
+        const user = Users.find(e => e.email == auth.currentUser.email);
+        setcredit(user.credit);
+       
+      }, [Users]);
 
     return (
         <View style={{ marginTop: 30, alignItems: 'center' }}>
@@ -32,7 +77,7 @@ const Search = ({navigation}) => {
                     <Text style={{ color: "white", fontSize: 20, fontWeight: 'bold' }}>Visa</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 30, alignItems: 'center' }}>
-                    <Text style={{ color: "white", fontSize: 30, fontWeight: 'bold' }}> $280.65</Text>
+                    <Text style={{ color: "white", fontSize: 30, fontWeight: 'bold' }}> ${credit}</Text>
                     <Text style={{ color: "gray" }}> ...3028</Text>
                 </View>
             </View>

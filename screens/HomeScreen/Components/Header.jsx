@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import React ,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../../../db/config";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -26,58 +26,56 @@ import {
 const Header = ({ pagename, icon, navigation }) => {
   console.log(auth.currentUser);
 
-   const [listItems, setListItems] = useState([]);
+  const [listItems, setListItems] = useState([]);
 
 
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [name, setname] = useState('')
 
-   
 
-    const getUserss = async () => {
-      const arr = await getUsers();
-      setUsers(arr);
-      // console.log(arr);
+
+  const getUserss = async () => {
+    const arr = await getUsers();
+    setUsers(arr);
+    // console.log(arr);
+  };
+
+  useEffect(() => {
+    getUserss();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeUser(({ change, snapshot }) => {
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getUserss();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getUserss();
+      }
+      // }
+    });
+
+    return () => {
+      unsubscribe();
     };
+  }, []);
 
-    useEffect(() => {
-      getUserss();
-    }, []);
-
-    useEffect(() => {
-      const unsubscribe = subscribeUser(({ change, snapshot }) => {
-        if (change.type === "added") {
-          console.log("New message: ", change.doc.data());
-          getUserss();
-        }
-        if (change.type === "modified") {
-          console.log("Modified city: ", change.doc.data());
-          getUserss();
-        }
-        if (change.type === "removed") {
-          console.log("Removed message: ", change.doc.data());
-          getUserss();
-        }
-        // }
-      });
-
-      return () => {
-        unsubscribe();
-      };
-    }, []);
-   
 
   useEffect(() => {
     if (!users?.length) return;
     const user = users.find((e) => e.email == auth.currentUser.email);
-    console.log("User i find :>> ", user);
-
-                   setListItems([...user.cart]) ;
-    
+    setname(user.userName)
   }, [users]);
-   
 
-  
-  
+
+
+
 
 
   return (
@@ -114,24 +112,11 @@ const Header = ({ pagename, icon, navigation }) => {
             paddingLeft: 10,
           }}
         >
-          {/* {auth.currentUser.displayName} */}
-          raneen
+          {name}
         </Text>
       </View>
 
       <View>
-        {/* {auth.currentUser.email == "noha46@gmail.com" ? (
-            <Button title="Admin Panel" color={color.primary} onpress={() => { }} />
-          ) : (
-            <TouchableOpacity onPress={() => {
-              navigation.navigator('Cart');
-            }}>
-              <Ionicons name={icon} size={35} color={style.primary} />
-            </TouchableOpacity>
-
-          )
-          } */}
-
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Cart");
