@@ -8,7 +8,7 @@ const height = Dimensions.get("window").height;
 import style from '../../Constants/style';
 
 
-const EndOfOrder = () => {
+const EndOfOrder = ({navigation}) => {
   return (
     <View>
 

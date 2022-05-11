@@ -8,8 +8,10 @@ import style from '../../Constants/style';
 
 
 import { auth } from '../../db/config';
-import { getUsers, subscribeUser } from '../../db/Auth/usersData/users';
+import { getUsers, subscribeUser , editUser } from '../../db/Auth/usersData/users';
 import { getProducts, subscribe } from '../../db/Auth/usersData/Products';
+import{editOrder , getOrders , addOrder , subscribeOrder} from '../../db/Auth/usersData/Orders'
+// import {editorders}
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -23,6 +25,7 @@ const placeOrder = ({ route, navigation }) => {
 
   const [products, setproducts] = useState([]);
   const [Users, setUsers] = useState([]);
+  const [orders, setorders] = useState([])
   const [listItems, setListItems] = useState([]);
   const [credit, setcredit] = useState('');
   const [points, setpoints] = useState('');
@@ -35,6 +38,10 @@ const placeOrder = ({ route, navigation }) => {
     const arr = await getUsers();
     setUsers(arr);
   };
+  const getord = async () => {
+    const arr = await getOrders();
+    setorders(arr);
+  };
 
   const getProduct = async () => {
     const arr = await getProducts();
@@ -45,6 +52,29 @@ const placeOrder = ({ route, navigation }) => {
   useEffect(() => {
     getUserss();
     getProduct();
+    getord();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeOrder(({ change, snapshot }) => {
+
+      if (change.type === "added") {
+        console.log("New message: ", change.doc.data());
+        getord();
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+        getord();
+      }
+      if (change.type === "removed") {
+        console.log("Removed message: ", change.doc.data());
+        getord();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -116,6 +146,47 @@ const placeOrder = ({ route, navigation }) => {
     }
 
   })
+
+  const handleCheckOrder= ()=>{
+    let temp=[];
+    const user = Users.find(e => e.email == auth.currentUser.email);
+    user.cart.map((name)=>{
+      temp.push(name)
+      })
+      addOrder(
+       {user:user.email ,product:[...temp]}
+      ).then(()=>{
+        console.log("done")
+      }).catch((e)=>{
+        console.log(e)
+      })
+
+      if (payment == "credit") {
+        editUser({
+          ...user,
+          orders: [{user:user.email ,product:[...temp]}],
+          cart:[],
+          credit:credit-total,
+          points:points+(total/4)
+        });
+      } else if (payment == "points") {
+        editUser({
+          ...user,
+          orders: [{user:user.email ,product:[...temp]}],
+          cart:[],
+          points:((((points)-(total))))
+        });
+      } else {
+        editUser({
+          ...user,
+          orders: [{user:user.email ,product:[...temp]}],
+          cart:[],
+          points:points+(total/4)
+        });
+      }
+
+      
+  }
 
 
 
@@ -209,7 +280,7 @@ const placeOrder = ({ route, navigation }) => {
               alignItems: "center"
             }}
             onPress={() => {
-
+              handleCheckOrder()
               navigation.navigate("EndOfOrder");
             }}
           >

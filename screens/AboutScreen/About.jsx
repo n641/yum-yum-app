@@ -18,9 +18,23 @@ const height = Dimensions.get("window").height;
 
 const About = ({ navigation}) => {
   return (
+<<<<<<< HEAD
     <ScrollView>
       <View>
         <View
+=======
+    // <View>
+      <ScrollView>
+      <View
+        style={{
+          backgroundColor: "black",
+          opacity: 2,
+          width: width,
+          height: height / 2,
+        }}
+      >
+        <Image
+>>>>>>> a1f7291d0b0069b1bc6598043de6163b37184bb8
           style={{
             backgroundColor: "black",
             opacity: 2,
@@ -28,6 +42,7 @@ const About = ({ navigation}) => {
             height: height / 2,
           }}
         >
+<<<<<<< HEAD
           <Image
             style={{
               width: width,
@@ -59,6 +74,12 @@ const About = ({ navigation}) => {
             Yum Yum Resturant
           </Text>
         </View>
+=======
+          Yum Yum Resturant
+        </Text>
+      </View>
+      
+>>>>>>> a1f7291d0b0069b1bc6598043de6163b37184bb8
         <View
           style={{
             justifyContent: "center",
@@ -234,8 +255,13 @@ const About = ({ navigation}) => {
         <View style={{}}>
           <Stuff />
         </View>
+<<<<<<< HEAD
       </View>
     </ScrollView>
+=======
+      </ScrollView>
+    // </View>
+>>>>>>> a1f7291d0b0069b1bc6598043de6163b37184bb8
   );
 }
 

@@ -45,7 +45,7 @@ async function addOrder(order) {
     }
 }
 
-function subscribe(callback) {
+function subscribeOrder(callback) {
     const unsubscribe = onSnapshot(
     query(collection(db, "orders")),
         (snapshot) => {
@@ -60,4 +60,4 @@ function subscribe(callback) {
     return unsubscribe;
 }
 
-export { getOrders, addOrder, editOrder, deleteOrder, subscribe };
+export { getOrders, addOrder, editOrder, deleteOrder, subscribeOrder };
