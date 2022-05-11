@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 
 
-import { deleteCategory, editCategory, getCategories, subscribe } from '../../db/Auth/usersData/Categories';
+import { deleteCategory, getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 

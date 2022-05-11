@@ -66,7 +66,7 @@ const Offer = ({navigation}) => {
                 }
             />
 
-        <View>
+            <View>
                 <TouchableOpacity onPress={()=>{ navigation.navigate("addOffer")}}>
                 <Ionicons name="add-circle" size={70} color={'red'} />
                 </TouchableOpacity>

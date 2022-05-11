@@ -2,10 +2,10 @@ import react, {useEffect} from "react";
 import {
     View,
     Text,
+    Image,
     StyleSheet,
     Dimensions,
 } from 'react-native';
-import style from '../../Constants/style'
 import { Ionicons } from "@expo/vector-icons";
 
 import { deleteStuff, getStuff, subscribe } from "../../db/Auth/usersData/Stuff";
@@ -45,41 +45,44 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
     }, []);
 
     return(
-        <View>
-            <View style={styles.FirstContainer}>
-                <View style={styles.SecondContainer}>
-                    <View style={styles.thirdContainer}>
-                        <View>
-                            <View>
-                                <Text>{name}</Text>
-                            </View>
-                            <View>
-                                <Text>{rule}</Text>
-                            </View>
-                            <View>
-                                <Text>{salary}</Text>
-                            </View>
-                            <View>
-                                <Text>{rate}</Text>
-                            </View>
-                        </View>
-                    </View>
+        <View style={styles.FirstContainer}>
+            <Image 
+                source={"https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png"}
+                style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 100
+                }}
+            />
+            <View style={styles.SecondContainer}>
+                <Text>name: </Text>
+                <Text>{name}</Text>
+            </View>
+            <View style={styles.SecondContainer}>
+                <Text>job: </Text>
+                <Text>{rule}</Text>
+            </View>
+            <View style={styles.SecondContainer}>
+                <Text>salary: </Text>
+                <Text>{salary}</Text>
+            </View>
+            <View style={styles.SecondContainer}>
+                <Text>rate: </Text>
+                <Text>{rate}</Text>
+            </View>
 
-                    <View style={{ flexDirection: 'column' }}>
-                        <TouchableOpacity onPress={()=>{
-                            navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
-                        }}>
-                            <Ionicons name="create" size={30} color={'red'} />
-                        </TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity onPress={()=>{
+                    navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
+                }}>
+                    <Ionicons name="create" size={30} color={'red'} />
+                </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>{  //test
-                            handleDeleteStaff(id);
-                        }}>
-                            <Ionicons name="trash" size={30} color={'red'} />
-                        </TouchableOpacity>
-
-                    </View>
-                </View>
+                <TouchableOpacity onPress={()=>{  //test
+                    handleDeleteStaff(id);
+                }}>
+                    <Ionicons name="trash" size={30} color={'red'} />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -88,20 +91,17 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
 
 const styles = StyleSheet.create({
     FirstContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
-        width: width,
+        width: width / 2.5,
         margin: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 5
     },
     SecondContainer: {
-        borderRadius: style.border,
-        borderWidth: 1,
-        justifyContent: "space-between",
-        width: width - 20,
-        alignItems: "center",
-        flexDirection: "row",
-        height: height / 6,
+        flexDirection: "row"
     },
     thirdContainer: {
         flexDirection: "column",
