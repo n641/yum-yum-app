@@ -122,7 +122,7 @@ const Staff = ({navigation}) =>{
             </View>
             
             <FlatList 
-                data={arrStaff.filter(e => e.rule === "delever")}
+                data={arrStaff.filter(e => e.rule === "delever ")}
                 renderItem={itemData => 
                         <AssistantStuffCard 
                         name={itemData.item.name}

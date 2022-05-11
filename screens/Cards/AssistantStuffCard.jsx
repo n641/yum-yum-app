@@ -72,7 +72,7 @@ const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
                     <Text>{rate}</Text>
                 </View>
             </View>
-            <View style={{ flexDirection: 'column' }}>
+            <View style={{ flexDirection: 'column'}}>
                 <TouchableOpacity onPress={()=>{
                     navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
                 }}>
@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
     FirsrCotainer: {
         flexDirection: "row",
         alignItems: 'center', 
-        width: "auto",
+        justifyContent: "space-evenly",
+        width: width,
         height: 120,
         borderWidth: 1,
         borderRadius: 5,

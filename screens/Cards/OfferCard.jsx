@@ -46,44 +46,39 @@ const OfferCard = ({navigation, offerName, price, desc, url, id}) =>{
     }, []);
 
     return(
-        <View>
-            <View style={styles.FirstContainer}>
-                <View style={styles.SecondContainer}>
-                    <View style={styles.thirdContainer}>
-                        <Image
-                            style={style.imageStyle}
-                            source={{
-                                uri: url,
-                            }}
-                        />
-                        <View>
-                            <View>
-                                <Text>{offerName}</Text>
-                            </View>
-                            <View>
-                                <Text>{price}</Text>
-                            </View>
-                            <View>
-                                <Text>{desc}</Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{ flexDirection: 'column' }}>
-                        <TouchableOpacity onPress={()=>{
-                            navigation.navigate("editOffer" , {offerName :offerName , price: price , desc: desc, url: url , id :id })
-                        }}>
-                            <Ionicons name="create" size={30} color={'red'} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>{  //test
-                            handleDeleteOffer(id);
-                        }}>
-                            <Ionicons name="trash" size={30} color={'red'} />
-                        </TouchableOpacity>
-
-                    </View>
+        <View style={styles.FirstContainer}>
+            <Image 
+                source={url}
+                style={{
+                    width: 100,
+                    height: 100,
+                }}
+            />
+            <View style={styles.Card}>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>name: </Text>
+                    <Text>{offerName}</Text>
                 </View>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>price: </Text>
+                    <Text>{price} EGP</Text>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                    <Text>{desc}</Text>
+                </View>
+            </View>
+            <View style={{ flexDirection: 'column'}}>
+                <TouchableOpacity onPress={()=>{
+                    navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
+                }}>
+                    <Ionicons name="create" size={30} color={'red'} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{  //test
+                    handleDeleteOffer(id);
+                }}>
+                    <Ionicons name="trash" size={30} color={'red'} />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -93,34 +88,22 @@ const OfferCard = ({navigation, offerName, price, desc, url, id}) =>{
 const styles = StyleSheet.create({
     FirstContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         alignItems: "center",
-        width: width,
-        margin: 10,
-    },
-    SecondContainer: {
-        borderRadius: style.border,
+        width: width - 25 ,
+        marginHorizontal: 10,
+        marginVertical: 5,
         borderWidth: 1,
-        justifyContent: "space-between",
-        width: width - 20,
-        alignItems: "center",
-        flexDirection: "row",
-        height: height / 6,
+        borderRadius: 5
     },
-    thirdContainer: {
+    Card:{
         flexDirection: "column",
-        height: height / 4,
-        justifyContent: "center",
+        paddingHorizontal: 5,
+        marginHorizontal: 5,
     },
-    fourthContainer: {
-        fontSize: width / 20,
-        fontWeight: "bold",
-        textTransform: "capitalize",
-    },
-    imageStyle:{
-        width: width / 3 - 18,
-        height: height / 6,
-        borderRadius: style.border,
+    fontStyle:{
+        fontSize: 15, 
+        fontWeight: 'bold', 
     }
 })
 

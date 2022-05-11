@@ -15,7 +15,7 @@ const Drawer = createDrawerNavigator();
 
 const AdminStartScreen = ({ navigation }) => {
     return (
-        <Drawer.Navigator initialRouteName="StaffStart">
+        <Drawer.Navigator initialRouteName="Offers">
             <Drawer.Screen name="Category" component={categoryStart} options={{
                 title: "categories",
                 headerStyle: {
