@@ -18,7 +18,8 @@ const height = Dimensions.get("window").height;
 
 const About = ({ navigation}) => {
   return (
-    <View>
+    // <View>
+      <ScrollView>
       <View
         style={{
           backgroundColor: "black",
@@ -58,7 +59,7 @@ const About = ({ navigation}) => {
           Yum Yum Resturant
         </Text>
       </View>
-      <ScrollView>
+      
         <View
           style={{
             justifyContent: "center",
@@ -235,7 +236,7 @@ const About = ({ navigation}) => {
 
         </View>
       </ScrollView>
-    </View>
+    // </View>
   );
 }
 
