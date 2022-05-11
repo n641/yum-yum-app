@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Cart">
+      <Stack.Navigator initialRouteName="HomeStart">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -150,7 +150,7 @@ export default function App() {
             },
           }}
         />
-       
+
         <Stack.Screen
           name="placeOrder"
           component={placeOrder}
@@ -204,8 +204,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-       
-        
         <Stack.Screen
           name="editAddress"
           component={EditAddressCheckout}
@@ -221,8 +219,6 @@ export default function App() {
             },
           }}
         />
-        
-       
       </Stack.Navigator>
     </NavigationContainer>
   );
