@@ -52,7 +52,7 @@ const Product = ({navigation}) =>{
     }, []);
 
     return(
-        <View>
+        <View style={styles.bigContainer}>
             <FlatList 
                 data={arrProduct}
                 renderItem={itemData => 

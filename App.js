@@ -16,12 +16,15 @@ import ProductList from "./screens/ProductListScreen/ProductList";
 import UseerProScreen from "./screens/UserProfile/UseerProScreen";
 import EditProfile from "./screens/UserProfile/Components/Footer/EditProfile";
 import DetailsScreen from "./screens/Details/DetailsScreen"
-import CheckOut from "./screens/Checkout/CheckOut";
-import Address from "./screens/Checkout/Address";
-import EditAddressCheckout from "./screens/Checkout/EditAddressCheckout";
-import placeOrder from "./screens/Checkout/placeOrder";
+import CheckOut from "./screens/Checkout/CheckOut"
+import About from "./screens/AboutScreen/About"
 import TestSearch from "./screens/TestSearch";
 import EndOfOrder from "./screens/Checkout/EndOfOrder";
+import Address from "./screens/Checkout/Address";
+import EditAddressCheckout from "./screens/Checkout/EditAddressCheckout";
+import placeOrder from './screens/Checkout/placeOrder';
+
+
 
 
 
@@ -33,7 +36,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeStart">
-
         <Stack.Screen
           name="Login"
           component={Login}
@@ -75,6 +77,11 @@ export default function App() {
         />
 
         <Stack.Screen
+          name="About"
+          component={About}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="HomeStart"
           component={HomeStart}
           options={{ headerShown: false }}
@@ -113,6 +120,67 @@ export default function App() {
           component={UseerProScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="CheckOut"
+          component={CheckOut}
+          options={{
+            title: "results of search",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Address"
+          component={Address}
+          options={{
+            title: "Address",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name="placeOrder"
+          component={placeOrder}
+          options={{
+            title: "Address",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="EndOfOrder"
+          component={EndOfOrder}
+          options={{
+            title: "Address",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
 
         <Stack.Screen
           name="EditProfile"
@@ -136,67 +204,21 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-        <Stack.Screen name="CheckOut" component={CheckOut}
-        options={{
-          title: "results of search",
-          headerStyle: {
-            backgroundColor: "red",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }}
+        <Stack.Screen
+          name="editAddress"
+          component={EditAddressCheckout}
+          options={{
+            title: "Address",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
         />
-        <Stack.Screen name="Address" component={Address}
-        options={{
-          title: "Address",
-          headerStyle: {
-            backgroundColor: "red",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }} />
-        <Stack.Screen name="editAddress" component={EditAddressCheckout}
-        options={{
-          title: "Address",
-          headerStyle: {
-            backgroundColor: "red",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }} />
-        <Stack.Screen name="placeOrder" component={placeOrder}
-        options={{
-          title: "Address",
-          headerStyle: {
-            backgroundColor: "red",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }} />
-         <Stack.Screen name="EndOfOrder" component={EndOfOrder}
-        options={{
-          title: "Address",
-          headerStyle: {
-            backgroundColor: "red",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
