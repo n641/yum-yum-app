@@ -38,7 +38,6 @@ const ProductCard = ({navigation, category, count, desc, discount, offer, url, p
                 console.log("Removed mesg: ", change.doc.data());
                 getProducts();
             }
-            // }
         });
 
         return () => {
@@ -52,8 +51,8 @@ const ProductCard = ({navigation, category, count, desc, discount, offer, url, p
                 <Image 
                     source={url}
                     style={{
-                        width: 100,
-                        height: 100,
+                        width: width/3,
+                        height: height/4,
                     }}
                 />
                 <View style={styles.Card}>
@@ -86,17 +85,17 @@ const ProductCard = ({navigation, category, count, desc, discount, offer, url, p
                     </View>
                 </View>
             </View>
-            <View style={{ flexDirection: 'column'}}>
+            <View style={{ flexDirection: 'column', justifyContent:"space-around"}}>
                 <TouchableOpacity onPress={()=>{
                     navigation.navigate("editProduct" , {categoryy :category , countt: count , descc: desc , discountt :discount, offerf: offer, url: url, pricee: price, productNamee: productName})
                 }}>
-                    <Ionicons name="create" size={30} color={'red'} />
+                    <Ionicons name="create" size={width/15} color={'red'} />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>{  //test
+                <TouchableOpacity onPress={()=>{  
                     handleDeleteProduct(id);
                 }}>
-                    <Ionicons name="trash" size={30} color={'red'} />
+                    <Ionicons name="trash" size={width/15} color={'red'} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -109,8 +108,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center', 
         justifyContent: "space-between",
-        width: width,
-        height: 120,
+        width: width-10,
+        height: height/4,
         borderWidth: 1,
         borderRadius: 5,
         marginHorizontal: 5 ,

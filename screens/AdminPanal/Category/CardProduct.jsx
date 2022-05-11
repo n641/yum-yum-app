@@ -59,12 +59,13 @@ import {
                 (<Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>)
   }
               </View>
-              <View>
+              <View >
                 {offer ? (
                   <View
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
                     <View>
@@ -84,7 +85,7 @@ import {
                       <Text
                         style={{
                           color: "red",
-                          fontSize: 18,
+                          fontSize: width/20,
                           fontWeight: "bold",
                           marginRight: 5,
                         }}
@@ -98,8 +99,9 @@ import {
                     <Text
                       style={{
                         color: "red",
-                        fontSize: 18,
+                        fontSize: width/20,
                         fontWeight: "bold",
+                        alignItems: "center",
                       }}
                     >
                       {price + "$"}

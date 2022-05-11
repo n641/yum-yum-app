@@ -51,9 +51,11 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
     }, []);
 
     return (
+      <View>
+
       <View
         style={{
-            backgroundColor: "white",
+          backgroundColor: "white",
           flexDirection: "row",
           justifyContent: "space-between",
           width: width - 20,
@@ -91,7 +93,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   paddingRight: 5,
                   fontWeight: "bold",
                 }}
-              >
+                >
                 user name:
               </Text>
               <Text>{userName}</Text>
@@ -104,7 +106,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   paddingRight: 5,
                   fontWeight: "bold",
                 }}
-              >
+                >
                 email:
               </Text>
               <Text>{email}</Text>
@@ -117,7 +119,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   paddingRight: 5,
                   fontWeight: "bold",
                 }}
-              >
+                >
                 password:
               </Text>
               <Text>{password}</Text>
@@ -130,7 +132,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   paddingRight: 5,
                   fontWeight: "bold",
                 }}
-              >
+                >
                 credit:
               </Text>
               <Text>{credit} EGP</Text>
@@ -169,7 +171,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   paddingRight: 5,
                   fontWeight: "bold",
                 }}
-              >
+                >
                 points:{" "}
               </Text>
               <Text>{points}</Text>
@@ -190,7 +192,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                 userName: userName,
               });
             }}
-          >
+            >
             <Ionicons name="create" size={30} color={"red"} />
           </TouchableOpacity>
 
@@ -199,12 +201,13 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
               //test
               handleDeleteUser(id);
             }}
-          >
+            >
             <Ionicons name="trash" size={30} color={"red"} />
           </TouchableOpacity>
         </View>
        
       </View>
+            </View>
     );
 
 }

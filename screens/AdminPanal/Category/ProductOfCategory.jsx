@@ -49,7 +49,6 @@ const ProductOfCategory = ({ route, navigation }) => {
                 console.log("Removed mesg: ", change.doc.data());
                 getItems();
             }
-            // }
         });
 
         return () => {
@@ -57,11 +56,7 @@ const ProductOfCategory = ({ route, navigation }) => {
         };
     }, []);
 
-    product.map((p) => {
-        p.category == "salads" ? (
-            console.log("noha")
-        ) : null
-    })
+    
     return (
         <View style={{ flex: 1, width: width }}>
             <View style={{ alignItems: "center", justifyContent: "center" , flexDirection:"row" }}>
@@ -69,10 +64,10 @@ const ProductOfCategory = ({ route, navigation }) => {
                 <TouchableOpacity onPress={() => {
                     navigation.navigate("Category");
                 }}>
-                    <Ionicons name="chevron-back" size={40} color={'red'} />
+                    <Ionicons name="chevron-back" size={width/10} color={'red'} />
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: 25, fontWeight: "bold", color: "red" }}>
+                <Text style={{ fontSize: width/15, fontWeight: "bold", color: "red" }}>
                     products of {name}
                 </Text>
             </View>

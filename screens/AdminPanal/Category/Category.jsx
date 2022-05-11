@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { addCategory, getCategories, subscribe } from "../../../db/Auth/usersData/Categories";
+import {  getCategories, subscribe } from "../../../db/Auth/usersData/Categories";
 import CategoriesCard from '../../Cards/CategoriesCart';
 
 
@@ -48,7 +48,6 @@ const Category = ({ navigation }) => {
                 console.log("Removed mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
-            // }
         });
 
         return () => {
@@ -68,15 +67,12 @@ const Category = ({ navigation }) => {
                         link={itemData.item.link}
                         description={itemData.item.description}
                         id={itemData.item.id}
-                        // newCategory={category}
-                        // newLink={imageLink}
-                        // newDescription={description}
                         navigation={navigation}
                     />}
             />
             <View>
                 <TouchableOpacity onPress={()=>{ navigation.navigate("addCategory")}}>
-                <Ionicons name="add-circle" size={70} color={'red'} />
+                <Ionicons name="add-circle" size={width / 5} color={'red'} />
                 </TouchableOpacity>
             </View>
 
@@ -90,32 +86,6 @@ const styles = StyleSheet.create({
     bigContainer: {
         flex: 1,
         width: width
-    },
-    Container: {
-        padding: 3
-    },
-    getCategoriesContainer: {
-        margin: 3
-    },
-    textInput: {
-        borderWidth: 1,
-        width: "100%",
-        paddingVertical: 4,
-        marginVertical: 5,
-        justifyContent: "center",
-        alignContent: "center",
-        borderRadius: 10,
-        alignItems: "center"
-    },
-    textInputDescription: {
-        borderWidth: 1,
-        width: "100%",
-        paddingVertical: 5,
-        marginVertical: 5,
-        justifyContent: "center",
-        alignContent: "center",
-        borderRadius: 10,
-        alignItems: "center"
     },
 });
 

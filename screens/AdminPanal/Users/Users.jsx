@@ -1,11 +1,12 @@
 import {
-    StyleSheet, 
-    View, 
-    Text,
-    FlatList,
-    Dimensions,
-    TouchableOpacity,
-} from 'react-native'
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import react, {useState, useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import UsersCard from '../../Cards/UsersCard';
@@ -46,36 +47,40 @@ const Users = ({navigation}) =>{
         //     // }
         // });
 
-        return () => {
-            unsubscribe();
-        };
+     //   return () => {
+          //  unsubscribe();
+      //  };
     }, []);
 
-    return(
-        <View >
-            <FlatList 
-                data={arrUsers}
+    return (
+      <View>
 
-                renderItem={itemData => 
-                    <UsersCard 
-                        navigation={navigation}
-                        address={itemData.item.address}
-                        credit={itemData.item.credit}
-                        email={itemData.item.email}
-                        password={itemData.item.password}
-                        points={itemData.item.points}
-                        rule={itemData.item.rule}
-                        userName={itemData.item.userName}
-                        id={itemData.item.id}
-                    />
-                }
-            />
-            <View>
-                <TouchableOpacity style={{height:height-100}} onPress={()=>{ navigation.navigate("addUsers")}}>
-                <Ionicons name="add-circle" size={70} color={'red'} />
-                </TouchableOpacity>
-            </View>
+        <FlatList
+          data={arrUsers}
+          renderItem={(itemData) => (
+            <UsersCard
+            navigation={navigation}
+              address={itemData.item.address}
+              credit={itemData.item.credit}
+              email={itemData.item.email}
+              password={itemData.item.password}
+              points={itemData.item.points}
+              rule={itemData.item.rule}
+              userName={itemData.item.userName}
+              id={itemData.item.id}
+              />
+              )}
+              />
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("addUsers");
+            }}
+          >
+            <Ionicons name="add-circle" size={width / 5} color={"red"} />
+          </TouchableOpacity>
         </View>
+      </View>
     );
 }
 
