@@ -15,7 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
+const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
 
     const handleDeleteStaff = (id) => {
         console.log("We delete Staff with id: ", id);
@@ -45,7 +45,7 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
     }, []);
 
     return(
-        <View style={styles.FirstContainer}>
+        <View style={styles.FirsrCotainer}>
             <Image 
                 source={"https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png"}
                 style={{
@@ -54,24 +54,25 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
                     borderRadius: 100
                 }}
             />
-            <View style={styles.SecondContainer}>
-                <Text>name: </Text>
-                <Text>{name}</Text>
+            <View style={styles.Card}>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>name: </Text>
+                    <Text>{name}</Text>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>job: </Text>
+                    <Text>{rule}</Text>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>salary: </Text>
+                    <Text>{salary}</Text>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                    <Text style={styles.fontStyle}>rate: </Text>
+                    <Text>{rate}</Text>
+                </View>
             </View>
-            <View style={styles.SecondContainer}>
-                <Text>job: </Text>
-                <Text>{rule}</Text>
-            </View>
-            <View style={styles.SecondContainer}>
-                <Text>salary: </Text>
-                <Text>{salary}</Text>
-            </View>
-            <View style={styles.SecondContainer}>
-                <Text>rate: </Text>
-                <Text>{rate}</Text>
-            </View>
-
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
                 <TouchableOpacity onPress={()=>{
                     navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
                 }}>
@@ -86,33 +87,27 @@ const StaffCard = ({navigation, name, rule, salary, rate, id}) => {
             </View>
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({
-    FirstContainer: {
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: width / 2.5,
-        margin: 10,
-        padding: 10,
+    FirsrCotainer: {
+        flexDirection: "row",
+        alignItems: 'center', 
+        width: "auto",
+        height: 120,
         borderWidth: 1,
-        borderRadius: 5
+        borderRadius: 5,
+        marginHorizontal: 5 ,
     },
-    SecondContainer: {
-        flexDirection: "row"
-    },
-    thirdContainer: {
+    Card:{
         flexDirection: "column",
-        height: height / 4,
-        justifyContent: "center",
+        paddingHorizontal: 5,
+        marginHorizontal: 5,
     },
-    fourthContainer: {
-        fontSize: width / 20,
-        fontWeight: "bold",
-        textTransform: "capitalize",
+    fontStyle:{
+        fontSize: 15, 
+        fontWeight: 'bold', 
     }
 })
 
-export default StaffCard;
+export default AssistantStuffCard

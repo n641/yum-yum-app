@@ -1,15 +1,19 @@
 import {
     StyleSheet, 
     View, 
+    Text,
     FlatList,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    Animated,
+    ScrollView,
 } from 'react-native'
 import react, {useState, useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 import { getStuff, subscribe } from '../../../db/Auth/usersData/Stuff';
 import StaffCard from '../../Cards/StaffCard';
+import AssistantStuffCard from '../../Cards/AssistantStuffCard';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -53,23 +57,53 @@ const Staff = ({navigation}) =>{
 
     return(
         <View style={styles.bigContainer}>
+            <View style={styles.Container}>
+                <Text style={styles.fontStyle}>Sheifs</Text>
+            </View>
+            <View style={{justifyContent: "center",
+                            alignItems: "center",}}>
+                <FlatList 
+                    data={arrStaff.filter(e => (e.rule === "Sheif" || e.rule === "Second Sheif"))}
+                    numColumns={2}
+                    renderItem={itemData => 
+                        <StaffCard 
+                            name={itemData.item.name}
+                            rule={itemData.item.rule}
+                            salary={itemData.item.salary}
+                            rate={itemData.item.rate}
+                            id={itemData.item.id}
+                            navigation={navigation}
+                        />
+                }
+                />
+
+            <View style={styles.Container}>
+                <Text style={styles.fontStyle}>Assistant</Text>
+            </View>
+            
+
             <FlatList 
-                data={arrStaff}
+                data={arrStaff.filter(e => e.rule === "Assistant")}
                 renderItem={itemData => 
-                    <StaffCard 
+                        <AssistantStuffCard 
                         name={itemData.item.name}
                         rule={itemData.item.rule}
                         salary={itemData.item.salary}
                         rate={itemData.item.rate}
                         id={itemData.item.id}
-                    />
+                        navigation={navigation}
+                        />
                 }
+                horizontal={true}
+                style={{width: width, padding: 5}}
             />
-            <View>
+            </View>
+            <View style={{bottom:0}}>
                 <TouchableOpacity onPress={()=>{ navigation.navigate("addStaff")}}>
                 <Ionicons name="add-circle" size={70} color={'red'} />
                 </TouchableOpacity>
             </View>
+            
         </View>
     );
 }
@@ -77,15 +111,23 @@ const Staff = ({navigation}) =>{
 const styles = StyleSheet.create({
     bigContainer: {
         flex: 1,
-        width: width
+        width: width,
+        height: height,
+        // justifyContent: "center",
+        // alignItems: "center",
     },
     Container: {
-        padding: 3
+        marginTop: 5,
+        flexDirection: "row", 
+        alignItems: 'center', 
+        justifyContent: 'center'
     },
-    getCategoriesContainer: {
-        margin: 3
+    fontStyle: {
+        fontSize: 20, 
+        fontWeight: 'bold', 
+        color: "red"
     },
-    textInput: {
+    AnimationStyle: {
         borderWidth: 1,
         width: "100%",
         paddingVertical: 4,
