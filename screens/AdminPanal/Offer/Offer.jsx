@@ -50,28 +50,32 @@ const Offer = ({navigation}) => {
         };
     }, []);
 
-    return(
-        <View style={styles.bigContainer}>
-            <FlatList 
-                data={arrOffer}
-                renderItem={itemDate =>
-                    <OfferCard 
-                        offerName={itemDate.item.offerName}
-                        price={itemDate.item.price}
-                        desc={itemDate.item.desc}
-                        url={itemDate.item.url}
-                        id={itemDate.item.id}
-                        navigation={navigation}
-                    />
-                }
+    return (
+      <View style={styles.bigContainer}>
+        <FlatList
+          data={arrOffer}
+          renderItem={(itemDate) => (
+            <OfferCard
+              offerName={itemDate.item.offerName}
+              price={itemDate.item.price}
+              desc={itemDate.item.desc}
+              url={itemDate.item.url}
+              id={itemDate.item.id}
+              navigation={navigation}
             />
+          )}
+        />
 
-            <View>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("addOffer")}}>
-                <Ionicons name="add-circle" size={70} color={'red'} />
-                </TouchableOpacity>
-            </View>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("addOffer");
+            }}
+          >
+            <Ionicons name="add-circle" size={width / 5} color={"red"} />
+          </TouchableOpacity>
         </View>
+      </View>
     );
 
 }

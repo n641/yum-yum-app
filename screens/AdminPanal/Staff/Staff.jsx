@@ -53,96 +53,99 @@ const Staff = ({navigation}) =>{
     }, []);
 
 
-    return(
-        <View style={styles.bigContainer}>
-            <View style={styles.Container}>
-                <Text style={styles.fontStyle}>Sheifs</Text>
-            </View>
-            <View style={{justifyContent: "center",
-                            alignItems: "center",}}>
-                <FlatList 
-                    data={arrStaff.filter(e => (e.rule === "Sheif" || e.rule === "Second Sheif"))}
-                    numColumns={2}
-                    renderItem={itemData => 
-                        <StaffCard 
-                            name={itemData.item.name}
-                            rule={itemData.item.rule}
-                            salary={itemData.item.salary}
-                            rate={itemData.item.rate}
-                            id={itemData.item.id}
-                            navigation={navigation}
-                        />
-                }
-                />
-
-            <View style={styles.Container}>
-                <Text style={styles.fontStyle}>Assistant</Text>
-            </View>
-            
-            <FlatList 
-                data={arrStaff.filter(e => e.rule === "Assistant")}
-                renderItem={itemData => 
-                        <AssistantStuffCard 
-                        name={itemData.item.name}
-                        rule={itemData.item.rule}
-                        salary={itemData.item.salary}
-                        rate={itemData.item.rate}
-                        id={itemData.item.id}
-                        navigation={navigation}
-                        />
-                }
-                horizontal={true}
-                style={{width: width, padding: 5}}
-            />
-
-            <View style={styles.Container}>
-                <Text style={styles.fontStyle}>waiter</Text>
-            </View>
-            
-            <FlatList 
-                data={arrStaff.filter(e => e.rule === "waiter")}
-                renderItem={itemData => 
-                        <AssistantStuffCard 
-                        name={itemData.item.name}
-                        rule={itemData.item.rule}
-                        salary={itemData.item.salary}
-                        rate={itemData.item.rate}
-                        id={itemData.item.id}
-                        navigation={navigation}
-                        />
-                }
-                horizontal={true}
-                style={{width: width, padding: 5}}
-            />
-
-            <View style={styles.Container}>
-                <Text style={styles.fontStyle}>delever</Text>
-            </View>
-            
-            <FlatList 
-                data={arrStaff.filter(e => e.rule === "delever ")}
-                renderItem={itemData => 
-                        <AssistantStuffCard 
-                        name={itemData.item.name}
-                        rule={itemData.item.rule}
-                        salary={itemData.item.salary}
-                        rate={itemData.item.rate}
-                        id={itemData.item.id}
-                        navigation={navigation}
-                        />
-                }
-                horizontal={true}
-                style={{width: width, padding: 5}}
-            />
-            
-            </View>
-            <View style={{bottom:0}}>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("addStaff")}}>
-                <Ionicons name="add-circle" size={70} color={'red'} />
-                </TouchableOpacity>
-            </View>
-            
+    return (
+      <View style={styles.bigContainer}>
+        <View style={styles.Container}>
+          <Text style={styles.fontStyle}>Sheifs</Text>
         </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <FlatList
+            data={arrStaff.filter(
+              (e) => e.rule === "Sheif" || e.rule === "Second Sheif"
+            )}
+            numColumns={2}
+            renderItem={(itemData) => (
+              <StaffCard
+                name={itemData.item.name}
+                rule={itemData.item.rule}
+                salary={itemData.item.salary}
+                rate={itemData.item.rate}
+                id={itemData.item.id}
+                navigation={navigation}
+              />
+            )}
+          />
+
+          <View style={styles.Container}>
+            <Text style={styles.fontStyle}>Assistant</Text>
+          </View>
+
+          <FlatList
+            data={arrStaff.filter((e) => e.rule === "Assistant")}
+            renderItem={(itemData) => (
+              <AssistantStuffCard
+                name={itemData.item.name}
+                rule={itemData.item.rule}
+                salary={itemData.item.salary}
+                rate={itemData.item.rate}
+                id={itemData.item.id}
+                navigation={navigation}
+              />
+            )}
+            horizontal={true}
+            style={{ width: width, padding: 5 }}
+          />
+
+          <View style={styles.Container}>
+            <Text style={styles.fontStyle}>waiter</Text>
+          </View>
+
+          <FlatList
+            data={arrStaff.filter((e) => e.rule === "waiter")}
+            renderItem={(itemData) => (
+              <AssistantStuffCard
+                name={itemData.item.name}
+                rule={itemData.item.rule}
+                salary={itemData.item.salary}
+                rate={itemData.item.rate}
+                id={itemData.item.id}
+                navigation={navigation}
+              />
+            )}
+            horizontal={true}
+            style={{ width: width, padding: 5 }}
+          />
+
+          <View style={styles.Container}>
+            <Text style={styles.fontStyle}>delever</Text>
+          </View>
+
+          <FlatList
+            data={arrStaff.filter((e) => e.rule === "delever ")}
+            renderItem={(itemData) => (
+              <AssistantStuffCard
+                name={itemData.item.name}
+                rule={itemData.item.rule}
+                salary={itemData.item.salary}
+                rate={itemData.item.rate}
+                id={itemData.item.id}
+                navigation={navigation}
+              />
+            )}
+            horizontal={true}
+            style={{ width: width, padding: 5 }}
+          />
+        </View>
+        <View style={{ bottom: 0 }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("addStaff");
+            }}
+          >
+            <Ionicons name="add-circle" size={width / 5} color={"red"} />
+          </TouchableOpacity>
+        </View>
+      </View>
     );
 }
 

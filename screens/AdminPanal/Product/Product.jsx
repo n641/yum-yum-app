@@ -43,7 +43,6 @@ const Product = ({navigation}) =>{
                 console.log("Removed mesg: ", change.doc.data());
                 getProductsHandler();
             }
-            // }
         });
 
         return () => {
@@ -51,31 +50,35 @@ const Product = ({navigation}) =>{
         };
     }, []);
 
-    return(
-        <View style={styles.bigContainer}>
-            <FlatList 
-                data={arrProduct}
-                renderItem={itemData => 
-                    <ProductCard 
-                    navigation={navigation}
-                    category={itemData.item.category}
-                    count={itemData.item.count}
-                    desc={itemData.item.desc}
-                    discount={itemData.item.discount}
-                    offer={itemData.item.offer}
-                    url={itemData.item.url}
-                    price={itemData.item.price}
-                    productName={itemData.item.productName}
-                    id={itemData.item.id}
-                    />
-                }
+    return (
+      <View style={styles.bigContainer}>
+        <FlatList
+          data={arrProduct}
+          renderItem={(itemData) => (
+            <ProductCard
+              navigation={navigation}
+              category={itemData.item.category}
+              count={itemData.item.count}
+              desc={itemData.item.desc}
+              discount={itemData.item.discount}
+              offer={itemData.item.offer}
+              url={itemData.item.url}
+              price={itemData.item.price}
+              productName={itemData.item.productName}
+              id={itemData.item.id}
             />
-            <View>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("addProduct")}}>
-                <Ionicons name="add-circle" size={70} color={'red'} />
-                </TouchableOpacity>
-            </View>
+          )}
+        />
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("addProduct");
+            }}
+          >
+            <Ionicons name="add-circle" size={width / 5} color={"red"} />
+          </TouchableOpacity>
         </View>
+      </View>
     );
 
 }

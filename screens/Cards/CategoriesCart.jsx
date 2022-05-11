@@ -49,92 +49,100 @@ const CategoriesCart = ({navigation , link , category , description , id }) => {
     }, []);
 
     return (
-        <View>
+      <View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: width,
+            margin: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: style.border,
+              borderWidth: 1,
+              justifyContent: "space-between",
+              width: width - 20,
+              alignItems: "center",
+              flexDirection: "row",
+              height: height / 6,
+            }}
+          >
+            <Image
+              style={{
+                width: width / 3 - 18,
+                height: height / 6,
+                borderRadius: style.border,
+              }}
+              source={{
+                uri: `${link}`,
+              }}
+            />
+
             <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: width,
-                    margin: 10,
-                }}
+              style={{
+                flexDirection: "column",
+                height: height / 4,
+                justifyContent: "center",
+              }}
             >
-                <View
+              <View>
+                <View style={{ minWidth: width / 3 }}>
+                  <Text
                     style={{
-                        borderRadius: style.border,
-                        borderWidth: 1,
-                        justifyContent: "space-between",
-                        width: width - 20,
-                        alignItems: "center",
-                        flexDirection: "row",
-                        height: height / 6,
+                      fontSize: width / 20,
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
                     }}
-                >
-                    <Image
-                        style={{
-                            width: width / 3 - 18,
-                            height: height / 6,
-                            borderRadius: style.border,
-                        }}
-                        source={{
-                            uri: `${link}`,
-                        }}
-                    />
-
-                    <View
-                        style={{
-                            flexDirection: "column",
-                            height: height / 4,
-                            justifyContent: "center",
-                        }}
-                    >
-                        <View>
-
-                            <View>
-                                <Text
-                                    style={{
-                                        fontSize: width / 20,
-                                        fontWeight: "bold",
-                                        textTransform: "capitalize",
-                                    }}
-                                >
-                                    {category}
-                                </Text>
-                            </View>
-
-                            <Text style={{ fontSize: 16, color: "gray" }}>
-                                {description.substring(0, 15)}...
-                            </Text>
-
-                        </View>
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress={()=>{
-                            navigation.navigate("ProductOfCategory" , {name :category })
-                        }}>
-                        <Ionicons name="apps" size={40} color={'red'} />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection: 'column' }}>
-                        <TouchableOpacity onPress={()=>{
-                            navigation.navigate("editCaregory" , {name :category , desc:description , url : link , ids :id })
-                        }}>
-                            <Ionicons name="create" size={30} color={'red'} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>{  //test
-                            handleDeleteCategory(id);
-                        }}>
-                            <Ionicons name="trash" size={30} color={'red'} />
-                        </TouchableOpacity>
-
-                    </View>
-
+                  >
+                    {category}
+                  </Text>
                 </View>
+
+                <Text style={{ fontSize: width / 35, color: "gray" }}>
+                  {description.substring(0, 15)}...
+                </Text>
+              </View>
             </View>
+
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("ProductOfCategory", { name: category });
+                }}
+              >
+                <Ionicons name="apps" size={width / 10} color={"red"} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={{ flexDirection: "column" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("editCaregory", {
+                    name: category,
+                    desc: description,
+                    url: link,
+                    ids: id,
+                  });
+                }}
+              >
+                <Ionicons name="create" size={width / 15} color={"red"} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  //test
+                  handleDeleteCategory(id);
+                }}
+              >
+                <Ionicons name="trash" size={width / 15} color={"red"} />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
+      </View>
     );
 }
 const styles = StyleSheet.create({
