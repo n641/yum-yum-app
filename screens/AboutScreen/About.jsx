@@ -42,7 +42,6 @@ const About = ({ navigation}) => {
             height: height / 2,
           }}
         >
-<<<<<<< HEAD
           <Image
             style={{
               width: width,
@@ -74,12 +73,6 @@ const About = ({ navigation}) => {
             Yum Yum Resturant
           </Text>
         </View>
-=======
-          Yum Yum Resturant
-        </Text>
-      </View>
-      
->>>>>>> a1f7291d0b0069b1bc6598043de6163b37184bb8
         <View
           style={{
             justifyContent: "center",
