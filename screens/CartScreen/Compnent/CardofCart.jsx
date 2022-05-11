@@ -67,9 +67,9 @@ export default function CardofCart({
         />
         <TouchableOpacity
         onPress={() => {deleteItem(name)}}
-          style={{ position: "absolute", left: width / 2 - 45, top: -20 }}
+          style={{ position: "absolute",width: width/14,height: height/14,alignItems: 'center',justifyContent:"center",borderRadius:50,backgroundColor:"white", left: width / 2 - 60, top: -5 }}
         >
-          <Ionicons name="close" size={40} color={"red"} />
+          <Ionicons name="close" size={30} color={"red"} />
         </TouchableOpacity>
 
         <View

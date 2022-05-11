@@ -77,7 +77,7 @@ const TestSearch = ({ navigation, route }) => {
     const searchfilteredit = (text) => {
         let sizeWord = text.length;
         if (text) {
-         const foundproduct=products.find(p=>p.productName.toUpperCase()===text.toUpperCase())
+         const foundproduct=products.find(p=>p.productName.toUpperCase().includes(text.toUpperCase()))
         if(foundproduct){
             setFilterProducts(foundproduct);
             setflag(true);
