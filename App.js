@@ -17,8 +17,7 @@ import UseerProScreen from "./screens/UserProfile/UseerProScreen";
 import EditProfile from "./screens/UserProfile/Components/Footer/EditProfile";
 import DetailsScreen from "./screens/Details/DetailsScreen"
 import CheckOut from "./screens/Checkout/CheckOut"
-// import NavHome from "./screens/HomeScreen/Components/HomeScreen/NavHome";
-
+import About from "./screens/AboutScreen/About"
 import TestSearch from "./screens/TestSearch";
 
 
@@ -30,7 +29,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Cart">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -71,6 +70,11 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
+        <Stack.Screen
+          name="About"
+          component={About}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="HomeStart"
           component={HomeStart}

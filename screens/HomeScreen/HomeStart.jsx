@@ -15,6 +15,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Home from "./../HomeScreen/Components/HomeScreen/Home";
+import About from "../AboutScreen/About"
 import Favourite from "../favouriteScreen/favourite";
 import UseerProScreen from "../UserProfile/UseerProScreen";
 
@@ -32,14 +33,15 @@ const HomeStart = ({ navigation }) => {
           let iconName;
 
           if (route.name === "Home") {
-            iconName = focused
-              ? "home"
-              : "home";
-          }
-           else if (route.name === "Favourite") {
+            iconName = focused ? "home" : "home";
+          } else if (route.name === "Favourite") {
             iconName = focused ? "heart" : "heart";
-          }else if (route.name === "Profile") {
+          } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person";
+          } else if (route.name === "About") {
+            iconName = focused
+              ? "information-circle-outline"
+              : "information-circle-outline";
           }
 
           // You can return any component that you like here!
@@ -49,10 +51,27 @@ const HomeStart = ({ navigation }) => {
         tabBarInactiveTintColor: style.fourth,
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="Favourite" component={Favourite} options={{ headerShown: false }} />
-      <Tab.Screen name="Profile" component={UseerProScreen} options={{ headerShown: false }} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="About"
+        component={About}
+        options={{ headerShown: false }}
+      />
 
+      <Tab.Screen
+        name="Favourite"
+        component={Favourite}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={UseerProScreen}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 };
