@@ -24,12 +24,12 @@ export default function CardofCart({
 }) {
   
   const [counter, setcounter] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(offer?price - discound:price);
 
   const increment = () => {
     setcounter(counter + 1);
-    setTotal(price * (counter + 1));
-    onAdd(price);
+    setTotal(offer?(price - discound)* (counter + 1):price * (counter + 1));
+    onAdd(offer?price - discound:price);
   };
 
   const decrement = () => {
@@ -38,7 +38,7 @@ export default function CardofCart({
     } else {
       setcounter(counter - 1);
       setTotal(price * (counter - 1));
-      onRemove(price);
+      onRemove(offer?price - discound:price);
     }
   };
 

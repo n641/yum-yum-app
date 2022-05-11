@@ -30,9 +30,11 @@ const GetUsers = ({ navigation }) => {
                 rule: rule,
                 address: [address],
                 credit: credit,
+                points:0,
                 cart: [],
                 favourite: [],
-                oldOrders: []
+                oldOrders: [],
+                orders: []
             }).catch((err) =>{
                 console.log(err);
             });

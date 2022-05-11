@@ -57,25 +57,9 @@ const TestSearch = ({ navigation, route }) => {
         searchfilteredit(resulte);
     });
 
-    // const searchfilter = (text) => {
-    //     if (text) {
-    //         products.map((p) => {
-    //             if (p.productName.toUpperCase() == text.toUpperCase()) {
-    //                 setFilterProducts(p)
-    //                 setflag(true);
-    //                 console.log("find");
-    //             } else {
-    //                 console.log("not find");
-    //                 // setflag(false);
-    //             }
-
-    //         })
-    //         // })
-    //     } 
-    // }
+    
 
     const searchfilteredit = (text) => {
-        let sizeWord = text.length;
         if (text) {
          const foundproduct=products.find(p=>p.productName.toUpperCase().includes(text.toUpperCase()))
         if(foundproduct){
