@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: '20%',
+        height: 10,
         borderRadius: 10,
         width: 400,
         justifyContent: 'flex-start',
