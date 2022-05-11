@@ -52,7 +52,7 @@ const Users = ({navigation}) =>{
     }, []);
 
     return(
-        <View>
+        <View >
             <FlatList 
                 data={arrUsers}
 
@@ -71,7 +71,7 @@ const Users = ({navigation}) =>{
                 }
             />
             <View>
-                <TouchableOpacity onPress={()=>{ navigation.navigate("addUsers")}}>
+                <TouchableOpacity style={{height:height-100}} onPress={()=>{ navigation.navigate("addUsers")}}>
                 <Ionicons name="add-circle" size={70} color={'red'} />
                 </TouchableOpacity>
             </View>

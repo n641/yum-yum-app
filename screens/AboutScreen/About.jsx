@@ -18,47 +18,47 @@ const height = Dimensions.get("window").height;
 
 const About = ({ navigation}) => {
   return (
-    <View>
-      <View
-        style={{
-          backgroundColor: "black",
-          opacity: 2,
-          width: width,
-          height: height / 2,
-        }}
-      >
-        <Image
+    <ScrollView>
+      <View>
+        <View
           style={{
+            backgroundColor: "black",
+            opacity: 2,
             width: width,
             height: height / 2,
-            position: "relative",
-            //opacity: 0.9,
-            resizeMode: "cover",
-            flexDirection: "row",
-          }}
-          source={require("../../assets/about2.jpg")}
-        />
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          left: width / 3,
-          top: height / 16,
-          backgroundColor: "black",
-        }}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontSize: 30,
-            textAlign: "center",
-            padding: 5,
           }}
         >
-          Yum Yum Resturant
-        </Text>
-      </View>
-      <ScrollView>
+          <Image
+            style={{
+              width: width,
+              height: height / 2,
+              position: "relative",
+              //opacity: 0.9,
+              resizeMode: "cover",
+              flexDirection: "row",
+            }}
+            source={require("../../assets/about2.jpg")}
+          />
+        </View>
+        <View
+          style={{
+            position: "absolute",
+            left: width / 3,
+            top: height / 16,
+            backgroundColor: "black",
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              fontSize: 30,
+              textAlign: "center",
+              padding: 5,
+            }}
+          >
+            Yum Yum Resturant
+          </Text>
+        </View>
         <View
           style={{
             justifyContent: "center",
@@ -136,7 +136,7 @@ const About = ({ navigation}) => {
             <View style={{ width: width / 6, height: height / 8 }}>
               <Ionicons
                 name="return-down-back-outline"
-                size={width/6}
+                size={width / 6}
                 color={"white"}
               />
             </View>
@@ -230,12 +230,12 @@ const About = ({ navigation}) => {
             </View>
           </View>
         </View>
-        <View style={{}}>
-            <Stuff />
 
+        <View style={{}}>
+          <Stuff />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
