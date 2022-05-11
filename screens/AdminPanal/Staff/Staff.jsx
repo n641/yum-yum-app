@@ -81,7 +81,6 @@ const Staff = ({navigation}) =>{
                 <Text style={styles.fontStyle}>Assistant</Text>
             </View>
             
-
             <FlatList 
                 data={arrStaff.filter(e => e.rule === "Assistant")}
                 renderItem={itemData => 
@@ -97,6 +96,47 @@ const Staff = ({navigation}) =>{
                 horizontal={true}
                 style={{width: width, padding: 5}}
             />
+
+            <View style={styles.Container}>
+                <Text style={styles.fontStyle}>waiter</Text>
+            </View>
+            
+            <FlatList 
+                data={arrStaff.filter(e => e.rule === "waiter")}
+                renderItem={itemData => 
+                        <AssistantStuffCard 
+                        name={itemData.item.name}
+                        rule={itemData.item.rule}
+                        salary={itemData.item.salary}
+                        rate={itemData.item.rate}
+                        id={itemData.item.id}
+                        navigation={navigation}
+                        />
+                }
+                horizontal={true}
+                style={{width: width, padding: 5}}
+            />
+
+            <View style={styles.Container}>
+                <Text style={styles.fontStyle}>delever</Text>
+            </View>
+            
+            <FlatList 
+                data={arrStaff.filter(e => e.rule === "delever")}
+                renderItem={itemData => 
+                        <AssistantStuffCard 
+                        name={itemData.item.name}
+                        rule={itemData.item.rule}
+                        salary={itemData.item.salary}
+                        rate={itemData.item.rate}
+                        id={itemData.item.id}
+                        navigation={navigation}
+                        />
+                }
+                horizontal={true}
+                style={{width: width, padding: 5}}
+            />
+            
             </View>
             <View style={{bottom:0}}>
                 <TouchableOpacity onPress={()=>{ navigation.navigate("addStaff")}}>
