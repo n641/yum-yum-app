@@ -30,6 +30,7 @@ const Header = ({ pagename, icon, navigation }) => {
 
 
   const [users, setUsers] = useState([]);
+  
   const [name, setname] = useState('')
 
 
@@ -70,6 +71,7 @@ const Header = ({ pagename, icon, navigation }) => {
   useEffect(() => {
     if (!users?.length) return;
     const user = users.find((e) => e.email == auth.currentUser.email);
+    setListItems(user.cart)
     setname(user.userName)
   }, [users]);
 
