@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,Dimensions , TouchableOpacity} from 'react-native'
-import React from 'react'
+import React , { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
@@ -8,7 +8,12 @@ const height = Dimensions.get("window").height;
 import style from '../../Constants/style';
 
 
-const EndOfOrder = ({navigation}) => {
+const EndOfOrder = ({navigation , route}) => {
+  const { total, address, way , productinorder} = route.params;
+  console.log("product i have route are",productinorder );
+
+  const [arr, setarr] = useState(productinorder);
+
   return (
     <View>
 
@@ -61,9 +66,9 @@ const EndOfOrder = ({navigation}) => {
 
             }}
             onPress={() => {
-              // navigation.navigate("Address", {
-              //   total: total,
-              // });
+              navigation.navigate("Order", {
+                total:total, address:address, way:way , productinorder:arr
+              });
             }}
           >
             <Text

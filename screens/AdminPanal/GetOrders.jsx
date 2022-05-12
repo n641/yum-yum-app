@@ -9,7 +9,7 @@ import {
 import react, {useState, useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
-import { getOrders, subscribe  } from '../../db/Auth/usersData/Orders';
+import { getOrders, subscribeOrder  } from '../../db/Auth/usersData/Orders';
 import OrderCard from '../Cards/OrderCard';
 
 const width = Dimensions.get("window").width;
@@ -30,21 +30,21 @@ const GetOrders = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        // const unsubscribe = subscribe(({ change, snapshot }) => {
-        //     if (change.type === "added") {
-        //         console.log("New mesg: ", change.doc.data());
-        //         getOrdersHandler();
-        //     }
-        //     if (change.type === "modified") {
-        //         console.log("Modified mesg: ", change.doc.data());
-        //         getOrdersHandler();
-        //     }
-        //     if (change.type === "removed") {
-        //         console.log("Removed mesg: ", change.doc.data());
-        //         getOrdersHandler();
-        //     }
-        //     // }
-        // });
+        const unsubscribe = subscribeOrder(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getOrdersHandler();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getOrdersHandler();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getOrdersHandler();
+            }
+            // }
+        });
 
         return () => {
             unsubscribe();

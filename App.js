@@ -23,7 +23,8 @@ import EndOfOrder from "./screens/Checkout/EndOfOrder";
 import Address from "./screens/Checkout/Address";
 import EditAddressCheckout from "./screens/Checkout/EditAddressCheckout";
 import placeOrder from './screens/Checkout/placeOrder';
-import Support from "./screens/Support/support"
+import Support from "./screens/Support/support";
+import Order from "./screens/ordersScreen/Order";
 
 
 
@@ -36,7 +37,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AdminStartScreen">
+      <Stack.Navigator initialRouteName="HomeStart">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -177,6 +178,21 @@ export default function App() {
           component={EndOfOrder}
           options={{
             title: "Address",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
+          <Stack.Screen
+          name="Order"
+          component={Order}
+          options={{
+            title: "Order",
             headerStyle: {
               backgroundColor: "red",
             },
