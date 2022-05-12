@@ -21,6 +21,17 @@ async function getUsers() {
     });
     return userList;
 }
+async function getUser(email) {
+  const userRef = collection(db, "users");
+
+  const q = query(userRef, where("email", "==", email));
+  const userSnapshot = await getDocs(q);
+  const userobject = userSnapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
+  console.log(userobject[0]);
+  return userobject[0];
+}
 
 async function editUser(user) {
     console.log("at editUsers", user);
@@ -60,4 +71,4 @@ function subscribeUser(callback) {
     return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUserDB, subscribeUser };
+export { getUsers, getUser, addUser, editUser, deleteUserDB, subscribeUser };

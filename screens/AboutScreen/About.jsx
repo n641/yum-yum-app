@@ -152,7 +152,7 @@ const About = ({ navigation}) => {
               <Text
                 style={{
                   color: "red",
-                  fontSize: width / 20,
+                  fontSize: width / 15,
                   fontWeight: "bold",
                   paddingVertical: 5,
                 }}
@@ -189,6 +189,7 @@ const About = ({ navigation}) => {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 10,
+                margin: 10,
               }}
             >
               <View style={{}}>
@@ -233,6 +234,7 @@ const About = ({ navigation}) => {
 
         <View style={{}}>
           <Stuff />
+         
         </View>
       </View>
     </ScrollView>

@@ -23,6 +23,7 @@ import EndOfOrder from "./screens/Checkout/EndOfOrder";
 import Address from "./screens/Checkout/Address";
 import EditAddressCheckout from "./screens/Checkout/EditAddressCheckout";
 import placeOrder from './screens/Checkout/placeOrder';
+import Support from "./screens/Support/support"
 
 
 
@@ -35,7 +36,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AdminStartScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -67,6 +68,11 @@ export default function App() {
         <Stack.Screen
           name="OnBoarding"
           component={OnBoarding}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Support"
+          component={Support}
           options={{ headerShown: false }}
         />
 

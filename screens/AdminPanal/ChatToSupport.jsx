@@ -9,7 +9,9 @@ import {
 
 const ChatToSupport = ({ navigation }) => {
     return(
-        <View></View>
+        <View>
+            
+        </View>
     )
 }
 

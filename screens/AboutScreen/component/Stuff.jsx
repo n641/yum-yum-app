@@ -62,7 +62,7 @@ const Stuff = ({ navigation }) => {
           <View>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: width/15,
                 fontWeight: "bold",
                 textAlign: "center",
                 color: style.primary,

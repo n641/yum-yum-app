@@ -172,7 +172,7 @@ const UsersCard = ({navigation, address, credit, email, password, points, rule, 
                   fontWeight: "bold",
                 }}
                 >
-                points:{" "}
+                points:
               </Text>
               <Text>{points}</Text>
             </View>

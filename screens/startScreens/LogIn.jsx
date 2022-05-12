@@ -193,4 +193,3 @@ const styles = StyleSheet.create({
 
     }
 })
-
