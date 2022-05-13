@@ -21,32 +21,38 @@ const Login = ({ navigation }) => {
             unsub();
         };
     },[]);
+    useEffect(() => {
+        getUserss();
+    }, []);
     
     const [email, setemail] = useState("");
     const [pass, setpass] = useState("");
     const [flag, setflag] = useState(true);
     const [user, setUser] = useState(undefined);
+    const [CUsser, setCUser] = useState([]);
 
     const getUserss = async() =>{
         const arr = await getUsers();
-        console.log(arr);
-        let obj = arr.find(o => o.email === email);
-        if(obj.rule === "user")
-            navigation.navigate("HomeStart")
-        else if(obj.rule === "admin")
-            navigation.navigate("AdminStartScreen")
+        setCUser(arr)
+
     }
 
     const handleLogin = async () =>{
         console.log(email, pass);
         login(email, pass).then(()=>{
-            getUserss();
-            
-        }).catch((err)=>{
-            console.log(err)
-            const errorMessage = err;
-            alert(errorMessage);
-        }) ;
+            console.log(CUsser)
+            const obj = CUsser.find(o => o.email === email);
+            console.log(obj)
+            if(obj.rule === "user")
+                navigation.navigate("HomeStart")
+            else if(obj.rule === "admin")
+                navigation.navigate("AdminStartScreen")
+            })
+        // }).catch((err)=>{
+        //     console.log(err)
+        //     const errorMessage = err;
+        //     alert(errorMessage);
+        // }) ;
             console.log(user);
 
         

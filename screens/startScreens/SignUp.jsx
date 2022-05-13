@@ -28,11 +28,13 @@ const SignUp = ({ navigation }) => {
                     userName: userName,
                     email: email,
                     password: pass,
-                    address: add,
+                    address: [add],
                     rule: "user",
                     cart: [],
                     favourite: [],
-                    oldOrders: []
+                    oldOrders: [],
+                    Message: [],
+                    review: []
                 })
                 alert("Sign up done")
                 navigation.navigate("Login")

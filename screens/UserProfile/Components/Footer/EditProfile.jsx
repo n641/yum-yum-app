@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 
 import { auth } from '../../../../db/config'
-import { updateProfile } from 'firebase/auth';
+import { updatePassword } from 'firebase/auth';
 import { getAuth } from "firebase/auth";
 import { getUsers, editUser, subscribeUser } from '../../../../db/Auth/usersData/users';
 
@@ -72,10 +72,7 @@ const EditProfile = () => {
 
     const EditDone = () =>{
         if(password === cpassword && CCPassword === users.password){
-            updateProfile(auth.currentUser, {
-                displayName: name,
-                password: password
-            }).then(()=>{
+            updatePassword(auth.currentUser, password).then(()=>{
                 console.log(name, password, address)
                 editUser({
                     ...users,
