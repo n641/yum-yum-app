@@ -281,7 +281,7 @@ const placeOrder = ({ route, navigation }) => {
             }}
             onPress={() => {
               handleCheckOrder()
-              navigation.navigate("EndOfOrder");
+              navigation.navigate("EndOfOrder" , {way:way,address:address,total:total , productinorder:listItems});
             }}
           >
             <Text

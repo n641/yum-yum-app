@@ -19,7 +19,7 @@ import {
 } from "../../db/Auth/usersData/Support";
 import {auth} from "../../db/config";
 import {getUsers, subscribeUser,editUser} from "../../db/Auth/usersData/users"
-import Message from "./Component/Message";
+// import Message from "./Component/Message";
 
 
 const Support = () => {
