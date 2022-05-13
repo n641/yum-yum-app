@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "./screens/startScreens/LogIn";
 import SignUp from "./screens/startScreens/SignUp";
+import Forgetpass from './screens/startScreens/forgetPass/Forgetpass'
 import OnBoarding from "./screens/startScreens/OnBoarding";
 import AdminStartScreen from "./screens/AdminPanal/AdminStartScreen";
 import HomeStart from "./screens/HomeScreen/HomeStart";
@@ -37,7 +38,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeStart">
+      <Stack.Navigator initialRouteName="Forgetpass">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -63,6 +64,12 @@ export default function App() {
         <Stack.Screen
           name="SignUp"
           component={SignUp}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Forgetpass"
+          component={Forgetpass}
           options={{ headerShown: false }}
         />
 
@@ -188,7 +195,7 @@ export default function App() {
             },
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="Order"
           component={Order}
           options={{
