@@ -16,46 +16,64 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
-import { editUser,getProducts ,getUsers,subscribeUser} from "../../db/Auth/usersData/users";
+import {
+  editUser,
+  getUsers,
+  subscribeUser,
+} from "../../db/Auth/usersData/users";
+import {
+  editProduct,
+  getProducts,
+  subscribe,
+} from "../../db/Auth/usersData/Products";
 
 
 const DetailsScreen = ({ route,navigation}) => {
     const{name,price,desc,url,discound,offer}=route.params;
 
+     const [pro, setpro] = useState([
+    //must order product by count!!!!
 
-      const [users, setUsers] = useState([]);
-      const [product, setproduct] = useState([]);
+  ]);
+  const [product, setproduct] = useState([
+  ]);
+
+  const [users, setUsers] = useState([]);
+     const [user, setUser] = useState([]);
+      const [flag1, setflag1] = useState(false);
+      const [flag2, setflag2] = useState(false);
+      const [flag3, setflag3] = useState(false);
+      const [flag4, setflag4] = useState(false);
+      const [flag5, setflag5] = useState(false);
+      const [flag, setflag] = useState(false);
+      const [rate,setrate] = useState(0);
+
+     
+
+      const [card, setcard] = useState(false);
 
 
-    const [counter,setcounter] = useState(1);
     const[favo,setfavo]= useState(false);
 
     const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
-    // console.log(arr);
   };
    
-
-
      useEffect(() => {
     getUserss();
   }, []);
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
+     
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
       // }
@@ -66,17 +84,85 @@ const DetailsScreen = ({ route,navigation}) => {
     };
   }, []);
 
+   const getItems = async () => {
+    const arr = await getProducts();
+    setpro(arr);
+  };
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+     
+      if (change.type === "added") {
+        getItems();
+      }
+      if (change.type === "modified") {
+        getItems();
+      }
+      if (change.type === "removed") {
+        getItems();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
+
   useEffect(() => {
      if (!users?.length) return;
     const user = users.find((e) => e.email == auth.currentUser.email);
-        console.log("User i find :>> ", user);
+    
+    setUser(user);
 
 
-    const fav = user.favourite.map((namefav) =>
+
+    user.favourite.map((namefav) =>
       namefav == name ? setfavo(true) : null
     );
   }, [users]);
+
+
+  useEffect(() => {
+    if (!pro?.length) return;
+
+    const product = pro.find((e) => e.productName == name);
+       setproduct(product);
+       console.log(product);
+
+ let sum = 0;
+ product.rate.map((r) => {
+
+     sum += r.rate
+     
+ });
+
+sum==0?(setrate(0)):
+ setrate((sum / product.rate.length));
+   console.log("rate", rate);
+
+
+
+  }, [pro,rate,product]);
+
+
+ useEffect(() => {
+   if (!users?.length) return;
+   if (!user.oldOrders?.length) return;
+
+
+   const oldOrders = user.oldOrders;
+   const product = oldOrders.find((p) => p == name);
+
+   product ? setflag(true) : null;
+ }, [users]);
   
+
+ 
   return (
     <View
       style={{
@@ -138,31 +224,19 @@ const DetailsScreen = ({ route,navigation}) => {
           </Text>
         </View>
         <View style={{}}>
-          
-         
-          
-
           <TouchableOpacity
             onPress={() => {
-                  const user = users.find(
-                    (e) => e.email == auth.currentUser.email
-                  );
+              const user = users.find((e) => e.email == auth.currentUser.email);
 
-
-                    favo
-                     ? editUser({
-                         ...user,
-                         favourite: user.favourite.filter(
-                           (n) => n !== name
-                         ),
-                       }).then(() => setfavo(false))
-                     : editUser({
-                         ...user,
-                         favourite: [...user.favourite, name],
-                       }).then(() => setfavo(true))
-
-
-              
+              favo
+                ? editUser({
+                    ...user,
+                    favourite: user.favourite.filter((n) => n !== name),
+                  }).then(() => setfavo(false))
+                : editUser({
+                    ...user,
+                    favourite: [...user.favourite, name],
+                  }).then(() => setfavo(true));
             }}
           >
             <Ionicons
@@ -174,6 +248,7 @@ const DetailsScreen = ({ route,navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+
       <View
         style={{
           justifyContent: "space-between",
@@ -182,48 +257,56 @@ const DetailsScreen = ({ route,navigation}) => {
           flexDirection: "row",
         }}
       >
-
-
-        
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TouchableOpacity
-            onPress={() => {
-              counter <= 0 ? setcounter(0) : setcounter(counter - 1);
-            }}
-          >
-            <Ionicons name="remove" size={20} color={"red"} style={{}} />
-          </TouchableOpacity>
-          <View
-            style={{
-              fontSize: 18,
-              marginHorizontal: 15,
-              alignItems: "center",
-              justifyContent: "center",
-              width: width / 12,
-              height: width / 12,
-              backgroundColor: "gray",
-              borderRadius: width / 2,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                marginHorizontal: 15,
-                borderRadius: width / 2,
-                color: "white",
-              }}
-            >
-              {counter}
-            </Text>
+        {rate == 5 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              setcounter(counter + 1);
-            }}
-          >
-            <Ionicons name="add" size={20} color={"red"} style={{}} />
-          </TouchableOpacity>
-        </View>
+        ) : 4 <= rate&&rate < 5 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+          </View>
+        ) : 3 <= rate &&rate< 4 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+          </View>
+        ) : 2 <= rate&&rate < 3 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+          </View>
+        ) : 1 <= rate &&rate< 2 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"yellow"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+          </View>
+        ) : rate == 0 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+            <Ionicons name={"star"} size={40} color={"gray"} />
+          </View>
+        ) : null}
+
         <View>
           {offer ? (
             <View
@@ -278,59 +361,258 @@ const DetailsScreen = ({ route,navigation}) => {
         </Text>
         <Text style={{ fontSize: 16, color: "gray" }}>{desc}</Text>
       </View>
-      <TouchableOpacity
-        style={{
-          width: width - 40,
-          justifyContent: "center",
-          marginHorizontal: 20,
-          borderRadius: 40,
-          justifyContent: "center",
-          backgroundColor: style.primary,
-          height: height / 10,
-        }}
-        onPress={() => {
-
-
-           const user = users.find((e) => e.email == auth.currentUser.email);
-     if (user.cart.length == 0) {
-       editUser({
-         ...user,
-         cart: [...user.cart, name],
-       }).then(() => {
-         navigation.navigate("Cart");
-       });
-     } else {
-                const cart = user.cart.find(
-                  (namecart) => namecart == name
-                );
-                cart?alert("you have already added this product to your cart"):(
-                       editUser({
-                              ...user,
-                                cart: [...user.cart, name],
-                           }).then(()=>{
-                             navigation.navigate("Cart",{counter:counter});
-                           })
-
-                )
-
-       
-     }}
-
-             
-          
-        }
-      >
-        <Text
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
           style={{
-            color: style.third,
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 20,
+            width: flag ? width / 2 - 20 : width - 20,
+            justifyContent: "center",
+            marginHorizontal: 10,
+            borderRadius: 40,
+            justifyContent: "center",
+            backgroundColor: style.primary,
+            height: height / 10,
+          }}
+          onPress={() => {
+            if (user.cart.length == 0) {
+              editUser({
+                ...user,
+                cart: [...user.cart, name],
+              }).then(() => {
+                navigation.navigate("Cart");
+              });
+            } else {
+              const cart = user.cart.find((namecart) => namecart == name);
+              cart
+                ? alert("you have already added this product to your cart")
+                : editUser({
+                    ...user,
+                    cart: [...user.cart, name],
+                  }).then(() => {
+                    navigation.navigate("Cart");
+                  });
+            }
           }}
         >
-          add to cart
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={{
+              color: style.third,
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: 20,
+            }}
+          >
+            add to cart
+          </Text>
+        </TouchableOpacity>
+        {flag ? (
+          <TouchableOpacity
+            style={{
+              width: width / 2 - 20,
+              justifyContent: "center",
+              marginHorizontal: 10,
+              borderRadius: 40,
+              justifyContent: "center",
+              backgroundColor: style.primary,
+              height: height / 10,
+            }}
+            onPress={() => {
+              //navigation.navigate("Review", { name: name });
+              setcard(!card);
+            }}
+          >
+            <Text
+              style={{
+                color: style.third,
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: 20,
+              }}
+            >
+              Review
+            </Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+      {card ? (
+        <View
+          style={{
+            width: width / 2,
+            height: height / 4,
+            position: "absolute",
+            top: height - 200,
+            borderRadius: 20,
+            left: width / 2,
+            backgroundColor: "black",
+            marginBottom: 10,
+          }}
+        >
+          <View>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                textAlign: "center",
+                color: "red",
+                margin: 5,
+              }}
+            >
+              Review
+            </Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                padding: 10,
+                borderRadius: 20,
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Ionicons
+                onPress={() => {
+                  setflag2(false);
+                  setflag3(false);
+                  setflag4(false);
+                  setflag5(false);
+                  setflag1(!flag1);
+                }}
+                name={"star"}
+                size={40}
+                color={flag1 ? "yellow" : "gray"}
+              />
+              <Ionicons
+                onPress={() => {
+                  setflag4(false);
+                  setflag5(false);
+                  setflag3(false);
+                  setflag1(true);
+                  setflag2(!flag2);
+                }}
+                name={"star"}
+                size={40}
+                color={flag2 ? "yellow" : "gray"}
+              />
+              <Ionicons
+                onPress={() => {
+                  setflag4(false);
+                  setflag5(false);
+                  setflag1(true);
+                  setflag2(true);
+                  setflag3(!flag3);
+                }}
+                name={"star"}
+                size={40}
+                color={flag3 ? "yellow" : "gray"}
+              />
+              <Ionicons
+                onPress={() => {
+                  setflag5(false);
+
+                  setflag1(true);
+                  setflag2(true);
+                  setflag3(true);
+                  setflag4(!flag4);
+                }}
+                name={"star"}
+                size={40}
+                color={flag4 ? "yellow" : "gray"}
+              />
+              <Ionicons
+                onPress={() => {
+                  setflag1(true);
+                  setflag2(true);
+                  setflag3(true);
+                  setflag4(true);
+                  setflag5(!flag5);
+                }}
+                name={"star"}
+                size={40}
+                color={flag5 ? "yellow" : "gray"}
+              />
+            </View>
+            <View
+              style={{
+                width: width / 5,
+                height: height / 20,
+                borderRadius: 10,
+                backgroundColor: "white",
+                marginBottom: 5,
+                margin: 10,
+                position: "absolute",
+                left: width / 3 - 40,
+
+                top: height - 470,
+              }}
+            >
+              <Text
+                style={{
+                  color: "red",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  fontSize: 15,
+                }}
+                onPress={() => {
+                  const review = user.review.find(
+                    (namerev) => namerev.name == name
+                  );
+                  review
+                    ? alert("you have already reviewed this product")
+                    : editUser({
+                        ...user,
+                        review: [
+                          ...user.review,
+                          {
+                            name: name,
+                            rate: flag5
+                              ? 5
+                              : flag4
+                              ? 4
+                              : flag3
+                              ? 3
+                              : flag2
+                              ? 2
+                              : flag1
+                              ? 1
+                              : 0,
+                          },
+                        ],
+                      })
+                        .then(() => {
+                          console.log("pro", product);
+
+                          editProduct({
+                            ...product,
+                            rate: [
+                              ...product.rate,
+                              {
+                                user: user.userName,
+                                name: name,
+                                rate: flag5
+                                  ? 5
+                                  : flag4
+                                  ? 4
+                                  : flag3
+                                  ? 3
+                                  : flag2
+                                  ? 2
+                                  : flag1
+                                  ? 1
+                                  : 0,
+                              },
+                            ],
+                          });
+                        })
+                        .then(() => {
+                          setcard(!card);
+                        });
+                }}
+              >
+                Send
+              </Text>
+            </View>
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 }
