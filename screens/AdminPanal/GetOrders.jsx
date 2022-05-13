@@ -56,6 +56,7 @@ const GetOrders = ({ navigation }) => {
             <FlatList 
                 data={arrOrders}
                 numColumns={2}
+                keyExtractor={item=>item.id}
                 renderItem={itemData => 
                     <OrderCard 
                         user={itemData.item.user}

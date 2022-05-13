@@ -14,49 +14,49 @@ const height = Dimensions.get("window").height;
 
 const Login = ({ navigation }) => {
 
-    useEffect(()=>{
+    useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => setUser(user));
 
         return () => {
             unsub();
         };
-    },[]);
-    
+    }, []);
+
     const [email, setemail] = useState("");
     const [pass, setpass] = useState("");
     const [flag, setflag] = useState(true);
     const [user, setUser] = useState(undefined);
 
-    const getUserss = async() =>{
+    const getUserss = async () => {
         const arr = await getUsers();
         console.log(arr);
         let obj = arr.find(o => o.email === email);
-        if(obj.rule === "user")
+        if (obj.rule === "user")
             navigation.navigate("HomeStart")
-        else if(obj.rule === "admin")
+        else if (obj.rule === "admin")
             navigation.navigate("AdminStartScreen")
     }
 
-    const handleLogin = async () =>{
+    const handleLogin = async () => {
         console.log(email, pass);
-        login(email, pass).then(()=>{
+        login(email, pass).then(() => {
             getUserss();
-            
-        }).catch((err)=>{
+
+        }).catch((err) => {
             console.log(err)
             const errorMessage = err;
             alert(errorMessage);
-        }) ;
-            console.log(user);
+        });
+        console.log(user);
 
-        
+
     }
 
     return (
         <View style={{
             backgroundColor: 'black'
         }}>
-            <View style={{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <Image
                     style={{
                         width: width,
@@ -64,7 +64,7 @@ const Login = ({ navigation }) => {
                         position: 'relative',
                         opacity: 0.6,
                         resizeMode: 'cover',
-                        flexDirection:'row'
+                        flexDirection: 'row'
 
                     }}
                     source={require('../../assets/1.jpg')}
@@ -124,7 +124,7 @@ const Login = ({ navigation }) => {
 
                             : <Button title='log in' onPress={() => {
                                 handleLogin();
-                                
+
                             }} color={"red"}
                                 disabled style={styles.btn} />
 
@@ -132,7 +132,8 @@ const Login = ({ navigation }) => {
 
                         <View style={{ margin: 10, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
                             <TouchableOpacity onPress={() => {
-                                
+                                navigation.navigate("Forgetpass")
+
                             }}>
                                 <Text style={{ color: 'yellow', fontSize: 18 }}>forget password?</Text>
                             </TouchableOpacity>
@@ -142,10 +143,10 @@ const Login = ({ navigation }) => {
 
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ color: 'white', paddingRight: 5, fontSize: 18 }}> Don't have an account?</Text>
-                        <TouchableOpacity onPress={()=>{
-                                navigation.navigate('SignUp')
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate('SignUp')
                         }}>
-                        <Text style={{ color: 'yellow', fontSize: 20 }}>SignUp</Text>
+                            <Text style={{ color: 'yellow', fontSize: 20 }}>SignUp</Text>
                         </TouchableOpacity>
                     </View>
 
