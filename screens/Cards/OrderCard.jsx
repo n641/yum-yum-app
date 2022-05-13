@@ -9,7 +9,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
-import { deleteOrder, getOrders, subscribe } from "../../db/Auth/usersData/Orders";
+import { deleteOrder, getOrders, subscribeOrder } from "../../db/Auth/usersData/Orders";
 import { getUsers, editUser, getUserByEmail } from "../../db/Auth/usersData/users";
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
@@ -48,21 +48,21 @@ const OrderCard = ({navigation, user, product, id}) =>{
       }, []);
 
     useEffect(() => {
-        // const unsubscribe = subscribe(({ change, snapshot }) => {
-        //     if (change.type === "added") {
-        //         console.log("New mesg: ", change.doc.data());
-        //         getOrders();
-        //     }
-        //     if (change.type === "modified") {
-        //         console.log("Modified mesg: ", change.doc.data());
-        //         getOrders();
-        //     }
-        //     if (change.type === "removed") {
-        //         console.log("Removed mesg: ", change.doc.data());
-        //         getOrders();
-        //     }
-        //     // }
-        // });
+        const unsubscribe = subscribeOrder(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getOrders();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getOrders();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getOrders();
+            }
+            // }
+        });
 
         return () => {
             unsubscribe();
@@ -74,6 +74,7 @@ const OrderCard = ({navigation, user, product, id}) =>{
             <Text style={styles.fontStyle}>{user}</Text>
             <FlatList 
                 data={product}
+                keyExtractor={item=>item}
                 renderItem={itemData => <Text>{itemData.item}</Text>}
             />
             <View style={styles.Icons}>

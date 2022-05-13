@@ -8,9 +8,8 @@ import {
     Button
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
+
 import { AntDesign } from "@expo/vector-icons";
-
-
 
 import { auth } from '../../../../db/config'
 import { updatePassword } from 'firebase/auth';
@@ -183,6 +182,7 @@ const EditProfile = () => {
                 }
             </View>
             <Button title="Edit" onPress={() => EditDone()} />
+
         </View>
     )
 }

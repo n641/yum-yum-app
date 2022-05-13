@@ -12,7 +12,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const Forgetpass = () => {
+const Forgetpass = ({navigation}) => {
   const [email, setemail] = useState("");
   const [subject, setsubject] = useState("your password of restraunt");
   const [body, setbody] = useState("");
@@ -96,6 +96,7 @@ const Forgetpass = () => {
                 ).then(() => {
                   console.log('Your message was successfully sent!');
                 })
+                navigation.navigate("Login")
 
               }} color={"red"}
                 style={styles.btn} />
@@ -110,7 +111,7 @@ const Forgetpass = () => {
 
             <View style={{ margin: 10, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
               <TouchableOpacity onPress={() => {
-
+                navigation.navigate("Login");
               }}>
                 <Text style={{ color: 'yellow', fontSize: 18 }}>back to login?</Text>
               </TouchableOpacity>
