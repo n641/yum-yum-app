@@ -7,9 +7,6 @@ import {
     Dimensions,
 } from 'react-native';
 import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-
-import { deleteMessage, getMessage, subscribeMessage } from "../../db/Auth/usersData/Support";
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -22,8 +19,8 @@ const SupportCard = ({navigation, email, Message, id}) =>{
         <View style={styles.FirsrCotainer}>
             <Text style={styles.fontStyle}>{email}</Text>
             <View style={styles.Icons}>
-                <TouchableOpacity style={styles.rejectButton} onPress={() => handleDeleteOrder(id)}>
-                    <Entypo name={"squared-cross"} size={25} />
+                <TouchableOpacity style={styles.IconButton} onPress={() => navigation.navigate("chatting", {email: email, Message: Message})}>
+                    <Entypo name={"chat"} size={25} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -47,22 +44,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         marginHorizontal: 5,
     },
-    AcceptButton:{
+    IconButton: {
         justifyContent: 'center',
         alignItems: "center",
-        backgroundColor: "green",
+        backgroundColor: "#32a852",
         height: 30,
-        width: width / 5,
-        marginHorizontal: 5,
-        borderRadius: 5,
-        marginVertical: 5
-    },
-    rejectButton: {
-        justifyContent: 'center',
-        alignItems: "center",
-        backgroundColor: "red",
-        height: 30,
-        width: width / 5,
+        width: width / 3,
         marginHorizontal: 5,
         borderRadius: 5,
         marginVertical: 5
@@ -74,6 +61,5 @@ const styles = StyleSheet.create({
         color: 'red'
     }
 })
-
 
 export default SupportCard

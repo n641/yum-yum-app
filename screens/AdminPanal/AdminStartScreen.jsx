@@ -12,6 +12,7 @@ import StaffStart from "./Staff/StaffStart";
 import OfferStart from "./Offer/OfferStart";
 import ProductStart from "./Product/ProductStart";
 import StartUsers from "./Users/StartUsers";
+import Chatting from "../Cards/Chatting";
 
 const Drawer = createDrawerNavigator();
 
@@ -95,6 +96,17 @@ const AdminStartScreen = ({ navigation }) => {
 
             <Drawer.Screen name="StaffStart" component={StaffStart} options={{
                 title: "Staff",
+                headerStyle: {
+                    backgroundColor: "red",
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    fontWeight: "bold",
+                    fontSize: 22,
+                },
+            }} />
+            <Drawer.Screen name="chatting" component={Chatting} options={{
+                title: "Chat to user",
                 headerStyle: {
                     backgroundColor: "red",
                 },
