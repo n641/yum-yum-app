@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="AdminStartScreen">
         <Stack.Screen
           name="Login"
           component={Login}

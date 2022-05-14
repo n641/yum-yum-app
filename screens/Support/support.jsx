@@ -15,7 +15,7 @@ import {
   addMessage,
   editMessage,
   deleteMessage,
-  subscribe,
+  subscribeMessage,
 } from "../../db/Auth/usersData/Support";
 import {auth} from "../../db/config";
 import {getUsers, subscribeUser,editUser} from "../../db/Auth/usersData/users"
@@ -182,7 +182,9 @@ const Support = () => {
         <TextInput
           onChangeText={setMessageName}
           value={messageName}
-          onKeyPress={(e) => {
+          onKeyPress={async (e) => {
+            const array = await getMessage();
+            const obj = array.find(e => e.email === auth.currentUser.email)
             if (e.nativeEvent.key === "Enter") {
               e.preventDefault();
               editUser({
@@ -195,8 +197,24 @@ const Support = () => {
                     senderUN: user.userName,
                     date: date + "-" + time,
                     email: user.email,
+                    type: "send"
                   },
                 ],
+              }).then(()=>{
+                editMessage({
+                  ...obj,
+                  Message: [
+                    ...user.Message,
+                    {
+                      msg: messageName,
+                      senderId: user.id,
+                      senderUN: user.userName,
+                      date: date + "-" + time,
+                      email: user.email,
+                      type: "recieve"
+                    },
+                  ],
+                }).then(()=>console.log("Done !"))
               })
                 // .then(
                 //   editMessage({
@@ -246,7 +264,9 @@ const Support = () => {
             name="arrow-forward-outline"
             size={20}
             color="white"
-            onPress={() =>
+            onPress={async() =>{
+              const array = await getMessage();
+              const obj = array.find(e => e.email === auth.currentUser.email)
               editUser({
                 ...user,
                 Message: [
@@ -257,8 +277,24 @@ const Support = () => {
                     senderUN: user.userName,
                     date: date + "-" + time,
                     email: user.email,
+                    type: "send"
                   },
                 ],
+              }).then(()=>{
+                editMessage({
+                  ...obj,
+                  Message: [
+                    ...user.Message,
+                    {
+                      msg: messageName,
+                      senderId: user.id,
+                      senderUN: user.userName,
+                      date: date + "-" + time,
+                      email: user.email,
+                      type: "recieve"
+                    },
+                  ],
+                }).then(()=>console.log("Done !"))
               })
                 // .then(
                 //   editMessage({
@@ -277,7 +313,7 @@ const Support = () => {
                 //   })
                 // )
 
-                .then(setMessageName(""))
+                .then(setMessageName(""))}
             }
           />
         </TouchableOpacity>
