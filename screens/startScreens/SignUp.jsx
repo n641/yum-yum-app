@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, Touchable
 import React, { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import { register } from '../../db/Auth/auth';
-{/* <Ionicons name="chatbubbles" size={90} color={'red'} /> */ }
 import { auth, db, app } from '../../db/config';
 import { addUser } from '../../db/Auth/usersData/users';
+import { addMessage } from '../../db/Auth/usersData/Support';
 import { updateProfile } from "firebase/auth"
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -34,7 +34,14 @@ const SignUp = ({ navigation }) => {
                     favourite: [],
                     oldOrders: [],
                     Message: [],
-                    review: []
+                    review: [],
+                    points:1,
+                    credit:100
+                }).then(()=>{
+                    addMessage({
+                        email:email,
+                        Message:[]
+                    })
                 })
                 alert("Sign up done")
                 navigation.navigate("Login")
