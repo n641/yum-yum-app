@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Messages = ({ msg, loginuser, usermsg, time }) => {
+const Messages = ({ msg, loginuser, usermsg, time, type }) => {
   return (
     <View>
-      {loginuser ? (
+      {type === "send" ? (
         <View style={styles.containerx}>
           <Text style={{ fontSize: 12, textAlign: "center", color: "white" }}>
             {usermsg}

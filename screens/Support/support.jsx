@@ -133,7 +133,7 @@ const Support = () => {
         style={{ backgroundColor: "white", flexDirection: "column-reverse" }}
       >
         {message.map((c) =>
-          c.senderId == user.id ? (
+          c.type === "send" ? (
             <View
               key={c.id}
               style={{
@@ -148,6 +148,7 @@ const Support = () => {
                   usermsg={c.senderUN}
                   loginuser={true}
                   time={c.date}
+                  type={c.type}
                 />
               </TouchableOpacity>
             </View>
@@ -166,6 +167,7 @@ const Support = () => {
                   loginuser={false}
                   usermsg={c.senderUN}
                   time={c.date}
+                  type={c.type}
                 />
               </TouchableOpacity>
             </View>
@@ -284,7 +286,7 @@ const Support = () => {
                 editMessage({
                   ...obj,
                   Message: [
-                    ...user.Message,
+                    ...obj.Message,
                     {
                       msg: messageName,
                       senderId: user.id,
