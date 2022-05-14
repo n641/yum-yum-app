@@ -107,7 +107,9 @@ useEffect(() => {
                         offer: offer,
                         url: url,
                         price: price,
-                        productName: productName
+                        productName: productName,
+                        rate:[],
+                        comments:[]
                     }).then(()=>{
                        let temp=[];
                         findcat.products.map((p)=>{
