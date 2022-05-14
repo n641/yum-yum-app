@@ -75,7 +75,7 @@ const Product = ({navigation}) =>{
               navigation.navigate("addProduct");
             }}
           >
-            <Ionicons name="add-circle" size={width / 5} color={"red"} />
+            <Ionicons name="add-circle" size={width / 7} color={"red"} />
           </TouchableOpacity>
         </View>
       </View>

@@ -1,4 +1,4 @@
-import react, { useEffect } from 'react';
+import react, { useEffect , useState } from 'react';
 import {
     View,
     Text,
@@ -11,6 +11,7 @@ import style from '../../Constants/style'
 import { Ionicons } from "@expo/vector-icons";
 
 import { deleteProduct, getProducts, subscribe } from '../../db/Auth/usersData/Products';
+import { getCategories  , editCategory} from '../../db/Auth/usersData/Categories';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -18,10 +19,34 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const ProductCard = ({navigation, category, count, desc, discount, offer, url, price, productName, id}) =>{
+
+    const [categories, setCategories] = useState([]);
+    const getGategoriesHandler = async () => {
+        const arr = await getCategories();
+        setCategories(arr)
+    }
+
+    useEffect(() => {
+        getGategoriesHandler();
+    }, [])
+
     
     const handleDeleteProduct = (id) => {
         console.log("We delete Product with id: ", id);
-        deleteProduct(id);
+        deleteProduct(id)
+        .then(()=>{
+        const findcat = categories.find(e => e.category == category);
+        let temp=[];
+        findcat.products.map((p)=>{
+            if(p!=productName)
+            temp.push(p);
+        })
+        editCategory({
+           ...findcat,
+           products:temp
+          })
+
+        })
     }
 
     useEffect(() => {
@@ -87,7 +112,7 @@ const ProductCard = ({navigation, category, count, desc, discount, offer, url, p
             </View>
             <View style={{ flexDirection: 'column', justifyContent:"space-around"}}>
                 <TouchableOpacity onPress={()=>{
-                    navigation.navigate("editProduct" , {categoryy :category , countt: count , descc: desc , discountt :discount, offerf: offer, url: url, pricee: price, productNamee: productName})
+                    navigation.navigate("editProduct" , {categoryy :category , countt: count , descc: desc , discountt :discount, offerf: offer, url: url, pricee: price, productNamee: productName })
                 }}>
                     <Ionicons name="create" size={width/15} color={'red'} />
                 </TouchableOpacity>

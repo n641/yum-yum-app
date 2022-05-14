@@ -7,11 +7,11 @@ import {
   Button,
   Dimensions,
 } from "react-native";
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 
-import { addCategory } from '../../../db/Auth/usersData/Categories';
+import { addCategory ,getCategories, subscribe } from '../../../db/Auth/usersData/Categories';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -20,20 +20,57 @@ const AddCategory = ({ navigation }) => {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [imageLink, setImageLink] = useState("");
+    const [categories, setCategories] = useState("");
+
+
+    const getGategoriesHandler = async () => {
+        const arr = await getCategories();
+        setCategories(arr)
+        console.log(categories);
+    }
+
+    useEffect(() => {
+        getGategoriesHandler();
+    }, [])
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     const addCategoryHandler = () => {
+        const findcat = categories.find(e => e.category == category);
+        console.log(findcat);
+        if(findcat){
+            alert("name of category is already exist");
+        }else{
         category&&description&&imageLink?(
-
             addCategory({
                 category: category,
                 description: description,
                 link: imageLink,
                 products: [],
             }).then(()=>{
-                                    navigation.navigate("Category");
-
+            navigation.navigate("Category");
             })
-            ):alert("you must add a category")
+            ):alert("you must complite info of category")
+        }
     }
 
 

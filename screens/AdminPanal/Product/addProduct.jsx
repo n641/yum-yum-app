@@ -6,34 +6,130 @@ import {
     TextInput,
     Button
 } from 'react-native'
-import react, {useState} from 'react'
+import react, {useState , useEffect} from 'react'
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { addProduct } from '../../../db/Auth/usersData/Products';
+import { addProduct , getProducts , subscribe } from '../../../db/Auth/usersData/Products';
+import { editCategory, getCategories } from '../../../db/Auth/usersData/Categories';
 
 const addProductt = ({navigation}) =>{
     const [category, setCategory] = useState("")
     const [productName, setProductName] = useState("")
     const [url, setUrl] = useState("")
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState("")
     const [offer, setOffer] = useState("")
     const [discount, setDiscount] = useState("")
     const [desc, setDisc] = useState("")
-    const [count, setCount] = useState(0)
+    const [product, setproduct] = useState([])
+   const [categories, setCategories] = useState("");
+
+
+    const getItems = async () => {
+        const arr = await getProducts();
+        setproduct(arr);
+        console.log(arr);
+      };
+   useEffect(() => {
+     getItems();
+   }, []);
+
+   
+   const getGategoriesHandler = async () => {
+    const arr = await getCategories();
+    setCategories(arr)
+    console.log(categories);
+}
+
+useEffect(() => {
+    getGategoriesHandler();
+}, [])
+   
+   useEffect(() => {
+     const unsubscribe = subscribe(({ change, snapshot }) => {
+             if (change.type === "added") {
+         console.log("New message: ", change.doc.data());
+         getItems();
+       }
+       if (change.type === "modified") {
+         console.log("Modified city: ", change.doc.data());
+         getItems();
+       }
+       if (change.type === "removed") {
+         console.log("Removed message: ", change.doc.data());
+         getItems();
+       }
+     });
+   
+     return () => {
+       unsubscribe();
+     };
+   }, []);
+
+
+
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     const addProductHandler = () =>{
-        console.log(category, productName, url, price, offer, discount, desc, count)
-        addProduct({
-            category: category,
-            count: category,
-            description: desc,
-            discount: discount,
-            offer, offer,
-            url: url,
-            price: price,
-            productName: productName
-        });
+        const findpro = product.find(e => e.productName == productName);
+        console.log(findpro);
+        if(findpro){
+            alert("name of product is already exist");
+        }else{
+            const findcat = categories.find(e => e.category == category);
+            if(findcat){
+                category&&productName&&desc&&price&&url?(
+                    addProduct({
+                        category: category,
+                        count: 0,
+                        description: desc,
+                        discount: discount,
+                        offer: offer,
+                        url: url,
+                        price: price,
+                        productName: productName,
+                        rate:[],
+                        comments:[]
+                    }).then(()=>{
+                       let temp=[];
+                        findcat.products.map((p)=>{
+                            temp.push(p);
+                        })
+                        temp.push(productName);
+                        editCategory({
+                            ...findcat,
+                           products:temp
+                        }
+                          )
+                    })
+                        ):alert("you must complite info of product")
+            }else{
+                alert(`don\'t have this category ${category}`)
+            }
+           
+
+       
+    }
     }
 
     return(
@@ -47,7 +143,7 @@ const addProductt = ({navigation}) =>{
                 </TouchableOpacity>
 
                 <Text style={styles.fontStyle}>
-                    Add Staff
+                    Add product
                 </Text>
             </View>
 
@@ -56,6 +152,13 @@ const addProductt = ({navigation}) =>{
                     placeholder='Enter name of Product'
                     onChangeText={setProductName}
                     value={productName}
+                />
+            </View>
+            <View style={styles.input}>
+                <TextInput
+                    placeholder='Enter url of Product'
+                    onChangeText={setUrl}
+                    value={url}
                 />
             </View>
             <View style={styles.input}>
@@ -72,13 +175,7 @@ const addProductt = ({navigation}) =>{
                     value={desc}
                 />
             </View>
-            <View style={styles.input}>
-                <TextInput
-                    placeholder='Enter count of Product'
-                    onChangeText={setCount}
-                    value={count}
-                />
-            </View>
+           
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter Category of Product'
@@ -88,14 +185,14 @@ const addProductt = ({navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter offer of Product'
+                    placeholder='Enter true if you have offer or false if not'
                     onChangeText={setOffer}
                     value={offer}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter discount of Product'
+                    placeholder='Enter discount if offer is true'
                     onChangeText={setDiscount}
                     value={discount}
                 />
@@ -114,13 +211,12 @@ const styles = StyleSheet.create({
     bigContainer: {
         flex: 1,
         alignItems: 'center', 
-        justifyContent: 'center', 
         marginTop: 60 
     },
     backButtonStyle: {
         flexDirection: "row", 
         alignItems: 'center', 
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     fontStyle: {
         fontSize: 20, 
@@ -128,7 +224,7 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: 10,
+        height: 20,
         borderRadius: 10,
         width: 400,
         justifyContent: 'flex-start',
