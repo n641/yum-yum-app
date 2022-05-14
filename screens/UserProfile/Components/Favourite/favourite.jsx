@@ -5,6 +5,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import FavCard from './FavCard';
+import BasicCard from '../../../../Components/BasicCard'
 import style from '../../../../Constants/style';
 
 import { getUsers, subscribeUser } from "../../../../db/Auth/usersData/users";
@@ -126,7 +127,7 @@ const Favourite = ({ navigation }) => {
               ? e.favourite.map((op) =>
                   Favourite.map((p, id) =>
                     op == p.productName ? (
-                      <FavCard
+                      <BasicCard
                         url={p.url}
                         name={p.productName}
                         price={p.price}

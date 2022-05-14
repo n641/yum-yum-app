@@ -2,8 +2,10 @@ import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList } from "react-
 import React, { useState, useEffect } from 'react'
 import Card from './Card';
 import style from "../../../Constants/style";
+import BasicCard from '../../../Components/BasicCard'
 
 import { getProducts, subscribe } from "../../../db/Auth/usersData/Products";
+
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -47,6 +49,11 @@ const BestSellingFood = ({ navigation }) => {
     };
   }, []);
 
+useEffect(()=>{
+let temp=[];
+
+},[])
+
 
   return (
     <View>
@@ -69,7 +76,7 @@ const BestSellingFood = ({ navigation }) => {
 
         renderItem={(itemData) =>
           itemData.item.count > 2 ? (
-            <Card
+            <BasicCard
               name={itemData.item.productName}
               url={itemData.item.url}
               price={itemData.item.price}

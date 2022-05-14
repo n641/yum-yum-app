@@ -7,6 +7,7 @@ const height = Dimensions.get("window").height;
 import style from '../../../../Constants/style';
 
 import LastOrderCard from './LastOrderCard';
+import BasicCard from '../../../../Components/BasicCard'
 
 import { getUsers, subscribeUser } from '../../../../db/Auth/usersData/users';
 import { getProducts, subscribe } from '../../../../db/Auth/usersData/Products';
@@ -126,7 +127,7 @@ const LastOrder = ({ navigation }) => {
                                 e.oldOrders.map((op) => (
                                     product.map((p, id) => (
                                         op == p.productName ? (
-                                            <LastOrderCard url={p.url} name={p.productName} price={p.price} desc={p.description} offer={e.offer} discound={e.discount} navigation={navigation} key={id} />
+                                            <BasicCard url={p.url} name={p.productName} price={p.price} desc={p.description} offer={e.offer} discound={e.discount} navigation={navigation} key={id} />
                                         ) : null
                                     ))
                                 )

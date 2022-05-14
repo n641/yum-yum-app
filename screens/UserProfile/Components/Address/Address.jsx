@@ -11,8 +11,9 @@ const height = Dimensions.get("window").height;
 
 
 const Address = () => {
-  const [user, setUsers] = useState([{ name: "noha", add: ["sdkjslkj", "lskddsljkf"] }]);
-
+  const [users, setUsers] = useState([]);
+const [address, setaddress] = useState([]);
+const [points, setpoints] = useState([]);
 
 
 
@@ -54,12 +55,19 @@ const Address = () => {
 
 
   
-    user.map((e, i) => {
-      e.email == auth.currentUser.email ? (
-        e.address.map((l)=>{
-          console.log(l);
-        })
-      ) : null })
+  
+
+  useEffect(()=>{
+    const user = users.find(e=>e.email === auth.currentUser.email);
+    console.log(user)
+  //    let temp =[];
+  //    user.address.map((add)=>{
+  //     temp.push(add)
+  // })
+  //   setaddress(temp);
+  //   setpoints(user.points)
+
+      },[])
   
   return (
     <View style={{ flexDirection: 'row', marginTop: 20 }}>
@@ -69,10 +77,10 @@ const Address = () => {
       }}>
         <Text style={{ fontWeight: 'bold', fontSize: 20, color: style.primary, textAlign: 'center' }}>Address</Text>
         <ScrollView>
-          {user.map((e, i) => (
+          {users.map((e, i) => (
             e.email == auth.currentUser.email ? (
               <View key={i} style={{ padding: 10 }}>
-                {e.address.map((l, index) => (
+                {address.map((l, index) => (
 
                   <View key={index}>
                     <Text style={{ fontWeight: '500', fontSize: 16 , color:"black" }} >
@@ -95,7 +103,7 @@ const Address = () => {
         <Text style={{ fontWeight: 'bold', fontSize: 25, color: style.primary, textAlign: 'center' }}>points</Text>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>1</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>{points}</Text>
           <Ionicons name="trophy" size={40} color={style.secondry} />
         </View>
 

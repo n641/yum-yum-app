@@ -29,16 +29,13 @@ import Order from "./screens/ordersScreen/Order";
 
 
 
-
-
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AdminStartScreen">
+      <Stack.Navigator initialRouteName="HomeStart">
         <Stack.Screen
           name="Login"
           component={Login}

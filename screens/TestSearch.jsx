@@ -11,8 +11,9 @@ import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 import { getProducts, subscribe } from "../db/Auth/usersData/Products";
-import Card from "./HomeScreen/Components/Card";
+// import Card from "./HomeScreen/Components/Card";
 import NotFound from "./NotFoundScreens/NotFound";
+import BasicCard from '../Components/BasicCard'
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -59,31 +60,31 @@ const TestSearch = ({ navigation, route }) => {
 
   useEffect(() => {
     searchfilteredit(resulte);
-  },[products]);
+  }, [products]);
 
   const searchfilteredit = (text) => {
     if (text) {
-         if (!products?.length) return;
-        let tem = [];
-              products.map((p) =>
-               
-                  p.productName
-                    .toUpperCase()
-                    .includes(text.toUpperCase() )? tem.push(p) : null
-                
-              );
+      if (!products?.length) return;
+      let tem = [];
+      products.map((p) =>
+
+        p.productName
+          .toUpperCase()
+          .includes(text.toUpperCase()) ? tem.push(p) : null
+
+      );
       console.log("tem", tem)
-        setFilterProducts(tem);
-        setflag(true);
-      
+      setFilterProducts(tem);
+      setflag(true);
+
     }
   };
 
-          console.log("filter pro", FilterProducts);
+  console.log("filter pro", FilterProducts);
 
 
   return (
-    <View style={{ top: 2, alignItems: "center" }}>
+    <View style={{ top: 2, alignItems: "center", backgroundColor: "white" }}>
       <View
         style={{
           borderRadius: 20,
@@ -94,7 +95,7 @@ const TestSearch = ({ navigation, route }) => {
           backgroundColor: "gray",
           alignItems: "center",
           justifyContent: "center",
-          padding: 10,
+          padding: 20,
           flexDirection: "row",
           margin: 10,
         }}
@@ -104,17 +105,14 @@ const TestSearch = ({ navigation, route }) => {
           onChangeText={setsearch}
           value={search}
         />
-        {/* <TouchableOpacity
-                    onPress={() => searchfilter(search)}
-                >
-                    <Ionicons name="search" size={20} color={'black'} />
-                </TouchableOpacity> */}
+
       </View>
 
       <View>
         {flag ? (
-          FilterProducts.map((FilterProducts) => (
-            <Card
+          FilterProducts.map((FilterProducts, i) => (
+            <BasicCard
+              key={i}
               name={FilterProducts.productName}
               url={FilterProducts.url}
               price={FilterProducts.price}

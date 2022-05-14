@@ -4,7 +4,8 @@ import React, { useState ,useEffect} from 'react'
 import Header from "../HomeScreen/Components/Header";
 import { Ionicons } from "@expo/vector-icons";
 
-import CardProduct from "./CardProduct";
+// import CardProduct from "./CardProduct";
+import BasicCard from '../../Components/BasicCard'
 
 import {getProducts,subscribe} from "../../db/Auth/usersData/Products"
 
@@ -14,9 +15,10 @@ import style from "../../Constants/style"
 
 
 const ProductList = ({ navigation ,route}) => {
-   const [pro, setpro] = useState([
-     //must order product by count!!!!
-   ]);
+   const [pro, setpro] = useState([]);
+   const {name}  = route.params;
+   const [listItem, setlistItem] = useState([])
+
 
    const getItems = async () => {
      const arr = await getProducts();
@@ -50,13 +52,18 @@ useEffect(() => {
   };
 }, []);
 
-    const {name}  = route.params;
-    console.log(name);
+   
+useEffect(()=>{
+const findpro = pro.find(p=>p.category===name);
+console.log("find proooooooooooo",findpro)
+let temp=[findpro];
+setlistItem(temp);
 
+},[pro])
  
   return (
     <View>
-      <Header icon={"cart"} />
+      <Header icon={"cart"} navigation={navigation} />
       <Text
         style={{
           fontSize: 25,
@@ -75,8 +82,8 @@ useEffect(() => {
         style={{
           fontSize: 18,
           position: "absolute",
-          top: 50,
-          left: 150,
+          top: width/5-6,
+          left: width/5,
           marginHorizontal: 15,
           alignItems: "center",
           justifyContent: "center",
@@ -89,12 +96,12 @@ useEffect(() => {
       </TouchableOpacity>
 
       <FlatList
-        data={pro}
+        data={listItem}
         numColumns={2}
         keyExtractor={(item) => item.productName}
         renderItem={(itemData) =>
-          itemData.item.category == name ? (
-            <CardProduct
+          // itemData.item.category == name ? (
+            <BasicCard
               name={itemData.item.productName}
               url={itemData.item.url}
               price={itemData.item.price}
@@ -103,7 +110,7 @@ useEffect(() => {
               desc={itemData.item.description}
               navigation={navigation}
             />
-          ) : null
+          // ) : null
         }
       />
     </View>

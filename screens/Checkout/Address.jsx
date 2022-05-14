@@ -78,12 +78,10 @@ const Address = ({ route, navigation }) => {
 
                         <View style={{justifyContent:'flex-start' , flexDirection:"row" , alignItems:'center'}}>
                             <View style={{ marginHorizontal: 10 }}>
-                                <Ionicons name="checkmark-circle-sharp" size={width / 19} color={'black'} />
+                                <Ionicons name="shield-checkmark" size={width / 19} color={'black'} />
                             </View>
                             <TouchableOpacity onPress={()=>{
                                 navigation.navigate("CheckOut" , { address:a , total:total})
-
-
                             }}>
                                 <Text style={{ fontSize: width / 20, fontWeight: 'bold' }}>{a}</Text>
                             </TouchableOpacity>

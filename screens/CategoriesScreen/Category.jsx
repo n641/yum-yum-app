@@ -59,7 +59,7 @@ const Category = ({navigation}) => {
     return (
       <View>
         <Header icon={"cart"} navigation={navigation} />
-        <Text style={{ textAlign: "center", fontSize: 20, margin: 20 }}>
+        <Text style={{ textAlign: "center", fontSize: 20, margin: 20 , fontWeight:'bold' }}>
           select from the categories below
         </Text>
         <TouchableOpacity
@@ -69,8 +69,8 @@ const Category = ({navigation}) => {
           style={{
             fontSize: 18,
             position: "absolute",
-            top: 55,
-            left: 20,
+            top: width/5,
+            left: width/35,
             marginHorizontal: 15,
             alignItems: "center",
             justifyContent: "center",

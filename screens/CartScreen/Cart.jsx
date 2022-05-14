@@ -43,7 +43,6 @@ const Cart = ({ navigation, route }) => {
   const getProduct = async () => {
     const arr = await getProducts();
     setproducts(arr);
-    // console.log(arr);
   };
 
   useEffect(() => {
@@ -55,15 +54,12 @@ const Cart = ({ navigation, route }) => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
 
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
     });
@@ -76,15 +72,12 @@ const Cart = ({ navigation, route }) => {
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getProduct();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getProduct();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getProduct();
       }
     });
@@ -97,16 +90,9 @@ const Cart = ({ navigation, route }) => {
   useEffect(() => {
     if (!Users?.length)
       return;
-    // console.log('auth.currentUser.email :>> ', auth.currentUser.email);
     const user = Users.find(e => e.email == auth.currentUser.email);
-    // console.log('Users :>> ', Users);
-    // console.log('User i find :>> ', user);
     const cart = user.cart.map(name => products.find(p => p.productName == name));
-    // console.log("we have orders", cart)
     setListItems(cart);
-    // console.log("we have product", listItems);
-
-
   }, [products, Users]);
 
 
@@ -214,10 +200,15 @@ const Cart = ({ navigation, route }) => {
           alignItems:"center"
         }}
         onPress={() => {
+          if(total!==0){
           navigation.navigate("Address", {
             total: total,
           });
-        }}
+        }else{
+          alert("please increase counter of product to order it")
+        }
+        }
+      }
       >
         <Text
           style={{

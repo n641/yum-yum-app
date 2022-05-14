@@ -23,7 +23,7 @@ export default function CardofCart({
   
 }) {
   
-  const [counter, setcounter] = useState(1);
+  const [counter, setcounter] = useState(0);
   const [total, setTotal] = useState(offer?price - discound:price);
 
   const increment = () => {
