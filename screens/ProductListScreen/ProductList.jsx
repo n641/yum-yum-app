@@ -54,9 +54,12 @@ useEffect(() => {
 
    
 useEffect(()=>{
-const findpro = pro.find(p=>p.category===name);
-console.log("find proooooooooooo",findpro)
-let temp=[findpro];
+
+let temp=[];
+pro.map((p)=>{
+  p.category===name?
+  temp.push(p):null
+})
 setlistItem(temp);
 
 },[pro])

@@ -175,14 +175,13 @@ const placeOrder = ({ route, navigation }) => {
           ...user,
           orders: [{user:user.email ,product:[...temp]}],
           cart:[],
-          points:((((points)-(total))))
+          points:(points)-Math.floor(total/4)
         });
       } else {
         editUser({
           ...user,
           orders: [{user:user.email ,product:[...temp]}],
           cart:[],
-          points:points+(total/4)
         });
       }
 

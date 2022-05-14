@@ -3,8 +3,8 @@ import React, { useState , useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 
-import { editCategory } from '../../../db/Auth/usersData/Categories';
-import { getProducts , subscribe , editProduct } from '../../../db/Auth/usersData/Products';
+import { editCategory  , getCategories , subscribe} from '../../../db/Auth/usersData/Categories';
+import { getProducts  , editProduct } from '../../../db/Auth/usersData/Products';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -21,6 +21,40 @@ const EditCaregory = ({ route, navigation }) => {
   const [description, setDescription] = useState(desc);
   const [imageLink, setImageLink] = useState(url);
   const [products, setproducts] = useState([])
+  const [arrCategory, setArrCategory] = useState([]);
+
+
+
+  const getGategoriesHandler = async () => {
+      const arr = await getCategories();
+      setArrCategory(arr)
+  }
+
+  useEffect(() => {
+      getGategoriesHandler();
+  }, [])
+
+  useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+        if (change.type === "added") {
+            console.log("New mesg: ", change.doc.data());
+            getGategoriesHandler();
+        }
+        if (change.type === "modified") {
+            console.log("Modified mesg: ", change.doc.data());
+            getGategoriesHandler();
+        }
+        if (change.type === "removed") {
+            console.log("Removed mesg: ", change.doc.data());
+            getGategoriesHandler();
+        }
+    });
+
+    return () => {
+        unsubscribe();
+    };
+}, []);
+
 
 
   const getItems = async () => {
@@ -31,30 +65,6 @@ const EditCaregory = ({ route, navigation }) => {
   useEffect(() => {
     getItems();
   }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
-            if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
-        getItems();
-      }
-      if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
-        getItems();
-      }
-      if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
-        getItems();
-      }
-    });
-  
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-
-
 
   return (
     <View
@@ -97,13 +107,19 @@ const EditCaregory = ({ route, navigation }) => {
           title="Confirm Edit"
           color={"red"}
           onPress={() => {
-            category && description && imageLink ? (
+            const findcat = arrCategory.find(e => e.category == name);
+            let temp=[];
+            findcat.products.map((p)=>{
+              temp.push(p);
+            })
 
+            category && description && imageLink ? (
               editCategory({
                 category: category,
                 description: description,
                 link: imageLink,
                 id: ids,
+                products:[...temp]
               }).then(() => {
                 const findpro = products.find(e => e.category == name);
                 console.log(findpro);
