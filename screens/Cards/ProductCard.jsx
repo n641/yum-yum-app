@@ -87,7 +87,7 @@ const ProductCard = ({navigation, category, count, desc, discount, offer, url, p
             </View>
             <View style={{ flexDirection: 'column', justifyContent:"space-around"}}>
                 <TouchableOpacity onPress={()=>{
-                    navigation.navigate("editProduct" , {categoryy :category , countt: count , descc: desc , discountt :discount, offerf: offer, url: url, pricee: price, productNamee: productName})
+                    navigation.navigate("editProduct" , {categoryy :category , countt: count , descc: desc , discountt :discount, offerf: offer, url: url, pricee: price, productNamee: productName })
                 }}>
                     <Ionicons name="create" size={width/15} color={'red'} />
                 </TouchableOpacity>

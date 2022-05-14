@@ -7,10 +7,11 @@ import {
     TextInput,
     ScrollView
 } from 'react-native'
-import react, {useState} from 'react'
+import react, {useState , useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 import { editProduct } from '../../../db/Auth/usersData/Products';
+import { getCategories , subscribe } from '../../../db/Auth/usersData/Categories';
 
 const editProductt = ({route, navigation}) =>{
     
@@ -25,8 +26,45 @@ const editProductt = ({route, navigation}) =>{
     const [desc, setDisc] = useState(descc)
     const [count, setCount] = useState(countt)
 
-    const editProductHandler = ({navigation}) =>{
+   const [categories, setCategories] = useState("");
+
+
+    const getGategoriesHandler = async () => {
+        const arr = await getCategories();
+        setCategories(arr)
+        console.log(categories);
+    }
+    
+    useEffect(() => {
+        getGategoriesHandler();
+    }, [])
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+            if (change.type === "added") {
+                console.log("New mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "modified") {
+                console.log("Modified mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+            if (change.type === "removed") {
+                console.log("Removed mesg: ", change.doc.data());
+                getGategoriesHandler();
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+    const editProductHandler = () =>{
         console.log(category, productName, url, price, offer, discount, desc, count)
+        const findcat = categories.find(e => e.category == category);
+        if(findcat){
+            
         editProduct({
             category: category,
             count: count,
@@ -37,9 +75,13 @@ const editProductt = ({route, navigation}) =>{
             price: price,
             productName: productName,
             id: id
-        }).then(() => navigation.navigate("Producto"));
+        })
+        .then(() => navigation.navigate("Product"))
+            
+    }else{
+        alert(`don\'t have this category ${category}`)
     }
-
+    }
     return(
         <View style={styles.bigContainer}>
             <View style={styles.backButtonStyle}>
@@ -106,7 +148,7 @@ const editProductt = ({route, navigation}) =>{
             </View>
             <View style={styles.finishButton}>
                 <Button title='Confirm Edit' color={'red'} onPress={() => {
-                    editProductHandlerHandler();
+                    editProductHandler();
                 }} />
             </View>
         </View>
