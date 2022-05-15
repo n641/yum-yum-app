@@ -50,7 +50,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter name of Staff'
                     onChangeText={setName}
-                    value={name}
+                    value={namee}
                 />
             </View>
 
@@ -58,7 +58,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter rule of Staff'
                     onChangeText={setRule}
-                    value={rule}
+                    value={rulee}
                 />
             </View>
 
@@ -66,7 +66,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter Salary of Staff'
                     onChangeText={setSalary}
-                    value={salary}
+                    value={salaryy}
                 />
             </View>
 
@@ -74,7 +74,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter ate of Staff'
                     onChangeText={setRate}
-                    value={rate}
+                    value={ratee}
                 />
             </View>
 

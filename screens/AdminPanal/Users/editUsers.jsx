@@ -58,49 +58,49 @@ const editUsers = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter user name'
                     onChangeText={setUserName}
-                    value={userName}
+                    value={userNamee}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter email'
                     onChangeText={setEmail}
-                    value={email}
+                    value={emaill}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter password'
                     onChangeText={setPassword}
-                    value={password}
+                    value={passwordd}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter address'
                     onChangeText={setAddress}
-                    value={address}
+                    value={addresss}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter credit'
                     onChangeText={setCredit}
-                    value={credit}
+                    value={creditt}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter point'
                     onChangeText={setPoints}
-                    value={points}
+                    value={pointss}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter rule'
                     onChangeText={setRule}
-                    value={rule}
+                    value={rulee}
                 />
             </View>
 
