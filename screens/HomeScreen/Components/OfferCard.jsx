@@ -18,17 +18,17 @@ const OfferCard = ({ url,name,price,desc,discound,fav,offer,navigation}) => {
     return (
       <View>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("DetailsScreen", {
-              name: name,
-              price: price,
-              fav: fav,
-              url: url,
-              discound: discound,
-              desc: desc,
-              offer: offer,
-            });
-          }}
+          // onPress={() => {
+          //   navigation.navigate("DetailsScreen", {
+          //     name: name,
+          //     price: price,
+          //     fav: fav,
+          //     url: url,
+          //     discound: discound,
+          //     desc: desc,
+          //     offer: offer,
+          //   });
+          // }}
         >
           <Image
             style={{

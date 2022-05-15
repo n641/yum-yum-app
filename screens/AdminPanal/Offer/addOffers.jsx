@@ -20,7 +20,6 @@ const addOffers = ({navigation}) =>{
     const [url, setUrl] = useState('')
 
     const addOfferHandler = () =>{
-        console.log(offerName, price, desc, url)
         addOffer({
             offerName: offerName,
             price: price,

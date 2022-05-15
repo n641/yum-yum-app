@@ -23,7 +23,6 @@ const ChatToSupport = ({ navigation }) => {
     const getMessagesHandler = async () =>{
         const arr = await getMessage()
         setArrMessage(arr)
-        console.log(arrMessage)
     }
 
     useEffect(() => {
@@ -33,18 +32,14 @@ const ChatToSupport = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = subscribeMessage(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getMessagesHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getMessagesHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getMessagesHandler();
             }
-            // }
         });
 
         return () => {

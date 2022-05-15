@@ -7,7 +7,6 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 import style from "../../Constants/style";
 
-//db
 import { getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 
 
@@ -22,7 +21,6 @@ const Category = ({navigation}) => {
     const getGategoriesHandler = async () => {
       const arr = await getCategories();
       setcategory(arr)
-      console.log(category);
   }
 
   useEffect(()=>{
@@ -34,18 +32,14 @@ const Category = ({navigation}) => {
       //   console.log("changes", change, snapshot, change.type);
       // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getGategoriesHandler();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getGategoriesHandler();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getGategoriesHandler();
       }
-      // }
     });
 
     return () => {

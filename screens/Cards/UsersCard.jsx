@@ -20,26 +20,21 @@ const height = Dimensions.get("window").height;
 const UsersCard = ({navigation, address, credit, email, password, points, rule, userName, id}) =>{
     const handleDeleteUser = (id) => {
         deleteUser(id).then(() =>{
-            console.log("We delete user with id: ", id);
             deleteUserDB(id);   
         }).catch((e) =>{
             alert(e.messege)
-            console.log(e.messege)
         })
     }
 
     useEffect(() => {
        //const unsubscribe = subscribe(({ change, snapshot }) => {
         //     if (change.type === "added") {
-        //         console.log("New mesg: ", change.doc.data());
         //         getStuff();
         //     }
         //     if (change.type === "modified") {
-        //         console.log("Modified mesg: ", change.doc.data());
         //         getStuff();
         //     }
         //     if (change.type === "removed") {
-        //         console.log("Removed mesg: ", change.doc.data());
         //         getStuff();
         //     }
         //     // }

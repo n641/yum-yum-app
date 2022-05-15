@@ -21,7 +21,6 @@ const Offer = ({navigation}) => {
     const getOfferHandler = async () => {
         const arr = await getOffers();
         setArrOffer(arr)
-        console.log(arrOffer);
     }
 
     useEffect(() => {
@@ -31,15 +30,12 @@ const Offer = ({navigation}) => {
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getOfferHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getOfferHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getOfferHandler();
             }
             // }

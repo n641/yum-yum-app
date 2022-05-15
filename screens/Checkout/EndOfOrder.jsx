@@ -10,7 +10,6 @@ import style from '../../Constants/style';
 
 const EndOfOrder = ({navigation , route}) => {
   const { total, address, way , productinorder} = route.params;
-  console.log("product i have route are",productinorder );
 
   const [arr, setarr] = useState(productinorder);
 

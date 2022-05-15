@@ -19,25 +19,20 @@ const height = Dimensions.get("window").height;
 const OfferCard = ({navigation, offerName, price, desc, url, id}) =>{
 
     const handleDeleteOffer = (id) => {
-        console.log("We delete Offer with id: ", id);
         deleteOffer(id);
     }
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getOffers();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getOffers();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getOffers();
             }
-            // }
         });
 
         return () => {

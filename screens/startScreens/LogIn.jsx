@@ -38,11 +38,8 @@ const Login = ({ navigation }) => {
     }
 
     const handleLogin = async () => {
-        console.log(email, pass);
         login(email, pass).then(()=>{
-            console.log(CUsser)
             const obj = CUsser.find(o => o.email === email);
-            console.log(obj)
             if(obj.rule === "user")
                 navigation.navigate("HomeStart")
             else if(obj.rule === "admin")

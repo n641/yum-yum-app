@@ -21,7 +21,6 @@ const editOfferr = ({route, navigation}) =>{
     const [urll, seturll] = useState('')
 
     const editOfferHandler = () =>{
-        console.log(offerNamee, pricee, descc, urll)
         editOffer({
             offerName: offerNamee,
             price: pricee,

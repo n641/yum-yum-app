@@ -34,18 +34,14 @@ const CheckOut = ({ route, navigation }) => {
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
-      // }
     });
 
     return () => {

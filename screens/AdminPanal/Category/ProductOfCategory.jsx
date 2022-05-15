@@ -28,7 +28,6 @@ const ProductOfCategory = ({ route, navigation }) => {
     const getItems = async () => {
         const arr = await getProducts();
         setproduct(arr);
-        console.log(arr)
     }
 
     useEffect(() => {
@@ -38,15 +37,12 @@ const ProductOfCategory = ({ route, navigation }) => {
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getItems();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getItems();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getItems();
             }
         });

@@ -16,7 +16,6 @@ const CategoriesList = ({ navigation }) => {
   const getGategoriesHandler = async () => {
     const arr = await getCategories();
     setcategoryName(arr)
-    console.log(categoryName);
 }
 
 useEffect(()=>{
@@ -28,15 +27,12 @@ useEffect(() => {
     //   console.log("changes", change, snapshot, change.type);
     // if (snapshot.metadata.hasPendingWrites) {
     if (change.type === "added") {
-      console.log("New message: ", change.doc.data());
       getGategoriesHandler();
     }
     if (change.type === "modified") {
-      console.log("Modified city: ", change.doc.data());
       getGategoriesHandler();
     }
     if (change.type === "removed") {
-      console.log("Removed message: ", change.doc.data());
       getGategoriesHandler();
     }
     // }

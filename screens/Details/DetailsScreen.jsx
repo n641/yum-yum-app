@@ -32,7 +32,6 @@ const DetailsScreen = ({ route,navigation}) => {
     const{name,price,desc,url,discound,offer}=route.params;
 
      const [pro, setpro] = useState([
-    //must order product by count!!!!
 
   ]);
   const [product, setproduct] = useState([
@@ -132,7 +131,6 @@ const DetailsScreen = ({ route,navigation}) => {
 
     const product = pro.find((e) => e.productName == name);
        setproduct(product);
-       console.log(product);
 
  let sum = 0;
  product.rate.map((r) => {
@@ -143,7 +141,6 @@ const DetailsScreen = ({ route,navigation}) => {
 
 sum==0?(setrate(0)):
  setrate((sum / product.rate.length));
-   console.log("rate", rate);
 
 
 

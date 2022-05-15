@@ -18,25 +18,20 @@ const height = Dimensions.get("window").height;
 const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
 
     const handleDeleteStaff = (id) => {
-        console.log("We delete Staff with id: ", id);
         deleteStuff(id);
     }
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getStuff();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getStuff();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getStuff();
             }
-            // }
         });
 
         return () => {

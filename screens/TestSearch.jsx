@@ -20,7 +20,6 @@ const height = Dimensions.get("window").height;
 
 const TestSearch = ({ navigation, route }) => {
   const { resulte } = route.params;
-  console.log(resulte);
 
   const [search, setsearch] = useState(resulte);
   const [products, setproducts] = useState([]);
@@ -30,7 +29,6 @@ const TestSearch = ({ navigation, route }) => {
   const getItems = async () => {
     const arr = await getProducts();
     setproducts(arr);
-    // console.log(products);
   };
 
   useEffect(() => {
@@ -40,15 +38,12 @@ const TestSearch = ({ navigation, route }) => {
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        // console.log("New message: ", change.doc.data());
         getItems();
       }
       if (change.type === "modified") {
-        // console.log("Modified city: ", change.doc.data());
         getItems();
       }
       if (change.type === "removed") {
-        // console.log("Removed message: ", change.doc.data());
         getItems();
       }
     });
@@ -73,15 +68,13 @@ const TestSearch = ({ navigation, route }) => {
           .includes(text.toUpperCase()) ? tem.push(p) : null
 
       );
-      console.log("tem", tem)
       setFilterProducts(tem);
       setflag(true);
 
     }
   };
 
-  console.log("filter pro", FilterProducts);
-
+   
 
   return (
     <View style={{ top: 2, alignItems: "center", backgroundColor: "white" }}>

@@ -24,7 +24,6 @@ import {
 
 
 const Header = ({ pagename, icon, navigation }) => {
-  console.log(auth.currentUser);
 
   const [listItems, setListItems] = useState([]);
 
@@ -38,7 +37,6 @@ const Header = ({ pagename, icon, navigation }) => {
   const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
-    // console.log(arr);
   };
 
   useEffect(() => {
@@ -48,15 +46,12 @@ const Header = ({ pagename, icon, navigation }) => {
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
       // }

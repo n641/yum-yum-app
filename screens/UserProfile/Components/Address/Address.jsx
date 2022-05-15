@@ -20,7 +20,6 @@ const [points, setpoints] = useState([]);
   const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
-    // console.log(arr);
   };
 
 
@@ -30,18 +29,14 @@ const [points, setpoints] = useState([]);
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
+     
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
       // }
@@ -80,7 +75,7 @@ const [points, setpoints] = useState([]);
           {users.map((e, i) => (
             e.email == auth.currentUser.email ? (
               <View key={i} style={{ padding: 10 }}>
-                {address.map((l, index) => (
+                {e.address.map((l, index) => (
 
                   <View key={index}>
                     <Text style={{ fontWeight: '500', fontSize: 16 , color:"black" }} >
@@ -103,7 +98,7 @@ const [points, setpoints] = useState([]);
         <Text style={{ fontWeight: 'bold', fontSize: 25, color: style.primary, textAlign: 'center' }}>points</Text>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>{points}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>20</Text>
           <Ionicons name="trophy" size={40} color={style.secondry} />
         </View>
 

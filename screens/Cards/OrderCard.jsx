@@ -28,14 +28,12 @@ const OrderCard = ({navigation, user, product, id}) =>{
       };
 
     const handleDeleteOrder = (id) => {
-        console.log("We delete Order with id: ", id);
         deleteOrder(id);
     }
 
     const acceptOrder = () =>{
         const realUser = users.find(e => e.email === user)
         const oldOrdersUser = users.find(e => e.email === user).oldOrders
-        console.log(oldOrdersUser)
         const finalArr = oldOrdersUser.concat(product)
         editUser({
             ...realUser,
@@ -50,18 +48,14 @@ const OrderCard = ({navigation, user, product, id}) =>{
     useEffect(() => {
         const unsubscribe = subscribeOrder(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getOrders();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getOrders();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getOrders();
             }
-            // }
         });
 
         return () => {

@@ -38,7 +38,6 @@ const ProductCard = ({ navigation, category, count, desc, discount, offer, url, 
                 const findcat = categories.find(e => e.category === category);
                 let temp = [];
 
-                console.log("fin category of product ", findcat)
                 findcat.products.map((p) => {
                     if (p != productName)
                         temp.push(p);
@@ -55,15 +54,12 @@ const ProductCard = ({ navigation, category, count, desc, discount, offer, url, 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getProducts();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getProducts();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getProducts();
             }
         });

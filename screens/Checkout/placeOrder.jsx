@@ -20,9 +20,7 @@ const height = Dimensions.get("window").height;
 
 const placeOrder = ({ route, navigation }) => {
   const { total, address, payment } = route.params;
-  console.log(total)
-  console.log(address)
-  console.log(payment)
+  
 
   const [products, setproducts] = useState([]);
   const [Users, setUsers] = useState([]);
@@ -47,7 +45,6 @@ const placeOrder = ({ route, navigation }) => {
   const getProduct = async () => {
     const arr = await getProducts();
     setproducts(arr);
-    // console.log(arr);
   };
 
   useEffect(() => {
@@ -60,15 +57,12 @@ const placeOrder = ({ route, navigation }) => {
     const unsubscribe = subscribeOrder(({ change, snapshot }) => {
 
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getord();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getord();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getord();
       }
     });
@@ -82,15 +76,12 @@ const placeOrder = ({ route, navigation }) => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
 
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
     });
@@ -103,15 +94,12 @@ const placeOrder = ({ route, navigation }) => {
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getProduct();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getProduct();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getProduct();
       }
     });

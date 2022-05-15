@@ -36,17 +36,13 @@ const EditProfile = () => {
         const arr = await getUsers();
         const us =  getAuth().currentUser
         const realUser = arr.find(e => e.email === us.email)
-        console.log(realUser)
         await setUsers(realUser);
         setName(realUser.userName)
         setAddress(realUser.address)
-        console.log(us)
     };
 
     const removeAddress = index =>{
         address.splice(index, 1)
-        console.log("Clicked", address)
-        console.log(users)
         editUser({
             ...users,
             address: [...address]
@@ -59,8 +55,6 @@ const EditProfile = () => {
         }
         else{
             address.push(editAddress)
-            console.log("Clicked", address)
-            console.log(users)
             editUser({
                 ...users,
                 address: [...address]
@@ -72,7 +66,6 @@ const EditProfile = () => {
     const EditDone = () =>{
         if(password === cpassword && CCPassword === users.password){
             updatePassword(auth.currentUser, password).then(()=>{
-                console.log(name, password, address)
                 editUser({
                     ...users,
                     address: [...address],
@@ -92,15 +85,12 @@ const EditProfile = () => {
             //   console.log("changes", change, snapshot, change.type);
             // if (snapshot.metadata.hasPendingWrites) {
             if (change.type === "added") {
-                console.log("New message: ", change.doc.data());
                 getUserss();
             }
             if (change.type === "modified") {
-                console.log("Modified city: ", change.doc.data());
                 getUserss();
             }
             if (change.type === "removed") {
-                console.log("Removed message: ", change.doc.data());
                 getUserss();
             }
             // }

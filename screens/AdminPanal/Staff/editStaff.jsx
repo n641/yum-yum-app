@@ -21,7 +21,6 @@ const editStaff = ({route, navigation}) =>{
     const [ratee, setRate] = useState(rate);
 
     const editStaffHandler = () =>{
-        console.log(name, rule, salary, rate)
         editStuff({
             name: namee,
             rule: rulee,
