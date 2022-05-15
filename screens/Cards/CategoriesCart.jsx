@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { deleteCategory, getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { async } from '@firebase/util';
 
 
 const width = Dimensions.get("window").width;
@@ -21,9 +22,16 @@ const height = Dimensions.get("window").height;
 
 const CategoriesCart = ({navigation , link , category , description , id }) => {
 
-    const handleDeleteCategory = (id) => {
+    const handleDeleteCategory = async(id) => {
         console.log("We delete category with id: ", id);
-        deleteCategory(id);
+        const categoriesArr = await getCategories();
+        const obj = categoriesArr.find(e => e.id === id)
+        if(obj.products.length == 0){
+          deleteCategory(id);
+        }
+        else{
+          alert(`This category have ${obj.products.length} product please delete this products first`)
+        }
     }
 
     useEffect(() => {
