@@ -3,8 +3,11 @@ import React, { useState, useEffect  } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 
-import { getUsers, subscribeUser } from '../../db/Auth/usersData/users'
+import { getUsers, editUser, subscribeUser } from '../../db/Auth/usersData/users'
 import { auth } from '../../db/config'
+import { TextInput } from 'react-native-gesture-handler';
+import { async } from '@firebase/util';
+import editUsers from '../AdminPanal/Users/editUsers';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -13,15 +16,26 @@ const Address = ({ route, navigation }) => {
     const { total } = route.params;
     const [Users, setUsers] = useState([]);
     const [address, setaddress] = useState([]);
-
-
-
+    const [flag, setFlag] = useState(true)
+    const [CUser, setCUser] = useState("")
+    const [newAddress, setNewAddress] = useState("")
 
     const getUserss = async () => {
         const arr = await getUsers();
         setUsers(arr);
     };
 
+    const addNewAddress = async() =>{
+        const arr = await getUsers();
+        const obj = arr.find(e => e.email === auth.currentUser.email)
+        setCUser(obj)
+        const oldAddresses = obj.address
+        editUser({
+            ...obj,
+            address:[...oldAddresses, newAddress]
+        }).then(()=> setFlag(!flag))
+
+    }
 
     useEffect(() => {
         getUserss();
@@ -60,37 +74,57 @@ const Address = ({ route, navigation }) => {
 
     return (
         <View style={{alignItems:'center'}}>
-             <Text  style={{ fontSize: 20, fontWeight: 'bold', color: "red" , margin:10 }}>choose on of your address </Text>
-             <ScrollView>
-            {address.map((a,i) => (
-                <View key={i} style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
-                    <View style={{justifyContent:'space-between' , flexDirection:"row" , width:width-20 , alignItems:'center'}}>
+            {
+                (flag == true) ?
+                    <View>
+                        <Text  style={{ fontSize: 20, fontWeight: 'bold', color: "red" , margin:10 }}>choose on of your address </Text>
+                        <ScrollView>
+                        {address.map((a,i) => (
+                            <View key={i} style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
+                                <View style={{justifyContent:'space-between' , flexDirection:"row" , width:width-20 , alignItems:'center'}}>
 
-                        <View style={{justifyContent:'flex-start' , flexDirection:"row" , alignItems:'center'}}>
-                            <View style={{ marginHorizontal: 10 }}>
-                                <Ionicons name="shield-checkmark" size={width / 19} color={'black'} />
+                                    <View style={{justifyContent:'flex-start' , flexDirection:"row" , alignItems:'center'}}>
+                                        <View style={{ marginHorizontal: 10 }}>
+                                            <Ionicons name="shield-checkmark" size={width / 19} color={'black'} />
+                                        </View>
+                                        <TouchableOpacity onPress={()=>{
+                                            navigation.navigate("CheckOut" , { address:a , total:total})
+                                        }}>
+                                            <Text style={{ fontSize: width / 20, fontWeight: 'bold' }}>{a}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    <View style={{ marginHorizontal: 10 }}>
+                                        <TouchableOpacity
+                                        onPress={()=>{
+                                            navigation.navigate("editAddress" , {address:a , total:total})
+                                        }}
+                                        >
+                                            <Ionicons name="create" size={width / 19} color={'black'} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
                             </View>
-                            <TouchableOpacity onPress={()=>{
-                                navigation.navigate("CheckOut" , { address:a , total:total})
-                            }}>
-                                <Text style={{ fontSize: width / 20, fontWeight: 'bold' }}>{a}</Text>
-                            </TouchableOpacity>
-                        </View>
 
-                        <View style={{ marginHorizontal: 10 }}>
-                            <TouchableOpacity
-                            onPress={()=>{
-                                navigation.navigate("editAddress" , {address:a , total:total})
-                            }}
-                            >
-                                <Ionicons name="create" size={width / 19} color={'black'} />
+                        ))}
+                        </ScrollView>
+                        <View>
+                            <TouchableOpacity style={{position: "fixed", bottom: 0, left: 0}} onPress={()=>setFlag(!flag)}>
+                            <Ionicons name="add-circle" size={width / 7} color={'red'} />
                             </TouchableOpacity>
                         </View>
                     </View>
+                :
+                <View>
+                    <TextInput 
+                        placeholder="Enter new address"
+                        onChangeText={setNewAddress}
+                        onPress={()=>null}
+                    />
+                    <Ionicons name="add-circle-outline" size={35} onPress={()=>addNewAddress()}/>
                 </View>
-
-            ))}
-            </ScrollView>
+            }
+            
 
         </View>
     )
