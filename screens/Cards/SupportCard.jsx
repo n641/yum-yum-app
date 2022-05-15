@@ -17,7 +17,7 @@ const SupportCard = ({navigation, email, Message, id}) =>{
 
     return(
         <View style={styles.FirsrCotainer}>
-            <Text style={styles.fontStyle}>{email}</Text>
+            <Text style={styles.fontStyle}>{(email.length) > 20 ? email.substring(0, 20) + "..." : email}</Text>
             <View style={styles.Icons}>
                 <TouchableOpacity style={styles.IconButton} onPress={() => navigation.navigate("chatting", {email: email, Message: Message})}>
                     <Entypo name={"chat"} size={25} />
