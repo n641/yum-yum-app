@@ -13,10 +13,11 @@ import { editStuff } from '../../../db/Auth/usersData/Stuff';
 
 const editStaff = ({route, navigation}) =>{
 
-    const {name, rule, salary, rate, id} = route.params;
+    const {name, rule, url, salary, rate, id} = route.params;
 
     const [namee, setName] = useState(name);
     const [rulee, setRule] = useState(rule);
+    const [urll, setUrll] = useState(url);
     const [salaryy, setSalary] = useState(salary);
     const [ratee, setRate] = useState(rate);
 
@@ -25,6 +26,7 @@ const editStaff = ({route, navigation}) =>{
         editStuff({
             name: namee,
             rule: rulee,
+            url: urll,
             salary: salaryy,
             rate: ratee,
             id:id
@@ -59,6 +61,14 @@ const editStaff = ({route, navigation}) =>{
                     placeholder='Enter rule of Staff'
                     onChangeText={setRule}
                     value={rulee}
+                />
+            </View>
+
+            <View style={styles.input}>
+                <TextInput
+                    placeholder='Enter image of Staff'
+                    onChangeText={setUrll}
+                    value={urll}
                 />
             </View>
 

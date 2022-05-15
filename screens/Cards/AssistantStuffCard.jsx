@@ -15,7 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
+const AssistantStuffCard = ({navigation, name, rule, url, salary, rate, id}) => {
 
     const handleDeleteStaff = (id) => {
         console.log("We delete Staff with id: ", id);
@@ -76,7 +76,7 @@ const AssistantStuffCard = ({navigation, name, rule, salary, rate, id}) => {
             </View>
             <View style={{ flexDirection: 'column'}}>
                 <TouchableOpacity onPress={()=>{
-                    navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
+                    navigation.navigate("editStaff" , {name :name , rule: rule ,url: url, salary: salary , id :id })
                 }}>
                     <Ionicons name="create" size={30} color={'red'} />
                 </TouchableOpacity>

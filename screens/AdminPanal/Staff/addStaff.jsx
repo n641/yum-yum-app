@@ -16,6 +16,7 @@ const addStaff = ({navigation}) =>{
 
     const [name, setName] = useState("");
     const [rule, setRule] = useState("");
+    const [url, setUrl] = useState("");
     const [salary, setSalary] = useState(0);
     const [rate, setRate] = useState(0);
 
@@ -24,6 +25,7 @@ const addStaff = ({navigation}) =>{
         addStuff({
             name: name,
             rule: rule,
+            url: url,
             salary: salary,
             rate: rate
         });
@@ -57,6 +59,14 @@ const addStaff = ({navigation}) =>{
                     placeholder='Enter rule of Staff'
                     onChangeText={setRule}
                     value={rule}
+                />
+            </View>
+
+            <View style={styles.input}>
+                <TextInput
+                    placeholder='Enter image of Staff'
+                    onChangeText={setUrl}
+                    value={url}
                 />
             </View>
 

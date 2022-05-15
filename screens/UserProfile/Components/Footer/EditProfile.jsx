@@ -121,7 +121,7 @@ const EditProfile = () => {
 
     return (
         <View style={styles.bigContainer}>
-            <Text>Please fill this form to edit your profile</Text>
+            <Text style={styles.fontStyle}>Please fill this form to edit your profile</Text>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Enter new user name'
@@ -237,5 +237,11 @@ const styles = StyleSheet.create({
         width: width-100,
         justifyContent: "space-between",
         alignItems: "space-between",
-    }
+        paddingVertical: 10,
+    },
+    fontStyle: {
+        fontSize: 20, 
+        fontWeight: 'bold', 
+        color: "red"
+    },
 })
