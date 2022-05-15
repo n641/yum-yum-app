@@ -37,15 +37,12 @@ const EditCaregory = ({ route, navigation }) => {
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
         if (change.type === "added") {
-            console.log("New mesg: ", change.doc.data());
             getGategoriesHandler();
         }
         if (change.type === "modified") {
-            console.log("Modified mesg: ", change.doc.data());
             getGategoriesHandler();
         }
         if (change.type === "removed") {
-            console.log("Removed mesg: ", change.doc.data());
             getGategoriesHandler();
         }
     });
@@ -60,7 +57,6 @@ const EditCaregory = ({ route, navigation }) => {
   const getItems = async () => {
     const arr = await getProducts();
     setproducts(arr);
-    console.log(arr);
   };
   useEffect(() => {
     getItems();
@@ -122,7 +118,6 @@ const EditCaregory = ({ route, navigation }) => {
                 products:[...temp]
               }).then(() => {
                 const findpro = products.find(e => e.category == name);
-                console.log(findpro);
                   let temp=[findpro];
                   temp.map((p)=>{
                   editProduct({

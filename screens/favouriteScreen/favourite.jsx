@@ -27,7 +27,6 @@ const Favourite = ({ navigation }) => {
   const getProduct = async () => {
     const arr = await getProducts();
     setproduct(arr);
-    console.log(arr);
   };
 
   useEffect(() => {
@@ -39,15 +38,12 @@ const Favourite = ({ navigation }) => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
 
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
     });
@@ -60,15 +56,12 @@ const Favourite = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getProduct();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getProduct();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getProduct();
       }
     });

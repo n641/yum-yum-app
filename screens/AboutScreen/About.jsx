@@ -33,7 +33,6 @@ const About = ({ navigation}) => {
               width: width,
               height: height / 2,
               position: "relative",
-              //opacity: 0.9,
               resizeMode: "cover",
               flexDirection: "row",
             }}

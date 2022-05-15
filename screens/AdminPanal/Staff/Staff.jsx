@@ -23,7 +23,6 @@ const Staff = ({navigation}) =>{
     const getStaffHandler = async () => {
         const arr = await getStuff();
         setArrStaff(arr)
-        console.log(arrStaff);
     }
 
     useEffect(() => {
@@ -33,15 +32,12 @@ const Staff = ({navigation}) =>{
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getStaffHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getStaffHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getStaffHandler();
             }
             // }

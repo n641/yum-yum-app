@@ -28,15 +28,12 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
       //   console.log("changes", change, snapshot, change.type);
       // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
       // }

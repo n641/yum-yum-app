@@ -22,6 +22,7 @@ const height = Dimensions.get("window").height;
 
 const CategoriesCart = ({navigation , link , category , description , id }) => {
 
+
     const handleDeleteCategory = async(id) => {
         console.log("We delete category with id: ", id);
         const categoriesArr = await getCategories();
@@ -37,15 +38,12 @@ const CategoriesCart = ({navigation , link , category , description , id }) => {
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getCategories();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getCategories();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getCategories();
             }
             // }

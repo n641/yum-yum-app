@@ -35,7 +35,6 @@ const Forgetpass = ({navigation}) => {
     if (!Users?.length)
       return;
     const user = Users.find(e => e.email == sendemail);
-    console.log(user)
     setbody("Your password is 123456")
   }, []);
 

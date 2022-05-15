@@ -20,7 +20,6 @@ const Address = ({ route, navigation }) => {
     const getUserss = async () => {
         const arr = await getUsers();
         setUsers(arr);
-        // console.log(arr);
     };
 
 
@@ -33,18 +32,14 @@ const Address = ({ route, navigation }) => {
             //   console.log("changes", change, snapshot, change.type);
             // if (snapshot.metadata.hasPendingWrites) {
             if (change.type === "added") {
-                console.log("New message: ", change.doc.data());
                 getUserss();
             }
             if (change.type === "modified") {
-                console.log("Modified city: ", change.doc.data());
                 getUserss();
             }
             if (change.type === "removed") {
-                console.log("Removed message: ", change.doc.data());
                 getUserss();
             }
-            // }
         });
 
         return () => {
@@ -56,24 +51,19 @@ const Address = ({ route, navigation }) => {
     useEffect(() => {
         if (!Users?.length)
             return;
-        console.log('auth.currentUser.email :>> ', auth.currentUser.email);
         const user = Users.find(e => e.email == auth.currentUser.email);
-        console.log('Users :>> ', Users);
-        console.log('User i find :>> ', user);
         user.address.map((a) => {
             temp.push(a);
         })
         setaddress(temp)
-        console.log(address);
     }, [Users]);
 
-    console.log(address);
     return (
         <View style={{alignItems:'center'}}>
              <Text  style={{ fontSize: 20, fontWeight: 'bold', color: "red" , margin:10 }}>choose on of your address </Text>
              <ScrollView>
-            {address.map((a) => (
-                <View style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
+            {address.map((a,i) => (
+                <View key={i} style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
                     <View style={{justifyContent:'space-between' , flexDirection:"row" , width:width-20 , alignItems:'center'}}>
 
                         <View style={{justifyContent:'flex-start' , flexDirection:"row" , alignItems:'center'}}>

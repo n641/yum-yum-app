@@ -25,21 +25,16 @@ const Stuff = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
+      
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getStuffs();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getStuffs();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getStuffs();
       }
-      // }
     });
 
     return () => {

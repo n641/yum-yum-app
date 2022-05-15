@@ -83,6 +83,4 @@ export default HomeStart;
 
 const styles = StyleSheet.create({});
 
-{
-  /*  */
-}
+

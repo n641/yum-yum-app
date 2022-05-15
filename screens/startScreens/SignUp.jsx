@@ -22,7 +22,6 @@ const SignUp = ({ navigation }) => {
 
     const handleSignUp = () => {
         if (pass === cpass) {
-            console.log(userName, email, pass, add);
             register(email, pass).then(() => {
                 addUser({
                     userName: userName,

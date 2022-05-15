@@ -20,7 +20,6 @@ const BestSellingFood = ({ navigation }) => {
   const getItems = async () => {
     const arr = await getProducts();
     setpro(arr);
-    console.log(arr);
   };
   useEffect(() => {
     getItems();
@@ -31,15 +30,12 @@ const BestSellingFood = ({ navigation }) => {
       //   console.log("changes", change, snapshot, change.type);
       // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getItems();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getItems();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getItems();
       }
     });

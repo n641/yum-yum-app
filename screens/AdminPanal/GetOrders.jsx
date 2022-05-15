@@ -22,7 +22,6 @@ const GetOrders = ({ navigation }) => {
     const getOrdersHandler = async () => {
         const arr = await getOrders();
         setArrOrders(arr)
-        console.log(arrOrders);
     }
 
     useEffect(() => {
@@ -32,15 +31,12 @@ const GetOrders = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = subscribeOrder(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getOrdersHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getOrdersHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getOrdersHandler();
             }
             // }

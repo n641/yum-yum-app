@@ -43,15 +43,12 @@ const Support = () => {
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
-        console.log("New message: ", change.doc.data());
         getUserss();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getUserss();
       }
       if (change.type === "removed") {
-        console.log("Removed message: ", change.doc.data());
         getUserss();
       }
     });
@@ -66,7 +63,6 @@ const Support = () => {
      if (!users?.length) return;
      const user = users.find((e) => e.email == auth.currentUser.email);
      setUser(user);
-     console.log("user >>>",user.Message);
    
      let msg=[];
            user.Message.map((m) =>
@@ -80,11 +76,9 @@ const Support = () => {
   const d = new Date();
   const date = d.toISOString().split("T")[0];
   const time = d.toTimeString().split(" ")[0];
-  console.log(date + "-" + time);
 
    useEffect(() => {
      if (!message?.length) return;
-     console.log("length",message.length)
 
      message.length == 1
        ? editUser({

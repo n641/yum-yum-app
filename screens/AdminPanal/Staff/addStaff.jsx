@@ -21,7 +21,6 @@ const addStaff = ({navigation}) =>{
     const [rate, setRate] = useState(0);
 
     const addStaffHandler = () =>{
-        console.log(name, rule, salary, rate)
         addStuff({
             name: name,
             rule: rule,

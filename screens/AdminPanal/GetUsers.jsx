@@ -44,7 +44,6 @@ const GetUsers = ({ navigation }) => {
     const getUserss = async() =>{
         const arr = await getUsers();
         setUsers(arr);
-        console.log(arr);
     }
 
     return(

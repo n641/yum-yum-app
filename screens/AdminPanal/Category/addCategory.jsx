@@ -26,7 +26,6 @@ const AddCategory = ({ navigation }) => {
     const getGategoriesHandler = async () => {
         const arr = await getCategories();
         setCategories(arr)
-        console.log(categories);
     }
 
     useEffect(() => {
@@ -36,15 +35,12 @@ const AddCategory = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
         });

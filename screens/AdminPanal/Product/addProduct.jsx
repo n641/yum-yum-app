@@ -48,15 +48,12 @@ useEffect(() => {
    useEffect(() => {
      const unsubscribe = subscribe(({ change, snapshot }) => {
              if (change.type === "added") {
-         console.log("New message: ", change.doc.data());
          getItems();
        }
        if (change.type === "modified") {
-         console.log("Modified city: ", change.doc.data());
          getItems();
        }
        if (change.type === "removed") {
-         console.log("Removed message: ", change.doc.data());
          getItems();
        }
      });
@@ -72,15 +69,12 @@ useEffect(() => {
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
             if (change.type === "added") {
-                console.log("New mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
             if (change.type === "modified") {
-                console.log("Modified mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
             if (change.type === "removed") {
-                console.log("Removed mesg: ", change.doc.data());
                 getGategoriesHandler();
             }
         });
