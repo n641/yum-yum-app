@@ -71,7 +71,7 @@ const OfferCard = ({navigation, offerName, price, desc, url, id}) =>{
             </View>
             <View style={{ flexDirection: 'column'}}>
                 <TouchableOpacity onPress={()=>{
-                    navigation.navigate("editStaff" , {name :name , rule: rule , salary: salary , id :id })
+                    navigation.navigate("editOffer" , {offerName :offerName , price: price , desc: desc , url: url, id :id })
                 }}>
                     <Ionicons name="create" size={30} color={'red'} />
                 </TouchableOpacity>
