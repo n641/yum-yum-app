@@ -5,7 +5,7 @@ import { auth } from '../../../db/config';
 
 import { sendEmail } from './SendEmail';
 import { getUsers } from '../../../db/Auth/usersData/users';
-
+import { forgetPassword } from '../../../db/Auth/auth';
 
 
 const width = Dimensions.get("window").width;
@@ -87,14 +87,17 @@ const Forgetpass = ({navigation}) => {
 
             {email ?
               <Button title='send email' onPress={() => {
-                sendEmail(
-                  email,
-                     subject,
-                  body,
-                // { cc: 'user@domain.com; user2@domain.com; userx@domain1.com' }
-                ).then(() => {
-                  console.log('Your message was successfully sent!');
-                })
+                // sendEmail(
+                //   email,
+                //      subject,
+                //   body,
+                // // { cc: 'user@domain.com; user2@domain.com; userx@domain1.com' }
+                // ).then(() => {
+                //   console.log('Your message was successfully sent!');
+                // })
+                forgetPassword(email)
+                .then(() => console.log("Done"))
+                .catch(()=>console.log(e))
                 navigation.navigate("Login")
 
               }} color={"red"}
