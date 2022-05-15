@@ -13,6 +13,10 @@ import OfferStart from "./Offer/OfferStart";
 import ProductStart from "./Product/ProductStart";
 import StartUsers from "./Users/StartUsers";
 import Chatting from "../Cards/Chatting";
+import {Ionicons} from "@expo/vector-icons"
+import {AntDesign} from "@expo/vector-icons";
+import { View } from "react-native";
+import { logout } from "../../db/Auth/auth";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +28,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -36,6 +64,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -48,6 +100,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -61,6 +137,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -73,6 +173,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -87,6 +211,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -99,6 +247,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
@@ -110,6 +282,30 @@ const AdminStartScreen = ({ navigation }) => {
                 headerStyle: {
                     backgroundColor: "red",
                 },
+                headerRight: () => (
+                    <View style={{
+                        flexDirection: 'row',
+                        width: 100,
+                        justifyContent: 'space-evenly',
+                        padding: 5,
+                        margin: 5
+                    }}>
+                    <AntDesign 
+                        name="logout" 
+                        size={20}
+                        onPress={()=>{
+                            logout().then(()=>{
+                                navigation.navigate("Login")
+                            })
+                        }}
+                    />
+                    <AntDesign 
+                        name="home" 
+                        size={20}
+                        onPress={() => navigation.navigate("HomeStart")}
+                    />
+                    </View>
+                ),
                 headerTintColor: "#fff",
                 headerTitleStyle: {
                     fontWeight: "bold",
