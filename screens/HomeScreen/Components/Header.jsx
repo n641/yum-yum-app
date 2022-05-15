@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { auth } from "../../../db/config";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import style from "../../../Constants/style"
 
@@ -30,6 +30,7 @@ const Header = ({ pagename, icon, navigation }) => {
 
 
   const [users, setUsers] = useState([]);
+  const [CUser, setCUser] = useState([]);
   
   const [name, setname] = useState('')
 
@@ -37,6 +38,8 @@ const Header = ({ pagename, icon, navigation }) => {
 
   const getUserss = async () => {
     const arr = await getUsers();
+    const slove = arr.find(e => e.email === auth.currentUser.email)
+    setCUser(slove)
     setUsers(arr);
     // console.log(arr);
   };
@@ -119,37 +122,47 @@ const Header = ({ pagename, icon, navigation }) => {
       </View>
 
       <View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Cart");
-          }}
-        >
-          <View>
-            <View
-              style={{
-                width: width / 18,
-                top: -5,
-                left: -20,
-                height: width / 18,
-                backgroundColor: "red",
-                borderRadius: 50,
-                alignItems: "center",
-                justifyContent: "center",
-                position: "absolute",
-              }}
-            >
-              <Text style={{ color: style.third, fontSize: 20 }}>
-                {listItems.length}
-              </Text>
-            </View>
-            <Ionicons
-              name={icon}
-              size={35}
-              style={{ paddingBottom: 25 }}
-              color={style.primary}
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Cart");
+            }}
+          >
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  width: width / 18,
+                  top: -5,
+                  left: -20,
+                  height: width / 18,
+                  backgroundColor: "red",
+                  borderRadius: 50,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                }}
+              >
+                <Text style={{ color: style.third, fontSize: 20 }}>
+                  {listItems.length}
+                </Text>
+              </View>
+              <Ionicons
+                name={icon}
+                size={35}
+                style={{ paddingBottom: 25 }}
+                color={style.primary}
+              />
+              {(CUser.rule === "admin") ?
+                <MaterialIcons 
+                name="admin-panel-settings" 
+                size={35}
+                onPress={() => navigation.navigate("AdminStartScreen")}
             />
-          </View>
-        </TouchableOpacity>
+              : null}
+            </View>
+          </TouchableOpacity>
+        </View>
+        
       </View>
     </View>
   );
