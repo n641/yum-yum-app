@@ -13,10 +13,11 @@ import { editStuff } from '../../../db/Auth/usersData/Stuff';
 
 const editStaff = ({route, navigation}) =>{
 
-    const {name, rule, salary, rate, id} = route.params;
+    const {name, rule, url, salary, rate, id} = route.params;
 
     const [namee, setName] = useState(name);
     const [rulee, setRule] = useState(rule);
+    const [urll, setUrll] = useState(url);
     const [salaryy, setSalary] = useState(salary);
     const [ratee, setRate] = useState(rate);
 
@@ -24,6 +25,7 @@ const editStaff = ({route, navigation}) =>{
         editStuff({
             name: namee,
             rule: rulee,
+            url: urll,
             salary: salaryy,
             rate: ratee,
             id:id
@@ -49,7 +51,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter name of Staff'
                     onChangeText={setName}
-                    value={name}
+                    value={namee}
                 />
             </View>
 
@@ -57,7 +59,15 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter rule of Staff'
                     onChangeText={setRule}
-                    value={rule}
+                    value={rulee}
+                />
+            </View>
+
+            <View style={styles.input}>
+                <TextInput
+                    placeholder='Enter image of Staff'
+                    onChangeText={setUrll}
+                    value={urll}
                 />
             </View>
 
@@ -65,7 +75,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter Salary of Staff'
                     onChangeText={setSalary}
-                    value={salary}
+                    value={salaryy}
                 />
             </View>
 
@@ -73,7 +83,7 @@ const editStaff = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter ate of Staff'
                     onChangeText={setRate}
-                    value={rate}
+                    value={ratee}
                 />
             </View>
 

@@ -15,10 +15,10 @@ const editOfferr = ({route, navigation}) =>{
 
     const {offerName, price, desc, url, id} = route.params
 
-    const [offerNamee, setOfferNamee] = useState('')
-    const [pricee, setPricee] = useState(0)
-    const [descc, setDescc] = useState('')
-    const [urll, seturll] = useState('')
+    const [offerNamee, setOfferNamee] = useState(offerName)
+    const [pricee, setPricee] = useState(price)
+    const [descc, setDescc] = useState(desc)
+    const [urll, seturll] = useState(url)
 
     const editOfferHandler = () =>{
         editOffer({
@@ -49,7 +49,7 @@ const editOfferr = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter name of Offer'
                     onChangeText={setOfferNamee}
-                    value={offerName}
+                    value={offerNamee}
                 />
             </View>
 
@@ -57,7 +57,7 @@ const editOfferr = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter price of offer'
                     onChangeText={setPricee}
-                    value={price}
+                    value={pricee}
                 />
             </View>
 
@@ -65,7 +65,7 @@ const editOfferr = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter description of Offer'
                     onChangeText={setDescc}
-                    value={desc}
+                    value={descc}
                 />
             </View>
 
@@ -73,7 +73,7 @@ const editOfferr = ({route, navigation}) =>{
                 <TextInput
                     placeholder='Enter image url of Offer'
                     onChangeText={seturll}
-                    value={url}
+                    value={urll}
                 />
             </View>
 

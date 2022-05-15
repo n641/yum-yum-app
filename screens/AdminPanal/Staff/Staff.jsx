@@ -65,6 +65,7 @@ const Staff = ({navigation}) =>{
                 name={itemData.item.name}
                 rule={itemData.item.rule}
                 salary={itemData.item.salary}
+                url={itemData.item.url}
                 rate={itemData.item.rate}
                 id={itemData.item.id}
                 navigation={navigation}
@@ -83,6 +84,7 @@ const Staff = ({navigation}) =>{
                 name={itemData.item.name}
                 rule={itemData.item.rule}
                 salary={itemData.item.salary}
+                url={itemData.item.url}
                 rate={itemData.item.rate}
                 id={itemData.item.id}
                 navigation={navigation}
@@ -103,6 +105,7 @@ const Staff = ({navigation}) =>{
                 name={itemData.item.name}
                 rule={itemData.item.rule}
                 salary={itemData.item.salary}
+                url={itemData.item.url}
                 rate={itemData.item.rate}
                 id={itemData.item.id}
                 navigation={navigation}
@@ -123,6 +126,7 @@ const Staff = ({navigation}) =>{
                 name={itemData.item.name}
                 rule={itemData.item.rule}
                 salary={itemData.item.salary}
+                url={itemData.item.url}
                 rate={itemData.item.rate}
                 id={itemData.item.id}
                 navigation={navigation}

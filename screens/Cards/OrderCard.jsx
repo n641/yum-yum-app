@@ -65,7 +65,7 @@ const OrderCard = ({navigation, user, product, id}) =>{
 
     return(
         <View style={styles.FirsrCotainer}>
-            <Text style={styles.fontStyle}>{user}</Text>
+            <Text style={styles.fontStyle}>{(user.length) > 20 ? user.substring(0, 20) + "..." : user}</Text>
             <FlatList 
                 data={product}
                 keyExtractor={item=>item}
