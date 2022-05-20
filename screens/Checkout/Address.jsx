@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity , ScrollView } from 'react-native'
-import React, { useState, useEffect  } from 'react'
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView , Button} from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 
@@ -25,15 +25,15 @@ const Address = ({ route, navigation }) => {
         setUsers(arr);
     };
 
-    const addNewAddress = async() =>{
+    const addNewAddress = async () => {
         const arr = await getUsers();
         const obj = arr.find(e => e.email === auth.currentUser.email)
         setCUser(obj)
         const oldAddresses = obj.address
         editUser({
             ...obj,
-            address:[...oldAddresses, newAddress]
-        }).then(()=> setFlag(!flag))
+            address: [...oldAddresses, newAddress]
+        }).then(() => setFlag(!flag))
 
     }
 
@@ -73,58 +73,66 @@ const Address = ({ route, navigation }) => {
     }, [Users]);
 
     return (
-        <View style={{alignItems:'center'}}>
+        <View style={{ alignItems: 'center' }}>
             {
                 (flag == true) ?
                     <View>
-                        <Text  style={{ fontSize: 20, fontWeight: 'bold', color: "red" , margin:10 }}>choose on of your address </Text>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: "red", margin: 10 }}>choose on of your address </Text>
                         <ScrollView>
-                        {address.map((a,i) => (
-                            <View key={i} style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
-                                <View style={{justifyContent:'space-between' , flexDirection:"row" , width:width-20 , alignItems:'center'}}>
+                            {address.map((a, i) => (
+                                <View key={i} style={{ flexDirection: "row", borderColor: "black", borderRadius: 20, borderWidth: 2, backgroundColor: "gray", margin: 10, height: height / 10, width: width - 20, }}>
+                                    <View style={{ justifyContent: 'space-between', flexDirection: "row", width: width - 20, alignItems: 'center' }}>
 
-                                    <View style={{justifyContent:'flex-start' , flexDirection:"row" , alignItems:'center'}}>
-                                        <View style={{ marginHorizontal: 10 }}>
-                                            <Ionicons name="shield-checkmark" size={width / 19} color={'black'} />
+                                        <View style={{ justifyContent: 'flex-start', flexDirection: "row", alignItems: 'center' }}>
+                                            <View style={{ marginHorizontal: 10 }}>
+                                                <Ionicons name="shield-checkmark" size={width / 19} color={'black'} />
+                                            </View>
+                                            <TouchableOpacity onPress={() => {
+                                                navigation.navigate("CheckOut", { address: a, total: total })
+                                            }}>
+                                                <Text style={{ fontSize: width / 20, fontWeight: 'bold' }}>{a}</Text>
+                                            </TouchableOpacity>
                                         </View>
-                                        <TouchableOpacity onPress={()=>{
-                                            navigation.navigate("CheckOut" , { address:a , total:total})
-                                        }}>
-                                            <Text style={{ fontSize: width / 20, fontWeight: 'bold' }}>{a}</Text>
-                                        </TouchableOpacity>
-                                    </View>
 
-                                    <View style={{ marginHorizontal: 10 }}>
-                                        <TouchableOpacity
-                                        onPress={()=>{
-                                            navigation.navigate("editAddress" , {address:a , total:total})
-                                        }}
-                                        >
-                                            <Ionicons name="create" size={width / 19} color={'black'} />
-                                        </TouchableOpacity>
+                                        <View style={{ marginHorizontal: 10 }}>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    navigation.navigate("editAddress", { address: a, total: total })
+                                                }}
+                                            >
+                                                <Ionicons name="create" size={width / 19} color={'black'} />
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
-                            </View>
 
-                        ))}
+                            ))}
                         </ScrollView>
                         <View>
-                            <TouchableOpacity style={{position: "fixed", bottom: 0, left: 0}} onPress={()=>setFlag(!flag)}>
-                            <Ionicons name="add-circle" size={width / 7} color={'red'} />
+                            <TouchableOpacity style={{ position: "fixed", bottom: 0, left: 0 }} onPress={() => setFlag(!flag)}>
+                                <Ionicons name="add-circle" size={width / 7} color={'red'} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                :
-                <View>
-                    <TextInput 
-                        placeholder="Enter new address"
-                        onChangeText={setNewAddress}
-                        onPress={()=>null}
-                    />
-                    <Ionicons name="add-circle-outline" size={35} onPress={()=>addNewAddress()}/>
-                </View>
+                    :
+
+                    <View style={{ flex: 1, width: width, height: height, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: "red", margin: 10 }}>Add new address </Text>
+                        <View style={{ flex: 1, width: width, height: height, alignItems: 'center' }}>
+
+                            <View style={styles.input}>
+                                <TextInput
+                                    onChangeText={setNewAddress}
+                                    value={newAddress}
+                                />
+                            </View>
+                            <View style={{ width: 200, margin: 10 }}>
+                                <Button title='Add' color={'red'} onPress={() => addNewAddress()} />
+                            </View>
+                        </View>
+                    </View>
             }
-            
+
 
         </View>
     )
@@ -132,4 +140,19 @@ const Address = ({ route, navigation }) => {
 
 export default Address
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    input: {
+        height: '20%',
+        borderRadius: 10,
+        width: 400,
+        justifyContent: 'flex-start',
+        paddingVertical: 10,
+        flexDirection: 'row',
+        paddingLeft: 10,
+        borderColor: 'black',
+        borderWidth: 2,
+        alignItems: 'center',
+        margin: 10,
+        height:height/10
+      },
+})
