@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
     },
+
     // Footer: {
     //     position: "fixed",
     //     bottom: 0,
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
     //     flexDirection: "row",
     //     justifyContent: 'space-between'
     // },
+
     bottonStyle:{
         backgroundColor: "red",
         justifyContent: 'center',

@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
     //     // alignItems: "space-between",
     //     paddingVertical: 10,
     // },
+
     fontStyle: {
         fontSize: 20, 
         fontWeight: 'bold', 
