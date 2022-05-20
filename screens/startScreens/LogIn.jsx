@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, SliderComponent } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button, TouchableOpacity, SliderComponent , TouchableWithoutFeedback , Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import { getUsers } from '../../db/Auth/usersData/users';
@@ -51,6 +51,10 @@ const Login = ({ navigation }) => {
              flex:1,
             backgroundColor: 'black'
         }}>
+            
+            <TouchableWithoutFeedback onPress={()=>{
+                // Keyboard.dismiss();
+            }}>
             <View style={{flex:1}}>
                 <Image
                     style={{
@@ -78,12 +82,13 @@ const Login = ({ navigation }) => {
                         <Ionicons name="person-circle" size={25} color={'white'} />
                         <TextInput
                             placeholder='enter your email'
-                            style={{ color: 'white', fontSize: 18, paddingLeft: 10 }}
+                            style={{ color: 'white', paddingLeft: 10, fontSize: 18 , width: 200}}
                             placeholderTextColor="white"
                             onChangeText={setemail}
                             value={email}
-
-
+                            returnKeyType="next"
+                            onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                            blurOnSubmit={false}
                         />
                     </View>
                     <View style={styles.input}>
@@ -95,11 +100,13 @@ const Login = ({ navigation }) => {
 
                         <TextInput
                             placeholder='enter your password'
-                            style={{ color: 'white', paddingLeft: 10, fontSize: 18 }}
+                            style={{ color: 'white', paddingLeft: 10, fontSize: 18 , width: 200}}
                             placeholderTextColor="white"
                             onChangeText={setpass}
                             value={pass}
                             secureTextEntry={flag}
+                            ref={(input) => { secondTextInput = input; }}
+                            blurOnSubmit={false}
                         />
                     </View>
 
@@ -145,7 +152,7 @@ const Login = ({ navigation }) => {
                 </View>
             </View>
 
-
+</TouchableWithoutFeedback>
         </View>
     )
 }
