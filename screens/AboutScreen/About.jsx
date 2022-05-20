@@ -160,7 +160,7 @@ const About = ({ navigation}) => {
               </Text>
             </View>
             <View style={{ width: width - 100 }}>
-              <Text style={{ color: "gray", textAlign: "start", padding: 10 }}>
+              <Text style={{ color: "gray", textAlign:"left" , padding: 10 }}>
                 Connie's Cookies Kansas City is a locally and family owned
                 business that was founded in 2006. We're dedicated to creating
                 wonderful sweet surprises that you'll absolutely love. When you

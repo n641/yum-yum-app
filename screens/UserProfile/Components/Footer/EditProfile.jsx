@@ -5,7 +5,8 @@ import {
     TextInput, 
     TouchableOpacity, 
     Dimensions,
-    Button
+    Button,
+    ScrollView
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
@@ -82,8 +83,6 @@ const EditProfile = () => {
 
     useEffect(() => {
         const unsubscribe = subscribeUser(({ change, snapshot }) => {
-            //   console.log("changes", change, snapshot, change.type);
-            // if (snapshot.metadata.hasPendingWrites) {
             if (change.type === "added") {
                 getUserss();
             }
@@ -110,6 +109,7 @@ const EditProfile = () => {
     // }, []);
 
     return (
+        <ScrollView>
         <View style={styles.bigContainer}>
             <Text style={styles.fontStyle}>Please fill this form to edit your profile</Text>
             <View style={styles.input}>
@@ -152,6 +152,7 @@ const EditProfile = () => {
                         <TextInput
                             placeholder='add new address'
                             onChangeText={setEditAddress}
+                            style={{color:"red"}}
                         />
                         
                     </View>
@@ -174,6 +175,7 @@ const EditProfile = () => {
             <Button title="Edit" onPress={() => EditDone()} />
 
         </View>
+        </ScrollView>
     )
 }
 
@@ -185,13 +187,13 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     input: {
-        height: '20%',
+        height: '15%',
         borderRadius: 10,
         width: width-100,
         justifyContent: 'flex-start',
         paddingVertical: 10,
         flexDirection: 'row',
-        paddingLeft: 10,
+        padding: 10,
         borderColor: 'black',
         borderWidth: 2,
         alignItems: 'center',
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: width-100,
         alignItems: "center",
-        
+    
         height: 'auto%',
         paddingVertical: 10,
         marginVertical: 10,
@@ -226,7 +228,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: width-100,
         justifyContent: "space-between",
-        alignItems: "space-between",
+        // alignItems: "space-between",
         paddingVertical: 10,
     },
     fontStyle: {

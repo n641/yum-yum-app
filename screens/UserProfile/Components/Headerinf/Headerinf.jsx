@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import { getUsers } from "../../../../db/Auth/usersData/users";
 import { auth } from "../../../../db/config";
@@ -21,7 +21,8 @@ const height = Dimensions.get("window").height;
 const Headerinf = ({ navigation }) => {
   const [users, setusers] = useState([])
   const [usename, setusename] = useState("");
-  const [email, setemail] = useState([])
+  const [email, setemail] = useState([]);
+
   return (
     <View>
       <Image
@@ -94,7 +95,7 @@ const Headerinf = ({ navigation }) => {
             style={{
               flex: 1,
               backgroundColor: "white",
-              borderTopLeftRadius: 75,
+              // borderTopLeftRadius: 75,
             }}
           >
             {/* ///info */}
@@ -116,7 +117,6 @@ const styles = StyleSheet.create({
   footer: {
     flex: .65,
     width: width,
-    height: 100
-
+    height: 20
   },
 })

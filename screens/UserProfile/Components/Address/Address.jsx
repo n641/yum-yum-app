@@ -65,7 +65,7 @@ const [points, setpoints] = useState([]);
       },[])
   
   return (
-    <View style={{ flexDirection: 'row', marginTop: 20 }}>
+    <View style={{ flexDirection: 'row', marginTop: 10 }}>
       <View style={{
         width: width / 2 - 20, height: height / 5, backgroundColor: style.third,
         borderRadius: 20, borderWidth: 1, margin: 10, justifyContent: 'space-around',
@@ -81,7 +81,7 @@ const [points, setpoints] = useState([]);
                     <Text style={{ fontWeight: '500', fontSize: 16 , color:"black" }} >
                       {l}
                     </Text>
-                    <Text> ----------------------------</Text>
+                    <Text> ------------------------</Text>
                   </View>
                 ))}
 

@@ -138,7 +138,7 @@ const Cart = ({ navigation, route }) => {
       <View>
         <Text
           style={{
-            textAlign: "end",
+            textAlign: "right",
             color: "red",
             fontSize: width / 24,
             fontWeight: "bold",
