@@ -9,7 +9,7 @@ import Login from "./screens/startScreens/LogIn";
 import SignUp from "./screens/startScreens/SignUp";
 import Forgetpass from './screens/startScreens/forgetPass/Forgetpass'
 import OnBoarding from "./screens/startScreens/OnBoarding";
-// import AdminStartScreen from "./screens/AdminPanal/AdminStartScreen";
+import AdminStartScreen from "./screens/AdminPanal/AdminStartScreen";
 import HomeStart from "./screens/HomeScreen/HomeStart";
 import Category from "./screens/CategoriesScreen/Category";
 import ProductList from "./screens/ProductListScreen/ProductList";
@@ -37,11 +37,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
 
-      {/* <Stack.Screen
+      <Stack.Screen
           name="AdminStartScreen"
           component={AdminStartScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
         
         <Stack.Screen
           name="Login"
@@ -194,7 +194,7 @@ export default function App() {
           name="CheckOut"
           component={CheckOut}
           options={{
-            title: "results of search",
+            title: "Payment",
             headerStyle: {
               backgroundColor: "red",
             },
@@ -210,7 +210,7 @@ export default function App() {
           name="placeOrder"
           component={placeOrder}
           options={{
-            title: "Address",
+            title: "Check Out",
             headerStyle: {
               backgroundColor: "red",
             },
@@ -226,7 +226,7 @@ export default function App() {
           name="EndOfOrder"
           component={EndOfOrder}
           options={{
-            title: "Address",
+            title: "End Of Order",
             headerStyle: {
               backgroundColor: "red",
             },
@@ -242,7 +242,7 @@ export default function App() {
           name="Order"
           component={Order}
           options={{
-            title: "Order",
+            title: "Your Order",
             headerStyle: {
               backgroundColor: "red",
             },
@@ -255,32 +255,7 @@ export default function App() {
         />
 
         
-        
-       
-
-        {/*
-       
-
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{
-            title: "Edit profile",
-            headerStyle: {
-              backgroundColor: "red",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          }}
-        />
-
- */}
-
-
-
+      {/* ///orders */}
 
       </Stack.Navigator>
     </NavigationContainer>

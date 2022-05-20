@@ -30,8 +30,8 @@ const placeOrder = ({ route, navigation }) => {
   const [points, setpoints] = useState('');
   const [text, settext] = useState('');
   const [way, setway] = useState('');
-
-
+  const [orderOfUser, setorderOfUser] = useState([])
+  
 
   const getUserss = async () => {
     const arr = await getUsers();
@@ -115,6 +115,8 @@ const placeOrder = ({ route, navigation }) => {
     const user = Users.find(e => e.email == auth.currentUser.email);
     const cart = user.cart.map(name => products.find(p => p.productName == name));
     setListItems(cart);
+    setorderOfUser(user.orders);
+    console.log("the orders of user" , orderOfUser);
   }, [products, Users]);
 
   useEffect(() => {
@@ -142,18 +144,19 @@ const placeOrder = ({ route, navigation }) => {
     user.cart.map((name)=>{
       temp.push(name)
       })
-      addOrder(
-       {user:user.email ,product:[...temp]}
-      ).then(()=>{
-        console.log("done")
-      }).catch((e)=>{
-        console.log(e)
-      })
+
+      // addOrder(
+      //  {user:user.email ,product:[...temp]}
+      // ).then(()=>{
+      //   console.log("done")
+      // }).catch((e)=>{
+      //   console.log(e)
+      // })
 
       if (payment == "credit") {
         editUser({
           ...user,
-          orders: [{user:user.email ,product:[...temp]}],
+          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
           cart:[],
           credit:credit-total,
           points:points+(total/4)
@@ -161,14 +164,15 @@ const placeOrder = ({ route, navigation }) => {
       } else if (payment == "points") {
         editUser({
           ...user,
-          orders: [{user:user.email ,product:[...temp]}],
+          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
+
           cart:[],
           points:(points)-Math.floor(total/4)
         });
       } else {
         editUser({
           ...user,
-          orders: [{user:user.email ,product:[...temp]}],
+          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
           cart:[],
         });
       }

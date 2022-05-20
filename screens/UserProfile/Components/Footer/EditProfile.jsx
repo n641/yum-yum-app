@@ -216,7 +216,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: width-100,
         alignItems: "center",
-    
         height: 'auto%',
         paddingVertical: 10,
         marginVertical: 10,
@@ -224,13 +223,13 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 2,
     },
-    address:{
-        flexDirection: 'row',
-        width: width-100,
-        justifyContent: "space-between",
-        // alignItems: "space-between",
-        paddingVertical: 10,
-    },
+    // address:{
+    //     flexDirection: 'row',
+    //     width: width-100,
+    //     justifyContent: "space-between",
+    //     // alignItems: "space-between",
+    //     paddingVertical: 10,
+    // },
     fontStyle: {
         fontSize: 20, 
         fontWeight: 'bold', 
