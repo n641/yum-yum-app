@@ -12,7 +12,6 @@ import React, { useState , useEffect } from "react";
 import style from "../../../Constants/style";
 
 import { getCategories , subscribe } from "../../../db/Auth/usersData/Categories";
-import { borderColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
