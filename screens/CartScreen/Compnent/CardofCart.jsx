@@ -1,5 +1,5 @@
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
@@ -20,16 +20,16 @@ export default function CardofCart({
   onRemove,
   deleteItem,
   count
-  
+
 }) {
-  
+
   const [counter, setcounter] = useState(0);
-  const [total, setTotal] = useState(offer?price - discound:price);
+  const [total, setTotal] = useState(offer ? price - discound : price);
 
   const increment = () => {
     setcounter(counter + 1);
-    setTotal(offer?(price - discound)* (counter + 1):price * (counter + 1));
-    onAdd(offer?price - discound:price);
+    setTotal(offer ? (price - discound) * (counter + 1) : price * (counter + 1));
+    onAdd(offer ? price - discound : price);
   };
 
   const decrement = () => {
@@ -38,7 +38,7 @@ export default function CardofCart({
     } else {
       setcounter(counter - 1);
       setTotal(price * (counter - 1));
-      onRemove(offer?price - discound:price);
+      onRemove(offer ? price - discound : price);
     }
   };
 
@@ -66,8 +66,8 @@ export default function CardofCart({
           }}
         />
         <TouchableOpacity
-        onPress={() => {deleteItem(name)}}
-          style={{ position: "absolute",width: width/14,height: height/14,alignItems: 'center',justifyContent:"center",borderRadius:50,backgroundColor:"white", left: width / 2 - 60, top: -5 }}
+          onPress={() => { deleteItem(name) }}
+          style={{ position: "absolute", width: width / 14, height: height / 14, alignItems: 'center', justifyContent: "center", borderRadius: 50, backgroundColor: "white", left: width / 2 - 60, top: -5 }}
         >
           <Ionicons name="close" size={30} color={"red"} />
         </TouchableOpacity>
@@ -150,16 +150,23 @@ export default function CardofCart({
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity onPress={() => decrement()}>
-            <Ionicons name="remove" size={20} color={"red"} style={{}} />
-          </TouchableOpacity>
+          {counter > 0 ? (
+            <TouchableOpacity onPress={() => decrement()}>
+              <Ionicons name="remove" size={20} color={"red"} style={{}} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => { deleteItem(name) }}>
+              <Ionicons name="trash" size={20} color={"red"} style={{}} />
+            </TouchableOpacity>
+          )
+          }
           <View
             style={{
               fontSize: 18,
               marginHorizontal: 15,
               alignItems: "center",
               justifyContent: "center",
-              width: width / 12,
+              width: width / 12 + 10,
               height: width / 12,
               backgroundColor: "gray",
               borderRadius: width / 2,
@@ -172,6 +179,8 @@ export default function CardofCart({
                   marginHorizontal: 15,
                   borderRadius: width / 2,
                   color: "white",
+                  fontWeight: "bold"
+
                 }}
               >
                 {counter}

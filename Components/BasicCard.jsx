@@ -2,7 +2,10 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Button } f
 import React, { useState, useEffect } from "react";
 
 import { getUsers, subscribeUser, editUser } from "../db/Auth/usersData/users";
+import { getProducts , subscribe } from "../db/Auth/usersData/Products";
 import { auth } from "../db/config";
+import { Ionicons } from "@expo/vector-icons";
+
 
 import style from "../Constants/style";
 
@@ -10,9 +13,12 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
+const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => {
     const [users, setUsers] = useState([]);
     const [favo, setfavo] = useState(false);
+    const [pro, setpro] = useState([]);
+    const [rate, setrate] = useState('');
+    const [product, setproduct] = useState({});
 
     const getUserss = async () => {
         const arr = await getUsers();
@@ -22,6 +28,14 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
     useEffect(() => {
         getUserss();
     }, []);
+
+    const getItems = async () => {
+        const arr = await getProducts();
+        setpro(arr);
+      };
+      useEffect(() => {
+        getItems();
+      }, []);
 
     useEffect(() => {
         const unsubscribe = subscribeUser(({ change, snapshot }) => {
@@ -42,6 +56,45 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
             unsubscribe();
         };
     }, []);
+
+    useEffect(() => {
+        const unsubscribe = subscribe(({ change, snapshot }) => {
+           
+            if (change.type === "added") {
+                getItems();
+            }
+            if (change.type === "modified") {
+                getItems();
+            }
+            if (change.type === "removed") {
+                getItems();
+            }
+            // }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+    useEffect(() => {
+        if (!pro?.length) return;
+    
+        const product = pro.find((e) => e.productName == name);
+        setproduct(product);
+    
+        let sum = 0;
+        product.rate.map((r) => {
+    
+          sum += r.rate
+    
+        });
+    
+        sum == 0 ? (setrate(0)) :
+          setrate((sum / product.rate.length));
+    
+    
+    
+      }, [pro, rate, product]);
 
 
     return (
@@ -129,6 +182,59 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
                     </View>
                 </View>
 
+                {rate == 5 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+          </View>
+        ) : 4 <= rate && rate < 5 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+          </View>
+        ) : 3 <= rate && rate < 4 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+          </View>
+        ) : 2 <= rate && rate < 3 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+          </View>
+        ) : 1 <= rate && rate < 2 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"yellow"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+          </View>
+        ) : rate == 0 ? (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+            <Ionicons name={"star"} size={20} color={"gray"} />
+          </View>
+        ) : null}
+
+
+
+
                 <View
                     style={{
                         flexDirection: "row",
@@ -168,7 +274,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
                             borderRadius: style.border,
                             backgroundColor: style.primary,
                             width: width / 4 - 25,
-                            height: height / 14,
+                            height: height / 15,
                             justifyContent: "center",
                             margin: 5,
                             marginLeft: 5,
@@ -189,7 +295,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation }) => {
                             borderRadius: style.border,
                             backgroundColor: "black",
                             width: width / 4 - 25,
-                            height: height / 14,
+                            height: height / 15,
                             justifyContent: "center",
                             margin: 5,
                             marginRight: 5,

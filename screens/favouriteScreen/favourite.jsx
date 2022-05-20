@@ -86,7 +86,7 @@ const Favourite = ({ navigation }) => {
 
 
   return Favourite.length != 0 ? (
-    <ScrollView>
+   <View>
       <Text
         style={{
           fontSize: 25,
@@ -116,7 +116,7 @@ const Favourite = ({ navigation }) => {
           />
         )}
       />
-    </ScrollView>
+      </View>
   ) : (
 
     <View

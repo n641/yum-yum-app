@@ -32,7 +32,7 @@ const Messages = ({ msg, loginuser, usermsg, time, type }) => {
           <Text
             style={{
               fontSize: 12,
-              textAlign: "end",
+              textAlign: "right",
               color: "white",
               paddingRight: 10,
             }}

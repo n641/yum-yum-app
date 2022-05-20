@@ -6,10 +6,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React ,{useState ,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
-import {auth} from '../../db/config'
+import { auth } from '../../db/config'
 
 
 const width = Dimensions.get("window").width;
@@ -28,44 +28,44 @@ import {
 } from "../../db/Auth/usersData/Products";
 
 
-const DetailsScreen = ({ route,navigation}) => {
-    const{name,price,desc,url,discound,offer}=route.params;
+const DetailsScreen = ({ route, navigation }) => {
+  const { name, price, desc, url, discound, offer } = route.params;
 
-     const [pro, setpro] = useState([
+  const [pro, setpro] = useState([
 
   ]);
   const [product, setproduct] = useState([
   ]);
 
   const [users, setUsers] = useState([]);
-     const [user, setUser] = useState([]);
-      const [flag1, setflag1] = useState(false);
-      const [flag2, setflag2] = useState(false);
-      const [flag3, setflag3] = useState(false);
-      const [flag4, setflag4] = useState(false);
-      const [flag5, setflag5] = useState(false);
-      const [flag, setflag] = useState(false);
-      const [rate,setrate] = useState(0);
-
-     
-
-      const [card, setcard] = useState(false);
+  const [user, setUser] = useState([]);
+  const [flag1, setflag1] = useState(false);
+  const [flag2, setflag2] = useState(false);
+  const [flag3, setflag3] = useState(false);
+  const [flag4, setflag4] = useState(false);
+  const [flag5, setflag5] = useState(false);
+  const [flag, setflag] = useState(false);
+  const [rate, setrate] = useState(0);
 
 
-    const[favo,setfavo]= useState(false);
 
-    const getUserss = async () => {
+  const [card, setcard] = useState(false);
+
+
+  const [favo, setfavo] = useState(false);
+
+  const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
   };
-   
-     useEffect(() => {
+
+  useEffect(() => {
     getUserss();
   }, []);
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-     
+
       if (change.type === "added") {
         getUserss();
       }
@@ -83,7 +83,7 @@ const DetailsScreen = ({ route,navigation}) => {
     };
   }, []);
 
-   const getItems = async () => {
+  const getItems = async () => {
     const arr = await getProducts();
     setpro(arr);
   };
@@ -93,7 +93,7 @@ const DetailsScreen = ({ route,navigation}) => {
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
-     
+
       if (change.type === "added") {
         getItems();
       }
@@ -113,9 +113,9 @@ const DetailsScreen = ({ route,navigation}) => {
 
 
   useEffect(() => {
-     if (!users?.length) return;
+    if (!users?.length) return;
     const user = users.find((e) => e.email == auth.currentUser.email);
-    
+
     setUser(user);
 
 
@@ -130,36 +130,36 @@ const DetailsScreen = ({ route,navigation}) => {
     if (!pro?.length) return;
 
     const product = pro.find((e) => e.productName == name);
-       setproduct(product);
+    setproduct(product);
 
- let sum = 0;
- product.rate.map((r) => {
+    let sum = 0;
+    product.rate.map((r) => {
 
-     sum += r.rate
-     
- });
+      sum += r.rate
 
-sum==0?(setrate(0)):
- setrate((sum / product.rate.length));
+    });
 
-
-
-  }, [pro,rate,product]);
+    sum == 0 ? (setrate(0)) :
+      setrate((sum / product.rate.length));
 
 
- useEffect(() => {
-   if (!users?.length) return;
-   if (!user.oldOrders?.length) return;
+
+  }, [pro, rate, product]);
 
 
-   const oldOrders = user.oldOrders;
-   const product = oldOrders.find((p) => p == name);
+  useEffect(() => {
+    if (!users?.length) return;
+    if (!user.oldOrders?.length) return;
 
-   product ? setflag(true) : null;
- }, [users]);
-  
 
- 
+    const oldOrders = user.oldOrders;
+    const product = oldOrders.find((p) => p == name);
+
+    product ? setflag(true) : null;
+  }, [users]);
+
+
+
   return (
     <View
       style={{
@@ -227,13 +227,13 @@ sum==0?(setrate(0)):
 
               favo
                 ? editUser({
-                    ...user,
-                    favourite: user.favourite.filter((n) => n !== name),
-                  }).then(() => setfavo(false))
+                  ...user,
+                  favourite: user.favourite.filter((n) => n !== name),
+                }).then(() => setfavo(false))
                 : editUser({
-                    ...user,
-                    favourite: [...user.favourite, name],
-                  }).then(() => setfavo(true));
+                  ...user,
+                  favourite: [...user.favourite, name],
+                }).then(() => setfavo(true));
             }}
           >
             <Ionicons
@@ -262,7 +262,7 @@ sum==0?(setrate(0)):
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"yellow"} />
           </View>
-        ) : 4 <= rate&&rate < 5 ? (
+        ) : 4 <= rate && rate < 5 ? (
           <View style={{ flexDirection: "row" }}>
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"yellow"} />
@@ -270,7 +270,7 @@ sum==0?(setrate(0)):
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"gray"} />
           </View>
-        ) : 3 <= rate &&rate< 4 ? (
+        ) : 3 <= rate && rate < 4 ? (
           <View style={{ flexDirection: "row" }}>
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"yellow"} />
@@ -278,7 +278,7 @@ sum==0?(setrate(0)):
             <Ionicons name={"star"} size={40} color={"gray"} />
             <Ionicons name={"star"} size={40} color={"gray"} />
           </View>
-        ) : 2 <= rate&&rate < 3 ? (
+        ) : 2 <= rate && rate < 3 ? (
           <View style={{ flexDirection: "row" }}>
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"yellow"} />
@@ -286,7 +286,7 @@ sum==0?(setrate(0)):
             <Ionicons name={"star"} size={40} color={"gray"} />
             <Ionicons name={"star"} size={40} color={"gray"} />
           </View>
-        ) : 1 <= rate &&rate< 2 ? (
+        ) : 1 <= rate && rate < 2 ? (
           <View style={{ flexDirection: "row" }}>
             <Ionicons name={"star"} size={40} color={"yellow"} />
             <Ionicons name={"star"} size={40} color={"gray"} />
@@ -382,11 +382,11 @@ sum==0?(setrate(0)):
               cart
                 ? alert("you have already added this product to your cart")
                 : editUser({
-                    ...user,
-                    cart: [...user.cart, name],
-                  }).then(() => {
-                    navigation.navigate("Cart");
-                  });
+                  ...user,
+                  cart: [...user.cart, name],
+                }).then(() => {
+                  navigation.navigate("Cart");
+                });
             }
           }}
         >
@@ -555,53 +555,53 @@ sum==0?(setrate(0)):
                   review
                     ? alert("you have already reviewed this product")
                     : editUser({
-                        ...user,
-                        review: [
-                          ...user.review,
-                          {
-                            name: name,
-                            rate: flag5
-                              ? 5
-                              : flag4
+                      ...user,
+                      review: [
+                        ...user.review,
+                        {
+                          name: name,
+                          rate: flag5
+                            ? 5
+                            : flag4
                               ? 4
                               : flag3
-                              ? 3
-                              : flag2
-                              ? 2
-                              : flag1
-                              ? 1
-                              : 0,
-                          },
-                        ],
-                      })
-                        .then(() => {
-                          console.log("pro", product);
-
-                          editProduct({
-                            ...product,
-                            rate: [
-                              ...product.rate,
-                              {
-                                user: user.userName,
-                                name: name,
-                                rate: flag5
-                                  ? 5
-                                  : flag4
-                                  ? 4
-                                  : flag3
-                                  ? 3
-                                  : flag2
+                                ? 3
+                                : flag2
                                   ? 2
                                   : flag1
-                                  ? 1
-                                  : 0,
-                              },
-                            ],
-                          });
-                        })
-                        .then(() => {
-                          setcard(!card);
+                                    ? 1
+                                    : 0,
+                        },
+                      ],
+                    })
+                      .then(() => {
+                        console.log("pro", product);
+
+                        editProduct({
+                          ...product,
+                          rate: [
+                            ...product.rate,
+                            {
+                              user: user.userName,
+                              name: name,
+                              rate: flag5
+                                ? 5
+                                : flag4
+                                  ? 4
+                                  : flag3
+                                    ? 3
+                                    : flag2
+                                      ? 2
+                                      : flag1
+                                        ? 1
+                                        : 0,
+                            },
+                          ],
                         });
+                      })
+                      .then(() => {
+                        setcard(!card);
+                      });
                 }}
               >
                 Send

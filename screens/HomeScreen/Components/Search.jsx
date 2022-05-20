@@ -53,6 +53,11 @@ const Search = ({navigation}) => {
        
       }, [Users]);
 
+      const handleSearch=()=>{
+        navigation.navigate("TestSearch" , {resulte:search})
+        setsearch(" ");
+      }
+
     return (
         <View style={{ marginTop: 30, alignItems: 'center' }}>
             <View style={{ borderRadius: 20, borderColor: "white", borderWidth: 1, width: width - 50, height: height / 17, backgroundColor: "white", alignItems: 'center', justifyContent: 'space-between', padding: 10, flexDirection: 'row' }}>
@@ -60,6 +65,8 @@ const Search = ({navigation}) => {
                     placeholder='Search here for product...'
                     onChangeText={setsearch}
                     value={search}
+                    returnKeyType="next"
+                    onSubmitEditing={()=>{handleSearch()}}
                 />
                 <TouchableOpacity onPress={()=>{
                     navigation.navigate("TestSearch" , {resulte:search})
