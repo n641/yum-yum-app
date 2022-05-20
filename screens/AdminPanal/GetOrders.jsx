@@ -58,6 +58,7 @@ const GetOrders = ({ navigation }) => {
                         user={itemData.item.user}
                         product={itemData.item.product}
                         id={itemData.item.id}
+                        create={itemData.item.creatAt}
                         navigation={navigation}
                     />
                 }
