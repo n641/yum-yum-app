@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   FlatList,
+  ScrollView
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -74,54 +75,52 @@ const TestSearch = ({ navigation, route }) => {
     }
   };
 
-   
+
 
   return (
-    <View style={{ top: 2, alignItems: "center", backgroundColor: "white" }}>
-      <View
-        style={{
-          borderRadius: 20,
-          borderColor: "black",
-          borderWidth: 1,
-          width: width - 100,
-          height: height / 17,
-          backgroundColor: "gray",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: 20,
-          flexDirection: "row",
-          margin: 10,
-        }}
-      >
-        <TextInput
-          placeholder="Search here..."
-          onChangeText={setsearch}
-          value={search}
-        />
+    <ScrollView>
+      <View style={{ top: 2, alignItems: "center", backgroundColor: "white" }}>
+        <View
+          style={{
+            borderRadius: 20,
+            borderColor: "black",
+            borderWidth: 1,
+            width: width - 100,
+            height: height / 17,
+            backgroundColor: "gray",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+            margin: 10,
+          }}
+        >
 
-      </View>
+          <Text style={{ textAlign: "center", color: "white", fontWeight: "500", fontSize: 18 }}>{resulte}</Text>
 
-      <View>
-        {flag ? (
-          FilterProducts.map((FilterProducts, i) => (
-            <BasicCard
-              key={i}
-              name={FilterProducts.productName}
-              url={FilterProducts.url}
-              price={FilterProducts.price}
-              offer={FilterProducts.offer}
-              discound={FilterProducts.discount}
-              desc={FilterProducts.description}
-              navigation={navigation}
-            />
-          ))
-        ) : (
-          <View>
-            <NotFound />
-          </View>
-        )}
+        </View>
+
+        <View>
+          {flag ? (
+            FilterProducts.map((FilterProducts, i) => (
+              <BasicCard
+                key={i}
+                name={FilterProducts.productName}
+                url={FilterProducts.url}
+                price={FilterProducts.price}
+                offer={FilterProducts.offer}
+                discound={FilterProducts.discount}
+                desc={FilterProducts.description}
+                navigation={navigation}
+              />
+            ))
+          ) : (
+            <View>
+              <NotFound />
+            </View>
+          )}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -220,6 +220,8 @@ const SignUp = ({ navigation }) => {
                                     autoComplete="off"
                                     blurOnSubmit={false}
                                     ref={ref_input6}
+                                    returnKeyType="next"
+                                    onSubmitEditing={()=>{handleSignUp()}}
 
                                 />
                             </View>
