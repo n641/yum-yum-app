@@ -55,6 +55,7 @@ const Search = ({navigation}) => {
 
       const handleSearch=()=>{
         navigation.navigate("TestSearch" , {resulte:search})
+        setsearch(" ");
       }
 
     return (

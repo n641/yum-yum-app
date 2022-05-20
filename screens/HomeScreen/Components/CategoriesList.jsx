@@ -4,12 +4,18 @@ import {
   View,
   TouchableOpacity,
   Animated,
+  Image,
+  Dimensions
 } from "react-native";
 import React, { useState , useEffect } from "react";
 
 import style from "../../../Constants/style";
 
 import { getCategories , subscribe } from "../../../db/Auth/usersData/Categories";
+import { borderColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 const CategoriesList = ({ navigation }) => {
   const [categoryName, setcategoryName] = useState([]);
@@ -44,11 +50,11 @@ useEffect(() => {
 }, []);
 
   return (
-    <View style={{ margin: 20 }}>
+    <View style={{ marginTop: 6 }}>
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
@@ -67,12 +73,24 @@ useEffect(() => {
                 onPress={() => {
                   navigation.navigate("ProductList" ,{name:e.category});
                 }}
-                style={{  borderRadius: style.border, margin: 10 , borderColor:style.fourth , borderWidth:1 }}
+                style={{   margin: 10 , borderColor:style.fourth , alignItems:"center", borderBottomColor:"black" }}
               >
+                 <Image
+                    style={{
+                        width: width / 6- 18,
+                        height: width / 6- 18,
+                        borderRadius: style.border,
+                        borderWidth:1,
+                        borderColor:"red"
+                    }}
+                    source={{
+                        uri: `${e.link}`,
+                    }}
+                />
                 <Text
                   style={{
                     color: style.primary,
-                    fontSize: 20,
+                    fontSize: width / 11- 18,
                     minHeight: 40,
                     textAlign: "center",
                     borderRadius: style.border,
@@ -83,6 +101,8 @@ useEffect(() => {
                 >
                   {e.category}
                 </Text>
+
+
               </TouchableOpacity>
             ) : index == 4 ? (
               <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }} onPress={() =>{

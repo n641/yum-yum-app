@@ -32,7 +32,7 @@ const OfferCard = ({ url,name,price,desc,discound,fav,offer,navigation}) => {
         >
           <Image
             style={{
-              width: width - 40,
+              width: width - 20,
               height: height / 3,
               borderRadius: style.border,
               borderWidth: 1,
