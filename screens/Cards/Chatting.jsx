@@ -153,11 +153,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     Footer: {
-        position: "fixed",
+        // position: "fixed",
         bottom: 0,
         marginVertical: 5 ,
         flexDirection: "row",
-        justifyContent: 'space-between'
+        // justifyContent: 'space-between'
     },
     bottonStyle:{
         backgroundColor: "red",

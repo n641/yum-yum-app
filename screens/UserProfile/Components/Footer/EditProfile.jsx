@@ -225,8 +225,8 @@ const styles = StyleSheet.create({
     address:{
         flexDirection: 'row',
         width: width-100,
-        justifyContent: "space-between",
-        alignItems: "space-between",
+        // justifyContent: "space-between",
+        // alignItems: "space-between",
         paddingVertical: 10,
     },
     fontStyle: {
