@@ -71,8 +71,6 @@ const Category = ({ navigation }) => {
                 <Ionicons name="add-circle" size={width / 7} color={'red'} />
                 </TouchableOpacity>
             </View>
-
-
         </View>
 
     );

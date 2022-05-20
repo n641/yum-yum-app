@@ -22,7 +22,7 @@ const Drawer = createDrawerNavigator();
 
 const AdminStartScreen = ({ navigation }) => {
     return (
-        <Drawer.Navigator initialRouteName="ChatToSupport">
+        <Drawer.Navigator initialRouteName="Category">
             <Drawer.Screen name="Category" component={categoryStart} options={{
                 title: "categories",
                 headerStyle: {

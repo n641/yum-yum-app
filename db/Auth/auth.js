@@ -43,4 +43,9 @@ async function logout(){
     });
 }
 
-export { register, login, logout };
+async function forgetPassword(email) {
+  await sendPasswordResetEmail(auth, email)
+  .catch((e)=>console.log(e))
+}
+
+export { register, login, logout, forgetPassword };
