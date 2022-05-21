@@ -30,7 +30,7 @@ const Header = ({ pagename, icon, navigation }) => {
 
   const [users, setUsers] = useState([]);
   const [CUser, setCUser] = useState([]);
-  
+
   const [name, setname] = useState('')
 
 
@@ -123,7 +123,7 @@ const Header = ({ pagename, icon, navigation }) => {
               navigation.navigate("Cart");
             }}
           >
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <View
                 style={{
                   width: width / 18,
@@ -147,17 +147,22 @@ const Header = ({ pagename, icon, navigation }) => {
                 style={{ paddingBottom: 25 }}
                 color={style.primary}
               />
+              <View style={{marginHorizontal:20}}>
               {(CUser.rule === "admin") ?
-                <MaterialIcons 
-                name="admin-panel-settings" 
-                size={35}
-                onPress={() => navigation.navigate("AdminStartScreen")}
-            />
-              : null}
+                <MaterialIcons
+                  name="admin-panel-settings"
+                  size={35}
+                  onPress={() => navigation.navigate("AdminStartScreen")}
+                />
+                : (CUser.rule === "delivery") ?
+                  <Ionicons name="bicycle" size={35} color={style.fourth} onPress={() => navigation.navigate("getDelivery")} />
+                  : null
+              }
+              </View>
             </View>
           </TouchableOpacity>
         </View>
-        
+
       </View>
     </View>
   );
