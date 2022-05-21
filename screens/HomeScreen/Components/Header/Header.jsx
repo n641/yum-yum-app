@@ -87,16 +87,22 @@ const Header = ({user,products, navigation }) => {
                 style={{ paddingBottom: 25 }}
                 color={style.primary}
               />
-              {user.rule === "admin" ? (
+              <View style={{marginHorizontal:20}}>
+              {(user.rule === "admin") ?
                 <MaterialIcons
                   name="admin-panel-settings"
                   size={35}
                   onPress={() => navigation.navigate("AdminStartScreen")}
                 />
-              ) : null}
+                : (user.rule === "delivery") ?
+                  <Ionicons name="bicycle" size={35} color={style.fourth} onPress={() => navigation.navigate("getDelivery")} />
+                  : null
+              }
+              </View>
             </View>
           </TouchableOpacity>
         </View>
+
       </View>
     </View>
   );

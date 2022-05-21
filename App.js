@@ -27,6 +27,7 @@ import EditAddressCheckout from "./screens/Checkout/EditAddressCheckout";
 import placeOrder from './screens/Checkout/placeOrder';
 import Support from "./screens/Support/support";
 import Order from "./screens/ordersScreen/Order";
+import getDelivery from "./screens/delivery/getDelivery";
 
 
 import { auth } from "./db/config";
@@ -110,18 +111,18 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
 
-      <Stack.Screen
+        <Stack.Screen
           name="AdminStartScreen"
           component={AdminStartScreen}
           options={{ headerShown: false }}
         />
-        
+
         <Stack.Screen
           name="Login"
           component={Login}
           options={{ headerShown: false }}
         />
- 
+
         <Stack.Screen
           name="SignUp"
           component={SignUp}
@@ -327,8 +328,24 @@ export default function App() {
           }}
         />
 
-        
-      {/* ///orders */}
+        <Stack.Screen
+          name="getDelivery"
+          component={getDelivery}
+          options={{
+            title: "Delivery",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
+        />
+
+
+        {/* ///orders */}
 
       </Stack.Navigator>
     </NavigationContainer>

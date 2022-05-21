@@ -135,7 +135,11 @@ const placeOrder = ({ route, navigation }) => {
       setway("cache")
     }
 
-  })
+  },[orders,Users , products])
+
+  const d = new Date();
+  const date = d.toISOString().split("T")[0];
+  const time = d.toTimeString().split(" ")[0];
 
   const handleCheckOrder= ()=>{
     let temp=[];
@@ -144,18 +148,19 @@ const placeOrder = ({ route, navigation }) => {
       temp.push(name)
       })
 
-      // addOrder(
-      //  {user:user.email ,product:[...temp]}
-      // ).then(()=>{
-      //   console.log("done")
-      // }).catch((e)=>{
-      //   console.log(e)
-      // })
+      addOrder(
+        // {products:[...temp]}
+        {user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" , creatAt:data+"-"+time}
+      ).then(()=>{
+        console.log("done")
+      }).catch((e)=>{
+        console.log(e)
+      })
 
       if (payment == "credit") {
         editUser({
           ...user,
-          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:data+"-"+time}],
           cart:[],
           credit:credit-total,
           points:points+(total/4)
@@ -163,15 +168,14 @@ const placeOrder = ({ route, navigation }) => {
       } else if (payment == "points") {
         editUser({
           ...user,
-          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
-
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:data+"-"+time}],
           cart:[],
           points:(points)-Math.floor(total/4)
         });
       } else {
         editUser({
           ...user,
-          orders: [...orders ,{user:user.email ,product:[...temp] , payment:payment , address:address , total:total , status:"un accepted"}],
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted",  creatAt:data+"-"+time}],
           cart:[],
         });
       }
