@@ -22,55 +22,22 @@ import {getUsers, subscribeUser,editUser} from "../../db/Auth/usersData/users"
 import Message from "./component/Message";
 
 
-const Support = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState([]);
+const Support = ({user, navigation}) => {
   const [flag,setflag] = useState(true);
 
   const [message, setMessage] = useState([]);
   const [messageName, setMessageName] = useState("");
 
-  const getUserss = async () => {
-    const arr = await getUsers();
-    setUsers(arr);
-  };
-
-  
-  useEffect(() => {
-    getUserss();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getUserss();
-      }
-      if (change.type === "modified") {
-        getUserss();
-      }
-      if (change.type === "removed") {
-        getUserss();
-      }
-    });
-
-   
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+ 
 
    useEffect(() => {
-     if (!users?.length) return;
-     const user = users.find((e) => e.email == auth.currentUser.email);
-     setUser(user);
-   
      let msg=[];
            user.Message.map((m) =>
      msg.push(m)
        
      );
      setMessage(msg);
-   }, [ users]);
+   }, [ user]);
 
 
   const d = new Date();
@@ -126,10 +93,10 @@ const Support = () => {
       <ScrollView
         style={{ backgroundColor: "white", flexDirection: "column-reverse" }}
       >
-        {message.map((c) =>
+        {message.map((c ,i) =>
           c.type === "send" ? (
             <View
-              key={c.id}
+              key={i}
               style={{
                 flexDirection: "row-reverse",
                 justifyContent: "space-between",
@@ -148,7 +115,7 @@ const Support = () => {
             </View>
           ) : (
             <View
-              key={c.id}
+              key={i}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",

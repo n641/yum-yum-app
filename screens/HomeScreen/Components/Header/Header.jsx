@@ -5,77 +5,17 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import { auth } from "../../../db/config";
+import React from "react";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-import style from "../../../Constants/style"
+import style from "../../../../Constants/style"
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-import {
-  editUser,
-  getProducts,
-  getUsers,
-  subscribeUser,
-} from "../../../db/Auth/usersData/users";
 
 
-
-const Header = ({ pagename, icon, navigation }) => {
-
-  const [listItems, setListItems] = useState([]);
-
-
-  const [users, setUsers] = useState([]);
-  const [CUser, setCUser] = useState([]);
-  
-  const [name, setname] = useState('')
-
-
-
-  const getUserss = async () => {
-    const arr = await getUsers();
-    const slove = arr.find(e => e.email === auth.currentUser.email)
-    setCUser(slove)
-    setUsers(arr);
-  };
-
-  useEffect(() => {
-    getUserss();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getUserss();
-      }
-      if (change.type === "modified") {
-        getUserss();
-      }
-      if (change.type === "removed") {
-        getUserss();
-      }
-      // }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-
-  useEffect(() => {
-    if (!users?.length) return;
-    const user = users.find((e) => e.email == auth.currentUser.email);
-    setListItems(user.cart)
-    setname(user.userName)
-  }, [users]);
-
-
-
-
+const Header = ({user,products, navigation }) => {
 
 
   return (
@@ -112,7 +52,7 @@ const Header = ({ pagename, icon, navigation }) => {
             paddingLeft: 10,
           }}
         >
-          {name}
+          {user.userName}
         </Text>
       </View>
 
@@ -120,10 +60,10 @@ const Header = ({ pagename, icon, navigation }) => {
         <View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Cart");
+              navigation.navigate("Cart", { user: user, products:products});
             }}
           >
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: "row" }}>
               <View
                 style={{
                   width: width / 18,
@@ -138,26 +78,25 @@ const Header = ({ pagename, icon, navigation }) => {
                 }}
               >
                 <Text style={{ color: style.third, fontSize: 20 }}>
-                  {listItems.length}
+                  {user.cart ? user.cart.length : 0}
                 </Text>
               </View>
               <Ionicons
-                name={icon}
+                name="cart"
                 size={35}
                 style={{ paddingBottom: 25 }}
                 color={style.primary}
               />
-              {(CUser.rule === "admin") ?
-                <MaterialIcons 
-                name="admin-panel-settings" 
-                size={35}
-                onPress={() => navigation.navigate("AdminStartScreen")}
-            />
-              : null}
+              {user.rule === "admin" ? (
+                <MaterialIcons
+                  name="admin-panel-settings"
+                  size={35}
+                  onPress={() => navigation.navigate("AdminStartScreen")}
+                />
+              ) : null}
             </View>
           </TouchableOpacity>
         </View>
-        
       </View>
     </View>
   );

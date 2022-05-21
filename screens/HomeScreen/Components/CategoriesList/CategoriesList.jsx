@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import React, { useState , useEffect } from "react";
 
-import style from "../../../Constants/style";
+import style from "../../../../Constants/style";
 
-import { getCategories , subscribe } from "../../../db/Auth/usersData/Categories";
+import { getCategories , subscribe } from "../../../../db/Auth/usersData/Categories";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const CategoriesList = ({ navigation }) => {
+const CategoriesList = ({user,products, navigation }) => {
   const [categoryName, setcategoryName] = useState([]);
   const getGategoriesHandler = async () => {
     const arr = await getCategories();
@@ -29,8 +29,7 @@ useEffect(()=>{
 
 useEffect(() => {
   const unsubscribe = subscribe(({ change, snapshot }) => {
-    //   console.log("changes", change, snapshot, change.type);
-    // if (snapshot.metadata.hasPendingWrites) {
+   
     if (change.type === "added") {
       getGategoriesHandler();
     }
@@ -40,7 +39,6 @@ useEffect(() => {
     if (change.type === "removed") {
       getGategoriesHandler();
     }
-    // }
   });
 
   return () => {
@@ -70,7 +68,7 @@ useEffect(() => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  navigation.navigate("ProductList" ,{name:e.category});
+                  navigation.navigate("ProductList" ,{name:e.category ,user:user,products:products});
                 }}
                 style={{   margin: 10 , borderColor:style.fourth , alignItems:"center", borderBottomColor:"black" }}
               >

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from 'react'
-import style from '../../../Constants/style'
+import style from '../../../../Constants/style'
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;

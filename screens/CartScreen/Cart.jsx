@@ -7,13 +7,17 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
-  Alert
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 import { auth } from "../../db/config";
-import { getUsers, editUser, subscribeUser } from "../../db/Auth/usersData/users";
+import {
+  getUsers,
+  editUser,
+  subscribeUser,
+} from "../../db/Auth/usersData/users";
 import { getProducts, subscribe } from "../../db/Auth/usersData/Products";
 
 import HomeStart from "../HomeScreen/HomeStart";
@@ -27,9 +31,7 @@ const height = Dimensions.get("window").height;
 import style from "../../Constants/style";
 
 const Cart = ({ navigation, route }) => {
-  // const { counter } = route.params;
-  //console.log("counter",counter)
-
+  
 
   const [products, setproducts] = useState([]);
   const [Users, setUsers] = useState([]);
@@ -52,7 +54,6 @@ const Cart = ({ navigation, route }) => {
 
   useEffect(() => {
     const unsubscribe = subscribeUser(({ change, snapshot }) => {
-
       if (change.type === "added") {
         getUserss();
       }
@@ -88,26 +89,24 @@ const Cart = ({ navigation, route }) => {
   }, []);
 
   useEffect(() => {
-    if (!Users?.length)
-      return;
-    const user = Users.find(e => e.email == auth.currentUser.email);
-    const cart = user.cart.map(name => products.find(p => p.productName == name));
+    if (!Users?.length) return;
+    const user = Users.find((e) => e.email == auth.currentUser.email);
+    const cart = user.cart.map((name) =>
+      products.find((p) => p.productName == name)
+    );
     setListItems(cart);
   }, [products, Users]);
 
+  const [total, setTotal] = useState(0);
 
-
-  const [total, setTotal] = useState(0)
-
-
-  const totalIncrement = givinTotal => {
-    setTotal(total + givinTotal)
-    console.log(total + givinTotal)
-  }
-  const totalDecrement = givinTotal => {
-    setTotal(total - givinTotal)
-    console.log(total + givinTotal)
-  }
+  const totalIncrement = (givinTotal) => {
+    setTotal(total + givinTotal);
+    console.log(total + givinTotal);
+  };
+  const totalDecrement = (givinTotal) => {
+    setTotal(total - givinTotal);
+    console.log(total + givinTotal);
+  };
   const deleteItem = (name) => {
     //  Alert.alert("Delete Item", `Are you sure you want to delete this ${name}?`, [
     //    {
@@ -120,7 +119,6 @@ const Cart = ({ navigation, route }) => {
       ...user,
       cart: user.cart.filter((n) => n !== name),
     });
-
 
     //  },
     //},
@@ -166,7 +164,7 @@ const Cart = ({ navigation, route }) => {
               onAdd={totalIncrement}
               onRemove={totalDecrement}
               deleteItem={deleteItem}
-            // count={counter ? 2 : 1}
+              // count={counter ? 2 : 1}
             />
           )}
         />
@@ -174,10 +172,19 @@ const Cart = ({ navigation, route }) => {
 
       <View>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-
-          <Text style={{ color: "red", fontWeight: "bold", fontSize: width/30 }}>-----------------------------------------------------------</Text>
+          <Text
+            style={{ color: "red", fontWeight: "bold", fontSize: width / 30 }}
+          >
+            -----------------------------------------------------------
+          </Text>
         </View>
-        <View style={{ flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
           <Text style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
             Total:
           </Text>
@@ -187,7 +194,6 @@ const Cart = ({ navigation, route }) => {
         </View>
       </View>
 
-
       <TouchableOpacity
         style={{
           width: width - 40,
@@ -196,19 +202,18 @@ const Cart = ({ navigation, route }) => {
           justifyContent: "space-around",
           backgroundColor: style.primary,
           height: height / 10,
-          flexDirection:"row",
-          alignItems:"center"
+          flexDirection: "row",
+          alignItems: "center",
         }}
         onPress={() => {
-          if(total!==0){
-          navigation.navigate("Address", {
-            total: total,
-          });
-        }else{
-          alert("please increase counter of product to order it")
-        }
-        }
-      }
+          if (total !== 0) {
+            navigation.navigate("Address", {
+              total: total,
+            });
+          } else {
+            alert("please increase counter of product to order it");
+          }
+        }}
       >
         <Text
           style={{
@@ -221,7 +226,7 @@ const Cart = ({ navigation, route }) => {
           Address
         </Text>
         <View>
-          <Ionicons name="caret-forward" size={30} color={'white'} />
+          <Ionicons name="caret-forward" size={30} color={"white"} />
         </View>
       </TouchableOpacity>
     </View>

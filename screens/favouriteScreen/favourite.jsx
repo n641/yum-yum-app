@@ -2,85 +2,21 @@ import { StyleSheet, Text, View, Dimensions, FlatList, ScrollView, Image } from 
 import React, { useState, useEffect } from 'react';
 import BasicCard from '../../Components/BasicCard'
 
-import { auth } from '../../db/config';
-import { getUsers, subscribeUser } from '../../db/Auth/usersData/users';
-import { getProducts, subscribe } from '../../db/Auth/usersData/Products';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-// import FavCard from '../UserProfile/Components/Favourite/FavCard';
 import style from '../../Constants/style';
 
-const Favourite = ({ navigation }) => {
+const Favourite = ({user,products, navigation }) => {
 
-  const [product, setproduct] = useState([]);
   const [Favourite, setfavourite] = useState([]);
 
-  const [Users, setUsers] = useState([]);
-
-  const getUserss = async () => {
-    const arr = await getUsers();
-    setUsers(arr);
-  };
-
-  const getProduct = async () => {
-    const arr = await getProducts();
-    setproduct(arr);
-  };
 
   useEffect(() => {
-    getUserss();
-    getProduct();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeUser(({ change, snapshot }) => {
-
-      if (change.type === "added") {
-        getUserss();
-      }
-      if (change.type === "modified") {
-        getUserss();
-      }
-      if (change.type === "removed") {
-        getUserss();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getProduct();
-      }
-      if (change.type === "modified") {
-        getProduct();
-      }
-      if (change.type === "removed") {
-        getProduct();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-
-  
-
-  useEffect(() => {
-    if(!Users?.length)
-      return;
-    const user = Users.find(e=>e.email == auth.currentUser.email);
-    const fav = user.favourite.map(name=>product.find(p=>p.productName===name));
+    const fav = user.favourite.map(name=>products.find(p=>p.productName===name));
     setfavourite(fav);
-  }, [product, Users]);
+  }, [products, user]);
 
   
 

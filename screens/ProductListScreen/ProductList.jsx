@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity, Dimensions, FlatList } from "react-native";
 import React, { useState ,useEffect} from 'react'
 
-import Header from "../HomeScreen/Components/Header";
+import Header from "../HomeScreen/Components/Header/Header";
 import { Ionicons } from "@expo/vector-icons";
 
-// import CardProduct from "./CardProduct";
 import BasicCard from '../../Components/BasicCard'
 
 import {getProducts,subscribe} from "../../db/Auth/usersData/Products"
@@ -15,6 +14,7 @@ import style from "../../Constants/style"
 
 
 const ProductList = ({ navigation ,route}) => {
+  const {user,products}= route.params
    const [pro, setpro] = useState([]);
    const {name}  = route.params;
    const [listItem, setlistItem] = useState([])
@@ -30,8 +30,7 @@ useEffect(() => {
 
 useEffect(() => {
   const unsubscribe = subscribe(({ change, snapshot }) => {
-    //   console.log("changes", change, snapshot, change.type);
-    // if (snapshot.metadata.hasPendingWrites) {
+    
     if (change.type === "added") {
       getItems();
     }
@@ -62,7 +61,7 @@ setlistItem(temp);
  
   return (
     <View>
-      <Header icon={"cart"} navigation={navigation} />
+      <Header icon={"cart"} user={user} products={products} navigation={navigation} />
       <Text
         style={{
           fontSize: 25,

@@ -1,56 +1,16 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList } from "react-native";
 import React, { useState, useEffect } from 'react'
-import Card from './Card';
-import style from "../../../Constants/style";
-import BasicCard from '../../../Components/BasicCard'
+import style from "../../../../Constants/style";
+import BasicCard from '../../../../Components/BasicCard'
 
-import { getProducts, subscribe } from "../../../db/Auth/usersData/Products";
 
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const BestSellingFood = ({ navigation }) => {
-  const [pro, setpro] = useState([
-    //must order product by count!!!!
-
-  ]);
-
-  const getItems = async () => {
-    const arr = await getProducts();
-    setpro(arr);
-  };
-  useEffect(() => {
-    getItems();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
-      if (change.type === "added") {
-        getItems();
-      }
-      if (change.type === "modified") {
-        getItems();
-      }
-      if (change.type === "removed") {
-        getItems();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-useEffect(()=>{
-let temp=[];
-
-},[])
-
-
+const BestSellingFood = ({ products, navigation }) => {
+  
   return (
     <View>
       <Text
@@ -66,10 +26,9 @@ let temp=[];
       </Text>
 
       <FlatList
-        data={pro}
+        data={products}
         numColumns={2}
         keyExtractor={(item) => item.productName}
-
         renderItem={(itemData) =>
           itemData.item.count > 2 ? (
             <BasicCard
@@ -86,7 +45,7 @@ let temp=[];
       />
     </View>
   );
-}
+};
 
 export default BestSellingFood
 

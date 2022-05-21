@@ -89,7 +89,7 @@ export default function CardofCart({
                   paddingLeft: 5,
                 }}
               >
-                {name.length < 15 ? name : name.substring(0, 10) + "..."}
+                {name?name.length < 15 ? name : name.substring(0, 10) + "...":null}
               </Text>
             </View>
           </View>

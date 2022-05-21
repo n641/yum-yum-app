@@ -12,7 +12,6 @@ import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 import { getProducts, subscribe } from "../db/Auth/usersData/Products";
-// import Card from "./HomeScreen/Components/Card";
 import NotFound from "./NotFoundScreens/NotFound";
 import BasicCard from '../Components/BasicCard'
 

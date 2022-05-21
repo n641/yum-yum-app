@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Dimensions, Animated, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
-import Card from '../HomeScreen/Components/Card';
 import style from '../../Constants/style';
 import ViewCard from '../../Components/ViewCard'
 

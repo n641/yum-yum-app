@@ -12,9 +12,9 @@ import { getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 
 
 
-import Header from '../HomeScreen/Components/Header';
+import Header from '../HomeScreen/Components/Header/Header';
 
-const Category = ({navigation}) => {
+const Category = ({user,products,navigation}) => {
 
     const [category, setcategory] = useState([]);
     
@@ -52,7 +52,7 @@ const Category = ({navigation}) => {
 
     return (
       <View>
-        <Header icon={"cart"} navigation={navigation} />
+        <Header user={user} product={products} icon={"cart"} navigation={navigation} />
         <Text style={{ textAlign: "center", fontSize: 20, margin: 20 , fontWeight:'bold' }}>
           select from the categories below
         </Text>

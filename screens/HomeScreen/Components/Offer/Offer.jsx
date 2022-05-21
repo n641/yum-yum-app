@@ -8,8 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { auth } from "../../../db/config";
-import { getOffers , subscribe } from "../../../db/Auth/usersData/Offers";
+import { getOffers , subscribe } from "../../../../db/Auth/usersData/Offers";
 
 import OfferCard from "./OfferCard";
 
