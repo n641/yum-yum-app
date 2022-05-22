@@ -19,28 +19,15 @@ export default function CardofCart({
   onAdd,
   onRemove,
   deleteItem,
-  count
+  counter1
 
 }) {
 
-  const [counter, setcounter] = useState(0);
+  const [counter, setcounter] = useState(counter1);
   const [total, setTotal] = useState(offer ? price - discound : price);
+  console.log("the counter " , counter)
 
-  const increment = () => {
-    setcounter(counter + 1);
-    setTotal(offer ? (price - discound) * (counter + 1) : price * (counter + 1));
-    onAdd(offer ? price - discound : price);
-  };
-
-  const decrement = () => {
-    if (counter == 0) {
-      setTotal(0);
-    } else {
-      setcounter(counter - 1);
-      setTotal(price * (counter - 1));
-      onRemove(offer ? price - discound : price);
-    }
-  };
+ 
 
   return (
     <View style={{ margin: 10 }}>
@@ -150,13 +137,16 @@ export default function CardofCart({
             justifyContent: "center",
           }}
         >
-          {counter > 0 ? (
-            <TouchableOpacity onPress={() => decrement()}>
-              <Ionicons name="remove" size={20} color={"red"} style={{}} />
-            </TouchableOpacity>
+          {counter == 1 ? (
+           <TouchableOpacity onPress={() => { deleteItem(name) }}>
+           <Ionicons name="trash" size={20} color={"red"} style={{}} />
+         </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => { deleteItem(name) }}>
-              <Ionicons name="trash" size={20} color={"red"} style={{}} />
+            <TouchableOpacity onPress={() => {
+              setcounter(counter-1)
+              onRemove(price)
+              }}>
+              <Ionicons name="remove" size={20} color={"red"} style={{}} />
             </TouchableOpacity>
           )
           }
@@ -187,7 +177,11 @@ export default function CardofCart({
               </Text>
             ) : null}
           </View>
-          <TouchableOpacity onPress={() => increment()}>
+          <TouchableOpacity onPress={() => 
+          {
+            setcounter(counter+1) 
+            onAdd(price)
+          }}>
             <Ionicons name="add" size={20} color={"red"} style={{}} />
           </TouchableOpacity>
         </View>

@@ -8,10 +8,9 @@ const height = Dimensions.get("window").height;
 
 import style from '../../Constants/style';
 
-const Favourite = ({user,products, navigation }) => {
+const Favourite = ({user,products, navigation , cart , funPush }) => {
 
   const [Favourite, setfavourite] = useState([]);
-
 
   useEffect(() => {
     const fav = user.favourite.map(name=>products.find(p=>p.productName===name));
@@ -49,6 +48,8 @@ const Favourite = ({user,products, navigation }) => {
             discound={itemData.item.discount}
             desc={itemData.item.description}
             navigation={navigation}
+            cart={cart} 
+            funPush={funPush}
           />
         )}
       />

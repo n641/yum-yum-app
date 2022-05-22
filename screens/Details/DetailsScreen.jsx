@@ -29,7 +29,13 @@ import {
 
 
 const DetailsScreen = ({ route, navigation }) => {
-  const { name, price, desc, url, discound, offer } = route.params;
+  const { name, price, desc, url, discound, offer, cart, funPush } = route.params;
+  let defualtcounrer=1;
+  cart.find((product)=>{
+    product.name==name?defualtcounrer=product.counter:null
+  })
+  const [counterPreoduct, setcounterPreoduct] = useState(defualtcounrer);
+ 
 
   const [pro, setpro] = useState([
 
@@ -75,7 +81,6 @@ const DetailsScreen = ({ route, navigation }) => {
       if (change.type === "removed") {
         getUserss();
       }
-      // }
     });
 
     return () => {
@@ -246,6 +251,58 @@ const DetailsScreen = ({ route, navigation }) => {
         </View>
       </View>
 
+
+
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {counterPreoduct > 0 ? (
+          <TouchableOpacity onPress={() => { }}>
+            <Ionicons name="remove" size={20} color={"red"} style={{}} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => { }}>
+            <Ionicons name="trash" size={20} color={"red"} style={{}} />
+          </TouchableOpacity>
+        )
+        }
+        <View
+          style={{
+            fontSize: 18,
+            marginHorizontal: 15,
+            alignItems: "center",
+            justifyContent: "center",
+            width: width / 12 + 10,
+            height: width / 12,
+            backgroundColor: "gray",
+            borderRadius: width / 2,
+          }}
+        >
+            <Text
+              style={{
+                fontSize: 18,
+                marginHorizontal: 15,
+                borderRadius: width / 2,
+                color: "white",
+                fontWeight: "bold"
+
+              }}
+            >
+              {counterPreoduct}
+            </Text>
+        </View>
+        <TouchableOpacity onPress={() => { 
+          setcounterPreoduct(counterPreoduct+1)
+        }}>
+          <Ionicons name="add" size={20} color={"red"} style={{}} />
+        </TouchableOpacity>
+      </View>
+
+
       <View
         style={{
           justifyContent: "space-between",
@@ -370,25 +427,36 @@ const DetailsScreen = ({ route, navigation }) => {
             height: height / 10,
           }}
           onPress={() => {
-            if (user.cart.length == 0) {
-              editUser({
-                ...user,
-                cart: [...user.cart, name],
-              }).then(() => {
-                navigation.navigate("Cart");
-              });
+            if (!cart?.length) {
+                funPush([{ name: name, price: price, desc: desc, url: url, discound: discound, offer: offer, counter: counterPreoduct}])
             } else {
-              const cart = user.cart.find((namecart) => namecart == name);
-              cart
-                ? alert("you have already added this product to your cart")
-                : editUser({
-                  ...user,
-                  cart: [...user.cart, name],
-                }).then(() => {
-                  navigation.navigate("Cart");
-                });
+                
+                let oldcounter=0;
+                let tem=[];
+                cart.map((product)=>{
+                    if(product.name==name){
+                        oldcounter=product.counter
+                    }else{
+                        tem.push(product)
+                    }
+                })
+ 
+                    console.log("tttt",tem)
+                
+
+                 funPush([...tem, { name: name, price: price, desc: desc, url: url, discound: discound, offer: offer, counter: counterPreoduct}])
+
+                 console.log("the cart is ", cart);
+
+
+
+                    }
             }
-          }}
+
+        }
+      
+
+
         >
           <Text
             style={{

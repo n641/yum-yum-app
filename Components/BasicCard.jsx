@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Button } f
 import React, { useState, useEffect } from "react";
 
 import { getUsers, subscribeUser, editUser } from "../db/Auth/usersData/users";
-import { getProducts , subscribe } from "../db/Auth/usersData/Products";
+import { getProducts, subscribe } from "../db/Auth/usersData/Products";
 import { auth } from "../db/config";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -13,13 +13,14 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => {
+const Card = ({ name, price, desc, url, fav, discound, offer, navigation, cart, funPush}) => {
     const [users, setUsers] = useState([]);
     const [favo, setfavo] = useState(false);
     const [pro, setpro] = useState([]);
     const [rate, setrate] = useState('');
     const [product, setproduct] = useState({});
 
+    // console.log("your cart in fav is " , cart);
     const getUserss = async () => {
         const arr = await getUsers();
         setUsers(arr);
@@ -32,14 +33,14 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
     const getItems = async () => {
         const arr = await getProducts();
         setpro(arr);
-      };
-      useEffect(() => {
+    };
+    useEffect(() => {
         getItems();
-      }, []);
+    }, []);
 
     useEffect(() => {
         const unsubscribe = subscribeUser(({ change, snapshot }) => {
-           
+
             if (change.type === "added") {
                 getUserss();
             }
@@ -59,7 +60,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
 
     useEffect(() => {
         const unsubscribe = subscribe(({ change, snapshot }) => {
-           
+
             if (change.type === "added") {
                 getItems();
             }
@@ -78,23 +79,23 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
     }, []);
     useEffect(() => {
         if (!pro?.length) return;
-    
+
         const product = pro.find((e) => e.productName == name);
         setproduct(product);
-    
+
         let sum = 0;
         product.rate.map((r) => {
-    
-          sum += r.rate
-    
+
+            sum += r.rate
+
         });
-    
+
         sum == 0 ? (setrate(0)) :
-          setrate((sum / product.rate.length));
-    
-    
-    
-      }, [pro, rate, product]);
+            setrate((sum / product.rate.length));
+
+
+
+    }, [pro, rate, product]);
 
 
     return (
@@ -129,7 +130,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                     }}
                 >
                     <View>
-                        <Text style={{ fontSize: width/25, fontWeight: "bold" }}>
+                        <Text style={{ fontSize: width / 25, fontWeight: "bold" }}>
                             {name.length < 15 ? name : name.substring(0, 10) + "..."}
                         </Text>
                     </View>
@@ -145,7 +146,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                                     <Text
                                         style={{
                                             color: "#838787",
-                                            fontSize: width/25,
+                                            fontSize: width / 25,
                                             fontWeight: "bold",
                                             textDecorationLine: "line-through",
                                             marginRight: 5,
@@ -158,7 +159,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                                     <Text
                                         style={{
                                             color: "red",
-                                            fontSize: width/25,
+                                            fontSize: width / 25,
                                             fontWeight: "bold",
                                         }}
                                     >
@@ -171,7 +172,7 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                                 <Text
                                     style={{
                                         color: "red",
-                                        fontSize: width/25,
+                                        fontSize: width / 25,
                                         fontWeight: "bold",
                                     }}
                                 >
@@ -183,54 +184,54 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                 </View>
 
                 {rate == 5 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-          </View>
-        ) : 4 <= rate && rate < 5 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-          </View>
-        ) : 3 <= rate && rate < 4 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-          </View>
-        ) : 2 <= rate && rate < 3 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-          </View>
-        ) : 1 <= rate && rate < 2 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"yellow"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-          </View>
-        ) : rate == 0 ? (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-            <Ionicons name={"star"} size={20} color={"gray"} />
-          </View>
-        ) : null}
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                    </View>
+                ) : 4 <= rate && rate < 5 ? (
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                    </View>
+                ) : 3 <= rate && rate < 4 ? (
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                    </View>
+                ) : 2 <= rate && rate < 3 ? (
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                    </View>
+                ) : 1 <= rate && rate < 2 ? (
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"yellow"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                    </View>
+                ) : rate == 0 ? (
+                    <View style={{ flexDirection: "row" }}>
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                        <Ionicons name={"star"} size={20} color={"gray"} />
+                    </View>
+                ) : null}
 
 
 
@@ -246,28 +247,36 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                 >
                     <TouchableOpacity onPress={() => {
 
-                        const user = users.find((e) => e.email == auth.currentUser.email);
-                        if (user.cart.length == 0) {
-                            editUser({
-                                ...user,
-                                cart: [...user.cart, name],
-                            });
+                        if (!cart?.length) {
+                            funPush([...cart,{ name: name, price: price, desc: desc, url: url,  discound: discound, offer: offer, counter: 1 }])
+                            console.log("the cart is ", cart);
+
                         } else {
-                            const cart = user.cart.find(
-                                (namecart) => namecart == name
-                            );
-                            cart ? alert("you have already added this product to your cart") : (
-                                editUser({
-                                    ...user,
-                                    cart: [...user.cart, name],
-                                })
+                            
+                            let oldcounter=0;
+                            let tem=[];
+                            cart.map((product)=>{
+                                if(product.name==name){
+                                    oldcounter=product.counter
+                                }else{
+                                    tem.push(product)
+                                }
+                            })
+             
+                                console.log("tttt",tem)
+                            
 
-                            )
+                             funPush([...tem, { name: name, price: price, desc: desc, url: url, discound: discound, offer: offer, counter: oldcounter+1}])
+
+                             console.log("the cart is ", cart);
 
 
+
+                                }
                         }
+
                     }
-                    }
+                  
 
 
                         style={{
@@ -311,7 +320,10 @@ const Card = ({ name, price, desc, url, fav, discound, offer, navigation  }) => 
                                     discound: discound,
                                     desc: desc,
                                     offer: offer,
-                                });
+                                    cart:cart,
+                                    funPush:funPush
+                                }
+                                );
                             }}
                         >
                             <Text

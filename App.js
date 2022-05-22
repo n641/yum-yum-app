@@ -30,80 +30,11 @@ import Order from "./screens/ordersScreen/Order";
 import getDelivery from "./screens/delivery/getDelivery";
 
 
-import { auth } from "./db/config";
-import { getUsers, subscribeUser } from "./db/Auth/usersData/users";
-import { getProducts, subscribe } from "./db/Auth/usersData/Products";
-
-
-
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [Users, setUsers] = useState([]);
-  const [User, setUser] = useState([]);
-  const [product, setproduct] = useState([]);
-
-  const getProduct = async () => {
-    const arr = await getProducts();
-    setproduct(arr);
-  };
-
-  useEffect(() => {
-    getProduct();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getProduct();
-      }
-      if (change.type === "modified") {
-        getProduct();
-      }
-      if (change.type === "removed") {
-        getProduct();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  const getUserss = async () => {
-    const arr = await getUsers();
-    setUsers(arr);
-  };
-  useEffect(() => {
-    getUserss();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeUser(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getUserss();
-      }
-      if (change.type === "modified") {
-        getUserss();
-      }
-      if (change.type === "removed") {
-        getUserss();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   if (!Users?.length) return;
-
-  //   const user = Users.find((e) => e.email == auth.currentUser.email);
-  //   setUser(user);
-  // }, [Users]);
-
+ 
 
  
 
@@ -201,7 +132,7 @@ export default function App() {
         <Stack.Screen
           name="ProductList"
           component={ProductList}
-          options={{ headerShown: false }}
+          // options={{ headerShown: false }}
         />
 
         <Stack.Screen
@@ -284,7 +215,7 @@ export default function App() {
           name="placeOrder"
           component={placeOrder}
           options={{
-            title: "Check Out",
+            title: "CheckOut",
             headerStyle: {
               backgroundColor: "red",
             },

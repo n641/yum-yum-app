@@ -9,13 +9,15 @@ import React from "react";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import style from "../../../../Constants/style"
+import { editUser } from "../../../../db/Auth/usersData/users";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
 
-const Header = ({user,products, navigation }) => {
+const Header = ({ cart, user, products, navigation, funPush }) => {
+  
 
 
   return (
@@ -60,7 +62,23 @@ const Header = ({user,products, navigation }) => {
         <View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Cart", { user: user, products:products});
+              if(!cart?.length){
+                navigation.navigate("Cart", { user: user, cart: cart, funPush: funPush });          
+                }else{
+                  editUser(
+                    {
+                      ...user,
+                      cart: [...cart]
+                    }
+                    )
+                    // .then(()=>{
+                    //   funPush([])
+                    // })
+                    .then(() => {
+                      navigation.navigate("Cart", { cart: cart, funPush: funPush });
+                      
+                    })
+                }
             }}
           >
             <View style={{ flexDirection: "row" }}>
@@ -78,7 +96,7 @@ const Header = ({user,products, navigation }) => {
                 }}
               >
                 <Text style={{ color: style.third, fontSize: 20 }}>
-                  {user.cart ? user.cart.length : 0}
+                  {cart ? cart.length : 0}
                 </Text>
               </View>
               <Ionicons
@@ -87,17 +105,17 @@ const Header = ({user,products, navigation }) => {
                 style={{ paddingBottom: 25 }}
                 color={style.primary}
               />
-              <View style={{marginHorizontal:20}}>
-              {(user.rule === "admin") ?
-                <MaterialIcons
-                  name="admin-panel-settings"
-                  size={35}
-                  onPress={() => navigation.navigate("AdminStartScreen")}
-                />
-                : (user.rule === "delivery") ?
-                  <Ionicons name="bicycle" size={35} color={style.fourth} onPress={() => navigation.navigate("getDelivery")} />
-                  : null
-              }
+              <View style={{ marginHorizontal: 20 }}>
+                {(user.rule === "admin") ?
+                  <MaterialIcons
+                    name="admin-panel-settings"
+                    size={35}
+                    onPress={() => navigation.navigate("AdminStartScreen")}
+                  />
+                  : (user.rule === "delivery") ?
+                    <Ionicons name="bicycle" size={35} color={style.fourth} onPress={() => navigation.navigate("getDelivery")} />
+                    : null
+                }
               </View>
             </View>
           </TouchableOpacity>

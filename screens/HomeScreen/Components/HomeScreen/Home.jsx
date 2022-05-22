@@ -11,7 +11,7 @@ import BestSellingFood from "../BestSellingFood/BestSellingFood";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Home = ({user,products, navigation }) => {
+const Home = ({user,products, navigation , cart  , funPush }) => {
 
  
 
@@ -24,12 +24,12 @@ const Home = ({user,products, navigation }) => {
         flexDirection: "column",
       }}
     >
-      <Header user={user}  products={products} navigation={navigation} />
+      <Header user={user} cart={cart} funPush={funPush} products={products} navigation={navigation} />
       <ScrollView>
-        <Search user={user} navigation={navigation} />
-        <CategoriesList user={user} products={products} navigation={navigation} />
+        <Search user={user}  cart={cart} funPush={funPush} navigation={navigation} />
+        <CategoriesList user={user} cart={cart} funPush={funPush} products={products} navigation={navigation} />
         <Offers navigation={navigation} />
-        <BestSellingFood products={products} navigation={navigation} />
+        <BestSellingFood products={products} cart={cart} funPush={funPush} navigation={navigation} />
       </ScrollView>
     </View>
   );

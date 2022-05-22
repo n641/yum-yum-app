@@ -34,9 +34,10 @@ async function deletedelivery(id) {
     }
 }
 
-async function adddelivery(order) {
+async function adddelivery(d) {
     try {
-        const docRef = await addDoc(collection(db, "delivery"), order);
+        const docRef = await addDoc(collection(db, "delivery"), d);
+        console.log("done in delivery" , docRef.id)
     } catch (e) {
         console.error("Error adding document: ", e);
     }
@@ -44,7 +45,7 @@ async function adddelivery(order) {
 
 function subscribedelivery(callback) {
     const unsubscribe = onSnapshot(
-    query(collection(db, "orders")),
+    query(collection(db, "delivery")),
         (snapshot) => {
             const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
             snapshot.docChanges().forEach((change) => {

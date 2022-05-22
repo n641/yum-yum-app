@@ -60,6 +60,10 @@ const GetOrders = ({ navigation }) => {
                         id={itemData.item.id}
                         create={itemData.item.creatAt}
                         navigation={navigation}
+                        address={itemData.item.addresss}
+                        payment={itemData.item.payments}
+                        status={itemData.item.statuss}
+                        total={itemData.item.totals}
                     />
                 }
             />

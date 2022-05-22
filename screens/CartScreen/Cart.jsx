@@ -29,27 +29,21 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 import style from "../../Constants/style";
+import { set } from "react-native-reanimated";
 
 const Cart = ({ navigation, route }) => {
-  
-
-  const [products, setproducts] = useState([]);
+  const [productcart, setproductcart] = useState([]);
   const [Users, setUsers] = useState([]);
-  const [listItems, setListItems] = useState([]);
+  const [User, setUser] = useState([])
+
+
 
   const getUserss = async () => {
     const arr = await getUsers();
     setUsers(arr);
   };
-
-  const getProduct = async () => {
-    const arr = await getProducts();
-    setproducts(arr);
-  };
-
   useEffect(() => {
     getUserss();
-    getProduct();
   }, []);
 
   useEffect(() => {
@@ -71,37 +65,34 @@ const Cart = ({ navigation, route }) => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getProduct();
-      }
-      if (change.type === "modified") {
-        getProduct();
-      }
-      if (change.type === "removed") {
-        getProduct();
-      }
-    });
+    if (!Users?.length) return;
 
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+    const user = Users.find((e) => e.email == auth.currentUser.email);
+    setUser(user);
+  }, [Users]);
+
+  
+
+
 
   useEffect(() => {
-    if (!Users?.length) return;
-    const user = Users.find((e) => e.email == auth.currentUser.email);
-    const cart = user.cart.map((name) =>
-      products.find((p) => p.productName == name)
-    );
-    setListItems(cart);
-  }, [products, Users]);
+  if(!User?.cart)return;
+  setproductcart([...User.cart])
+  }, [User])
 
   const [total, setTotal] = useState(0);
+  useEffect(()=>{
+  if(!User?.cart)return;
+    let globaltotal=0;
+    User.cart.map((product)=>{
+      globaltotal += product.counter*product.price
+
+    })
+    setTotal(globaltotal);
+  },[User])
 
   const totalIncrement = (givinTotal) => {
     setTotal(total + givinTotal);
-    console.log(total + givinTotal);
   };
   const totalDecrement = (givinTotal) => {
     setTotal(total - givinTotal);
@@ -113,19 +104,17 @@ const Cart = ({ navigation, route }) => {
     //      text: "Yes",
     //      onPress: () => {
 
-    const user = Users.find((e) => e.email == auth.currentUser.email);
-    console.log("User i find :>> ", user);
-    editUser({
-      ...user,
-      cart: user.cart.filter((n) => n !== name),
-    });
+      editUser({
+        ...User,
+        cart: User.cart.filter((n) => n.name !== name),
+      });
 
     //  },
     //},
     //]);
   };
 
-  return listItems.length != 0 ? (
+  return productcart.length != 0 ? (
     <View
       style={{
         justifyContent: "space-between",
@@ -144,27 +133,27 @@ const Cart = ({ navigation, route }) => {
             marginRight: 20,
           }}
         >
-          {listItems.length} items
+          {productcart.length} items
         </Text>
 
         <FlatList
-          data={listItems}
+          data={productcart}
           numColumns={2}
           keyExtractor={(item) => item.productName}
           renderItem={(itemData, id) => (
             <CardofCart
               key={id}
-              name={itemData.item.productName}
+              name={itemData.item.name}
               url={itemData.item.url}
               price={itemData.item.price}
               offer={itemData.item.offer}
-              discound={itemData.item.discount}
-              desc={itemData.item.description}
+              discound={itemData.item.discound}
+              desc={itemData.item.desc}
               navigation={navigation}
+              counter1={itemData.item.counter}
               onAdd={totalIncrement}
               onRemove={totalDecrement}
               deleteItem={deleteItem}
-              // count={counter ? 2 : 1}
             />
           )}
         />

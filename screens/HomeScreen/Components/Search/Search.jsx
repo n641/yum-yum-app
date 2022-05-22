@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const Search = ({user,navigation}) => {
+const Search = ({cart,funPush,user,navigation}) => {
 
     const [credit, setcredit] = useState('');
     const [search, setsearch] = useState("");
@@ -38,7 +38,7 @@ const Search = ({user,navigation}) => {
                     onSubmitEditing={()=>{handleSearch()}}
                 />
                 <TouchableOpacity onPress={()=>{
-                    navigation.navigate("TestSearch" , {resulte:search})
+                    navigation.navigate("TestSearch" , {resulte:search,cart:cart,funPush:funPush})
                 }}>
                 <Ionicons name="search" size={20} color={'black'} />
                 </TouchableOpacity>

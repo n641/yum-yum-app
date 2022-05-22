@@ -16,7 +16,7 @@ import { getCategories , subscribe } from "../../../../db/Auth/usersData/Categor
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const CategoriesList = ({user,products, navigation }) => {
+const CategoriesList = ({cart,funPush,user,products, navigation }) => {
   const [categoryName, setcategoryName] = useState([]);
   const getGategoriesHandler = async () => {
     const arr = await getCategories();
@@ -68,7 +68,7 @@ useEffect(() => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  navigation.navigate("ProductList" ,{name:e.category ,user:user,products:products});
+                  navigation.navigate("ProductList" ,{name:e.category ,user:user,products:products,cart:cart,funPush:funPush});
                 }}
                 style={{   margin: 10 , borderColor:style.fourth , alignItems:"center", borderBottomColor:"black" }}
               >

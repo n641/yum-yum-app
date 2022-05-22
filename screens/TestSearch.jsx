@@ -19,7 +19,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const TestSearch = ({ navigation, route }) => {
-  const { resulte } = route.params;
+  const { resulte,cart,funPush } = route.params;
 
   const [search, setsearch] = useState(resulte);
   const [products, setproducts] = useState([]);
@@ -109,6 +109,8 @@ const TestSearch = ({ navigation, route }) => {
                 offer={FilterProducts.offer}
                 discound={FilterProducts.discount}
                 desc={FilterProducts.description}
+                cart={cart}
+                funPush={funPush}
                 navigation={navigation}
               />
             ))

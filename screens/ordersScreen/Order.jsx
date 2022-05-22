@@ -43,12 +43,12 @@ const Order = ({ navigation, route }) => {
             renderItem={(itemData, id) => (
               <ViewCard
                 key={id}
-                name={itemData.item.productName}
+                name={itemData.item.name}
                 url={itemData.item.url}
                 price={itemData.item.price}
                 offer={itemData.item.offer}
-                discound={itemData.item.discount}
-                desc={itemData.item.description}
+                discound={itemData.item.discound}
+                desc={itemData.item.desc}
                 navigation={navigation}
               />
             )}

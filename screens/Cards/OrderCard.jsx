@@ -11,6 +11,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import { deleteOrder, getOrders, subscribeOrder, editOrder } from "../../db/Auth/usersData/Orders";
 import { getUsers, editUser, getUserByEmail } from "../../db/Auth/usersData/users";
+import {adddelivery} from '../../db/Auth/usersData/delivers'
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -18,10 +19,10 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const OrderCard = ({ navigation, user, product, id }) => {
+const OrderCard = ({ navigation, user, product, id, create, address, payment, total }) => {
 
     const [users, setUsers] = useState([])
-    const [orders, setorders] = useState(second)
+    const [orders, setorders] = useState([])
 
     const getUserss = async () => {
         const arr = await getUsers();
@@ -62,21 +63,32 @@ const OrderCard = ({ navigation, user, product, id }) => {
 
 
     const acceptOrder = () => {
+        if (!users?.length) return;
         const realUser = users.find(e => e.email === user)
-        //get order his createAt == props.creatAt
-        //fillter order of user without this order
-        //edit order status with accept
-        //add this order to orders of user
-        //edit user with new order
-
-        //then add to delivery schema to delivery it with created at attrbute
-        // editUser(
-        //     {
-        //         ...realUser,
-        //         orders:[]
-        //     }
-        // )
-
+       
+        let temp = [];
+        let c =0;
+        realUser.orders.map((product)=>{
+            if(product.creatAt!==create){
+                temp.push(product);
+            }else{
+                c=product.creatAt;
+            }
+        })
+        temp.push({ user: user, product: product, payments: payment, addresss: address, totals: total, statuss: "accepted ", creatAt: c })
+        console.log(temp);
+        editUser({
+          ...realUser,
+          orders:[...temp],
+        })
+        .then(()=>{
+            handleDeleteOrder(id)
+        })
+        .then(()=>{
+            adddelivery(
+               { user: user, product: product, payments: payment, addresss: address, totals: total, statuss: "accepted ", creatAt: c }
+            )
+        })
 
         // const oldOrdersUser = users.find(e => e.email === user).oldOrders
         // const finalArr = oldOrdersUser.concat(product)
@@ -113,8 +125,8 @@ const OrderCard = ({ navigation, user, product, id }) => {
             <Text style={styles.fontStyle}>{(user.length) > 20 ? user.substring(0, 20) + "..." : user}</Text>
             <FlatList
                 data={product}
-                keyExtractor={item => item}
-                renderItem={itemData => <Text>{itemData.item}</Text>}
+                keyExtractor={item => item.name}
+                renderItem={itemData => <Text>{itemData.item.name}</Text>}
             />
             <View style={styles.Icons}>
                 <TouchableOpacity style={styles.rejectButton} onPress={() => handleDeleteOrder(id)}>

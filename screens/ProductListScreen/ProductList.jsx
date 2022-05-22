@@ -14,7 +14,7 @@ import style from "../../Constants/style"
 
 
 const ProductList = ({ navigation ,route}) => {
-  const {user,products}= route.params
+  const {user,products,cart,funPush}= route.params
    const [pro, setpro] = useState([]);
    const {name}  = route.params;
    const [listItem, setlistItem] = useState([])
@@ -61,7 +61,7 @@ setlistItem(temp);
  
   return (
     <View>
-      <Header icon={"cart"} user={user} products={products} navigation={navigation} />
+      {/* <Header icon={"cart"} cart={cart} funPush={funPush} user={user} products={products} navigation={navigation} /> */}
       <Text
         style={{
           fontSize: 25,
@@ -107,6 +107,8 @@ setlistItem(temp);
               discound={itemData.item.discount}
               desc={itemData.item.description}
               navigation={navigation}
+              cart={cart}
+              funPush={funPush}
             />
           // ) : null
         }

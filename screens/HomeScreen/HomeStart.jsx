@@ -1,9 +1,9 @@
 import {
   StyleSheet,
- 
+
 } from "react-native";
 
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -17,6 +17,7 @@ import Support from "../Support/support"
 import { auth } from "../../db/config";
 import { getUsers, subscribeUser } from "../../db/Auth/usersData/users";
 import { getProducts, subscribe } from "../../db/Auth/usersData/Products";
+import AllOrders from "../ordersScreen/AllOrders";
 
 
 
@@ -26,10 +27,13 @@ import style from '../../Constants/style'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const HomeStart = ({navigation }) => {
+const HomeStart = ({ navigation }) => {
   const [Users, setUsers] = useState([]);
   const [User, setUser] = useState([]);
   const [product, setproduct] = useState([]);
+  const [cart, setcart] = useState([])
+
+
 
   const getProduct = async () => {
     const arr = await getProducts();
@@ -57,6 +61,7 @@ const HomeStart = ({navigation }) => {
       unsubscribe();
     };
   }, []);
+
 
   const getUserss = async () => {
     const arr = await getUsers();
@@ -92,11 +97,23 @@ const HomeStart = ({navigation }) => {
   }, [Users]);
 
 
-  
+
+  const funPush = ((value) => {
+    if (cart.length == 0) {
+      setcart([...value])
+      console.log("done")
+      console.log(cart)
+
+    } else {
+      setcart([...value])
+      console.log("done2222")
+    }
+  })
 
 
 
- 
+
+
 
   return (
     <Tab.Navigator
@@ -116,6 +133,10 @@ const HomeStart = ({navigation }) => {
             iconName = focused
               ? "chatbubble-ellipses-outline"
               : "chatbubble-ellipses-outline";
+          }else if (route.name === "Orders") {
+            iconName = focused
+              ? "fast-food-outline"
+              : "fast-food";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -127,7 +148,7 @@ const HomeStart = ({navigation }) => {
       <Tab.Screen
         name="Home"
         children={() => (
-          <Home products={product} user={User} navigation={navigation} />
+          <Home products={product} user={User} cart={cart} funPush={funPush} navigation={navigation} />
         )}
         options={{ headerShown: false }}
       />
@@ -145,7 +166,15 @@ const HomeStart = ({navigation }) => {
       <Tab.Screen
         name="Favourite"
         children={() => (
-          <Favourite products={product} user={User} navigation={navigation} />
+          <Favourite products={product} user={User} cart={cart} funPush={funPush} navigation={navigation} />
+        )}
+        options={{ headerShown: false }}
+      />
+
+      <Tab.Screen
+        name="Orders"
+        children={() => (
+          <AllOrders products={product} user={User}  />
         )}
         options={{ headerShown: false }}
       />

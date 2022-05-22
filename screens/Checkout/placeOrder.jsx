@@ -30,6 +30,10 @@ const placeOrder = ({ route, navigation }) => {
   const [text, settext] = useState('');
   const [way, setway] = useState('');
   const [orderOfUser, setorderOfUser] = useState([])
+  const d = new Date();
+  const date = d.toISOString().split("T")[0];
+  const time = d.toTimeString().split(" ")[0];
+
   
 
   const getUserss = async () => {
@@ -112,10 +116,10 @@ const placeOrder = ({ route, navigation }) => {
     if (!Users?.length)
       return;
     const user = Users.find(e => e.email == auth.currentUser.email);
-    const cart = user.cart.map(name => products.find(p => p.productName == name));
-    setListItems(cart);
+    // const cart = user.cart.map(name => products.find(p => p.productName == name));
+    setListItems(user.cart);
     setorderOfUser(user.orders);
-    console.log("the orders of user" , orderOfUser);
+    console.log("the orders of user" , listItems);
   }, [products, Users]);
 
   useEffect(() => {
@@ -137,10 +141,7 @@ const placeOrder = ({ route, navigation }) => {
 
   },[orders,Users , products])
 
-  const d = new Date();
-  const date = d.toISOString().split("T")[0];
-  const time = d.toTimeString().split(" ")[0];
-
+ 
   const handleCheckOrder= ()=>{
     let temp=[];
     const user = Users.find(e => e.email == auth.currentUser.email);
@@ -150,7 +151,7 @@ const placeOrder = ({ route, navigation }) => {
 
       addOrder(
         // {products:[...temp]}
-        {user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" , creatAt:data+"-"+time}
+        {user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" , creatAt:date+"-"+time }
       ).then(()=>{
         console.log("done")
       }).catch((e)=>{
@@ -160,7 +161,7 @@ const placeOrder = ({ route, navigation }) => {
       if (payment == "credit") {
         editUser({
           ...user,
-          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:data+"-"+time}],
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:date+"-"+time}],
           cart:[],
           credit:credit-total,
           points:points+(total/4)
@@ -168,14 +169,14 @@ const placeOrder = ({ route, navigation }) => {
       } else if (payment == "points") {
         editUser({
           ...user,
-          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:data+"-"+time}],
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted" ,  creatAt:date+"-"+time}],
           cart:[],
           points:(points)-Math.floor(total/4)
         });
       } else {
         editUser({
           ...user,
-          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted",  creatAt:data+"-"+time}],
+          orders: [...orderOfUser ,{user:user.email ,product:[...temp] , payments:payment , addresss:address , totals:total , statuss:"un accepted",  creatAt:date+"-"+time}],
           cart:[],
         });
       }
@@ -198,12 +199,12 @@ const placeOrder = ({ route, navigation }) => {
           renderItem={(itemData, id) => (
             <ViewCard
               key={id}
-              name={itemData.item.productName}
+              name={itemData.item.name}
               url={itemData.item.url}
               price={itemData.item.price}
               offer={itemData.item.offer}
-              discound={itemData.item.discount}
-              desc={itemData.item.description}
+              discound={itemData.item.discound}
+              desc={itemData.item.desc}
               navigation={navigation}
             />
           )}

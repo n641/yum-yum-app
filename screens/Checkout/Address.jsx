@@ -6,7 +6,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { getUsers, editUser, subscribeUser } from '../../db/Auth/usersData/users'
 import { auth } from '../../db/config'
 import { TextInput } from 'react-native-gesture-handler';
-import { async } from '@firebase/util';
 import editUsers from '../AdminPanal/Users/editUsers';
 
 const width = Dimensions.get("window").width;

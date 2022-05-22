@@ -9,7 +9,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const BestSellingFood = ({ products, navigation }) => {
+const BestSellingFood = ({ products, navigation , cart , funPush }) => {
   
   return (
     <View>
@@ -38,6 +38,8 @@ const BestSellingFood = ({ products, navigation }) => {
               offer={itemData.item.offer}
               discound={itemData.item.discount}
               desc={itemData.item.description}
+              cart={cart}
+              funPush={funPush}
               navigation={navigation}
             />
           ) : null
