@@ -45,6 +45,7 @@ const SignUp = ({ navigation }) => {
                     oldOrders: [],
                     Message: [],
                     review: [],
+                    orders:[],
                     points: 1,
                     credit: 100
                 }).then(() => {
