@@ -64,7 +64,7 @@ useEffect(() => {
           
           {categoryName.map((e, index) =>
 
-            index < 4 ? (
+            
               <TouchableOpacity
                 key={index}
                 onPress={() => {
@@ -101,14 +101,6 @@ useEffect(() => {
 
 
               </TouchableOpacity>
-            ) : index == 4 ? (
-              <TouchableOpacity key={index} style={{ margin: 10 , alignItems:"center" }} onPress={() =>{
-                navigation.navigate("Category");}}>
-                <Text style={{ color: style.primary, fontSize: 19, fontWeight: "700", paddingTop:8 }}>
-                  {'more \>\>'}
-                </Text>
-              </TouchableOpacity>
-            ) : null
           )}
 
         </Animated.ScrollView>

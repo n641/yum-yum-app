@@ -3,6 +3,7 @@ import React, { useState ,useEffect} from 'react'
 
 import Header from "../HomeScreen/Components/Header/Header";
 import { Ionicons } from "@expo/vector-icons";
+import EmptyScreen from '../NotFoundScreens/EmptyScreen'
 
 import BasicCard from '../../Components/BasicCard'
 
@@ -59,7 +60,7 @@ setlistItem(temp);
 
 },[pro])
  
-  return (
+  return listItem.length!==0?(
     <View>
       {/* <Header icon={"cart"} cart={cart} funPush={funPush} user={user} products={products} navigation={navigation} /> */}
       <Text
@@ -73,7 +74,7 @@ setlistItem(temp);
       >
         product
       </Text>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           navigation.goBack();
         }}
@@ -91,7 +92,7 @@ setlistItem(temp);
         }}
       >
         <Ionicons name="chevron-back" size={40} color={"black"} style={{}} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <FlatList
         data={listItem}
@@ -114,7 +115,11 @@ setlistItem(temp);
         }
       />
     </View>
-  );
+  ):(
+    <View>
+      <EmptyScreen/>
+    </View>
+  )
 };
 
 export default ProductList

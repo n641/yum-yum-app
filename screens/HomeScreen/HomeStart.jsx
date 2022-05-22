@@ -89,12 +89,13 @@ const HomeStart = ({ navigation }) => {
     };
   }, []);
 
+
   useEffect(() => {
     if (!Users?.length) return;
 
     const user = Users.find((e) => e.email == auth.currentUser.email);
     setUser(user);
-  }, [Users]);
+  }, [Users , User]);
 
 
 

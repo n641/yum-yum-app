@@ -78,9 +78,9 @@ const SignUp = ({ navigation }) => {
             backgroundColor: 'black',
              height:height
         }}>
-            {/* <TouchableWithoutFeedback onPress={() => {
-                // Keyboard.dismiss();
-            }}> */}
+            <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+            }}>
                 <View
                     style={{ flex: 1 }}
                 >
@@ -107,11 +107,11 @@ const SignUp = ({ navigation }) => {
                             <Text style={{ color: 'yellow', fontSize: 26, fontWeight: '600' }}>Sign Up</Text>
                         </View>
 
-                        {/* <KeyboardAvoidingView
+                        <KeyboardAvoidingView
                             behavior={Platform.OS === "ios" ? "padding" : "height"}
                             // behavior='height'
                             style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'space-evenly', marginTop: 20 }}
-                        > */}
+                        >
 
 
 
@@ -242,7 +242,7 @@ const SignUp = ({ navigation }) => {
                             }
 
 
-                            <View style={{ marginBottom: 50, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
+                            <View style={{ margin: 0, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
                                 <TouchableOpacity onPress={() => {
                                     navigation.navigate('Login')
                                 }}>
@@ -251,11 +251,11 @@ const SignUp = ({ navigation }) => {
                             </View>
                             {/* </View> */}
 
-                        {/* </KeyboardAvoidingView> */}
+                        </KeyboardAvoidingView>
 
                     </View>
                 </View>
-            {/* </TouchableWithoutFeedback> */}
+            </TouchableWithoutFeedback>
 
         </View >
     )

@@ -85,14 +85,12 @@ const getDelivery = () => {
     let temp = [];
     let c =0;
     let oldolders=[];
+
     User.orders.map((product)=>{
         if(product.creatAt!==creatAt){
             temp.push(product);
-           
-            console.log("my old orders", product.product.name)
         }else{
             c=product.creatAt;
-            oldolders.push(product.product.name);
         }
     })
 
@@ -101,15 +99,17 @@ const getDelivery = () => {
         oldolders.push(p.name)
       })
     })
-    temp.push({ user: User.email, product: products, payments: payment, addresss: address, totals: total, statuss: "arrived ", creatAt: c })
+
+    temp.push({ user: User.email, product: products, payments: payment, addresss: address, totals: total, statuss: "arrived", creatAt: c })
     console.log(temp);
     
-
+    console.log("your order will be = ",temp);
 
     editUser({
       ...User,
       orders:[...temp],
     }).then(()=>{
+    console.log("your order will be = ",temp);
       editUser({
         ...User,
         oldOrders:[...oldolders],
@@ -119,6 +119,8 @@ const getDelivery = () => {
         deletedelivery(id)
     })
     
+
+
   }
 
   console.log(orders)
