@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Dimensions } from 'react-native'
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 
-import { editCategory  , getCategories , subscribe} from '../../../db/Auth/usersData/Categories';
-import { getProducts  , editProduct } from '../../../db/Auth/usersData/Products';
+import { editCategory, getCategories, subscribe } from '../../../db/Auth/usersData/Categories';
+import { getProducts, editProduct } from '../../../db/Auth/usersData/Products';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -26,31 +26,31 @@ const EditCaregory = ({ route, navigation }) => {
 
 
   const getGategoriesHandler = async () => {
-      const arr = await getCategories();
-      setArrCategory(arr)
+    const arr = await getCategories();
+    setArrCategory(arr)
   }
 
   useEffect(() => {
-      getGategoriesHandler();
+    getGategoriesHandler();
   }, [])
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
-        if (change.type === "added") {
-            getGategoriesHandler();
-        }
-        if (change.type === "modified") {
-            getGategoriesHandler();
-        }
-        if (change.type === "removed") {
-            getGategoriesHandler();
-        }
+      if (change.type === "added") {
+        getGategoriesHandler();
+      }
+      if (change.type === "modified") {
+        getGategoriesHandler();
+      }
+      if (change.type === "removed") {
+        getGategoriesHandler();
+      }
     });
 
     return () => {
-        unsubscribe();
+      unsubscribe();
     };
-}, []);
+  }, []);
 
 
 
@@ -87,15 +87,18 @@ const EditCaregory = ({ route, navigation }) => {
       </View>
 
       <View style={styles.input}>
-        <TextInput onChangeText={setCategory} value={category} />
+        <TextInput style={{ width: width - 100, height: height / 9 }}
+          onChangeText={setCategory} value={category} />
       </View>
 
       <View style={styles.input}>
-        <TextInput onChangeText={setDescription} value={description} />
+        <TextInput style={{ width: width - 100, height: height / 9 }}
+          onChangeText={setDescription} value={description} />
       </View>
 
       <View style={styles.input}>
-        <TextInput onChangeText={setImageLink} value={imageLink} />
+        <TextInput style={{ width: width - 100, height: height / 9 }}
+          onChangeText={setImageLink} value={imageLink} />
       </View>
 
       <View style={{ width: width / 3, borderRadius: 30, marginVertical: 10 }}>
@@ -104,8 +107,8 @@ const EditCaregory = ({ route, navigation }) => {
           color={"red"}
           onPress={() => {
             const findcat = arrCategory.find(e => e.category == name);
-            let temp=[];
-            findcat.products.map((p)=>{
+            let temp = [];
+            findcat.products.map((p) => {
               temp.push(p);
             })
 
@@ -115,17 +118,17 @@ const EditCaregory = ({ route, navigation }) => {
                 description: description,
                 link: imageLink,
                 id: ids,
-                products:[...temp]
+                products: [...temp]
               }).then(() => {
                 const findpro = products.find(e => e.category == name);
-                  let temp=[findpro];
-                  temp.map((p)=>{
+                let temp = [findpro];
+                temp.map((p) => {
                   editProduct({
                     ...p,
                     category: category,
+                  })
                 })
-                })
-              }).then(()=>{
+              }).then(() => {
                 navigation.navigate("Category");
               })
             ) : alert("you must edit category")

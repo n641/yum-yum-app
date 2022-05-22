@@ -20,7 +20,7 @@ const SupportCard = ({navigation, email, Message, id}) =>{
             <Text style={styles.fontStyle}>{(email.length) > 20 ? email.substring(0, 20) + "..." : email}</Text>
             <View style={styles.Icons}>
                 <TouchableOpacity style={styles.IconButton} onPress={() => navigation.navigate("chatting", {email: email, Message: Message})}>
-                    <Entypo name={"chat"} size={25} />
+                    <Entypo name={"chat"} size={25} color="white"/>
                 </TouchableOpacity>
             </View>
         </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: "space-between",
         width: width / 2 -10,
-        height: 120,
+        height: 110,
         borderWidth: 1,
         borderRadius: 5,
         marginHorizontal: 5 ,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     IconButton: {
         justifyContent: 'center',
         alignItems: "center",
-        backgroundColor: "#32a852",
+        backgroundColor: "red",
         height: 30,
         width: width / 3,
         marginHorizontal: 5,

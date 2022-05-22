@@ -14,7 +14,8 @@ import { getCategories, subscribe } from '../../db/Auth/usersData/Categories';
 
 import Header from '../HomeScreen/Components/Header/Header';
 
-const Category = ({user,products,navigation}) => {
+const Category = ({user,products,route,navigation}) => {
+  const {cart,funPush,user1} = route.params;
 
     const [category, setcategory] = useState([]);
     
@@ -52,7 +53,7 @@ const Category = ({user,products,navigation}) => {
 
     return (
       <View>
-        <Header user={user} product={products} icon={"cart"} navigation={navigation} />
+        <Header user={user1} funPush={funPush} cart={cart} product={products} icon={"cart"} navigation={navigation} />
         <Text style={{ textAlign: "center", fontSize: 20, margin: 20 , fontWeight:'bold' }}>
           select from the categories below
         </Text>
@@ -83,6 +84,8 @@ const Category = ({user,products,navigation}) => {
             <CardCategory
               url={`${itemData.item.link}`}
               namepro={itemData.item.category}
+              cart={cart}
+              funPush={funPush}
               navigation={navigation}
             />
           )}

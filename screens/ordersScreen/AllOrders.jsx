@@ -19,7 +19,7 @@ const AllOrders = ({ products, user }) => {
         //    {
         //      text: "Yes",
         //      onPress: () => {
-    if(status=="arrived"){
+    if(status=="arrived "){
           editUser({
             ...user,
             orders: user.orders.filter((n) => n.creatAt !== creatAt),

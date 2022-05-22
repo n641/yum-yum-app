@@ -88,6 +88,7 @@ const AddCategory = ({ navigation }) => {
 
             <View style={styles.input}>
                 <TextInput
+                style={{width:width-100 ,height:height/9}}
                     placeholder='Enter name of category'
                     onChangeText={setCategory}
                     value={category}
@@ -96,6 +97,8 @@ const AddCategory = ({ navigation }) => {
 
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-100 ,height:height/9}}
+
                     placeholder='Enter description of category'
                     onChangeText={setDescription}
                     value={description}
@@ -104,6 +107,8 @@ const AddCategory = ({ navigation }) => {
 
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-100 ,height:height/9}}
+
                     placeholder='Enter link of Image of category'
                     onChangeText={setImageLink}
                     value={imageLink}

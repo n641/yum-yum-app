@@ -8,12 +8,12 @@ const height = Dimensions.get("window").height;
 
 
 
-const CardCategory = ({ url, namepro, navigation }) => {
+const CardCategory = ({ url,cart,funPush, namepro, navigation }) => {
   return (
     <View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("ProductList", { name: namepro });
+          navigation.navigate("ProductList", { name: namepro,cart:cart,funPush:funPush });
           //NAVIGATE TO PRODUCT SCREEN  WITH PARAM NAME OF CATEGORY TO LIST ALL PRODUCT OF THIS CATEGORY
         }}
       >

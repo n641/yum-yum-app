@@ -75,13 +75,14 @@ const SignUp = ({ navigation }) => {
     return (
         <View style={{
             flex: 1,
-            backgroundColor: 'black'
+            backgroundColor: 'black',
+             height:height
         }}>
-            <TouchableWithoutFeedback onPress={() => {
+            {/* <TouchableWithoutFeedback onPress={() => {
                 // Keyboard.dismiss();
-            }}>
+            }}> */}
                 <View
-                    style={{ flex: 1, }}
+                    style={{ flex: 1 }}
                 >
                     <Image
                         style={{
@@ -89,7 +90,7 @@ const SignUp = ({ navigation }) => {
                             height: height,
                             position: 'relative',
                             opacity: 0.6,
-                            resizeMode: 'cover',
+                            // resizeMode: 'cover',
                         }}
                         source={require('../../assets/1.jpg')}
                     />
@@ -106,11 +107,11 @@ const SignUp = ({ navigation }) => {
                             <Text style={{ color: 'yellow', fontSize: 26, fontWeight: '600' }}>Sign Up</Text>
                         </View>
 
-                        <KeyboardAvoidingView
+                        {/* <KeyboardAvoidingView
                             behavior={Platform.OS === "ios" ? "padding" : "height"}
                             // behavior='height'
                             style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'space-evenly', marginTop: 20 }}
-                        >
+                        > */}
 
 
 
@@ -241,7 +242,7 @@ const SignUp = ({ navigation }) => {
                             }
 
 
-                            <View style={{ margin: 10, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
+                            <View style={{ marginBottom: 50, borderBottomWidth: 2, borderBottomColor: 'yellow', padding: 5 }}>
                                 <TouchableOpacity onPress={() => {
                                     navigation.navigate('Login')
                                 }}>
@@ -250,11 +251,11 @@ const SignUp = ({ navigation }) => {
                             </View>
                             {/* </View> */}
 
-                        </KeyboardAvoidingView>
+                        {/* </KeyboardAvoidingView> */}
 
                     </View>
                 </View>
-            </TouchableWithoutFeedback>
+            {/* </TouchableWithoutFeedback> */}
 
         </View >
     )

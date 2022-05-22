@@ -4,10 +4,12 @@ import {
     View, 
     Button,
     TouchableOpacity,
-    TextInput
+    TextInput,Dimensions
 } from 'react-native'
 import react, {useState} from 'react'
 import { Ionicons } from "@expo/vector-icons";
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 import { editOffer } from '../../../db/Auth/usersData/Offers';
 
@@ -47,6 +49,8 @@ const editOfferr = ({route, navigation}) =>{
 
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter name of Offer'
                     onChangeText={setOfferNamee}
                     value={offerNamee}
@@ -55,6 +59,8 @@ const editOfferr = ({route, navigation}) =>{
 
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter price of offer'
                     onChangeText={setPricee}
                     value={pricee}
@@ -63,6 +69,8 @@ const editOfferr = ({route, navigation}) =>{
 
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter description of Offer'
                     onChangeText={setDescc}
                     value={descc}
@@ -71,6 +79,7 @@ const editOfferr = ({route, navigation}) =>{
 
             <View style={styles.input}>
                 <TextInput
+                style={{width:width-50,height:height/12}}
                     placeholder='Enter image url of Offer'
                     onChangeText={seturll}
                     value={urll}
@@ -104,9 +113,9 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: '20%',
+        height: height/12,
         borderRadius: 10,
-        width: 400,
+        width: width-50,
         justifyContent: 'flex-start',
         paddingVertical: 10,
         flexDirection: 'row',

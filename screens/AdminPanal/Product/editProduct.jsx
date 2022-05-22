@@ -5,13 +5,17 @@ import {
     Button,
     TouchableOpacity,
     TextInput,
-    ScrollView
+    ScrollView,
+    Dimensions
 } from 'react-native'
 import react, {useState , useEffect} from 'react'
 import { Ionicons } from "@expo/vector-icons";
 
 import { editProduct } from '../../../db/Auth/usersData/Products';
 import { getCategories , subscribe } from '../../../db/Auth/usersData/Categories';
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 const editProductt = ({route, navigation}) =>{
     
@@ -95,6 +99,8 @@ const editProductt = ({route, navigation}) =>{
 
             <View style={styles.input}>
                 <TextInput
+                                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter name of Product'
                     onChangeText={setProductName}
                     value={productName}
@@ -109,6 +115,8 @@ const editProductt = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter description of Product'
                     onChangeText={setDisc}
                     value={desc}
@@ -123,6 +131,8 @@ const editProductt = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter Category of Product'
                     onChangeText={setCategory}
                     value={category}
@@ -130,6 +140,8 @@ const editProductt = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter offer of Product'
                     onChangeText={setOffer}
                     value={offer}
@@ -137,6 +149,8 @@ const editProductt = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter discount of Product'
                     onChangeText={setDiscount}
                     value={discount}
@@ -168,9 +182,9 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: 10,
+        height: height/12,
         borderRadius: 10,
-        width: 400,
+        width: width-50,
         justifyContent: 'flex-start',
         paddingVertical: 10,
         flexDirection: 'row',

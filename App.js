@@ -35,12 +35,9 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
  
-
- 
-
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="OnBoarding">
 
         <Stack.Screen
           name="AdminStartScreen"
@@ -132,7 +129,17 @@ export default function App() {
         <Stack.Screen
           name="ProductList"
           component={ProductList}
-          // options={{ headerShown: false }}
+          options={{
+            title: "products",
+            headerStyle: {
+              backgroundColor: "red",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+            },
+          }}
         />
 
         <Stack.Screen

@@ -154,7 +154,7 @@ const HomeStart = ({ navigation }) => {
       />
       <Tab.Screen
         name="About"
-        component={About}
+        children={() => (<About cart={cart} user={User} funPush={funPush}  navigation={navigation}/>)}
         options={{ headerShown: false }}
       />
       <Tab.Screen

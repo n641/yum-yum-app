@@ -4,10 +4,13 @@ import {
     View, 
     Button,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Dimensions
 } from 'react-native'
 import react, {useState} from 'react'
 import { Ionicons } from "@expo/vector-icons";
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 import { editUser } from '../../../db/Auth/usersData/users';
 
@@ -56,6 +59,7 @@ const editUsers = ({route, navigation}) =>{
             
             <View style={styles.input}>
                 <TextInput
+                style={{width:width-50,height:height/12}}
                     placeholder='Enter user name'
                     onChangeText={setUserName}
                     value={userNamee}
@@ -63,6 +67,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter email'
                     onChangeText={setEmail}
                     value={emaill}
@@ -70,6 +76,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter password'
                     onChangeText={setPassword}
                     value={passwordd}
@@ -77,6 +85,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter address'
                     onChangeText={setAddress}
                     value={addresss}
@@ -84,6 +94,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter credit'
                     onChangeText={setCredit}
                     value={creditt}
@@ -91,6 +103,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter point'
                     onChangeText={setPoints}
                     value={pointss}
@@ -98,6 +112,8 @@ const editUsers = ({route, navigation}) =>{
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter rule'
                     onChangeText={setRule}
                     value={rulee}
@@ -131,9 +147,9 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: 10,
+        height: height/12,
         borderRadius: 10,
-        width: 400,
+        width: width-50,
         justifyContent: 'flex-start',
         paddingVertical: 10,
         flexDirection: 'row',

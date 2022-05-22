@@ -5,8 +5,10 @@ import {
     TextInput,
     StyleSheet,
     Button,
-    FlatList
+    FlatList,Dimensions
 } from "react-native";
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 import { addUser, getUsers } from "../../db/Auth/usersData/users";
 import UserCard from "../Cards/UserCard";
@@ -50,6 +52,7 @@ const GetUsers = ({ navigation }) => {
         <View>
             <View style={styles.RowContainer}>
                 <TextInput 
+
                     placeholder="Enter user name"
                     onChangeText={setUserName}
                     style={styles.textInput}
@@ -122,7 +125,8 @@ const styles = StyleSheet.create({
     },
     textInput: {
         borderWidth: 1,
-        width: "100%",
+        width: width-50,
+        height:height/12,
         paddingVertical: 4,
         paddingHorizontal: 3,
         marginVertical: 5,

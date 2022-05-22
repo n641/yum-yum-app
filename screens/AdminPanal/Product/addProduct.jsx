@@ -4,7 +4,7 @@ import {
     View,
     TouchableOpacity,
     TextInput,
-    Button
+    Button,Dimensions
 } from 'react-native'
 import react, {useState , useEffect} from 'react'
 
@@ -12,7 +12,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { addProduct , getProducts , subscribe } from '../../../db/Auth/usersData/Products';
 import { editCategory, getCategories } from '../../../db/Auth/usersData/Categories';
-
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 const addProductt = ({navigation}) =>{
     const [category, setCategory] = useState("")
     const [productName, setProductName] = useState("")
@@ -143,13 +144,15 @@ useEffect(() => {
 
             <View style={styles.input}>
                 <TextInput
-                    placeholder='Enter name of Product'
+                                style={{width:width-50,height:height/12}}
+                                placeholder='Enter name of Product'
                     onChangeText={setProductName}
                     value={productName}
                 />
             </View>
             <View style={styles.input}>
                 <TextInput
+                style={{width:width-50}}
                     placeholder='Enter url of Product'
                     onChangeText={setUrl}
                     value={url}
@@ -157,6 +160,8 @@ useEffect(() => {
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter price of Product'
                     onChangeText={setPrice}
                     value={price}
@@ -164,6 +169,8 @@ useEffect(() => {
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter description of Product'
                     onChangeText={setDisc}
                     value={desc}
@@ -172,6 +179,8 @@ useEffect(() => {
            
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter Category of Product'
                     onChangeText={setCategory}
                     value={category}
@@ -179,6 +188,8 @@ useEffect(() => {
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter true if you have offer or false if not'
                     onChangeText={setOffer}
                     value={offer}
@@ -186,6 +197,8 @@ useEffect(() => {
             </View>
             <View style={styles.input}>
                 <TextInput
+                                style={{width:width-50,height:height/12}}
+
                     placeholder='Enter discount if offer is true'
                     onChangeText={setDiscount}
                     value={discount}
@@ -218,9 +231,9 @@ const styles = StyleSheet.create({
         color: "red"
     },
     input: {
-        height: 20,
+        height: height/12,
         borderRadius: 10,
-        width: 400,
+        width: width-50,
         justifyContent: 'flex-start',
         paddingVertical: 10,
         flexDirection: 'row',

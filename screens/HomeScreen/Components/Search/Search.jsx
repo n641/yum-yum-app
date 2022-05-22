@@ -31,6 +31,7 @@ const Search = ({cart,funPush,user,navigation}) => {
         <View style={{ marginTop: 30, alignItems: 'center' }}>
             <View style={{ borderRadius: 20, borderColor: "white", borderWidth: 1, width: width - 50, height: height / 17, backgroundColor: "white", alignItems: 'center', justifyContent: 'space-between', padding: 10, flexDirection: 'row' }}>
                 <TextInput
+                style={{ width: width - 50,height: height / 17 }}
                     placeholder='Search here for product...'
                     onChangeText={setsearch}
                     value={search}

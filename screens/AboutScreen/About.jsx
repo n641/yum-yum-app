@@ -16,7 +16,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 
-const About = ({ navigation}) => {
+const About = ({cart,user,funPush, navigation}) => {
   return (
     <ScrollView>
       <View>
@@ -117,7 +117,7 @@ const About = ({ navigation}) => {
                     marginTop: 20,
                   }}
                   onPress={() => {
-                    navigation.navigate("Category");
+                    navigation.navigate("Category",{cart:cart,funPush:funPush,user1:user});
                   }}
                 >
                   <Text
