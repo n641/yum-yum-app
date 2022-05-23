@@ -30,7 +30,7 @@ const BestSellingFood = ({ products, navigation , cart , funPush }) => {
         numColumns={2}
         keyExtractor={(item) => item.productName}
         renderItem={(itemData) =>
-          itemData.item.count > 2 ? (
+          itemData.item.count > 0 ? (
             <BasicCard
               name={itemData.item.productName}
               url={itemData.item.url}

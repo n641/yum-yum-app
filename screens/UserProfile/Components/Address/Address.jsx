@@ -13,7 +13,7 @@ const height = Dimensions.get("window").height;
 const Address = () => {
   const [users, setUsers] = useState([]);
 const [address, setaddress] = useState([]);
-const [points, setpoints] = useState([]);
+const [points, setpoints] = useState(1);
 
 
 
@@ -60,7 +60,7 @@ const [points, setpoints] = useState([]);
   //     temp.push(add)
   // })
   //   setaddress(temp);
-  //   setpoints(user.points)
+    // setpoints(user.points)
 
       },[])
   
@@ -98,7 +98,7 @@ const [points, setpoints] = useState([]);
         <Text style={{ fontWeight: 'bold', fontSize: 25, color: style.primary, textAlign: 'center' }}>points</Text>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>20</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 50, textAlign: 'center' }}>{points}</Text>
           <Ionicons name="trophy" size={40} color={style.secondry} />
         </View>
 
